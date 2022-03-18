@@ -1,0 +1,50 @@
+unranked:
+  slot: 0
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    type: WOOD_SWORD
+    damage: 0
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §eUnranked Queue §7(Right-Click)
+ranked:
+  slot: 1
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    type: IRON_SWORD
+    damage: 0
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §cRanked Queue §7(Right-Click)
+party:
+  slot: 4
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    type: NAME_TAG
+    damage: 0
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §dCreate Party §7(Right-Click)
+settings:
+  slot: 7
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    type: WATCH
+    damage: 0
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §aSettings §7(Right-Click)
+kiteditor:
+  slot: 8
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    type: BOOK
+    damage: 0
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §6Kit Editor §7(Right-Click)

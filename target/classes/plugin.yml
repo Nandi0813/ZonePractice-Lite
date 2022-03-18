@@ -1,0 +1,66 @@
+name: ZonePracticeLite
+version: '1.0'
+main: dev.nandi0813.practice.Practice
+authors: [ Nandi0813 ]
+depend: [ ProtocolLib ]
+commands:
+  arena:
+  ladder:
+  setup:
+  practice:
+    aliases: [prac, zonepractice, zoneprac, zonep]
+  staff:
+  spectate:
+    aliases: spec
+  party:
+    aliases: p
+
+permissions:
+  zonepractice.admin:
+    children:
+      zonepractice.setup: true
+      zonepractice.practice: true
+      zonepractice.staff: true
+  zonepractice.setup:
+    description: Setup everything.
+  zonepractice.practice:
+    description: Practice permission.
+  zonepractice.staff:
+    description: Staff permission.
+
+  # Basic permission
+  zonepractice.spectate:
+    default: true
+  zonepractice.spectate.vanish:
+    description: Toogle vanish when spectating.
+  zonepractice.spectate.menu:
+    description: Spectate menu use.
+  zonepractice.spectate.random:
+    description: Spectate random match.
+
+  zonepractice.duel.selectarena:
+    description: Player can choose the arena to play in.
+  zonepractice.duel.infiniteinvite:
+    description: Player can invite player to duel any number of times.
+  zonepractice.party.selectarena:
+    description: Choose arena to play in with party.
+
+  # Party permissions
+  zonepractice.party.create:
+    description: Create party.
+  zonepractice.party.changelimit:
+    description: Change party player limit.
+  zonepractice.party.public:
+    description: Change party status to public.
+  zonepractice.party.broadcast:
+    description: Broadcast the party, if it public.
+
+  # Bypasses
+  zonepractice.bypass.ranked.requirements:
+    description: Bypass ranked requirements.
+  zonepractice.bypass.cooldown:
+    description: Cooldown bypass for spectate vanish, lobby vanish etc..
+
+  # Custom Kits
+  zonepractice.customkit:
+    description: Create custom kit for ladders.

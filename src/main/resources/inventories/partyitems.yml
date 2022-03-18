@@ -1,0 +1,30 @@
+host-event:
+  slot: 0
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    type: GOLD_AXE
+    damage: 0
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §eHost Party Event §7(Right-Click)
+info:
+  slot: 4
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    type: NETHER_STAR
+    damage: 0
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §bParty Information §7(Right-Click)
+leave:
+  slot: 8
+  item:
+    ==: org.bukkit.inventory.ItemStack
+    type: INK_SACK
+    damage: 1
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §cLeave Party §7(Right-Click)

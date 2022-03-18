@@ -1,0 +1,41 @@
+# Dont touch
+first-enable: true
+#
+# Lobby spawn:
+lobby:
+#
+# Knockback modifier - it depends on the hit delay very much. You should test what is the optimal for you.
+knockback:
+  normal:
+    air-horizontal: 0.93
+    air-vertical: 0.93
+    horizontal: 0.82
+    vertical: 0.88
+  combo:
+    air-horizontal: 2.8
+    air-vertical: 2.8
+    horizontal: 2.5
+    vertical: 2.5
+#
+# Ranked settings
+ranked:
+  elo-range-time: 5 # Sec
+  elo-range-increase: 20 # Range
+  elo-change: 10
+#
+# Match settings
+match-settings:
+  build-limit: 4 # Counts from the first players positions y level.
+  start-countdown: 5 # Countdown when the match starts.
+  after-countdown: 3 # After the match is over this countdown start, and when it's over the players teleport back to lobby.
+  remove-empty-bottle: true # Removes empty potion bottles after the player use it.
+  enderpearl:
+    cooldown: 13 # Sec
+  party:
+    split-team-damage: false # In party split games, players with the same team can't hurt each other (if false).
+#
+# Party settings
+party-settings:
+  max-party-members:
+    default: 6 # Maximum party members, if the owner don't have permission to change it.
+  party-invite-cooldown: 60 # After these seconds, the party invite will expire.
