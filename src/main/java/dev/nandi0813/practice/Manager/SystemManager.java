@@ -6,11 +6,12 @@ import dev.nandi0813.practice.Command.Ladder.LadderCommand;
 import dev.nandi0813.practice.Command.Party.PartyCommand;
 import dev.nandi0813.practice.Command.Practice.PracticeCommand;
 import dev.nandi0813.practice.Command.Setup.SetupCommand;
-import dev.nandi0813.practice.Command.Spectate.SpectateCommand;
+import dev.nandi0813.practice.Command.SpectateCommand;
 import dev.nandi0813.practice.Command.Staff.StaffCommand;
 import dev.nandi0813.practice.Listener.*;
 import dev.nandi0813.practice.Manager.Arena.ArenaManager;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Inventory.InventoryManager;
 import dev.nandi0813.practice.Manager.Ladder.Custom.CustomLadderManager;
 import dev.nandi0813.practice.Manager.Ladder.LadderManager;
@@ -48,6 +49,7 @@ public class SystemManager
         registerPacketListener();
 
         ConfigManager.createConfig(practice);
+        LanguageManager.createFile(practice);
         ladderManager.loadLadders();
         arenaManager.loadArenas();
         profileManager.loadProfiles();

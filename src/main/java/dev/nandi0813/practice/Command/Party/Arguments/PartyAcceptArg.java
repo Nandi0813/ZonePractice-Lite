@@ -1,6 +1,7 @@
 package dev.nandi0813.practice.Command.Party.Arguments;
 
 import dev.nandi0813.practice.Manager.File.ConfigManager;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
@@ -38,31 +39,30 @@ public class PartyAcceptArg
 
                                     if (invitetime > System.currentTimeMillis())
                                     {
-                                        profile.setSpectatorMode(false);
                                         party.addMember(player);
                                     }
                                     else
-                                        player.sendMessage(StringUtil.CC("&cYour party invite has expired."));
+                                        player.sendMessage(LanguageManager.getString("party.invite-expired"));
 
                                     party.getInvites().remove(player);
                                 }
                                 else
-                                    player.sendMessage(StringUtil.CC("&cYou are not invited to this party."));
+                                    player.sendMessage(LanguageManager.getString("party.not-invited"));
                             }
                             else
-                                player.sendMessage(StringUtil.CC("&cThe party is full."));
+                                player.sendMessage(LanguageManager.getString("party.party-full"));
                         }
                         else
-                            player.sendMessage(StringUtil.CC("&cParty doesn't exits anymore."));
+                            player.sendMessage(LanguageManager.getString("party.party-doesnt-exits"));
                     }
                     else
-                        player.sendMessage(StringUtil.CC("&cPlayer is not online."));
+                        player.sendMessage(LanguageManager.getString("party.player-not-online"));
                 }
                 else
-                    player.sendMessage(StringUtil.CC("&cYou are already a member of a party."));
+                    player.sendMessage(LanguageManager.getString("party.already-member"));
             }
             else
-                player.sendMessage(StringUtil.CC("&cYou cannot join a party right now."));
+                player.sendMessage(LanguageManager.getString("party.cant-join-party"));
         }
         else
             player.sendMessage(StringUtil.CC("&c/" + label + " accept <player>"));

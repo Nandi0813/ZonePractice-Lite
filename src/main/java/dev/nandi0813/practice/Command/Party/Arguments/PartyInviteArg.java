@@ -1,6 +1,7 @@
 package dev.nandi0813.practice.Command.Party.Arguments;
 
 import dev.nandi0813.practice.Command.Party.PartyCommand;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.SystemManager;
@@ -23,7 +24,6 @@ public class PartyInviteArg
                 if (party.getLeader().equals(player))
                 {
                     Player target = Bukkit.getPlayer(args[1]);
-                    Profile targetProfile = SystemManager.getProfileManager().getProfiles().get(target);
 
                     if (target != null)
                     {
@@ -31,30 +31,25 @@ public class PartyInviteArg
                         {
                             if (!party.getMembers().contains(target))
                             {
-                                if (targetProfile.isPartyInvites())
-                                {
-                                    party.getInvites().put(target, System.currentTimeMillis());
+                                party.getInvites().put(target, System.currentTimeMillis());
 
-                                    party.sendMessage(StringUtil.CC(PartyCommand.getPrefix() + "&a" + target.getName() + " &7has been invited to the party!"));
-                                    ClickableMessageUtil.sendClickableMessage(target, PartyCommand.getPrefix() + "&b" + player.getName() + " &7has invited you to their party. &a[Click to accept]", "/party accept " + party.getLeader().getName(), "&aClick to accept");
-                                }
-                                else
-                                    player.sendMessage(StringUtil.CC("&c" + target.getName() + " doesn't accept party invites."));
+                                party.sendMessage(LanguageManager.getString("party.player-invited-party").replaceAll("%player%", target.getName()));
+                                ClickableMessageUtil.sendClickableMessage(target, LanguageManager.getString("party.player-invited-player"), "/party accept " + party.getLeader().getName(), "&aClick to accept");
                             }
                             else
-                                player.sendMessage(StringUtil.CC("&c" + target.getName() + " is already in your party."));
+                                player.sendMessage(LanguageManager.getString("party.player-already-member").replaceAll("%player%", target.getName()));
                         }
                         else
-                            player.sendMessage(StringUtil.CC("&cYou can't invite yourself."));
+                            player.sendMessage(LanguageManager.getString("party.cant-invite-yourself"));
                     }
                     else
-                        player.sendMessage(StringUtil.CC("&cPlayer is not online."));
+                        player.sendMessage(LanguageManager.getString("party.player-not-online"));
                 }
                 else
-                    player.sendMessage(StringUtil.CC("&cYou can't invite players to the party."));
+                    player.sendMessage(LanguageManager.getString("party.not-leader"));
             }
             else
-                player.sendMessage(StringUtil.CC("&cYou are not in a party."));
+                player.sendMessage(LanguageManager.getString("party.not-member"));
         }
         else
             player.sendMessage(StringUtil.CC("&c/" + label + " invite <player>"));

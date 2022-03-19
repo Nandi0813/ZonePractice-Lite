@@ -20,17 +20,7 @@ public class Profile
 
     // Temporary Settings
     @Getter @Setter private ProfileStatus status;
-    @Getter @Setter private boolean spectatorMode;
     @Getter @Setter private boolean party;
-    @Getter @Setter private boolean hideSpectators;
-
-    // Permanent Settings
-    @Getter @Setter private boolean duelRequest;
-    @Getter @Setter private boolean sidebar;
-    @Getter @Setter private boolean hidePlayers;
-    @Getter @Setter private boolean partyInvites;
-    @Getter @Setter private boolean allowSpectate;
-    @Getter @Setter private boolean messages;
 
     // Statistics
     @Getter @Setter private int unrankedWins;

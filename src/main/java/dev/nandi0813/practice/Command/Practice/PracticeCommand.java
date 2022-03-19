@@ -3,6 +3,7 @@ package dev.nandi0813.practice.Command.Practice;
 import dev.nandi0813.practice.Command.Practice.Arguments.ArenasArg;
 import dev.nandi0813.practice.Command.Practice.Arguments.HelpArg;
 import dev.nandi0813.practice.Command.Practice.Arguments.LobbyArg;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,7 +21,7 @@ public class PracticeCommand implements CommandExecutor
             Player player = (Player) sender;
             if (!player.hasPermission("zonepractice.practice"))
             {
-                player.sendMessage(StringUtil.CC("&cYou don't have permission!"));
+                player.sendMessage(LanguageManager.getString("no-permission"));
                 return false;
             }
 

@@ -9,7 +9,6 @@ import dev.nandi0813.practice.Manager.SystemManager;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Duel
 {

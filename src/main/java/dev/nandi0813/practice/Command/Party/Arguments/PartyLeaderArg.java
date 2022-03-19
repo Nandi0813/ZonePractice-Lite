@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Command.Party.Arguments;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Util.StringUtil;
@@ -28,16 +29,16 @@ public class PartyLeaderArg
                             party.setNewOwner(target);
                         }
                         else
-                            player.sendMessage(StringUtil.CC("&cPlayer is not a member of the party."));
+                            player.sendMessage(LanguageManager.getString("party.player-not-member"));
                     }
                     else
-                        player.sendMessage(StringUtil.CC("&cPlayer is not online."));
+                        player.sendMessage(LanguageManager.getString("party.player-not-online"));
                 }
                 else
-                    player.sendMessage(StringUtil.CC("&cYou are not the leader of the party."));
+                    player.sendMessage(LanguageManager.getString("party.not-leader"));
             }
             else
-                player.sendMessage(StringUtil.CC("&cYou are not a member of a party."));
+                player.sendMessage(LanguageManager.getString("party.not-member"));
         }
         else
             player.sendMessage(StringUtil.CC("&c/" + label + " leader <player>"));

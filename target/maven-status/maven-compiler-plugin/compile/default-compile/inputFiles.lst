@@ -1,168 +1,146 @@
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/ArenaCommand.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Inventory/SpawnInventory/SpawnInventoryListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Queue/QueueManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Listener/PlayerChat.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Arena/ArenaGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderDeleteArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Util/KnockbackUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Party/PartyCommand.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Listener/PlayerQuit.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Ladder/Custom/Gui/KitSelectorGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderSethitdelayArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderCreateArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyAcceptArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Event/SpectateStartEvent.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/BlockCheck.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/PartySplit/PartySplit.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Runnable/AfterCountdown.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Profile/ProfileManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Arena/ArenaSetupManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/BlockChange/Rollback.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Inventory/PartyInventory/PartyInventoryListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/Copy/CopyArenaManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Ladder/CustomKitGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Event/QueueStartEvent.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaSetpositionArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/SpectatorListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/Cooldown/CooldownObject.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Profile/Enum/ProfileWorldTime.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/ArmorUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaDeleteArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Profile/Profile.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Ladder/LadderManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Sidebar/Adapter/SidebarAdapter.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Inventory/InventoryManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/RoundManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/InventoryUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Party/Gui/PartyEventsGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/PageUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Ladder/LadderFile.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/BlockChange/CachedBlock.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/Duel/DuelListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Setup/SetupCommand.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Ladder/LadderSetupManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Ladder/SettingsGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/ClickableMessageUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Ladder/InventoryGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyLeaveArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Listener/InventoryClick.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/MatchManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Gui/SpectatorGui/SpectatorGuiListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Gui/RankedGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/ItemUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Sidebar/SidebarListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Event/MatchEndEvent.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/SetupManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Event/QueueEndEvent.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Setup/RenameCommand.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Enum/MatchType.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Inventory/SpawnInventory/SpawnInventory.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderInfoArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Party/Gui/PartySettingsGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaLadderArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaSeticonArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Arena/ArenaItemUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Arena/LadderGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/Util/Cuboid.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Enum/TeamEnum.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/MatchFile.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Listener/PlayerCommandPreprocess.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Spectate/SpectateCommand.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Event/PartyCreateEvent.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Ladder/KnockbackType.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Sidebar/SidebarManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Util/PlayerUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Profile/Enum/ProfileStatus.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Inventory/SpectatorInventory/SpectatorInventory.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Queue/Queue.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Listener/PlayerInteract.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/Duel/Duel.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyInfoArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Party/PartyListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Listener/WeatherChange.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/SystemManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/Util/CornerUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Enum/MatchStatus.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Ladder/Custom/CustomLadderListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Ladder/LadderUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Runnable/StartCountdown.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Inventory/PartyInventory/PartyInventory.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/PartyFFA/PartyFFA.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyHelpArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyLeaderArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Arena/CopyGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Util/EloUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyJoinArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Ladder/LadderGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Match.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Server/ServerManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Queue/QueueListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaHelpArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/StringUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderSeticonArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Ladder/Custom/Gui/KitEditorGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/MatchStats/PlayerMatchStat.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Gui/SpectatorGui/SpectatorGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Ladder/LadderCommand.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Listener/ProjectileLaunch.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/BlockChange/RollbackListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyInviteArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/ArenaListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaListArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderSetinvArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaSetbuildArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/Enderpearl/EnderpearlListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/File/ConfigManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Runnable/EndCountdown.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Listener/ItemConsume.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/PlayerUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderHelpArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/MatchStats/MatchStatListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/EntityHider/EntityHider.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Practice/PracticeCommand.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaTeleportArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Party/Party.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Profile/ProfileFile.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Sidebar/Adapter/PracticeAdapter.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Ladder/LadderItemUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/Cooldown/PlayerCooldown.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Ladder/Custom/Gui/KitSumGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Inventory/QueueInventory/QueueInventoryListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Practice.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Staff/StaffCommand.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyKickArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Practice/Arguments/ArenasArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Gui/UnrankedGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Inventory/InventoryListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Party/BroadcastTask.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/Util/ArenaUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Event/MatchStartEvent.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/ArenaFile.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/EntityHider/EntityHiderListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Ladder/SummaryGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/TPSUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Util/KitUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaInfoArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Sidebar/Sidebar.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Party/PartyManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Queue/QueueRunnable.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Ladder/Ladder.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Practice/Arguments/HelpArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/Util/MatchTeamUtil.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/Copy/CopyArena.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Util/Enderpearl/EnderpearlRunnable.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Party/Gui/OtherPartiesGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyDisbandArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaCreateArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Inventory/QueueInventory/QueueInventory.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Arena/SummaryGui.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/ArenaManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Setup/Updater.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Ladder/Custom/CustomLadderManager.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderListArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Sidebar/SidebarTask.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Practice/Arguments/LobbyArg.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Match/MatchListener.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Listener/PlayerJoin.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Manager/Arena/Arena.java
-/Users/dukatnandor/IdeaProjects/SharkPractice/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaSetcornerArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Sidebar/SidebarTask.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/File/ConfigManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Event/QueueStartEvent.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Arena/BlockChange/RollbackListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/Duel/DuelListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/ItemUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Queue/QueueListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Enum/TeamEnum.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Inventory/SpawnInventory/SpawnInventoryListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchStats/MatchStatListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Arena/Arena.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyAcceptArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyKickArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/LadderManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Inventory/InventoryListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Staff/StaffCommand.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaSetcornerArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Arena/ArenaFile.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/Enderpearl/EnderpearlListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/PartySplit/PartySplit.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Listener/WeatherChange.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Custom/Gui/KitSumGui.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Arena/Util/CornerUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Party/Gui/PartyEventsGui.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Setup/SetupCommand.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Runnable/StartCountdown.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Inventory/PartyInventory/PartyInventoryListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Listener/InventoryClick.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Util/PlayerUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/SpectatorListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Match.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Ladders/BuildUHC.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/Cooldown/PlayerCooldown.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/ClickableMessageUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Profile/Profile.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/EntityHider/EntityHider.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Ladders/Combo.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Gui/RankedGui.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Party/PartyListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Ladders/NoDebuff.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/PartySplit/PartySplitListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Event/MatchEndEvent.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Runnable/AfterCountdown.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Runnable/DurationCountdown.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Gui/UnrankedGui.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyHelpArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/TPSUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Inventory/QueueInventory/QueueInventoryListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Queue/Queue.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Listener/PlayerCommandPreprocess.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/ItemBuilder.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Ladders/Gapple.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/BlockCheck.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyInfoArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Event/QueueEndEvent.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Sidebar/SidebarManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/Enderpearl/EnderpearlRunnable.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/Duel/ClickableText.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Ladders/Axe.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Profile/ProfileFile.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Practice/Arguments/HelpArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Inventory/QueueInventory/QueueInventory.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaSetpositionArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Ladders/Debuff.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Practice.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Spectate/SpectateCommand.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Enum/MatchStatus.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Listener/ItemConsume.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Inventory/PartyInventory/PartyInventory.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Custom/Gui/KitEditorGui.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Listener/PlayerQuit.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyInviteArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderListArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchStats/PlayerMatchStat.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaTeleportArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/SystemManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/EntityHider/EntityHiderListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/Cooldown/CooldownObject.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Sidebar/Sidebar.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/ItemSerializationUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/RoundManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/Duel/Duel.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Practice/Arguments/LobbyArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Ladder.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Queue/QueueManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Event/PartyCreateEvent.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/ArenaCommand.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaLadderArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/ArmorUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyDisbandArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyLeaderArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Ladders/Soup.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaListArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Arena/Util/ArenaUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Arena/Util/Cuboid.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Practice/Arguments/ArenasArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Inventory/InventoryManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Queue/QueueRunnable.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Practice/PracticeCommand.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Profile/ProfileStatus.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderInfoArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/StringUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Server/ServerManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaEnableArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Util/KitUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaCreateArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Event/MatchStartEvent.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Ladder/LadderCommand.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/PartyFFA/PartyFFAListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Arena/BlockChange/CachedBlock.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Party/PartyManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Arena/BlockChange/Rollback.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaInfoArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Sidebar/SidebarListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Party/PartyCommand.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Custom/CustomLadderManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Profile/ProfileManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Arena/ArenaManager.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Party/Party.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaDeleteArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Inventory/SpawnInventory/SpawnInventory.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Custom/CustomLadderListener.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Util/TeamUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Listener/PlayerInteract.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Enum/MatchType.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/MatchType/PartyFFA/PartyFFA.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/KnockbackType.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaHelpArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Inventory/SpectatorInventory/SpectatorInventory.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Listener/PlayerJoin.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/InventoryUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Event/SpectateStartEvent.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Sidebar/Adapter/SidebarAdapter.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaDisableArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Party/Arguments/PartyLeaveArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Gui/Match/LadderSelector.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Arena/Arguments/ArenaSetbuildArg.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Listener/ProjectileLaunch.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/PageUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Sidebar/Adapter/PracticeAdapter.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Match/Util/KnockbackUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Manager/Ladder/Custom/Gui/KitSelectorGui.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Util/PlayerUtil.java
+/Users/dukatnandor/IdeaProjects/ZonePractice/ZonePractice Lite/src/main/java/dev/nandi0813/practice/Command/Ladder/Arguments/LadderHelpArg.java

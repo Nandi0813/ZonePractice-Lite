@@ -1,6 +1,7 @@
 package dev.nandi0813.practice.Command.Party;
 
 import dev.nandi0813.practice.Command.Party.Arguments.*;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.SystemManager;
 import lombok.Getter;
 import org.bukkit.command.Command;
@@ -11,7 +12,7 @@ import org.bukkit.entity.Player;
 public class PartyCommand implements CommandExecutor
 {
 
-    @Getter private static final String prefix = "&8[&3&lParty&8] ";
+    @Getter private static final String prefix = LanguageManager.getString("party.prefix");
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)

@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Command.Setup;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,7 +18,7 @@ public class SetupCommand implements CommandExecutor
             Player player = (Player) sender;
             if (!player.hasPermission("zonepractice.setup"))
             {
-                player.sendMessage(StringUtil.CC("&cYou don't have permission!"));
+                player.sendMessage(LanguageManager.getString("no-permission"));
                 return false;
             }
 

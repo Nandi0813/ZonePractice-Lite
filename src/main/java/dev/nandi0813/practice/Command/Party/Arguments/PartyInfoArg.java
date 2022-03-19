@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Command.Party.Arguments;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Util.StringUtil;
@@ -20,7 +21,7 @@ public class PartyInfoArg
                 party = SystemManager.getPartyManager().getParty(player);
                 if (party == null)
                 {
-                    player.sendMessage(StringUtil.CC("&cYou are not in a party."));
+                    player.sendMessage(LanguageManager.getString("party.not-member"));
                     return;
                 }
             }
@@ -29,24 +30,27 @@ public class PartyInfoArg
                 Player target = Bukkit.getPlayer(args[1]);
                 if (target == null)
                 {
-                    player.sendMessage(StringUtil.CC("&c" + args[1] + " is not online."));
+                    player.sendMessage(LanguageManager.getString("party.player-not-online"));
                     return;
                 }
 
                 party = SystemManager.getPartyManager().getParty(target);
                 if (party == null)
                 {
-                    player.sendMessage(StringUtil.CC("&c" + target.getName() + " is not in a party."));
+                    player.sendMessage(LanguageManager.getString("party.not-member"));
                     return;
                 }
             }
 
-            player.sendMessage(StringUtil.CC("&7&m------------------------------------------------"));
-            player.sendMessage(StringUtil.CC(" &b&lParty Info&7:"));
-            player.sendMessage(StringUtil.CC(""));
-            player.sendMessage(StringUtil.CC(" &bLeader&7: &f" + party.getLeader().getName()));
-            player.sendMessage(StringUtil.CC(" &bParty Members (" + party.getMaxPlayerLimit() + "/" + party.getMembers().size() + ")&7: &f" + party.getMemberNames().toString().replace("[", "").replace("]", "")));
-            player.sendMessage(StringUtil.CC("&7&m------------------------------------------------"));
+            for (String line : LanguageManager.getList("party.info"))
+            {
+                player.sendMessage(line
+                        .replaceAll("%leader%", party.getLeader().getName())
+                        .replaceAll("%maxSize%", String.valueOf(party.getMaxPlayerLimit()))
+                        .replaceAll("%size%", String.valueOf(party.getMembers().size()))
+                        .replaceAll("%members%", party.getMemberNames().toString().replace("[", "").replace("]", ""))
+                );
+            }
         }
         else
             player.sendMessage(StringUtil.CC("&c/" + label + " info / info <player>"));

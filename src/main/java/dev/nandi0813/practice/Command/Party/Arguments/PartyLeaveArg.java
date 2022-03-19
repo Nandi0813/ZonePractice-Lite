@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Command.Party.Arguments;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Util.StringUtil;
@@ -21,10 +22,10 @@ public class PartyLeaveArg
                     party.removeMember(player, false);
                 }
                 else
-                    player.sendMessage(StringUtil.CC("&cYou can't leave the party during match."));
+                    player.sendMessage(LanguageManager.getString("party.cant-leave-inmatch"));
             }
             else
-                player.sendMessage(StringUtil.CC("&cYou are not a member of a party."));
+                player.sendMessage(LanguageManager.getString("party.not-member"));
         }
         else
             player.sendMessage(StringUtil.CC("&c/" + label + " leave"));

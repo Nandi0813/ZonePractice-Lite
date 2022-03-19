@@ -39,3 +39,10 @@ party-settings:
   max-party-members:
     default: 6 # Maximum party members, if the owner don't have permission to change it.
   party-invite-cooldown: 60 # After these seconds, the party invite will expire.
+#
+#
+duel-fight-end:
+  - "&7&m----------------------------------------"
+  - "&6Post-Match Inventories &7(click name to view)"
+  - "&aWinner &e%winner% &7- &cLoser: &e%loser%"
+  - "&7&m----------------------------------------"
