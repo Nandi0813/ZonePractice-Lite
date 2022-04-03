@@ -44,10 +44,6 @@ public class SystemManager
 
     public static void Enable(Practice practice)
     {
-        registerCommands();
-        registerListeners(practice, Bukkit.getPluginManager());
-        registerPacketListener();
-
         ConfigManager.createConfig(practice);
         LanguageManager.createFile(practice);
         ladderManager.loadLadders();
@@ -55,6 +51,10 @@ public class SystemManager
         profileManager.loadProfiles();
         sidebarManager.enable();
         ConfigManager.firstEnable();
+
+        registerCommands();
+        registerListeners(practice, Bukkit.getPluginManager());
+        registerPacketListener();
     }
 
     public static void Disable()

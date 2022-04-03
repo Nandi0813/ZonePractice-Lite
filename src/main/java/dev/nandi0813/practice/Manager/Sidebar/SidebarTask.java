@@ -19,8 +19,7 @@ public class SidebarTask extends BukkitRunnable implements Runnable
         for (Player player : SystemManager.getSidebarManager().getPlayerSidebars().keySet())
         {
             Sidebar sidebar = SystemManager.getSidebarManager().getPlayerSidebars().get(player);
-            if (SystemManager.getProfileManager().getProfiles().get(player).isSidebar())
-                sidebar.update();
+            sidebar.update();
         }
     }
 

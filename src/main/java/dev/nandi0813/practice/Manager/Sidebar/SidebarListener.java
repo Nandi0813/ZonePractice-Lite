@@ -19,21 +19,14 @@ public class SidebarListener implements Listener
         Player player = e.getPlayer();
 
         Bukkit.getScheduler().runTaskLater(Practice.getInstance(), () ->
-        {
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-            if (profile.isSidebar())
-                SystemManager.getSidebarManager().loadSidebar(player);
-        }, 5L);
+                SystemManager.getSidebarManager().loadSidebar(player), 5L);
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-
-        if (profile.isSidebar())
-            SystemManager.getSidebarManager().unLoadSidebar(player);
+        SystemManager.getSidebarManager().unLoadSidebar(player);
     }
 
 }

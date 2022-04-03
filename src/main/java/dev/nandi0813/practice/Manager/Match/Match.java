@@ -199,31 +199,12 @@ public class Match
 
     public void addSpectator(Player player)
     {
-        for (Player matchPlayer : players)
-        {
-            Profile matchPlayerProfile = SystemManager.getProfileManager().getProfiles().get(matchPlayer);
-            if (!matchPlayerProfile.isAllowSpectate())
-            {
-                player.sendMessage(StringUtil.CC("&cYou can't spectate this duel, because not every player has spectate enabled."));
-                return;
-            }
-        }
-
         Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
         spectators.add(player);
 
         // Hide spectator from match players
         for (Player matchPlayer : players)
             matchPlayer.hidePlayer(player);
-
-        // Hide spectators
-        if (profile.isHideSpectators())
-            PlayerUtil.toggleSpectatorVanish(player, this, true);
-
-        // Hide new spectators for players whose have hide on
-        for (Player spectator : spectators)
-            if (SystemManager.getProfileManager().getProfiles().get(spectator).isHideSpectators())
-                spectator.hidePlayer(player);
 
         player.teleport(gameArena.getPosition3());
         SystemManager.getInventoryManager().getSpectatorInventory().setSpectatorInventory(player);

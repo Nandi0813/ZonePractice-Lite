@@ -27,14 +27,6 @@ public class ProfileFile
     {
         config.set("uuid", profile.getUuid().toString());
 
-        // Basic settings
-        config.set("settings.duelrequest", profile.isDuelRequest());
-        config.set("settings.sidebar", profile.isSidebar());
-        config.set("settings.hideplayers", profile.isHidePlayers());
-        config.set("settings.partyinvites", profile.isPartyInvites());
-        config.set("settings.allowspectate", profile.isAllowSpectate());
-        config.set("settings.messages", profile.isMessages());
-
         // Elo
         for (Ladder ladder : SystemManager.getLadderManager().getLadders())
         {
@@ -122,13 +114,6 @@ public class ProfileFile
 
     public void getProfileData()
     {
-        profile.setDuelRequest(config.getBoolean("settings.duelrequest"));
-        profile.setSidebar(config.getBoolean("settings.sidebar"));
-        profile.setHidePlayers(config.getBoolean("settings.hideplayers"));
-        profile.setPartyInvites(config.getBoolean("settings.partyinvites"));
-        profile.setAllowSpectate(config.getBoolean("settings.allowspectate"));
-        profile.setMessages(config.getBoolean("settings.messages"));
-
         for (String ladderName : config.getConfigurationSection("stats.elo").getKeys(false))
         {
             Ladder ladder = SystemManager.getLadderManager().getLadder(ladderName);

@@ -111,7 +111,7 @@ public class SpectatorListener implements Listener
         ItemStack item = player.getInventory().getItemInHand();
         Action action = e.getAction();
 
-        if (profile.isSpectatorMode() || profile.getStatus().equals(ProfileStatus.SPECTATE))
+        if (profile.getStatus().equals(ProfileStatus.SPECTATE))
         {
             e.setCancelled(true);
             if (!action.equals(Action.RIGHT_CLICK_AIR) && !action.equals(Action.RIGHT_CLICK_BLOCK))

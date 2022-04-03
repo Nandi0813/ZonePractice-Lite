@@ -22,7 +22,7 @@ party:
     - " &b&lParty Info&7:"
     - ""
     - " &bLeader&7: &f%leader%"
-    - " &bParty Members(%maxSize%/%size%)&7: &f%members%"
+    - " &bParty Members (%maxSize%/%size%)&7: &f%members%"
     - "&7&m------------------------------------------------"
   help: # Label = party/p
     - "&7&m------------------------------------------------"

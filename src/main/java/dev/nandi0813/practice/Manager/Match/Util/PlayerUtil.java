@@ -79,23 +79,6 @@ public class PlayerUtil
             player.teleport(match.getGameArena().getPosition2());
     }
 
-    public static void toggleSpectatorVanish(Player player, Match match, boolean vanish)
-    {
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        profile.setHideSpectators(vanish);
-
-        if (match.getSpectators().size() > 1)
-        {
-            for (Player spectator : match.getSpectators())
-            {
-                if (vanish)
-                    player.hidePlayer(spectator);
-                else
-                    player.showPlayer(spectator);
-            }
-        }
-    }
-
     public static void hidePlayerPartyGames(Match match, Player player)
     {
         setMatchPlayer(player);
