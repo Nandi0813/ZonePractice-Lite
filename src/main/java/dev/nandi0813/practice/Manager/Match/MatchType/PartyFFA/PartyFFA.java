@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Match.MatchType.PartyFFA;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Match.Util.PlayerUtil;
@@ -24,23 +25,20 @@ public class PartyFFA
             for (Player player : match.getPlayers())
                 if (!player.equals(winner)) losers.add(player.getName());
 
-            match.sendMessage("&7&m----------------------------------------", true);
-            match.sendMessage("&aWinner: &e" + winner.getName(), true);
-            match.sendMessage("&cLosers: &e" + losers.toString().replace("[", "").replace("]", ""), true);
-            match.sendMessage("&7&m----------------------------------------", true);
+            for (String line : LanguageManager.getList("match.partyffa.match-end"))
+                match.sendMessage(line.replaceAll("%winner%", winner.getName()).replaceAll("%losers%", losers.toString().replace("[", "").replace("]", "")), true);
         }
         else
         {
-            match.sendMessage("&7&m----------------------------------------", true);
-            match.sendMessage("&cThe match is ended with no winner.", true);
-            match.sendMessage("&7&m----------------------------------------", true);
+            for (String line : LanguageManager.getList("match.partyffa.match-end-draw"))
+                match.sendMessage(line, true);
         }
     }
 
     public static void killPlayer(Match match, Player player, boolean message)
     {
         if (message)
-            match.sendMessage("&c" + player.getName() + " died.", true);
+            match.sendMessage(LanguageManager.getString("match.partyffa.player-die"), true);
         match.getAlivePlayers().remove(player);
 
         if (player.isOnline())

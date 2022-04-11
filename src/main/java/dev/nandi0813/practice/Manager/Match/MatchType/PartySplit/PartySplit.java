@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Match.MatchType.PartySplit;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Match.Util.PlayerUtil;
@@ -51,16 +52,20 @@ public class PartySplit
                     losers.add(player.getName());
             }
 
-            match.sendMessage("&7&m----------------------------------------", true);
-            match.sendMessage("&aWinner: &e" + match.getTeams().get(winner).getName() + " &7- &e" + winners.toString().replace("[", "").replace("]", ""), true);
-            match.sendMessage("&cLoser: &e" + TeamUtil.getOppositeTeam(match.getTeams().get(winner)).getName() + " &7- &e" + losers.toString().replace("[", "").replace("]", ""), true);
-            match.sendMessage("&7&m----------------------------------------", true);
+            for (String line : LanguageManager.getList("match.partysplit.match-end"))
+            {
+                match.sendMessage(line
+                                .replaceAll("%winnerTeam%", match.getTeams().get(winner).getName())
+                                .replaceAll("%winnerPlayers%", winners.toString().replace("[", "").replace("]", ""))
+                                .replaceAll("%loserTeam%", TeamUtil.getOppositeTeam(match.getTeams().get(winner)).getName())
+                                .replaceAll("%loserPlayers%", losers.toString().replace("[", "").replace("]", ""))
+                        , true);
+            }
         }
         else
         {
-            match.sendMessage("&7&m----------------------------------------", true);
-            match.sendMessage("&cThe match is ended with no winner.", true);
-            match.sendMessage("&7&m----------------------------------------", true);
+            for (String line : LanguageManager.getList("match.partysplit.match-end-draw"))
+                match.sendMessage(line, true);
         }
     }
 
@@ -70,7 +75,7 @@ public class PartySplit
         List<Player> playerTeam = getTeamAlivePlayers(match,  match.getTeams().get(player));
 
         if (message)
-            match.sendMessage("&c" + player.getName() + " died. &7(" + match.getTeams().get(player).getName() + "&7) - &e" + playerTeam.size() + " &7players left in their team.", true);
+            match.sendMessage(LanguageManager.getString("match.partysplit.player-die").replaceAll("%player%", player.getName()).replaceAll("%playerTeam%", match.getTeams().get(player).getName()).replaceAll("%playerTeamLeft%", String.valueOf(playerTeam.size())), true);
 
         if (player.isOnline())
             PlayerUtil.hidePlayerPartyGames(match, player);

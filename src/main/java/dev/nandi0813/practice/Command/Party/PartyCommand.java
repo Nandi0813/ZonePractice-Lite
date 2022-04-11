@@ -12,8 +12,6 @@ import org.bukkit.entity.Player;
 public class PartyCommand implements CommandExecutor
 {
 
-    @Getter private static final String prefix = LanguageManager.getString("party.prefix");
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {

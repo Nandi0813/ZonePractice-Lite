@@ -1,11 +1,11 @@
 package dev.nandi0813.practice.Manager.Inventory.PartyInventory;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Party.Gui.PartyEventsGui;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.SystemManager;
-import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -47,10 +47,10 @@ public class PartyInventoryListener implements Listener
                             player.openInventory(PartyEventsGui.getPartyEventGui());
                         }
                         else
-                            player.sendMessage(StringUtil.CC("&cThe party needs at least two players to be able to start a game."));
+                            player.sendMessage(LanguageManager.getString("party.game-cant-start"));
                     }
                     else
-                        player.sendMessage(StringUtil.CC("&cYou are not the leader of the party."));
+                        player.sendMessage(LanguageManager.getString("party.not-leader"));
                 }
             }
         }

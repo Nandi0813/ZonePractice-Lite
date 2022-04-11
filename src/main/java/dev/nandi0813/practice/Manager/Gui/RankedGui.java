@@ -1,10 +1,10 @@
 package dev.nandi0813.practice.Manager.Gui;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Util.InventoryUtil;
 import dev.nandi0813.practice.Util.ItemUtil;
-import dev.nandi0813.practice.Util.StringUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,13 +13,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class RankedGui
 {
 
-    @Getter public static Inventory gui = InventoryUtil.createInventory("&4&lJoin Ranked Queue", getRowSize());
+    @Getter public static Inventory gui = InventoryUtil.createInventory(LanguageManager.getString("gui.ranked.title"), getRowSize());
 
     public static void updateGui()
     {
@@ -35,12 +34,13 @@ public class RankedGui
                 int duelMatchSize = SystemManager.getMatchManager().getDuelMatchSize(ladder, true);
                 if (duelMatchSize > 0 && duelMatchSize <= 64) icon.setAmount(duelMatchSize);
 
-                iconMeta.setLore(StringUtil.CC(Arrays.asList(
-                        "",
-                        "  &fIn Queue: &b" + SystemManager.getQueueManager().getQueueSize(ladder, true),
-                        "  &fIn Fights: &b" + duelMatchSize,
-                        "",
-                        "&aClick here to select &cRanked " + ladder.getName() + "&a.")));
+                List<String> lore = new ArrayList<>();
+                for (String line : LanguageManager.getList("gui.unranked.item-lore"))
+                    lore.add(line
+                            .replaceAll("%inQueue%", String.valueOf(SystemManager.getQueueManager().getQueueSize(ladder, true))
+                                    .replaceAll("%inMatch%", String.valueOf(duelMatchSize))
+                                    .replaceAll("%ladderName%", ladder.getName())));
+                iconMeta.setLore(lore);
 
                 icon.setItemMeta(iconMeta);
                 gui.addItem(icon);

@@ -1,6 +1,7 @@
 package dev.nandi0813.practice.Manager.Match.MatchType.PartyFFA;
 
 import dev.nandi0813.practice.Manager.Arena.Util.Cuboid;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Match.Match;
@@ -69,7 +70,7 @@ public class PartyFFAListener implements Listener
             match.getPlayers().remove(player);
 
             PartyFFA.killPlayer(match, player, false);
-            match.sendMessage("&e" + player.getName() + " &7has left the match.", true);
+            match.sendMessage(LanguageManager.getString("match.partyffa.player-left"), true);
             if (match.getPlayers().size() < 2)
             {
                 for (Player winner : match.getPlayers())

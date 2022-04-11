@@ -1,7 +1,7 @@
 package dev.nandi0813.practice.Manager.Party;
 
-import dev.nandi0813.practice.Command.Party.PartyCommand;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
@@ -35,7 +35,7 @@ public class Party
     public void setNewOwner(Player newOwner)
     {
         leader = newOwner;
-        sendMessage(PartyCommand.getPrefix() + "&6" + newOwner.getName() + " &7is the new leader of the party.");
+        sendMessage(LanguageManager.getString("party.new-leader").replaceAll("%owner%", newOwner.getName()));
     }
 
     public void addMember(Player member)
@@ -46,7 +46,7 @@ public class Party
         memberProfile.setParty(true);
         SystemManager.getInventoryManager().getSpawnInventory().setInventory(member, false);
 
-        sendMessage(PartyCommand.getPrefix() + "&b" + member.getName() + " &ajoined the party.");
+        sendMessage(LanguageManager.getString("party.player-join").replaceAll("%player%", member.getName()));
     }
 
     public void removeMember(Player member, boolean kick)
@@ -54,9 +54,9 @@ public class Party
         Profile memberProfile = SystemManager.getProfileManager().getProfiles().get(member);
 
         if (kick)
-            sendMessage(PartyCommand.getPrefix() + "&c" + member.getName() + " &7has been kicked out of the party.");
+            sendMessage(LanguageManager.getString("party.player-kick").replaceAll("%player%", member.getName()));
         else
-            sendMessage(PartyCommand.getPrefix() + "&c" + member.getName() + " &7has left the party.");
+            sendMessage(LanguageManager.getString("party.player-leave").replaceAll("%player%", member.getName()));
 
         if (member.equals(leader))
             disband();
@@ -70,7 +70,7 @@ public class Party
 
     public void disband()
     {
-        sendMessage(PartyCommand.getPrefix() + "&cThe party has been disbanded.");
+        sendMessage(LanguageManager.getString("party.disband"));
 
         for (Player member : members)
             SystemManager.getProfileManager().getProfiles().get(member).setParty(false);
@@ -80,7 +80,7 @@ public class Party
 
         if (match != null)
         {
-            match.sendMessage("&cThe fight was forced to end because the party has been disbanded!", true);
+            match.sendMessage(LanguageManager.getString("party.match-end"), true);
             match.endMatch();
         }
         else

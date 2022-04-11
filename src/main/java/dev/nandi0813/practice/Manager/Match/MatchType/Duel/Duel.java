@@ -1,6 +1,7 @@
 package dev.nandi0813.practice.Manager.Match.MatchType.Duel;
 
 import dev.nandi0813.practice.Manager.File.ConfigManager;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Match.Util.PlayerUtil;
@@ -56,9 +57,8 @@ public class Duel
         }
         else
         {
-            match.sendMessage("&7&m----------------------------------------", true);
-            match.sendMessage("&cThe match is ended with no winner or loser.", true);
-            match.sendMessage("&7&m----------------------------------------", true);
+            for (String line : LanguageManager.getList("match.duel.match-end-draw"))
+                match.sendMessage(line, true);
         }
     }
 

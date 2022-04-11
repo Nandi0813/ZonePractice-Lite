@@ -1,6 +1,5 @@
 package dev.nandi0813.practice.Manager.Inventory.SpectatorInventory;
 
-import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.SystemManager;
@@ -19,7 +18,6 @@ public class SpectatorInventory
     @Getter File file = new File(Practice.getInstance().getDataFolder() + "/inventories", "spectatoritems.yml");
     private final YamlConfiguration config;
 
-    @Getter private static ItemStack menuItemSpectate;
     @Getter private static ItemStack leaveItemSpectate;
 
 

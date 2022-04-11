@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Ladder.Custom.Gui;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Ladder.Custom.CustomLadderManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Profile.Profile;
@@ -38,12 +39,12 @@ public class KitEditorGui
 
     public static Inventory buildGui(Ladder ladder)
     {
-        Inventory gui = InventoryUtil.createInventory("&8Editing " + ladder.getName() + " Kit", 6);
+        Inventory gui = InventoryUtil.createInventory(LanguageManager.getString("gui.kit-editor.editor.title").replaceAll("%ladderName%", ladder.getName()), 6);
 
-        gui.setItem(0, ItemUtil.createItem("&6&lEditing: &eKit " + ladder.getName(), Material.NAME_TAG));
-        gui.setItem(6, ItemUtil.createItem("&a&lSave", Material.WOOL, Short.valueOf("5"), getSaveLore()));
-        gui.setItem(7, ItemUtil.createItem("&e&lLoad Default Kit", Material.WOOL, Short.valueOf("4"), getDefaultKitLore()));
-        gui.setItem(8, ItemUtil.createItem("&c&lCancel", Material.WOOL, Short.valueOf("14"), getCancelLore()));
+        gui.setItem(0, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.name-item").replaceAll("%ladderName%", ladder.getName()), Material.NAME_TAG));
+        gui.setItem(6, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.save-item.name"), Material.WOOL, Short.valueOf("5"), LanguageManager.getList("gui.kit-editor.editor.save-item.lore")));
+        gui.setItem(7, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.load-item.name"), Material.WOOL, Short.valueOf("4"), LanguageManager.getList("gui.kit-editor.editor.load-item.lore")));
+        gui.setItem(8, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.cancel-item.name"), Material.WOOL, Short.valueOf("14"), LanguageManager.getList("gui.kit-editor.editor.cancel-item.lore")));
 
         // Frame
         for (int i : new int[]{1,2,3,5,9,10,11,12,13,14,15,16,17,19,28,37,46})
@@ -83,49 +84,25 @@ public class KitEditorGui
     private static ItemStack getEffectItem(Ladder ladder)
     {
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add("&eYou will get these effects,");
-        lore.add("&ewhen the game starts.");
-        lore.add("");
+        ArrayList<String> effectList = new ArrayList<>();
+
         if (ladder.getEffects().size() > 0)
-        {
             for (PotionEffect potionEffect : ladder.getEffects())
-                lore.add("&d" + potionEffect.getType().getName() + " " + (potionEffect.getAmplifier()+1) + " &7for " + StringUtil.formatMillisecondsToMinutes((potionEffect.getDuration()/20)* 1000L));
+                effectList.add("&d" + potionEffect.getType().getName() + " " + (potionEffect.getAmplifier()+1) + " &7for " + StringUtil.formatMillisecondsToMinutes((potionEffect.getDuration()/20)* 1000L));
+        else effectList.add("&7This ladder has no effects.");
+
+        for (String line : LanguageManager.getList("gui.kit-editor.editor.effect-item.lore"))
+        {
+            if (line.contains("%effects%"))
+            {
+                line.replaceAll("%effects%", "");
+                lore.addAll(effectList);
+            }
+            else
+                lore.add(line);
         }
-        else lore.add("&7This ladder has no effects.");
-        lore.add("");
 
-        return ItemUtil.createItem("&5Effects", Material.POTION, Short.valueOf("8233"), lore);
-    }
-
-    public static ArrayList<String> getSaveLore()
-    {
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add("&e&lClick here &eto save");
-        lore.add("&ethe custom kit.");
-        lore.add("");
-        return lore;
-    }
-
-    public static ArrayList<String> getDefaultKitLore()
-    {
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add("&e&lClick here &eto load the default");
-        lore.add("&ekit to your inventory.");
-        lore.add("");
-        return lore;
-    }
-
-    public static ArrayList<String> getCancelLore()
-    {
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add("&e&lClick here &eto abort editing the");
-        lore.add("&ekit, and return to the kit menu.");
-        lore.add("");
-        return lore;
+        return ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.effect-item.name"), Material.POTION, Short.valueOf("8233"), lore);
     }
 
 }

@@ -1,6 +1,5 @@
 package dev.nandi0813.practice.Manager.Inventory.SpawnInventory;
 
-import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Server.ServerManager;

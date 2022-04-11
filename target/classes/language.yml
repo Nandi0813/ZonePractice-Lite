@@ -1,6 +1,7 @@
 no-permission: "&cYou don't have permission."
 party:
-  prefix: "&8[&3&lParty&8]" # You can use it in any party related text with the %prefix% variable.
+  create: "&aYou have created a party."
+  cant-create: "&cYou can't create a party right now."
   cant-join-party: "&cYou cannot join a party right now."
   already-member: "&cYou are already a member of a party."
   player-not-online: "&cPlayer is not online."
@@ -17,12 +18,18 @@ party:
   player-not-member: "&cPlayer is not a member of the party."
   cant-kick-yourself: "&cYou can't kick yourself out."
   cant-leave-inmatch: "&cYou can't leave the party during match."
+  new-leader: "&6%owner% &7is the new leader of the party."
+  player-join: "&b%player% &ajoined the party."
+  player-leave: "&c%player% &7has been kicked out of the party."
+  player-kick: "&c%player% &7has left the party."
+  disband: "&cThe party has been disbanded."
+  match-end: "&cThe fight was forced to end because the party has been disbanded!"
   info:
     - "&7&m------------------------------------------------"
     - " &b&lParty Info&7:"
     - ""
     - " &bLeader&7: &f%leader%"
-    - " &bParty Members(%maxSize%/%size%)&7: &f%members%"
+    - " &bParty Members (%maxSize%/%size%)&7: &f%members%"
     - "&7&m------------------------------------------------"
   help: # Label = party/p
     - "&7&m------------------------------------------------"

@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Ladder.Custom.Gui;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Ladder.Custom.CustomLadderManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Profile.Profile;
@@ -18,7 +19,7 @@ public class KitSumGui
 
     public static void openGui(Player player, Ladder ladder)
     {
-        Inventory gui = InventoryUtil.createInventory("&8Viewing " + ladder.getName() + " kit", 4);
+        Inventory gui = InventoryUtil.createInventory(LanguageManager.getString("gui.kit-editor.summary.title").replaceAll("%ladderName%", ladder.getName()), 4);
         Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
 
         player.openInventory(gui);
@@ -27,15 +28,15 @@ public class KitSumGui
         // Set kit columns
         if (profile.getCustomKits().get(ladder) != null)
         {
-            gui.setItem(4, ItemUtil.createItem("&6&lKit",Material.GOLD_SWORD));
+            gui.setItem(4, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.summary.existing-kit-item-name"),Material.GOLD_SWORD));
 
             gui.setItem(13, ItemUtil.createItem(Material.STAINED_GLASS_PANE, Short.valueOf("7")));
-            gui.setItem(22, ItemUtil.createItem("&a&lEdit Kit", Material.BOOK));
-            gui.setItem(31, ItemUtil.createItem("&c&lDelete Kit", Material.REDSTONE, getDeleteItemLore()));
+            gui.setItem(22, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.summary.edit-kit-item-name"), Material.BOOK));
+            gui.setItem(31, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.summary.delete-kit-item-name"), Material.REDSTONE, getDeleteItemLore()));
         }
         else
         {
-            gui.setItem(4, ItemUtil.createItem("&a&lCreate Kit",Material.STONE_SWORD));
+            gui.setItem(4, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.summary.create-kit-item-name"),Material.STONE_SWORD));
 
             gui.setItem(13, ItemUtil.createItem(Material.STAINED_GLASS_PANE, Short.valueOf("7")));
             gui.setItem(22, ItemUtil.createItem(Material.STAINED_GLASS_PANE, Short.valueOf("7")));

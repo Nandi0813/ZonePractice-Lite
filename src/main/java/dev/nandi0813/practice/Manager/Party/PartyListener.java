@@ -1,13 +1,13 @@
 package dev.nandi0813.practice.Manager.Party;
 
 import dev.nandi0813.practice.Manager.Arena.Arena;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Gui.Match.LadderSelector;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Party.Gui.PartyEventsGui;
 import dev.nandi0813.practice.Manager.SystemManager;
-import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -93,7 +93,7 @@ public class PartyListener implements Listener
                                 match.startMatch();
                             }
                             else
-                                player.sendMessage(StringUtil.CC("&cThere are no available arena for your game."));
+                                player.sendMessage(LanguageManager.getString("party.no-available-arena"));
                             return;
                         }
                     }
@@ -101,7 +101,7 @@ public class PartyListener implements Listener
                 else
                 {
                     player.closeInventory();
-                    player.sendMessage(StringUtil.CC("&cThe party needs at least two players to be able to start a game."));
+                    player.sendMessage(LanguageManager.getString("party.game-cant-start"));
                 }
             }
         }

@@ -2,6 +2,7 @@ package dev.nandi0813.practice.Manager.Match.MatchType.PartySplit;
 
 import dev.nandi0813.practice.Manager.Arena.Util.Cuboid;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
@@ -97,7 +98,7 @@ public class PartySplitListener implements Listener
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_SPLIT))
         {
-            match.sendMessage("&e" + player.getName() + " &7has left the match.", true);
+            match.sendMessage(LanguageManager.getString("match.partysplit.player-left").replaceAll("%player%", player.getName()), true);
 
             match.removePlayer(player);
             match.getPlayers().remove(player);
@@ -131,8 +132,7 @@ public class PartySplitListener implements Listener
                     for (Player team2Player : team2Players)
                     {
                         match.getTeams().put(team2Player, team1);
-
-                        match.sendMessage("&e" + team2Player.getName() + " &cwas moved to " + team1.getName() + " &cto even the match.", true);
+                        match.sendMessage(LanguageManager.getString("match.partysplit.player-team-move").replaceAll("%player%", team2Player.getName()).replaceAll("%oldTeam%", TeamUtil.getOppositeTeam(team1).getName()).replaceAll("%newTeam%", team1.getName()), true);
                         return;
                     }
                 }
