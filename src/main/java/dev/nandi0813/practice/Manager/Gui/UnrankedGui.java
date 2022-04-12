@@ -35,9 +35,9 @@ public class UnrankedGui
             List<String> lore = new ArrayList<>();
             for (String line : LanguageManager.getList("gui.unranked.item-lore"))
                 lore.add(line
-                        .replaceAll("%inQueue%", String.valueOf(SystemManager.getQueueManager().getQueueSize(ladder, false))
+                        .replaceAll("%inQueue%", String.valueOf(SystemManager.getQueueManager().getQueueSize(ladder, false)))
                         .replaceAll("%inMatch%", String.valueOf(duelMatchSize))
-                        .replaceAll("%ladderName%", ladder.getName())));
+                        .replaceAll("%ladderName%", ladder.getName()));
             iconMeta.setLore(lore);
 
             icon.setItemMeta(iconMeta);

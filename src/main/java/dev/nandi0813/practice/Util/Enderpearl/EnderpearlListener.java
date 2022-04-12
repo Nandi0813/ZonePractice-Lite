@@ -1,6 +1,7 @@
 package dev.nandi0813.practice.Util.Enderpearl;
 
 import dev.nandi0813.practice.Manager.File.ConfigManager;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
@@ -8,7 +9,6 @@ import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Util.Cooldown.CooldownObject;
 import dev.nandi0813.practice.Util.Cooldown.PlayerCooldown;
-import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -50,7 +50,7 @@ public class EnderpearlListener implements Listener
                         BigDecimal bd = BigDecimal.valueOf(PlayerCooldown.getLeft(player, CooldownObject.ENDER_PEARL) / (float) 1000);
                         bd = bd.setScale(1, RoundingMode.HALF_UP);
 
-                        player.sendMessage(StringUtil.CC("&cYou cannot use this for another " + bd.doubleValue() + " seconds."));
+                        player.sendMessage(LanguageManager.getString("match.enderpearl-cooldown").replaceAll("%time%", String.valueOf(bd.doubleValue())));
                         player.updateInventory();
                     }
                 }

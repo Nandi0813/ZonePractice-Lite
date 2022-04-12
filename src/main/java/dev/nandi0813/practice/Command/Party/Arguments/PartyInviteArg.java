@@ -34,7 +34,7 @@ public class PartyInviteArg
                                 party.getInvites().put(target, System.currentTimeMillis());
 
                                 party.sendMessage(LanguageManager.getString("party.player-invited-party").replaceAll("%player%", target.getName()));
-                                ClickableMessageUtil.sendClickableMessage(target, LanguageManager.getString("party.player-invited-player"), "/party accept " + party.getLeader().getName(), "&aClick to accept");
+                                ClickableMessageUtil.sendClickableMessage(target, LanguageManager.getString("party.player-invited-player").replaceAll("%player%", player.getName()), "/party accept " + party.getLeader().getName(), "&aClick to accept");
                             }
                             else
                                 player.sendMessage(LanguageManager.getString("party.player-already-member").replaceAll("%player%", target.getName()));

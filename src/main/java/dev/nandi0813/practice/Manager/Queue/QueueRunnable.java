@@ -1,7 +1,7 @@
 package dev.nandi0813.practice.Manager.Queue;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Practice;
-import dev.nandi0813.practice.Util.StringUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -42,7 +42,7 @@ public class QueueRunnable extends BukkitRunnable
             Bukkit.getScheduler().runTask(Practice.getInstance(), () ->
             {
                 queue.endQueue(false);
-                queue.getPlayer().sendMessage(StringUtil.CC("&cWe couldn't find a match in 5 minutes."));
+                queue.getPlayer().sendMessage(LanguageManager.getString("queue.no-match"));
             });
         }
 

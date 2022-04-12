@@ -61,13 +61,13 @@ public class PartyListener implements Listener
                 player.openInventory(LadderSelector.getGui(MatchType.PARTY_FFA));
             }
         }
-        else if (inventoryView.getTitle().equals(ChatColor.translateAlternateColorCodes('&', MatchType.PARTY_FFA.getName() + "&8 - Kit")) ||
-                inventoryView.getTitle().equals(ChatColor.translateAlternateColorCodes('&', MatchType.PARTY_SPLIT.getName() + "&8 - Kit")))
+        else if (inventoryView.getTitle().equals(ChatColor.translateAlternateColorCodes('&', LanguageManager.getString("gui.ladder-selector.title").replaceAll("%matchTypeName%", MatchType.PARTY_FFA.getName()))) ||
+                inventoryView.getTitle().equals(ChatColor.translateAlternateColorCodes('&', LanguageManager.getString("gui.ladder-selector.title").replaceAll("%matchTypeName%", MatchType.PARTY_SPLIT.getName()))))
         {
             e.setCancelled(true);
 
             MatchType matchType;
-            if (inventoryView.getTitle().equals(ChatColor.translateAlternateColorCodes('&', MatchType.PARTY_FFA.getName() + "&8 - Kit")))
+            if (inventoryView.getTitle().equals(ChatColor.translateAlternateColorCodes('&', LanguageManager.getString("gui.ladder-selector.title").replaceAll("%matchTypeName%", MatchType.PARTY_FFA.getName()))))
                 matchType = MatchType.PARTY_FFA;
             else
                 matchType = MatchType.PARTY_SPLIT;

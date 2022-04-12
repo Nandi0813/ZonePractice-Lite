@@ -37,9 +37,9 @@ public class RankedGui
                 List<String> lore = new ArrayList<>();
                 for (String line : LanguageManager.getList("gui.unranked.item-lore"))
                     lore.add(line
-                            .replaceAll("%inQueue%", String.valueOf(SystemManager.getQueueManager().getQueueSize(ladder, true))
-                                    .replaceAll("%inMatch%", String.valueOf(duelMatchSize))
-                                    .replaceAll("%ladderName%", ladder.getName())));
+                            .replaceAll("%inQueue%", String.valueOf(SystemManager.getQueueManager().getQueueSize(ladder, true)))
+                            .replaceAll("%inMatch%", String.valueOf(duelMatchSize))
+                            .replaceAll("%ladderName%", ladder.getName()));
                 iconMeta.setLore(lore);
 
                 icon.setItemMeta(iconMeta);

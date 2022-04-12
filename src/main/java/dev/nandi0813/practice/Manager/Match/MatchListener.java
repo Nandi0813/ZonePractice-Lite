@@ -4,6 +4,7 @@ import dev.nandi0813.practice.Event.MatchEndEvent;
 import dev.nandi0813.practice.Event.MatchStartEvent;
 import dev.nandi0813.practice.Manager.Arena.Util.Cuboid;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Gui.RankedGui;
 import dev.nandi0813.practice.Manager.Gui.UnrankedGui;
 import dev.nandi0813.practice.Manager.Ladder.KnockbackType;
@@ -14,9 +15,7 @@ import dev.nandi0813.practice.Manager.Match.Util.KnockbackUtil;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.SystemManager;
-import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -32,8 +31,6 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.HashMap;
 
 public class MatchListener implements Listener
 {
@@ -146,7 +143,7 @@ public class MatchListener implements Listener
                 int buildLimit = match.getGameArena().getPosition1().getBlockY() + ConfigManager.getInt("match-settings.build-limit");
                 if (e.getBlock().getLocation().getY() >= buildLimit)
                 {
-                    player.sendMessage(StringUtil.CC("&cYou can't build here."));
+                    player.sendMessage(LanguageManager.getString("match.cant-build"));
                     e.setCancelled(true);
                 }
             }
@@ -172,7 +169,7 @@ public class MatchListener implements Listener
                 int buildLimit = match.getGameArena().getPosition1().getBlockY() + ConfigManager.getInt("match-settings.build-limit");
                 if (e.getBlockClicked().getLocation().getY() >= buildLimit)
                 {
-                    player.sendMessage(StringUtil.CC("&cYou can't build here."));
+                    player.sendMessage(LanguageManager.getString("match.cant-build"));
                     e.setCancelled(true);
                 }
             }
@@ -338,7 +335,7 @@ public class MatchListener implements Listener
             if (!match.getLadder().isBuild())
             {
                 e.setCancelled(true);
-                player.sendMessage(StringUtil.CC("&cYou can't craft with this ladder."));
+                player.sendMessage(LanguageManager.getString("match.cant-craft"));
             }
         }
     }

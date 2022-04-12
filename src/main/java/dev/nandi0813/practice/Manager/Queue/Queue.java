@@ -4,6 +4,7 @@ import dev.nandi0813.practice.Event.QueueEndEvent;
 import dev.nandi0813.practice.Event.QueueStartEvent;
 import dev.nandi0813.practice.Manager.Arena.Arena;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Gui.RankedGui;
 import dev.nandi0813.practice.Manager.Gui.UnrankedGui;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
@@ -13,7 +14,6 @@ import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
-import dev.nandi0813.practice.Util.StringUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -58,8 +58,7 @@ public class Queue
             queueManager.getQueues().add(this);
 
             queueRunnable.begin();
-
-            player.sendMessage(StringUtil.CC("&aYou are now queued for " + (ranked ? "ranked" : "unranked") + " " + ladder.getName() + "."));
+            player.sendMessage(LanguageManager.getString("queue.queue-start").replaceAll("%weightClass%", (ranked ? "ranked" : "unranked")).replaceAll("%ladderName%", ladder.getName()));
 
             if (ranked)
             {
@@ -94,7 +93,7 @@ public class Queue
                             }
                         }
 
-                        player.sendMessage(StringUtil.CC("&cElo range: &e" + (elo - range) + " &c-> &e" + (elo + range)));
+                        player.sendMessage(LanguageManager.getString("queue.elo-range").replaceAll("%eloMin%", String.valueOf((elo - range))).replaceAll("%eloMax%", String.valueOf((elo + range))));
                         setRange(range + rangeIncrease);
 
                     }
@@ -136,10 +135,10 @@ public class Queue
             return;
         }
 
-        queue.getPlayer().sendMessage(StringUtil.CC("&cCan't find available arena!"));
+        queue.getPlayer().sendMessage(LanguageManager.getString("queue.no-arena"));
         queue.endQueue(false);
 
-        player.sendMessage(StringUtil.CC("&cCan't find available arena!"));
+        player.sendMessage(LanguageManager.getString("queue.no-arena"));
         endQueue(false);
 
     }
@@ -157,7 +156,7 @@ public class Queue
         if (!foundMatch && player.isOnline())
         {
             SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, false);
-            player.sendMessage(StringUtil.CC("&aYou are no longer queued for " + (ranked ? "ranked" : "unranked") + " " + ladder.getName() + "."));
+            player.sendMessage(LanguageManager.getString("queue.queue-end").replaceAll("%weightClass%", (ranked ? "ranked" : "unranked")).replaceAll("%ladderName%", ladder.getName()));
         }
 
         UnrankedGui.updateGui();

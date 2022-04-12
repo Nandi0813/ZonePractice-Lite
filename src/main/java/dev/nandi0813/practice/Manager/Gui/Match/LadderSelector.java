@@ -8,6 +8,7 @@ import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Util.InventoryUtil;
 import dev.nandi0813.practice.Util.ItemUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -33,9 +34,9 @@ public class LadderSelector
             List<String> lore = new ArrayList<>();
             for (String line : LanguageManager.getList("gui.ladder-selector.item-lore"))
             {
-                lore.add(line
+                lore.add(ChatColor.translateAlternateColorCodes('&', line
                         .replaceAll("%ladderName%", ladder.getName())
-                        .replaceAll("%matchTypeName%", matchType.getName()));
+                        .replaceAll("%matchTypeName%", matchType.getName())));
             }
             iconMeta.setLore(lore);
 

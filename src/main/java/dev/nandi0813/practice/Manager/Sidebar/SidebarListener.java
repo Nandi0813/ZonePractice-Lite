@@ -1,6 +1,5 @@
 package dev.nandi0813.practice.Manager.Sidebar;
 
-import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import org.bukkit.Bukkit;

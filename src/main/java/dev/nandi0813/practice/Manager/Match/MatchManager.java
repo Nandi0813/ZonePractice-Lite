@@ -9,7 +9,6 @@ import dev.nandi0813.practice.Manager.Match.MatchType.PartySplit.PartySplitListe
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;

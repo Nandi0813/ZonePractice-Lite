@@ -38,7 +38,7 @@ public class PartyFFA
     public static void killPlayer(Match match, Player player, boolean message)
     {
         if (message)
-            match.sendMessage(LanguageManager.getString("match.partyffa.player-die"), true);
+            match.sendMessage(LanguageManager.getString("match.partyffa.player-die").replaceAll("%player%", player.getName()), true);
         match.getAlivePlayers().remove(player);
 
         if (player.isOnline())

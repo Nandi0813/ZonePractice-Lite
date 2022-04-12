@@ -11,8 +11,8 @@ party:
   invite-expired: "&cYour party invite has expired."
   not-member: "&cYou are not a member of a party."
   not-leader: "&cYou are not the leader of the party."
-  player-invited-party: "%prefix% &a%player% &7has been invited to the party!"
-  player-invited-player: "%prefix% &b%player% &7has invited you to their party. &a[Click to accept]"
+  player-invited-party: "&a%player% &7has been invited to the party!"
+  player-invited-player: "&b%player% &7has invited you to their party. &a[Click to accept]"
   player-already-member: "&c%player% is already in your party."
   cant-invite-yourself: "&cYou can't invite yourself."
   player-not-member: "&cPlayer is not a member of the party."
@@ -20,10 +20,18 @@ party:
   cant-leave-inmatch: "&cYou can't leave the party during match."
   new-leader: "&6%owner% &7is the new leader of the party."
   player-join: "&b%player% &ajoined the party."
-  player-leave: "&c%player% &7has been kicked out of the party."
-  player-kick: "&c%player% &7has left the party."
+  player-kick: "&c%player% &7has been kicked out of the party."
+  player-leave: "&c%player% &7has left the party."
   disband: "&cThe party has been disbanded."
   match-end: "&cThe fight was forced to end because the party has been disbanded!"
+  game-cant-start: "&cThe party needs at least two players to be able to start a game."
+  no-available-arena: "&cThere are no available arena for your game."
+  game-gui:
+    title: "Party Games"
+    split-fight-item:
+      name: "&bSplit Fight"
+    party-ffa-item:
+      name: "&aParty FFA"
   info:
     - "&7&m------------------------------------------------"
     - " &b&lParty Info&7:"
@@ -47,3 +55,124 @@ party:
     - " &f/%label% leader <player> &8- &7Transfer party leadership."
     - " &f/%label% disband &8- &7Disband party."
     - "&7&m------------------------------------------------"
+
+sidebar:
+  title: "&6&lZONE PRACTICE"
+  ip-line: "&6play.zonepractice.com"
+
+queue:
+  queue-start: "&aYou are now queued for %weightClass% %ladderName%."
+  queue-end: "&aYou are no longer queued for %weightClass% %ladderName%." # %weightClass% equals ranked or unranked
+  elo-range: "&cElo range: &e%eloMin% &c-> &e%eloMax%"
+  no-arena: "&cCan't find available arena."
+  no-match: "&cWe couldn't find a match in 5 minutes."
+
+match:
+  match-starting: "&eMatch is starting in &6%time% &eseconds."
+  match-started: "&aMatch has been started."
+  cant-build: "&cYou can't build here."
+  cant-craft: "&cYou can't craft with this ladder."
+  enderpearl-cooldown: "&cYou cannot use this for another %time% seconds."
+  duel:
+    match-end:
+      - "&7&m----------------------------------------"
+      - "&6Post-Match Inventories &7(click name to view)"
+      - "&aWinner &e%winner% &7- &cLoser: &e%loser%"
+      - "&7&m----------------------------------------"
+    match-end-draw:
+      - "&7&m----------------------------------------"
+      - "&cThe match is ended with no winner or loser."
+      - "&7&m----------------------------------------"
+  partyffa:
+    player-die: "&c%player% died."
+    player-left: "&e%player% &7has left the match."
+    match-end:
+      - "&7&m----------------------------------------"
+      - "&aWinner: &e%winner%"
+      - "&cLosers: &e%losers%"
+      - "&7&m----------------------------------------"
+    match-end-draw:
+      - "&7&m----------------------------------------"
+      - "&cThe match is ended with no winner."
+      - "&7&m----------------------------------------"
+  partysplit:
+    player-die: "&c%player% died. &7(%playerTeam%&7) - &e%playerTeamLeft% &7players left in their team."
+    player-left: "&e%player% &7has left the match."
+    player-team-move: "&e%player% &cwas moved to %newTeam% &cto event the match." # You can also use %oldTeam%
+    match-end:
+      - "&7&m----------------------------------------"
+      - "&aWinner: %winnerTeam% &7- &e%winnerPlayers%"
+      - "&cLoser: %loserTeam% &7- &e%loserPlayers%"
+      - "&7&m----------------------------------------"
+    match-end-draw:
+      - "&7&m----------------------------------------"
+      - "&cThe match is ended with no winner."
+      - "&7&m----------------------------------------"
+  teams:
+    team1: "&9Team 1"
+    team2: "&cTeam 2"
+
+gui:
+  unranked:
+    title: "&9&lJoin Unranked Queue"
+    item-lore:
+      - ""
+      - "  &fIn Queue: &b%inQueue%"
+      - "  &fIn Fights: &b%inMatch%"
+      - ""
+      - "&aClick here to select &eUnranked %ladderName%&a."
+  ranked:
+    title: "&4&lJoin Ranked Queue"
+    item-lore:
+      - ""
+      - "  &fIn Queue: &b%inQueue%"
+      - "  &fIn Fights: &b%inMatch%"
+      - ""
+      - "&aClick here to select &cRanked %ladderName%&a."
+  ladder-selector: # For duel requests and party games
+    title: "%matchTypeName% &8- Kit"
+    item-lore:
+      - ""
+      - "&7Click here to select &c%ladderName% &7kit for the %matchTypeName%."
+  kit-editor:
+    selector:
+      title: "&9&lSelect a kit to edit."
+      item-lore:
+        - ""
+        - "&aClick here to select &e%ladderName%&a."
+    summary:
+      title: "&8Viewing %ladderName% kit"
+      create-kit-item-name: "&a&lCreate Kit"
+      existing-kit-item-name: "&6&lKit"
+      edit-kit-item-name: "&a&lEdit Kit"
+      delete-kit-item-name: "&c&lDelete Kit"
+    editor:
+      title: "&8Editing %ladderName% Kit"
+      name-item: "&6&lEditing &eKit %ladderName%"
+      save-item:
+        name: "&a&lSave"
+        lore:
+          - ""
+          - "&e&lClick here &eto save"
+          - "&ethe custom kit."
+      load-item:
+        name: "&e&lLoad Default Kit"
+        lore:
+          - ""
+          - "&e&lClick here &eto load the default"
+          - "&ekit to your inventory."
+      cancel-item:
+        name: "&c&lCancel"
+        lore:
+          - ""
+          - "&e&lClick here &eto abort editing the"
+          - "&ekit, and return to the kit menu."
+      effect-item:
+        name: "&5Effects"
+        lore:
+          - ""
+          - "&eYou will get these effects,"
+          - "&ewhen the game starts."
+          - ""
+          - "%effects%"
+          - ""

@@ -11,8 +11,8 @@ party:
   invite-expired: "&cYour party invite has expired."
   not-member: "&cYou are not a member of a party."
   not-leader: "&cYou are not the leader of the party."
-  player-invited-party: "%prefix% &a%player% &7has been invited to the party!"
-  player-invited-player: "%prefix% &b%player% &7has invited you to their party. &a[Click to accept]"
+  player-invited-party: "&a%player% &7has been invited to the party!"
+  player-invited-player: "&b%player% &7has invited you to their party. &a[Click to accept]"
   player-already-member: "&c%player% is already in your party."
   cant-invite-yourself: "&cYou can't invite yourself."
   player-not-member: "&cPlayer is not a member of the party."
@@ -20,8 +20,8 @@ party:
   cant-leave-inmatch: "&cYou can't leave the party during match."
   new-leader: "&6%owner% &7is the new leader of the party."
   player-join: "&b%player% &ajoined the party."
-  player-leave: "&c%player% &7has been kicked out of the party."
-  player-kick: "&c%player% &7has left the party."
+  player-kick: "&c%player% &7has been kicked out of the party."
+  player-leave: "&c%player% &7has left the party."
   disband: "&cThe party has been disbanded."
   match-end: "&cThe fight was forced to end because the party has been disbanded!"
   game-cant-start: "&cThe party needs at least two players to be able to start a game."
@@ -56,8 +56,29 @@ party:
     - " &f/%label% disband &8- &7Disband party."
     - "&7&m------------------------------------------------"
 
+sidebar:
+  title: "&6&lZONE PRACTICE"
+  ip-line: "&6play.zonepractice.com"
+
+queue:
+  queue-start: "&aYou are now queued for %weightClass% %ladderName%."
+  queue-end: "&aYou are no longer queued for %weightClass% %ladderName%." # %weightClass% equals ranked or unranked
+  elo-range: "&cElo range: &e%eloMin% &c-> &e%eloMax%"
+  no-arena: "&cCan't find available arena."
+  no-match: "&cWe couldn't find a match in 5 minutes."
+
 match:
+  match-starting: "&eMatch is starting in &6%time% &eseconds."
+  match-started: "&aMatch has been started."
+  cant-build: "&cYou can't build here."
+  cant-craft: "&cYou can't craft with this ladder."
+  enderpearl-cooldown: "&cYou cannot use this for another %time% seconds."
   duel:
+    match-end:
+      - "&7&m----------------------------------------"
+      - "&6Post-Match Inventories &7(click name to view)"
+      - "&aWinner &e%winner% &7- &cLoser: &e%loser%"
+      - "&7&m----------------------------------------"
     match-end-draw:
       - "&7&m----------------------------------------"
       - "&cThe match is ended with no winner or loser."

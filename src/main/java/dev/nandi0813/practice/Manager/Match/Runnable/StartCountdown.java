@@ -1,6 +1,7 @@
 package dev.nandi0813.practice.Manager.Match.Runnable;
 
 import dev.nandi0813.practice.Manager.File.ConfigManager;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
 import dev.nandi0813.practice.Practice;
@@ -52,7 +53,7 @@ public class StartCountdown extends BukkitRunnable
             match.getDurationCountdown().begin();
 
             match.setStatus(MatchStatus.LIVE);
-            match.sendMessage("&aMatch has been started.", true);
+            match.sendMessage(LanguageManager.getString("match.match-started"), true);
 
             for (Player player : match.getPlayers())
                 for (PotionEffect potionEffect : match.getLadder().getEffects())
@@ -60,7 +61,7 @@ public class StartCountdown extends BukkitRunnable
         }
         else
         {
-            match.sendMessage("&eMatch is starting in &6" + seconds + " &eseconds.", false);
+            match.sendMessage(LanguageManager.getString("match.match-starting").replaceAll("%time%", String.valueOf(seconds)), false);
         }
 
         seconds--;

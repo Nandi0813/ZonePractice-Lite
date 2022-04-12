@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Sidebar.Adapter;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
 import dev.nandi0813.practice.Manager.Match.Match;
@@ -26,7 +27,7 @@ public class PracticeAdapter implements SidebarAdapter
     @Override
     public String getTitle(Player player)
     {
-        return StringUtil.CC("&6&lPRACTICE");
+        return LanguageManager.getString("sidebar.title");
     }
 
     @Override
@@ -46,7 +47,7 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("&fIn Fights: &6" + SystemManager.getMatchManager().getMatchSize());
                 sidebar.add("&fIn Queue: &6" + SystemManager.getQueueManager().getQueues().size());
                 sidebar.add("");
-                sidebar.add("&6mc.dukatnandor.hu");
+                sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
             }
             else
@@ -56,7 +57,7 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("&fIn Fights: &6" + SystemManager.getMatchManager().getMatchSize());
                 sidebar.add("&fIn Queue: &6" + SystemManager.getQueueManager().getQueues().size());
                 sidebar.add("");
-                sidebar.add("&6mc.dukatnandor.hu");
+                sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
                 sidebar.add("&fParty Leader: &6" + party.getLeader().getName());
                 sidebar.add("&fParty Members: &6" + party.getMaxPlayerLimit() + "&7/&e" + party.getMembers().size());
@@ -76,7 +77,7 @@ public class PracticeAdapter implements SidebarAdapter
             sidebar.add((queue.isRanked() ? "&cRanked" : "&aUnranked") + " " + queue.getLadder().getIcon().getItemMeta().getDisplayName());
             sidebar.add("&fTime: &6" + StringUtil.formatMillisecondsToMinutes(queue.getQueueRunnable().getSeconds() * 1000L));
             sidebar.add("");
-            sidebar.add("&6mc.dukatnandor.hu");
+            sidebar.add(LanguageManager.getString("sidebar.ip-line"));
             sidebar.add("&7&m---------------------");
         }
         else if (profile.getStatus().equals(ProfileStatus.MATCH))
@@ -101,7 +102,7 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("");
                 sidebar.add("&fDuration: &6" + StringUtil.formatMillisecondsToMinutes(match.getDurationCountdown().getSeconds() * 1000L));
                 sidebar.add("");
-                sidebar.add("&6mc.dukatnandor.hu");
+                sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
             }
             else if (match.getType().equals(MatchType.PARTY_FFA))
@@ -112,7 +113,7 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("&fPlayers: &6" + match.getPlayers().size() + "&7/&e" + match.getAlivePlayers().size());
                 sidebar.add("&fDuration: &6" + StringUtil.formatMillisecondsToMinutes(match.getDurationCountdown().getSeconds() * 1000L));
                 sidebar.add("");
-                sidebar.add("&6mc.dukatnandor.hu");
+                sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
             }
             else if (match.getType().equals(MatchType.PARTY_SPLIT))
@@ -128,7 +129,7 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("");
                 sidebar.add("&fDuration: &6" + StringUtil.formatMillisecondsToMinutes(match.getDurationCountdown().getSeconds() * 1000L));
                 sidebar.add("");
-                sidebar.add("&6mc.dukatnandor.hu");
+                sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
             }
         }
@@ -157,7 +158,7 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("&e" + player1.getName() + "'s Ping: &f" + player1Ping);
                 sidebar.add("&e" + player2.getName() + "'s Ping: &f" + player2Ping);
                 sidebar.add("");
-                sidebar.add("&6mc.dukatnandor.hu");
+                sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
             }
             else if (match.getType().equals(MatchType.PARTY_FFA))
@@ -170,7 +171,7 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("&fAlive: &6" + match.getPlayers().size() + "&7/&e" + match.getAlivePlayers().size());
                 sidebar.add("&fDuration: &6" + StringUtil.formatMillisecondsToMinutes(match.getDurationCountdown().getSeconds() * 1000L));
                 sidebar.add("");
-                sidebar.add("&6mc.dukatnandor.hu");
+                sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
             }
             else if (match.getType().equals(MatchType.PARTY_SPLIT))
@@ -187,7 +188,7 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("");
                 sidebar.add("&fDuration: &6" + StringUtil.formatMillisecondsToMinutes(match.getDurationCountdown().getSeconds() * 1000L));
                 sidebar.add("");
-                sidebar.add("&6mc.dukatnandor.hu");
+                sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
             }
         }

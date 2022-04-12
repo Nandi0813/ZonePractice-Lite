@@ -13,7 +13,7 @@ import dev.nandi0813.practice.Manager.Arena.ArenaManager;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Inventory.InventoryManager;
-import dev.nandi0813.practice.Manager.Ladder.Custom.CustomLadderManager;
+import dev.nandi0813.practice.Manager.Ladder.Custom.CustomLadderListener;
 import dev.nandi0813.practice.Manager.Ladder.LadderManager;
 import dev.nandi0813.practice.Manager.Match.MatchManager;
 import dev.nandi0813.practice.Manager.Party.PartyManager;
@@ -39,7 +39,6 @@ public class SystemManager
     @Getter private static final PartyManager partyManager = new PartyManager();
     @Getter private static final InventoryManager inventoryManager = new InventoryManager();
     @Getter private static final SidebarManager sidebarManager = new SidebarManager(Practice.getInstance());
-    @Getter private static final CustomLadderManager customLadderManager = new CustomLadderManager(Practice.getInstance());
     @Getter private static final EntityHider entityHider = new EntityHider(Practice.getInstance(), EntityHider.Policy.BLACKLIST);
 
     public static void Enable(Practice practice)
@@ -90,6 +89,7 @@ public class SystemManager
         pm.registerEvents(new ProjectileLaunch(), practice);
         pm.registerEvents(new EntityHiderListener(), practice);
         pm.registerEvents(new PlayerCommandPreprocess(), practice);
+        pm.registerEvents(new CustomLadderListener(), practice);
     }
 
     public static void registerPacketListener()

@@ -28,7 +28,8 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.BlockPosition;
 
-public class EntityHiderListener extends PacketAdapter implements Listener {
+public class EntityHiderListener extends PacketAdapter implements Listener
+{
 
     @Getter public static List<BlockPosition> blockPositions = new ArrayList<>();
 
