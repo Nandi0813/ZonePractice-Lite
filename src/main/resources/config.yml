@@ -17,6 +17,7 @@ ranked:
   elo-range-time: 5 # Sec
   elo-range-increase: 20 # Range
   elo-change: 10
+  min-unranked-wins: 10
 #
 # Match settings
 match-settings:

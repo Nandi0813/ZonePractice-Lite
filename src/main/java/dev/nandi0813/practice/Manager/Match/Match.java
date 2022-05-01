@@ -120,7 +120,8 @@ public class Match
 
         for (Player player : players)
         {
-            matchStats.put(player, new PlayerMatchStat(player));
+            if (type.equals(MatchType.DUEL))
+                matchStats.put(player, new PlayerMatchStat(player));
             SystemManager.getProfileManager().getProfiles().get(player).setStatus(ProfileStatus.MATCH);
         }
 
@@ -132,7 +133,10 @@ public class Match
         // Remove match players
         for (Player player : players)
         {
-            matchStats.get(player).end();
+            PlayerMatchStat matchStat = matchStats.get(player);
+            if (type.equals(MatchType.DUEL) && !matchStat.isSet())
+                matchStat.end();
+
             removePlayer(player);
         }
 

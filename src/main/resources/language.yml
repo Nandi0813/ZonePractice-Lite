@@ -74,10 +74,12 @@ match:
   cant-craft: "&cYou can't craft with this ladder."
   enderpearl-cooldown: "&cYou cannot use this for another %time% seconds."
   duel:
-    match-end:
+    match-end: # The %winner% and %loser% variables have to be in different lines.
       - "&7&m----------------------------------------"
       - "&6Post-Match Inventories &7(click name to view)"
-      - "&aWinner &e%winner% &7- &cLoser: &e%loser%"
+      - "&aWinner &e%winner%"
+      - "&cLoser: &e%loser%"
+      - "&bSpectators (%size%): &7%spectators%"
       - "&7&m----------------------------------------"
     match-end-draw:
       - "&7&m----------------------------------------"

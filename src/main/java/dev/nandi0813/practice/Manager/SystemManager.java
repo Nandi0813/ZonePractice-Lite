@@ -3,6 +3,7 @@ package dev.nandi0813.practice.Manager;
 import com.comphenix.protocol.ProtocolLibrary;
 import dev.nandi0813.practice.Command.Arena.ArenaCommand;
 import dev.nandi0813.practice.Command.Ladder.LadderCommand;
+import dev.nandi0813.practice.Command.Matchinv.MatchinvCommand;
 import dev.nandi0813.practice.Command.Party.PartyCommand;
 import dev.nandi0813.practice.Command.Practice.PracticeCommand;
 import dev.nandi0813.practice.Command.Setup.SetupCommand;
@@ -64,8 +65,6 @@ public class SystemManager
         entityHider.close();
     }
 
-
-
     public static void registerCommands()
     {
         Bukkit.getServer().getPluginCommand("arena").setExecutor(new ArenaCommand());
@@ -75,6 +74,7 @@ public class SystemManager
         Bukkit.getServer().getPluginCommand("staff").setExecutor(new StaffCommand());
         Bukkit.getServer().getPluginCommand("spectate").setExecutor(new SpectateCommand());
         Bukkit.getServer().getPluginCommand("party").setExecutor(new PartyCommand());
+        Bukkit.getServer().getPluginCommand("matchinv").setExecutor(new MatchinvCommand());
     }
 
     public static void registerListeners(Practice practice, PluginManager pm)

@@ -11,7 +11,6 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +18,6 @@ import java.util.List;
 public class MatchManager
 {
 
-    @Getter private final File folder = new File(Practice.getInstance().getDataFolder() + "/matches");
     @Getter private final HashMap<String, Match> matches = new HashMap<>();
     @Getter private final List<Match> liveMatches = new ArrayList<>();
 

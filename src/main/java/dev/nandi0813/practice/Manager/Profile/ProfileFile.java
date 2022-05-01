@@ -79,13 +79,6 @@ public class ProfileFile
 
     public void setDefaultData()
     {
-        config.set("settings.duelrequest", true);
-        config.set("settings.sidebar", true);
-        config.set("settings.hideplayers", false);
-        config.set("settings.partyinvites", true);
-        config.set("settings.allowspectate", true);
-        config.set("settings.messages", true);
-
         for (Ladder ladder : SystemManager.getLadderManager().getLadders())
         {
             if (ladder.isRanked())

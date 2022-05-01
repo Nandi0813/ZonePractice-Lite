@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Inventory.SpawnInventory;
 
+import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Server.ServerManager;
@@ -57,7 +58,8 @@ public class SpawnInventory
         else
         {
             player.getInventory().setItem(config.getInt("unranked.slot"), unrankedItem);
-            player.getInventory().setItem(config.getInt("ranked.slot"), rankedItem);
+            if ((profile.getUnrankedWins() >= ConfigManager.getInt("ranked.min-unranked-wins")) || player.hasPermission("zonepractice.bypass.ranked.requirements"))
+                player.getInventory().setItem(config.getInt("ranked.slot"), rankedItem);
             player.getInventory().setItem(config.getInt("party.slot"), partyItem);
             player.getInventory().setItem(config.getInt("settings.slot"), settingsItem);
             player.getInventory().setItem(config.getInt("kiteditor.slot"), kiteditorItem);

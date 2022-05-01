@@ -14,6 +14,7 @@ commands:
     aliases: spec
   party:
     aliases: p
+  matchinv:
 
 permissions:
   zonepractice.admin:
@@ -31,35 +32,14 @@ permissions:
   # Basic permission
   zonepractice.spectate:
     default: true
-  zonepractice.spectate.vanish:
-    description: Toogle vanish when spectating.
-  zonepractice.spectate.menu:
-    description: Spectate menu use.
-  zonepractice.spectate.random:
-    description: Spectate random match.
-
-  zonepractice.duel.selectarena:
-    description: Player can choose the arena to play in.
-  zonepractice.duel.infiniteinvite:
-    description: Player can invite player to duel any number of times.
-  zonepractice.party.selectarena:
-    description: Choose arena to play in with party.
 
   # Party permissions
   zonepractice.party.create:
     description: Create party.
-  zonepractice.party.changelimit:
-    description: Change party player limit.
-  zonepractice.party.public:
-    description: Change party status to public.
-  zonepractice.party.broadcast:
-    description: Broadcast the party, if it public.
 
   # Bypasses
   zonepractice.bypass.ranked.requirements:
     description: Bypass ranked requirements.
-  zonepractice.bypass.cooldown:
-    description: Cooldown bypass for spectate vanish, lobby vanish etc..
 
   # Custom Kits
   zonepractice.customkit:

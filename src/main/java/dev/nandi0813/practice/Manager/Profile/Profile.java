@@ -1,6 +1,7 @@
 package dev.nandi0813.practice.Manager.Profile;
 
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
+import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
@@ -44,8 +45,14 @@ public class Profile
 
     public void saveData()
     {
-        file.setProfileData();
+        if (Practice.getInstance().isEnabled())
+            Bukkit.getScheduler().runTaskAsynchronously(Practice.getInstance(), file::setProfileData);
+        else
+            file.setProfileData();
     }
-    public void getData() { file.getProfileData(); }
+    public void getData()
+    {
+        Bukkit.getScheduler().runTaskAsynchronously(Practice.getInstance(), file::getProfileData);
+    }
 
 }

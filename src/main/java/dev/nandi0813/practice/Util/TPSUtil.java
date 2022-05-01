@@ -40,7 +40,7 @@ public class TPSUtil
         return new double[] {20, 20, 20};
     }
 
-    private static double round(double value)
+    public static double round(double value)
     {
         if (value > 20.0)
             return 20.0;
