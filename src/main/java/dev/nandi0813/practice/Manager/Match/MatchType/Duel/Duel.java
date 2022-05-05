@@ -2,6 +2,7 @@ package dev.nandi0813.practice.Manager.Match.MatchType.Duel;
 
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
+import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Match.MatchStats.MatchStatEditor;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class Duel
 {
-
+    
     public static void startMatch(Match match)
     {
         Player player1 = match.getPlayers().get(0);
@@ -33,6 +34,12 @@ public class Duel
 
     public static void endMatch(Match match, Player winner, Player loser)
     {
+        for (Player player : match.getPlayers())
+        {
+            PlayerMatchStat matchStat = match.getMatchStats().get(player);
+            if (!matchStat.isSet()) matchStat.end();
+        }
+
         if (winner != null && loser != null)
         {
             List<Player> msgTo = new ArrayList<>();
@@ -95,8 +102,16 @@ public class Duel
                 }
                 loserNewElo = loserOldElo;
 
-                match.sendMessage("&eElo Changes: &a" + winnerProfile.getPlayer().getName() + " +" + elochange + " (" + winnerNewElo + ") &c" + loserProfile.getPlayer().getName() + " -" + elochange + " (" + loserNewElo + ")", true);
-                match.sendMessage("&7&m----------------------------------------", true);
+
+                for (String line : LanguageManager.getList("match.duel.ranked-extension"))
+                {
+                    match.sendMessage(line
+                            .replaceAll("%winner%", winnerProfile.getPlayer().getName())
+                            .replaceAll("%loser%", loserProfile.getPlayer().getName())
+                            .replaceAll("%eloChange%", String.valueOf(elochange))
+                            .replaceAll("%winnerNewElo%", String.valueOf(winnerNewElo))
+                            .replaceAll("%loserNewElo%", String.valueOf(loserNewElo)), true);
+                }
             }
 
             winnerProfile.saveData();

@@ -32,6 +32,10 @@ public class RoundManager
         this.match = match;
     }
 
+    /**
+     * It sets the match status to START, starts the start countdown, sets the dropped items, sets the match player,
+     * teleports the player, loads the kit, sets the hit delay, and adds the player to the alive players list
+     */
     public void startRound()
     {
         match.setStatus(MatchStatus.START);
@@ -74,6 +78,11 @@ public class RoundManager
         }
     }
 
+    /**
+     * It ends the round and starts the next one
+     *
+     * @param winner The player who won the round.
+     */
     public void endRound(Player winner)
     {
         match.getDurationCountdown().cancel();
@@ -82,6 +91,11 @@ public class RoundManager
         endMatch(winner);
     }
 
+    /**
+     * It ends the match
+     *
+     * @param winner The player who won the match.
+     */
     public void endMatch(Player winner)
     {
         switch (match.getType())

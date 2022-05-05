@@ -39,6 +39,11 @@ public class PartyManager
         return null;
     }
 
+    /**
+     * If the player is in the lobby, and they don't have a party, create a new party and add them to it
+     *
+     * @param player The player who is creating the party.
+     */
     public void createParty(Player player)
     {
         Profile profile = SystemManager.getProfileManager().getProfiles().get(player);

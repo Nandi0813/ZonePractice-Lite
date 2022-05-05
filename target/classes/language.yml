@@ -63,7 +63,7 @@ sidebar:
 queue:
   queue-start: "&aYou are now queued for %weightClass% %ladderName%."
   queue-end: "&aYou are no longer queued for %weightClass% %ladderName%." # %weightClass% equals ranked or unranked
-  elo-range: "&cElo range: &e%eloMin% &c-> &e%eloMax%"
+  elo-range: "&cElo range: &e%eloMin% &c-> &e%eloMax% &7(&6%playerElo%&7)"
   no-arena: "&cCan't find available arena."
   no-match: "&cWe couldn't find a match in 5 minutes."
 
@@ -74,12 +74,15 @@ match:
   cant-craft: "&cYou can't craft with this ladder."
   enderpearl-cooldown: "&cYou cannot use this for another %time% seconds."
   duel:
-    match-end: # The %winner% and %loser% variables have to be in different lines.
+    match-end: # The %winner% and %loser% variables have to be in different lines. Spectator line only appears if there was at least 1 spectator.
       - "&7&m----------------------------------------"
       - "&6Post-Match Inventories &7(click name to view)"
       - "&aWinner &e%winner%"
       - "&cLoser: &e%loser%"
       - "&bSpectators (%size%): &7%spectators%"
+      - "&7&m----------------------------------------"
+    ranked-extension:
+      - "&eElo Changes: &a%winner% +%eloChange% (%winnerNewElo%) &c%loser% -%eloChange% (%loserNewElo%)"
       - "&7&m----------------------------------------"
     match-end-draw:
       - "&7&m----------------------------------------"
@@ -178,3 +181,17 @@ gui:
           - ""
           - "%effects%"
           - ""
+  end-match-inventory:
+    title: "&8Inventory of %player%"
+    health-item-name: "&a20.0/%health% ♡"
+    hunger-item-name: "&a20.0/%hunger% Hunger"
+    player-stats-item:
+      name: "&aPlayer Stats"
+      lore:
+        - "&dHits: &e%hits%"
+        - "&dGet Hit: &e%getHit%"
+        - "&dLongest Combo: &e%combo%"
+        - "&dAverage CPS: &e%cps%"
+    effects-item:
+      name: "&aPotion Effects"
+      effect-line: "&b%effectName% %effectAmplifier% &7- %timeLeft%"

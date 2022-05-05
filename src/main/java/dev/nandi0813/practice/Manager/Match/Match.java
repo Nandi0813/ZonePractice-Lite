@@ -132,13 +132,7 @@ public class Match
     {
         // Remove match players
         for (Player player : players)
-        {
-            PlayerMatchStat matchStat = matchStats.get(player);
-            if (type.equals(MatchType.DUEL) && !matchStat.isSet())
-                matchStat.end();
-
             removePlayer(player);
-        }
 
         resetMap();
 
@@ -155,6 +149,11 @@ public class Match
     }
 
 
+    /**
+     * If the block change is not already in the list, add it
+     *
+     * @param change The block that was changed.
+     */
     public void addBlockChange(CachedBlock change)
     {
         for (CachedBlock c : blockChange)
@@ -165,6 +164,9 @@ public class Match
         blockChange.add(change);
     }
 
+    /**
+     * It removes all dropped items, rolls back the arena, and removes all items in the arena
+     */
     public void resetMap()
     {
         for (Item is : droppedItems)
@@ -185,6 +187,13 @@ public class Match
     }
 
 
+    /**
+     * It sends a message to all players in the match, and if the spectator boolean is true, it sends the message to all
+     * spectators
+     *
+     * @param message The message you want to send to the players.
+     * @param spectator If true, the message will be sent to the spectators.
+     */
     public void sendMessage(String message, boolean spectator)
     {
         for (Player player : players)
@@ -201,9 +210,14 @@ public class Match
         }
     }
 
+    /**
+     * Add a player to the list of spectators, hide them from the players in the match, teleport them to the spectator
+     * spawn, and give them the spectator inventory
+     *
+     * @param player The player to add to the spectators list
+     */
     public void addSpectator(Player player)
     {
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
         spectators.add(player);
 
         // Hide spectator from match players
@@ -214,6 +228,11 @@ public class Match
         SystemManager.getInventoryManager().getSpectatorInventory().setSpectatorInventory(player);
     }
 
+    /**
+     * If the player is in the match or spectating the match, remove them from the match
+     *
+     * @param player The player to remove from the match.
+     */
     public void removePlayer(Player player)
     {
         Profile profile = SystemManager.getProfileManager().getProfiles().get(player);

@@ -32,12 +32,22 @@ public class Party
         maxPlayerLimit = ConfigManager.getInt("party-settings.max-party-members.default");
     }
 
+    /**
+     * Sets the new owner of the party
+     *
+     * @param newOwner The new owner of the party.
+     */
     public void setNewOwner(Player newOwner)
     {
         leader = newOwner;
         sendMessage(LanguageManager.getString("party.new-leader").replaceAll("%owner%", newOwner.getName()));
     }
 
+    /**
+     * Adds a player to the party
+     *
+     * @param member The player that is joining the party.
+     */
     public void addMember(Player member)
     {
         Profile memberProfile = SystemManager.getProfileManager().getProfiles().get(member);
@@ -49,6 +59,12 @@ public class Party
         sendMessage(LanguageManager.getString("party.player-join").replaceAll("%player%", member.getName()));
     }
 
+    /**
+     * Removes a member from the party
+     *
+     * @param member The player that is being removed from the party.
+     * @param kick If the player is kicked or not.
+     */
     public void removeMember(Player member, boolean kick)
     {
         Profile memberProfile = SystemManager.getProfileManager().getProfiles().get(member);
@@ -68,6 +84,9 @@ public class Party
             SystemManager.getInventoryManager().getSpawnInventory().setInventory(member, false);
     }
 
+    /**
+     * Disband the party, remove all members, and if the party is in a match, end the match
+     */
     public void disband()
     {
         sendMessage(LanguageManager.getString("party.disband"));
@@ -92,6 +111,11 @@ public class Party
         SystemManager.getPartyManager().getParties().remove(this);
     }
 
+    /**
+     * If the members list is not empty, loop through each player in the members list and send them the message.
+     *
+     * @param message The message you want to send to the members of the party.
+     */
     public void sendMessage(String message)
     {
         if (!members.isEmpty())
@@ -101,6 +125,11 @@ public class Party
         }
     }
 
+    /*
+     * This function returns a list of the names of all the members of the clan.
+     *
+     * @return A list of the names of the members of the party.
+     */
     public List<String> getMemberNames()
     {
         List<String> memberNames = new ArrayList<>();

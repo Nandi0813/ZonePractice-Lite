@@ -66,7 +66,6 @@ dev/nandi0813/practice/Command/Party/Arguments/PartyLeaveArg.class
 dev/nandi0813/practice/Util/ArmorUtil.class
 dev/nandi0813/practice/Manager/Inventory/SpawnInventory/SpawnInventoryListener.class
 dev/nandi0813/practice/Util/PlayerUtil.class
-dev/nandi0813/practice/Listener/PlayerInteract.class
 dev/nandi0813/practice/Manager/Match/MatchType/PartyFFA/PartyFFA.class
 dev/nandi0813/practice/Manager/Arena/Util/Cuboid$CuboidDirection.class
 dev/nandi0813/practice/Command/Arena/ArenaCommand.class
@@ -104,7 +103,6 @@ dev/nandi0813/practice/Listener/PlayerJoin.class
 dev/nandi0813/practice/Manager/Sidebar/Adapter/PracticeAdapter.class
 dev/nandi0813/practice/Manager/Arena/ArenaFile.class
 dev/nandi0813/practice/Command/Practice/Arguments/HelpArg.class
-dev/nandi0813/practice/Manager/Match/Util/TeamUtil.class
 dev/nandi0813/practice/Manager/Ladder/Custom/Gui/KitEditorGui.class
 dev/nandi0813/practice/Command/Arena/Arguments/ArenaSetpositionArg.class
 dev/nandi0813/practice/Manager/SystemManager.class

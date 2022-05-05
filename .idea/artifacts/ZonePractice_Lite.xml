@@ -4,6 +4,7 @@
     <root id="archive" name="ZonePractice Lite.jar">
       <element id="library" level="project" name="Maven: com.comphenix.protocol:ProtocolLib:4.7.0" />
       <element id="library" level="project" name="Maven: net.bytebuddy:byte-buddy:1.11.0" />
+      <element id="module-output" name="practice" />
     </root>
   </artifact>
 </component>

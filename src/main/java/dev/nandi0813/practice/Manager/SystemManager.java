@@ -11,6 +11,7 @@ import dev.nandi0813.practice.Command.SpectateCommand;
 import dev.nandi0813.practice.Command.Staff.StaffCommand;
 import dev.nandi0813.practice.Listener.*;
 import dev.nandi0813.practice.Manager.Arena.ArenaManager;
+import dev.nandi0813.practice.Manager.File.BackendManager;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Inventory.InventoryManager;
@@ -46,11 +47,11 @@ public class SystemManager
     {
         ConfigManager.createConfig(practice);
         LanguageManager.createFile(practice);
+        BackendManager.createFile(practice);
         ladderManager.loadLadders();
         arenaManager.loadArenas();
         profileManager.loadProfiles();
         sidebarManager.enable();
-        ConfigManager.firstEnable();
 
         registerCommands();
         registerListeners(practice, Bukkit.getPluginManager());

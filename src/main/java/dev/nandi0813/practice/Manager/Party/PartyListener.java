@@ -24,6 +24,11 @@ import java.util.List;
 public class PartyListener implements Listener
 {
 
+    /**
+     * When a player quits, if they are in a party, remove them from the party
+     *
+     * @param e The event that is being listened for.
+     */
     @EventHandler (ignoreCancelled = true)
     public void onPlayerQuit(PlayerQuitEvent e)
     {
@@ -36,6 +41,13 @@ public class PartyListener implements Listener
         }
     }
 
+    /**
+     * If the player is in a party, and the inventory they clicked on is the party events gui, and the slot they clicked on
+     * is either 2 or 6, then open the ladder selector gui. If the inventory they clicked on is the ladder selector gui,
+     * and the slot they clicked on is a ladder, then start a match with the party
+     *
+     * @param e The event that was called.
+     */
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e)
     {

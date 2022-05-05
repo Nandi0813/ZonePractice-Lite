@@ -39,7 +39,6 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <outputDirectory>/Users/dukatnandor/Desktop/MC/Plugins/ZonePractice/Lite/Server/plugins</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,9 +1,3 @@
-# Dont touch
-first-enable: true
-#
-# Lobby spawn:
-lobby:
-#
 # Knockback modifier - it depends on the hit delay very much. You should test what is the optimal for you.
 knockback:
   combo:
@@ -16,6 +10,7 @@ knockback:
 ranked:
   elo-range-time: 5 # Sec
   elo-range-increase: 20 # Range
+  max-range: 300
   elo-change: 10
   min-unranked-wins: 10
 #

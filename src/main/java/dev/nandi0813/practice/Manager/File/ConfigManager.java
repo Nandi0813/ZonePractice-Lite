@@ -25,12 +25,6 @@ public class ConfigManager
         config = practice.getConfig();
     }
 
-    public static void firstEnable()
-    {
-        config.set("first-enable", false);
-        saveConfig();
-    }
-
     public static void saveConfig() { practice.saveConfig(); }
 
     public static void reloadConfig()

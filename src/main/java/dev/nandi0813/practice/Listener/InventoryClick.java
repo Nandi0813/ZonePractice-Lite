@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Listener;
 
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Gui.RankedGui;
 import dev.nandi0813.practice.Manager.Gui.UnrankedGui;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
@@ -23,6 +24,8 @@ public class InventoryClick implements Listener
         InventoryView inventoryView = e.getView();
         ItemStack item = e.getCurrentItem();
         int slot = e.getRawSlot();
+
+        String endMatchInvTitle = LanguageManager.getString("gui.end-match-inventory.title").replaceAll("%player%", "");
 
         if (inventoryView.getTitle().equals(UnrankedGui.getGui().getTitle()))
         {
@@ -62,6 +65,8 @@ public class InventoryClick implements Listener
                 }
             }
         }
+        else if (inventoryView.getTitle().contains(endMatchInvTitle))
+            e.setCancelled(true);
     }
 
 }

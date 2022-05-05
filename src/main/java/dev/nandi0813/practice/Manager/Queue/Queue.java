@@ -93,8 +93,13 @@ public class Queue
                             }
                         }
 
-                        player.sendMessage(LanguageManager.getString("queue.elo-range").replaceAll("%eloMin%", String.valueOf((elo - range))).replaceAll("%eloMax%", String.valueOf((elo + range))));
-                        setRange(range + rangeIncrease);
+                        player.sendMessage(LanguageManager.getString("queue.elo-range")
+                                .replaceAll("%eloMin%", String.valueOf((elo - range)))
+                                .replaceAll("%eloMax%", String.valueOf((elo + range)))
+                                .replaceAll("%playerElo%", String.valueOf(elo)));
+
+                        if (range < ConfigManager.getInt("ranked.max-range"))
+                            setRange(range + rangeIncrease);
 
                     }
                 }.runTaskTimerAsynchronously(Practice.getInstance(), 0, 20L * ConfigManager.getConfig().getInt("ranked.elo-range-time"));

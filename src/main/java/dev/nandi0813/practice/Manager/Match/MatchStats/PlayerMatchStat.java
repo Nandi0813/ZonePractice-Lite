@@ -15,6 +15,7 @@ public class PlayerMatchStat
 {
 
     @Getter private final OfflinePlayer player;
+    @Getter @Setter private boolean isSet;
 
     @Getter private final HashMap<Long, Integer> cps = new HashMap<>();
     @Getter private double averageCPS;
@@ -22,7 +23,6 @@ public class PlayerMatchStat
     @Getter @Setter private int getHit = 0;
     @Getter @Setter private int longestCombo = 0;
 
-    @Getter @Setter private boolean isSet;
     @Getter @Setter private double endHeart = 0;
     @Getter @Setter private double endHunger = 0;
     @Getter @Setter private List<PotionEffect> endPotionEffects = new ArrayList<>();

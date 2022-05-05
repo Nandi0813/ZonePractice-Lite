@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Server;
 
+import dev.nandi0813.practice.Manager.File.BackendManager;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import lombok.Getter;
 import org.bukkit.Location;
@@ -16,13 +17,13 @@ public class ServerManager
 
     public static void setLobby(Location lobbyLocation)
     {
-        ConfigManager.getConfig().set("lobby", lobbyLocation);
-        ConfigManager.saveConfig();
+        BackendManager.getConfig().set("lobby", lobbyLocation);
+        BackendManager.save();
     }
 
     public static Location getLobby()
     {
-        if (ConfigManager.getConfig().get("lobby") != null) return (Location) ConfigManager.getConfig().get("lobby");
+        if (BackendManager.getConfig().get("lobby") != null) return (Location) BackendManager.getConfig().get("lobby");
         else return null;
     }
 

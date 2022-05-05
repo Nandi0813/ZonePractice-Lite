@@ -43,38 +43,35 @@ public class MatchStatListener implements Listener
 
         if (player.getItemInHand() != null && player.getItemInHand().getType() == Material.FISHING_ROD) return;
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getStatus().equals(MatchStatus.LIVE))
+        if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getStatus().equals(MatchStatus.LIVE) && match.getType().equals(MatchType.DUEL))
         {
             if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK)
             {
-                if (match.getType().equals(MatchType.DUEL) || match.getAlivePlayers().contains(player))
+                if (!currentCPS.containsKey(player))
                 {
-                    if (!currentCPS.containsKey(player))
+                    currentCPS.put(player, 1);
+
+                    BukkitRunnable task = new BukkitRunnable()
                     {
-                        currentCPS.put(player, 1);
-
-                        BukkitRunnable task = new BukkitRunnable()
+                        @Override
+                        public void run()
                         {
-                            @Override
-                            public void run()
+                            if (currentCPS.containsKey(player))
                             {
-                                if (currentCPS.containsKey(player))
-                                {
-                                    int current = currentCPS.get(player);
+                                int current = currentCPS.get(player);
 
-                                    if (current > 2)
-                                    {
-                                        match.getMatchStats().get(player).getCps().put(System.currentTimeMillis(), current);
-                                    }
-                                    currentCPS.remove(player);
+                                if (current > 2)
+                                {
+                                    match.getMatchStats().get(player).getCps().put(System.currentTimeMillis(), current);
                                 }
+                                currentCPS.remove(player);
                             }
-                        };
-                        task.runTaskLaterAsynchronously(Practice.getInstance(), 20L);
-                    }
-                    else
-                        currentCPS.put(player, currentCPS.get(player) + 1);
+                        }
+                    };
+                    task.runTaskLaterAsynchronously(Practice.getInstance(), 20L);
                 }
+                else
+                    currentCPS.put(player, currentCPS.get(player) + 1);
             }
         }
     }
@@ -93,35 +90,32 @@ public class MatchStatListener implements Listener
                 {
                     Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(attacker);
 
-                    if (match.getStatus().equals(MatchStatus.LIVE))
+                    if (match.getStatus().equals(MatchStatus.LIVE) && match.getType().equals(MatchType.DUEL))
                     {
-                        if (match.getType().equals(MatchType.DUEL) || match.getAlivePlayers().contains(attacker))
+                        PlayerMatchStat attackerStats = match.getMatchStats().get(attacker);
+                        PlayerMatchStat defenderStats = match.getMatchStats().get(defender);
+
+                        // Hit and Get hit stats
+                        attackerStats.setHit(attackerStats.getHit() + 1);
+                        defenderStats.setGetHit(defenderStats.getGetHit() + 1);
+
+                        // Combo stats
+                        if (currentCombo.containsKey(attacker))
+                            currentCombo.put(attacker, currentCombo.get(attacker) + 1);
+                        else
+                            currentCombo.put(attacker, 1);
+                        // match.sendMessage("&c" + attacker.getName() + " &7combo: &e" + currentCombo.get(attacker), false);
+
+
+                        if (currentCombo.containsKey(defender))
                         {
-                            PlayerMatchStat attackerStats = match.getMatchStats().get(attacker);
-                            PlayerMatchStat defenderStats = match.getMatchStats().get(defender);
-
-                            // Hit and Get hit stats
-                            attackerStats.setHit(attackerStats.getHit() + 1);
-                            defenderStats.setGetHit(defenderStats.getGetHit() + 1);
-
-                            // Combo stats
-                            if (currentCombo.containsKey(attacker))
-                                currentCombo.put(attacker, currentCombo.get(attacker) + 1);
-                            else
-                                currentCombo.put(attacker, 1);
-                            // match.sendMessage("&c" + attacker.getName() + " &7combo: &e" + currentCombo.get(attacker), false);
-
-
-                            if (currentCombo.containsKey(defender))
+                            if (defenderStats.getLongestCombo() < currentCombo.get(defender))
                             {
-                                if (defenderStats.getLongestCombo() < currentCombo.get(defender))
-                                {
-                                    defenderStats.setLongestCombo(currentCombo.get(defender));
-                                    // match.sendMessage("&c" + defender.getName() + " &7has a new combo record: &e" + currentCombo.get(defender), false);
-                                }
+                                defenderStats.setLongestCombo(currentCombo.get(defender));
+                                // match.sendMessage("&c" + defender.getName() + " &7has a new combo record: &e" + currentCombo.get(defender), false);
                             }
-                            currentCombo.put(defender, 0);
                         }
+                        currentCombo.put(defender, 0);
                     }
                 }
             });
