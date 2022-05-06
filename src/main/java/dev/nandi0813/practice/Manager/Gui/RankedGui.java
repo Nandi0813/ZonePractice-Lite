@@ -25,7 +25,7 @@ public class RankedGui
         gui.clear();
         for (Ladder ladder : SystemManager.getLadderManager().getLadders())
         {
-            if (ladder.isRanked())
+            if (ladder.isRanked() && ladder.isEnabled())
             {
                 ItemStack icon = ladder.getIcon().clone();
                 ItemMeta iconMeta = icon.getItemMeta();

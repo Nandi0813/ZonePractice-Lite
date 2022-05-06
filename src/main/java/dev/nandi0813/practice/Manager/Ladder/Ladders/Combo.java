@@ -19,6 +19,7 @@ public class Combo extends Ladder
     public Combo(String name)
     {
         super(name);
+        setEnabled(true);
         setIcon(ItemUtil.createItem("&a&lCombo", Material.RAW_FISH, Short.valueOf("3")));
         setRanked(true);
         setArmor(armor());

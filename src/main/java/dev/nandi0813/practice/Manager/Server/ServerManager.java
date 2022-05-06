@@ -12,9 +12,6 @@ import java.util.HashMap;
 public class ServerManager
 {
 
-    @Getter private static final HashMap<Player, ItemStack[]> inventories = new HashMap<>();
-    @Getter private static final HashMap<Player, ItemStack[]> armors = new HashMap<>();
-
     public static void setLobby(Location lobbyLocation)
     {
         BackendManager.getConfig().set("lobby", lobbyLocation);

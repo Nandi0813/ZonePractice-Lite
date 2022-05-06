@@ -32,7 +32,7 @@ public class Profile
     @Getter private final HashMap<Ladder, Integer> ladderUnRankedLosses = new HashMap<>();
     @Getter private final HashMap<Ladder, Integer> ladderRankedWins = new HashMap<>();
     @Getter private final HashMap<Ladder, Integer> ladderRankedLosses = new HashMap<>();
-    @Getter private final HashMap<Ladder, Integer> elo = new HashMap<>();
+    @Getter @Setter private HashMap<Ladder, Integer> elo = new HashMap<>();
 
     public Profile(UUID uuid)
     {

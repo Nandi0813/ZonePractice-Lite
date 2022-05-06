@@ -11,6 +11,8 @@ public class LadderHelpArg
         player.sendMessage(StringUtil.CC("&c&m------------------------------------------------"));
         player.sendMessage(StringUtil.CC(" &c » /" + label + " list"));
         player.sendMessage(StringUtil.CC(" &c » /" + label + " info <name>"));
+        player.sendMessage(StringUtil.CC(" &c » /" + label + " enable <name>"));
+        player.sendMessage(StringUtil.CC(" &c » /" + label + " disable <name>"));
         player.sendMessage(StringUtil.CC("&c&m------------------------------------------------"));
     }
 

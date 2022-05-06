@@ -25,23 +25,26 @@ public class UnrankedGui
         gui.clear();
         for (Ladder ladder : SystemManager.getLadderManager().getLadders())
         {
-            ItemStack icon = ladder.getIcon().clone();
-            ItemMeta iconMeta = icon.getItemMeta();
-            ItemUtil.hideItemFlags(iconMeta);
+            if (ladder.isEnabled())
+            {
+                ItemStack icon = ladder.getIcon().clone();
+                ItemMeta iconMeta = icon.getItemMeta();
+                ItemUtil.hideItemFlags(iconMeta);
 
-            int duelMatchSize = SystemManager.getMatchManager().getDuelMatchSize(ladder, false);
-            if (duelMatchSize > 0 && duelMatchSize <= 64) icon.setAmount(duelMatchSize);
+                int duelMatchSize = SystemManager.getMatchManager().getDuelMatchSize(ladder, false);
+                if (duelMatchSize > 0 && duelMatchSize <= 64) icon.setAmount(duelMatchSize);
 
-            List<String> lore = new ArrayList<>();
-            for (String line : LanguageManager.getList("gui.unranked.item-lore"))
-                lore.add(line
-                        .replaceAll("%inQueue%", String.valueOf(SystemManager.getQueueManager().getQueueSize(ladder, false)))
-                        .replaceAll("%inMatch%", String.valueOf(duelMatchSize))
-                        .replaceAll("%ladderName%", ladder.getName()));
-            iconMeta.setLore(lore);
+                List<String> lore = new ArrayList<>();
+                for (String line : LanguageManager.getList("gui.unranked.item-lore"))
+                    lore.add(line
+                            .replaceAll("%inQueue%", String.valueOf(SystemManager.getQueueManager().getQueueSize(ladder, false)))
+                            .replaceAll("%inMatch%", String.valueOf(duelMatchSize))
+                            .replaceAll("%ladderName%", ladder.getName()));
+                iconMeta.setLore(lore);
 
-            icon.setItemMeta(iconMeta);
-            gui.addItem(icon);
+                icon.setItemMeta(iconMeta);
+                gui.addItem(icon);
+            }
         }
 
         for (Player online : Bukkit.getServer().getOnlinePlayers())

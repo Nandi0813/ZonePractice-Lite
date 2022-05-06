@@ -30,6 +30,14 @@ public class Duel
 
         match.getTeams().put(player1, TeamEnum.TEAM1);
         match.getTeams().put(player2, TeamEnum.TEAM2);
+
+        for (String line : LanguageManager.getList("match.duel.match-start"))
+        {
+            match.sendMessage(line
+                    .replaceAll("%weightClass%", (match.isRanked() ? "&cRanked" : "&aUnranked"))
+                    .replaceAll("%ladder%", match.getLadder().getName())
+                    .replaceAll("%map%", match.getArena().getName()), true);
+        }
     }
 
     public static void endMatch(Match match, Player winner, Player loser)

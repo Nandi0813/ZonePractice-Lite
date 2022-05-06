@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Profile;
 
+import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
@@ -82,7 +83,7 @@ public class ProfileFile
         for (Ladder ladder : SystemManager.getLadderManager().getLadders())
         {
             if (ladder.isRanked())
-                config.set("stats.elo." + ladder.getName(), 1000);
+                config.set("stats.elo." + ladder.getName(), ConfigManager.getInt("ranked.default-elo"));
         }
 
         config.set("stats.unranked.wins", 0);

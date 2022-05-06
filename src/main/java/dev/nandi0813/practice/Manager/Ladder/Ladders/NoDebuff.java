@@ -16,6 +16,7 @@ public class NoDebuff extends Ladder
     public NoDebuff(String name)
     {
         super(name);
+        setEnabled(true);
         setIcon(ItemUtil.createItem("&a&lNoDebuff", Material.POTION, Short.valueOf("16421")));
         setRanked(true);
         setArmor(armor());

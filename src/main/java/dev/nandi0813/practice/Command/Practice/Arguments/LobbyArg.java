@@ -1,5 +1,7 @@
 package dev.nandi0813.practice.Command.Practice.Arguments;
 
+import dev.nandi0813.practice.Manager.Profile.Profile;
+import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Server.ServerManager;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Util.StringUtil;
@@ -15,6 +17,14 @@ public class LobbyArg
         {
             if (ServerManager.getLobby() != null)
             {
+                Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+
+                if (profile.getStatus().equals(ProfileStatus.MATCH) || profile.getStatus().equals(ProfileStatus.SPECTATE))
+                {
+                    player.sendMessage(StringUtil.CC("&cYou can't use this, while you are in a match or spectating one."));
+                    return;
+                }
+
                 Location lobbyLocation = ServerManager.getLobby();
                 player.teleport(lobbyLocation);
             }

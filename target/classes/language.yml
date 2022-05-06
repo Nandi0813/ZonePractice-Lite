@@ -60,6 +60,10 @@ sidebar:
   title: "&6&lZONE PRACTICE"
   ip-line: "&6play.zonepractice.com"
 
+stats:
+  cant-use: "&cYou can't use this right now."
+  player-not-found: "&cPlayer cannot be found."
+
 queue:
   queue-start: "&aYou are now queued for %weightClass% %ladderName%."
   queue-end: "&aYou are no longer queued for %weightClass% %ladderName%." # %weightClass% equals ranked or unranked
@@ -70,10 +74,19 @@ queue:
 match:
   match-starting: "&eMatch is starting in &6%time% &eseconds."
   match-started: "&aMatch has been started."
+  spectator-join: "&e%player% &ais now spectating the match."
+  spectator-leave: "&e%player% &cis stopped spectating the match."
+  force-end: "&cThe match was forcibly suspended by a moderator."
   cant-build: "&cYou can't build here."
   cant-craft: "&cYou can't craft with this ladder."
   enderpearl-cooldown: "&cYou cannot use this for another %time% seconds."
   duel:
+    match-start:
+      - "&7&m----------------------------------------"
+      - "%weightClass% &6Match"
+      - " &e» Kit: &f%ladder%"
+      - " &e» Map: &f%map%"
+      - "&7&m----------------------------------------"
     match-end: # The %winner% and %loser% variables have to be in different lines. Spectator line only appears if there was at least 1 spectator.
       - "&7&m----------------------------------------"
       - "&6Post-Match Inventories &7(click name to view)"
@@ -91,6 +104,15 @@ match:
   partyffa:
     player-die: "&c%player% died."
     player-left: "&e%player% &7has left the match."
+    match-start:
+      - "&7&m----------------------------------------"
+      - "&6PartyFFA"
+      - ""
+      - " &e» Kit: &f%ladder%"
+      - " &e» Map: &f%map%"
+      - ""
+      - " &e» Players: &7%players%"
+      - "&7&m----------------------------------------"
     match-end:
       - "&7&m----------------------------------------"
       - "&aWinner: &e%winner%"
@@ -104,6 +126,16 @@ match:
     player-die: "&c%player% died. &7(%playerTeam%&7) - &e%playerTeamLeft% &7players left in their team."
     player-left: "&e%player% &7has left the match."
     player-team-move: "&e%player% &cwas moved to %newTeam% &cto event the match." # You can also use %oldTeam%
+    match-start:
+      - "&7&m----------------------------------------"
+      - "&6PartySplit"
+      - ""
+      - " &e» Kit: &f%ladder%"
+      - " &e» Map: &f%map%"
+      - ""
+      - "%team1name%: &7%team1players%"
+      - "%team2name%: &7%team2players%"
+      - "&7&m----------------------------------------"
     match-end:
       - "&7&m----------------------------------------"
       - "&aWinner: %winnerTeam% &7- &e%winnerPlayers%"
@@ -195,3 +227,27 @@ gui:
     effects-item:
       name: "&aPotion Effects"
       effect-line: "&b%effectName% %effectAmplifier% &7- %timeLeft%"
+  stats:
+    title: "&8%player%'s stats"
+    overall:
+      name: "&eOverall Stats"
+      lore:
+        - "&7&m---------------------------------"
+        - "&eWins: &f%wins%"
+        - "&eLosses: &f%losses%"
+        - ""
+        - "&eW/L Ration: &f%w/l-ratio%"
+        - "&7&m---------------------------------"
+    ladder:
+      lore:
+        - "&7&m---------------------------------"
+        - "&eELO: &f%elo%"
+        - ""
+        - "&aUnranked &eWins: &f%unrankedWins%"
+        - "&aUnranked &eLosses: &f%unrankedLosses%"
+        - ""
+        - "&cRanked &eWins: &f%rankedWins%"
+        - "&cRanked &eLosses: &f%rankedLosses%"
+        - ""
+        - "&eW/L Ratio: &f%w/l-ratio%"
+        - "&7&m---------------------------------"

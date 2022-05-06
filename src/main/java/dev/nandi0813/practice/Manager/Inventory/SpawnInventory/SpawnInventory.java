@@ -24,7 +24,7 @@ public class SpawnInventory
     @Getter private static ItemStack unrankedItem;
     @Getter private static ItemStack rankedItem;
     @Getter private static ItemStack partyItem;
-    @Getter private static ItemStack settingsItem;
+    @Getter private static ItemStack statsItem;
     @Getter private static ItemStack kiteditorItem;
 
     public SpawnInventory()
@@ -40,7 +40,7 @@ public class SpawnInventory
         unrankedItem = (ItemStack) config.get("unranked.item");
         rankedItem = (ItemStack) config.get("ranked.item");
         partyItem = (ItemStack) config.get("party.item");
-        settingsItem = (ItemStack) config.get("settings.item");
+        statsItem = (ItemStack) config.get("stats.item");
         kiteditorItem = (ItemStack) config.get("kiteditor.item");
     }
 
@@ -61,7 +61,7 @@ public class SpawnInventory
             if ((profile.getUnrankedWins() >= ConfigManager.getInt("ranked.min-unranked-wins")) || player.hasPermission("zonepractice.bypass.ranked.requirements"))
                 player.getInventory().setItem(config.getInt("ranked.slot"), rankedItem);
             player.getInventory().setItem(config.getInt("party.slot"), partyItem);
-            player.getInventory().setItem(config.getInt("settings.slot"), settingsItem);
+            player.getInventory().setItem(config.getInt("stats.slot"), statsItem);
             player.getInventory().setItem(config.getInt("kiteditor.slot"), kiteditorItem);
         }
 

@@ -13,8 +13,10 @@ import java.util.ArrayList;
 public class Debuff extends Ladder
 {
 
-    public Debuff(String name) {
+    public Debuff(String name)
+    {
         super(name);
+        setEnabled(true);
         setIcon(ItemUtil.createItem("&a&lDebuff", Material.POTION, Short.valueOf("16452")));
         setRanked(true);
         setArmor(armor());
@@ -28,7 +30,8 @@ public class Debuff extends Ladder
         setBuild(false);
     }
 
-    public ItemStack[] armor() {
+    public ItemStack[] armor()
+    {
         return new ItemStack[] {
                 new ItemBuilder(Material.DIAMOND_BOOTS).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2).addEnchant(Enchantment.DURABILITY, 3).addEnchant(Enchantment.PROTECTION_FALL, 4).toItemStack(),
                 new ItemBuilder(Material.DIAMOND_LEGGINGS).addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2).addEnchant(Enchantment.DURABILITY, 3).toItemStack(),

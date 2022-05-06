@@ -6,6 +6,7 @@ import dev.nandi0813.practice.Manager.Gui.UnrankedGui;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Queue.Queue;
 import dev.nandi0813.practice.Manager.SystemManager;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,6 +27,7 @@ public class InventoryClick implements Listener
         int slot = e.getRawSlot();
 
         String endMatchInvTitle = LanguageManager.getString("gui.end-match-inventory.title").replaceAll("%player%", "");
+        String playerStatInvTitle = LanguageManager.getString("gui.stats.title").replaceAll("%player%", "");
 
         if (inventoryView.getTitle().equals(UnrankedGui.getGui().getTitle()))
         {
@@ -65,7 +67,9 @@ public class InventoryClick implements Listener
                 }
             }
         }
-        else if (inventoryView.getTitle().contains(endMatchInvTitle))
+        else if (inventoryView.getTitle().contains(ChatColor.stripColor(endMatchInvTitle)))
+            e.setCancelled(true);
+        else if (inventoryView.getTitle().contains(ChatColor.stripColor(playerStatInvTitle)))
             e.setCancelled(true);
     }
 

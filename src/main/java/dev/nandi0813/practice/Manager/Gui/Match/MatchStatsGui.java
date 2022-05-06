@@ -33,7 +33,7 @@ public class MatchStatsGui
 
         Inventory gui = InventoryUtil.createInventory(LanguageManager.getString("gui.end-match-inventory.title").replaceAll("%player%", matchStat.getPlayer().getName()), 6);
 
-        gui.setContents(InventoryUtil.reverseInventoryContent(matchStat.getEndInventory()));
+        gui.setContents(matchStat.getEndInventory());
 
         List<ItemStack> armor = Arrays.asList(matchStat.getEndArmor());
         Collections.reverse(armor);

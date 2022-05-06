@@ -13,8 +13,21 @@ public class PartyFFA
 
     public static void startMatch(Match match)
     {
+        ArrayList<String> playerNames = new ArrayList<>();
+
         for (Player player : match.getPlayers())
+        {
             match.getTeams().put(player, TeamEnum.TEAM1);
+            playerNames.add(player.getName());
+        }
+
+        for (String line : LanguageManager.getList("match.partyffa.match-start"))
+        {
+            match.sendMessage(line
+                    .replaceAll("%ladder%", match.getLadder().getName())
+                    .replaceAll("%map%", match.getArena().getName())
+                    .replaceAll("%players%", playerNames.toString().replace("[", "").replace("]", "")), true);
+        }
     }
 
     public static void endMatch(Match match, Player winner)
@@ -26,7 +39,10 @@ public class PartyFFA
                 if (!player.equals(winner)) losers.add(player.getName());
 
             for (String line : LanguageManager.getList("match.partyffa.match-end"))
-                match.sendMessage(line.replaceAll("%winner%", winner.getName()).replaceAll("%losers%", losers.toString().replace("[", "").replace("]", "")), true);
+                match.sendMessage(line
+                        .replaceAll("%winner%", winner.getName())
+                        .replaceAll("%losers%", losers.toString()
+                                .replace("[", "").replace("]", "")), true);
         }
         else
         {

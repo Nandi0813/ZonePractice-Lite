@@ -6,9 +6,8 @@ import dev.nandi0813.practice.Command.Ladder.LadderCommand;
 import dev.nandi0813.practice.Command.Matchinv.MatchinvCommand;
 import dev.nandi0813.practice.Command.Party.PartyCommand;
 import dev.nandi0813.practice.Command.Practice.PracticeCommand;
-import dev.nandi0813.practice.Command.Setup.SetupCommand;
 import dev.nandi0813.practice.Command.SpectateCommand;
-import dev.nandi0813.practice.Command.Staff.StaffCommand;
+import dev.nandi0813.practice.Command.StatsCommand;
 import dev.nandi0813.practice.Listener.*;
 import dev.nandi0813.practice.Manager.Arena.ArenaManager;
 import dev.nandi0813.practice.Manager.File.BackendManager;
@@ -70,12 +69,11 @@ public class SystemManager
     {
         Bukkit.getServer().getPluginCommand("arena").setExecutor(new ArenaCommand());
         Bukkit.getServer().getPluginCommand("ladder").setExecutor(new LadderCommand());
-        Bukkit.getServer().getPluginCommand("setup").setExecutor(new SetupCommand());
         Bukkit.getServer().getPluginCommand("practice").setExecutor(new PracticeCommand());
-        Bukkit.getServer().getPluginCommand("staff").setExecutor(new StaffCommand());
         Bukkit.getServer().getPluginCommand("spectate").setExecutor(new SpectateCommand());
         Bukkit.getServer().getPluginCommand("party").setExecutor(new PartyCommand());
         Bukkit.getServer().getPluginCommand("matchinv").setExecutor(new MatchinvCommand());
+        Bukkit.getServer().getPluginCommand("statistics").setExecutor(new StatsCommand());
     }
 
     public static void registerListeners(Practice practice, PluginManager pm)

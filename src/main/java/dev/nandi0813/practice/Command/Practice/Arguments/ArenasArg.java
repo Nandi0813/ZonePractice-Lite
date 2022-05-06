@@ -1,6 +1,9 @@
 package dev.nandi0813.practice.Command.Practice.Arguments;
 
+import dev.nandi0813.practice.Manager.Profile.Profile;
+import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
@@ -9,6 +12,14 @@ public class ArenasArg
 
     public static void ArenasCommand(Player player)
     {
+        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+
+        if (profile.getStatus().equals(ProfileStatus.MATCH) || profile.getStatus().equals(ProfileStatus.SPECTATE))
+        {
+            player.sendMessage(StringUtil.CC("&cYou can't use this, while you are in a match or spectating one."));
+            return;
+        }
+
         player.teleport(SystemManager.getArenaManager().getArenasWorld().getSpawnLocation());
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);

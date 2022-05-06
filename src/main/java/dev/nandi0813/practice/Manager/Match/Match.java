@@ -5,6 +5,7 @@ import dev.nandi0813.practice.Event.MatchStartEvent;
 import dev.nandi0813.practice.Manager.Arena.Arena;
 import dev.nandi0813.practice.Manager.Arena.BlockChange.CachedBlock;
 import dev.nandi0813.practice.Manager.Arena.BlockChange.Rollback;
+import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
@@ -16,7 +17,6 @@ import dev.nandi0813.practice.Manager.Match.MatchType.PartySplit.PartySplit;
 import dev.nandi0813.practice.Manager.Match.Runnable.AfterCountdown;
 import dev.nandi0813.practice.Manager.Match.Runnable.DurationCountdown;
 import dev.nandi0813.practice.Manager.Match.Runnable.StartCountdown;
-import dev.nandi0813.practice.Manager.Match.Util.PlayerUtil;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.SystemManager;
@@ -111,18 +111,18 @@ public class Match
                     matchPlayer.hidePlayer(onlinePlayer);
         }
 
-        switch (type)
-        {
-            case DUEL: Duel.startMatch(this); break;
-            case PARTY_FFA: PartyFFA.startMatch(this); break;
-            case PARTY_SPLIT: PartySplit.startMatch(this); break;
-        }
-
         for (Player player : players)
         {
             if (type.equals(MatchType.DUEL))
                 matchStats.put(player, new PlayerMatchStat(player));
             SystemManager.getProfileManager().getProfiles().get(player).setStatus(ProfileStatus.MATCH);
+        }
+
+        switch (type)
+        {
+            case DUEL: Duel.startMatch(this); break;
+            case PARTY_FFA: PartyFFA.startMatch(this); break;
+            case PARTY_SPLIT: PartySplit.startMatch(this); break;
         }
 
         roundManager.startRound();
@@ -136,14 +136,14 @@ public class Match
 
         resetMap();
 
+        status = MatchStatus.OLD;
+
         // Remove spectators
         for (int i = 0; i < spectators.size(); i++)
             removePlayer(spectators.get(i));
 
         for (Chunk chunk : gameArena.getCuboid().getChunks())
             chunk.unload();
-
-        status = MatchStatus.OLD;
 
         Bukkit.getPluginManager().callEvent(new MatchEndEvent(this));
     }
@@ -226,6 +226,9 @@ public class Match
 
         player.teleport(gameArena.getPosition3());
         SystemManager.getInventoryManager().getSpectatorInventory().setSpectatorInventory(player);
+
+        if (!player.hasPermission("zonepractice.spectate.silent"))
+            sendMessage(LanguageManager.getString("match.spectator-join").replaceAll("%player%", player.getName()), true);
     }
 
     /**
@@ -240,6 +243,9 @@ public class Match
         if ((profile.getStatus().equals(ProfileStatus.MATCH) && SystemManager.getMatchManager().getLiveMatchByPlayer(player).equals(this))
                 || (profile.getStatus().equals(ProfileStatus.SPECTATE) && SystemManager.getMatchManager().getLiveMatchBySpectator(player).equals(this)))
         {
+            if (!status.equals(MatchStatus.OLD) && profile.getStatus().equals(ProfileStatus.SPECTATE) && !player.hasPermission("zonepractice.spectate.silent"))
+                sendMessage(LanguageManager.getString("match.spectator-leave").replaceAll("%player%", player.getName()), true);
+
             spectators.remove(player);
 
             SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, true);

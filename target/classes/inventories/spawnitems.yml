@@ -28,16 +28,16 @@ party:
       ==: ItemMeta
       meta-type: UNSPECIFIC
       display-name: §dCreate Party §7(Right-Click)
-settings:
+stats:
   slot: 7
   item:
     ==: org.bukkit.inventory.ItemStack
-    type: WATCH
+    type: PAPER
     damage: 0
     meta:
       ==: ItemMeta
       meta-type: UNSPECIFIC
-      display-name: §aSettings §7(Right-Click)
+      display-name: §aStatistics §7(Right-Click)
 kiteditor:
   slot: 8
   item:

@@ -19,6 +19,7 @@ public class Axe extends Ladder
     public Axe(String name)
     {
         super(name);
+        setEnabled(true);
         setIcon(ItemUtil.createItem("&7&lAxe", Material.IRON_AXE, Short.valueOf("0")));
         setRanked(true);
         setArmor(armor());

@@ -1,10 +1,7 @@
 package dev.nandi0813.practice.Command.Practice;
 
-import dev.nandi0813.practice.Command.Practice.Arguments.ArenasArg;
-import dev.nandi0813.practice.Command.Practice.Arguments.HelpArg;
-import dev.nandi0813.practice.Command.Practice.Arguments.LobbyArg;
+import dev.nandi0813.practice.Command.Practice.Arguments.*;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
-import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -33,6 +30,18 @@ public class PracticeCommand implements CommandExecutor
 
             else if (args[0].equalsIgnoreCase("lobby"))
                 LobbyArg.LobbyCommand(player, label, args);
+
+            else if (args[0].equalsIgnoreCase("eloreset"))
+                EloresetArg.EloResetCommand(player, label, args);
+
+            else if (args[0].equalsIgnoreCase("reset"))
+                ResetArg.resetCommand(player, label, args);
+
+            else if (args[0].equalsIgnoreCase("resetall"))
+                ResetallArg.ResetAllCommand(player, label, args);
+
+            else if (args[0].equalsIgnoreCase("endmatch"))
+                EndmatchArg.MatchForceendCommand(player, label, args);
 
             else
                 HelpArg.HelpCommand(player, label);

@@ -16,6 +16,7 @@ public class BuildUHC extends Ladder
     public BuildUHC(String name)
     {
         super(name);
+        setEnabled(true);
         setIcon(ItemUtil.createItem("&6&lBuildUHC", Material.LAVA_BUCKET, Short.valueOf("0")));
         setRanked(true);
         setArmor(armor());

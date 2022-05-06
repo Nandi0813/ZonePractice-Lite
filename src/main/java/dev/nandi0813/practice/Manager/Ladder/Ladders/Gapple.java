@@ -19,6 +19,7 @@ public class Gapple extends Ladder
     public Gapple(String name)
     {
         super(name);
+        setEnabled(true);
         setIcon(ItemUtil.createItem("&e&lGapple", Material.GOLDEN_APPLE, Short.valueOf("1")));
         setRanked(true);
         setArmor(armor());

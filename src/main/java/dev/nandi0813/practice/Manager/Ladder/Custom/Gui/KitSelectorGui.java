@@ -25,7 +25,7 @@ public class KitSelectorGui
         gui.clear();
         for (Ladder ladder : SystemManager.getLadderManager().getLadders())
         {
-            if (ladder.isEditable())
+            if (ladder.isEditable() && ladder.isEnabled())
             {
                 ItemStack icon = ladder.getIcon().clone();
                 ItemMeta iconMeta = icon.getItemMeta();

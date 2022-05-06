@@ -14,6 +14,7 @@ public class Ladder
 {
 
     @Getter @Setter private String name;
+    @Getter @Setter private boolean enabled;
     @Getter @Setter private ItemStack icon;
     @Getter @Setter private ItemStack[] armor;
     @Getter @Setter private ItemStack[] inventory;
@@ -27,8 +28,9 @@ public class Ladder
     @Getter @Setter private boolean hunger;
     @Getter @Setter private boolean build;
 
-    public Ladder(String name, ItemStack icon, boolean ranked, ItemStack[] armor, ItemStack[] inventory, List<PotionEffect> effects, int hitdelay, boolean editable, boolean regen, boolean hunger, boolean build) {
+    public Ladder(String name, Boolean enabled, ItemStack icon, boolean ranked, ItemStack[] armor, ItemStack[] inventory, List<PotionEffect> effects, int hitdelay, boolean editable, boolean regen, boolean hunger, boolean build) {
         this.name = name;
+        this.enabled = enabled;
         this.icon = icon;
         this.ranked = ranked;
         this.armor = armor;
@@ -44,6 +46,7 @@ public class Ladder
     public Ladder(String name)
     {
         this.name = name;
+        this.enabled = true;
         this.icon = ItemUtil.createItem("&6" + this.name, Material.ANVIL);
         this.ranked = false;
         this.armor = new ItemStack[4];

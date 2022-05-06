@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Ladder;
 
+import dev.nandi0813.practice.Manager.File.BackendManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladders.*;
 import lombok.Getter;
 
@@ -10,6 +11,7 @@ public class LadderManager
 {
 
     @Getter private final List<Ladder> ladders = new ArrayList<>();
+    @Getter private final List<String> disabledLadders = new ArrayList<>();
 
     public Ladder getLadder(String ladderName)
     {
@@ -44,6 +46,20 @@ public class LadderManager
         ladders.add(new Gapple(("Gapple")));
         ladders.add(new NoDebuff(("NoDebuff")));
         ladders.add(new Soup(("Soup")));
+
+        if (BackendManager.getConfig().getStringList("disabled-ladders") != null)
+        {
+            for (String ladderName : BackendManager.getConfig().getStringList("disabled-ladders"))
+            {
+                Ladder ladder = getLadder(ladderName);
+
+                if (ladder != null)
+                {
+                    ladder.setEnabled(false);
+                    disabledLadders.add(ladder.getName());
+                }
+            }
+        }
     }
 
 }

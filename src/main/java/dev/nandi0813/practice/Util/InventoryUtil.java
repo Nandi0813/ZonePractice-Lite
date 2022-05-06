@@ -14,6 +14,7 @@ public class InventoryUtil {
         return Bukkit.getServer().createInventory(null, row * 9, StringUtil.CC(title));
     }
 
+    /*
     public static ItemStack[] reverseInventoryContent(ItemStack[] baseContent)
     {
         ArrayList<ItemStack> content = new ArrayList<>(Arrays.asList(baseContent));
@@ -36,5 +37,6 @@ public class InventoryUtil {
 
         return newContent.toArray(new ItemStack[0]);
     }
+     */
 
 }

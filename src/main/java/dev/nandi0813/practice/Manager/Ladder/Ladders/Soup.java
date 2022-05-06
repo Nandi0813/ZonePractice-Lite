@@ -19,7 +19,8 @@ public class Soup extends Ladder
     public Soup(String name)
     {
         super(name);
-        setIcon(ItemUtil.createItem("&6Soup", Material.MUSHROOM_SOUP, Short.valueOf("0")));
+        setEnabled(true);
+        setIcon(ItemUtil.createItem("&6&lSoup", Material.MUSHROOM_SOUP, Short.valueOf("0")));
         setRanked(true);
         setArmor(armor());
         setInventory(inventory());

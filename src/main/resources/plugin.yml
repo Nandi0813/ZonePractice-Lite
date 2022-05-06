@@ -6,15 +6,15 @@ depend: [ ProtocolLib ]
 commands:
   arena:
   ladder:
-  setup:
   practice:
     aliases: [prac, zonepractice, zoneprac, zonep]
-  staff:
   spectate:
     aliases: spec
   party:
     aliases: p
   matchinv:
+  statistics:
+    aliases: [stats]
 
 permissions:
   zonepractice.admin:
@@ -23,15 +23,23 @@ permissions:
       zonepractice.practice: true
       zonepractice.staff: true
   zonepractice.setup:
-    description: Setup everything.
+    description: Setup everything, like arenas, ladders..
   zonepractice.practice:
     description: Practice permission.
+  zonepractice.match.forceend:
+    description: Ends any matches instantly.
   zonepractice.staff:
     description: Staff permission.
+  zonepractice.stats.resetall:
+    description: Resets all player stats.
 
   # Basic permission
   zonepractice.spectate:
     default: true
+  zonepractice.spectate.silent:
+    description: The server doesn't send message to the match player, when the player with the permission starts spectating.
+  zonepractice.stats:
+    description: View other players statistics.
 
   # Party permissions
   zonepractice.party.create:
@@ -40,6 +48,8 @@ permissions:
   # Bypasses
   zonepractice.bypass.ranked.requirements:
     description: Bypass ranked requirements.
+  zonepractice.bypass.match.forceend:
+    description: Bypasses the match end command.
 
   # Custom Kits
   zonepractice.customkit:

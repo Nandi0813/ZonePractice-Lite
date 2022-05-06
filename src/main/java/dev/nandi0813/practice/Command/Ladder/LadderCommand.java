@@ -32,6 +32,12 @@ public class LadderCommand implements CommandExecutor
             else if (args[0].equalsIgnoreCase("info"))
                 LadderInfoArg.InfoCommand(player, label, args);
 
+            else if (args[0].equalsIgnoreCase("enable"))
+                LadderEnableArg.LadderEnableCommand(player, label, args);
+
+            else if (args[0].equalsIgnoreCase("disable"))
+                LadderDisableArg.LadderDisableCommand(player, label, args);
+
             else
                 LadderHelpArg.HelpCommand(player, label);
 

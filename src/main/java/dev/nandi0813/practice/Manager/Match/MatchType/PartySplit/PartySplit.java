@@ -23,12 +23,21 @@ public class PartySplit
         // Split players to the teams.
         List<Player> team1 = new ArrayList<>();
         List<Player> team2 = new ArrayList<>();
+        ArrayList<String> team1Names = new ArrayList<>();
+        ArrayList<String> team2Names = new ArrayList<>();
+
         for (Player player : players)
         {
             if (team2.size() > team1.size())
+            {
                 team1.add(player);
+                team1Names.add(player.getName());
+            }
             else
+            {
                 team2.add(player);
+                team2Names.add(player.getName());
+            }
         }
 
         // Add players to the teams.
@@ -36,6 +45,17 @@ public class PartySplit
             match.getTeams().put(player, TeamEnum.TEAM1);
         for (Player player : team2)
             match.getTeams().put(player, TeamEnum.TEAM2);
+
+        for (String line : LanguageManager.getList("match.partysplit.match-start"))
+        {
+            match.sendMessage(line
+                    .replaceAll("%ladder%", match.getLadder().getName())
+                    .replaceAll("%map%", match.getArena().getName())
+                    .replaceAll("%team1name%", TeamEnum.TEAM1.getName())
+                    .replaceAll("%team2name%", TeamEnum.TEAM2.getName())
+                    .replaceAll("%team1players%", team1Names.toString().replace("[", "").replace("]", ""))
+                    .replaceAll("%team2players%", team2Names.toString().replace("[", "").replace("]", "")), true);
+        }
     }
 
     public static void endMatch(Match match, Player winner)

@@ -2,6 +2,7 @@ package dev.nandi0813.practice.Manager.Inventory.SpawnInventory;
 
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Gui.RankedGui;
+import dev.nandi0813.practice.Manager.Gui.StatsGui;
 import dev.nandi0813.practice.Manager.Gui.UnrankedGui;
 import dev.nandi0813.practice.Manager.Ladder.Custom.Gui.KitSelectorGui;
 import dev.nandi0813.practice.Manager.Party.Party;
@@ -55,6 +56,10 @@ public class SpawnInventoryListener implements Listener
                 else if (item.equals(SpawnInventory.getPartyItem()))
                 {
                     SystemManager.getPartyManager().createParty(player);
+                }
+                else if (item.equals(SpawnInventory.getStatsItem()))
+                {
+                    player.openInventory(StatsGui.getStatsGui(profile));
                 }
             }
         }
