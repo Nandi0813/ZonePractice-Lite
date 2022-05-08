@@ -40,8 +40,16 @@ public class SpawnInventoryListener implements Listener
                 }
                 else if (item.equals(SpawnInventory.getRankedItem()))
                 {
-                    player.openInventory(RankedGui.getGui());
-                    RankedGui.updateGui();
+                    int i1 = SystemManager.getMatchManager().getAllowedRankedPerDay().get(player);
+                    int i2 = SystemManager.getMatchManager().getRankedPerDay().get(player);
+
+                    if (i1 > i2)
+                    {
+                        player.openInventory(RankedGui.getGui());
+                        RankedGui.updateGui();
+                    }
+                    else
+                        player.sendMessage(LanguageManager.getString("match.ranked-limit"));
                 }
                 else if (item.equals(SpawnInventory.getKiteditorItem()))
                 {

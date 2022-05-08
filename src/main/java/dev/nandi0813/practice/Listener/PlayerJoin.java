@@ -4,6 +4,8 @@ import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
+import dev.nandi0813.practice.Util.AdMessageUtil;
+import dev.nandi0813.practice.Util.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,6 +42,11 @@ public class PlayerJoin implements Listener
                     onlinePlayer.hidePlayer(player);
             }
         }
+
+        if (player.isOp())
+            AdMessageUtil.sendAdMessagesToPlayer(player);
+
+        PlayerUtil.setupPlayerRankedPerDay(player);
     }
 
 }

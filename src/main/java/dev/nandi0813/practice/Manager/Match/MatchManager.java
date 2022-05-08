@@ -8,18 +8,23 @@ import dev.nandi0813.practice.Manager.Match.MatchType.PartyFFA.PartyFFAListener;
 import dev.nandi0813.practice.Manager.Match.MatchType.PartySplit.PartySplitListener;
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.util.*;
 
 public class MatchManager
 {
 
     @Getter private final HashMap<String, Match> matches = new HashMap<>();
     @Getter private final List<Match> liveMatches = new ArrayList<>();
+
+    @Getter @Setter private HashMap<Player, Integer> rankedPerDay = new HashMap<>();
+    @Getter private final HashMap<Player, Integer> allowedRankedPerDay = new HashMap<>();
 
     public MatchManager(Practice practice)
     {
@@ -46,24 +51,10 @@ public class MatchManager
         return null;
     }
 
-    public Match getLiveMatchById(String matchId)
-    {
-        for (Match match : liveMatches)
-            if (match.getMatchID().equalsIgnoreCase(matchId)) return match;
-        return null;
-    }
-
     public Match getLiveMatchByArena(Arena arena)
     {
         for (Match match : liveMatches)
             if (match.getArena().equals(arena)) return match;
-        return null;
-    }
-
-    public Match getLiveMatchByLadder(Ladder ladder)
-    {
-        for (Match match : liveMatches)
-            if (match.getLadder().equals(ladder)) return match;
         return null;
     }
 
@@ -94,6 +85,22 @@ public class MatchManager
     {
         for (Match match : liveMatches)
             match.endMatch();
+    }
+
+
+    public void startRankedTimer()
+    {
+        ZonedDateTime zdt = LocalDate.now(TimeZone.getDefault().toZoneId()).atTime(LocalTime.of(23, 59, 59)).atZone(TimeZone.getDefault().toZoneId());
+
+        long i2 = zdt.toInstant().toEpochMilli()-System.currentTimeMillis();
+        long i3 = (i2/1000)*20;
+
+        Bukkit.getScheduler().runTaskTimerAsynchronously(Practice.getInstance(), () ->
+        {
+            rankedPerDay = new HashMap<>();
+            for (Player player : Bukkit.getOnlinePlayers())
+                rankedPerDay.put(player, 0);
+        }, i3, 86400000L);
     }
 
 }

@@ -224,6 +224,10 @@ public class Match
         for (Player matchPlayer : players)
             matchPlayer.hidePlayer(player);
 
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers())
+            if (!players.contains(onlinePlayer))
+                player.hidePlayer(onlinePlayer);
+
         player.teleport(gameArena.getPosition3());
         SystemManager.getInventoryManager().getSpectatorInventory().setSpectatorInventory(player);
 
@@ -247,6 +251,9 @@ public class Match
                 sendMessage(LanguageManager.getString("match.spectator-leave").replaceAll("%player%", player.getName()), true);
 
             spectators.remove(player);
+
+            for (Player onlinePlayer : Bukkit.getOnlinePlayers())
+                player.showPlayer(onlinePlayer);
 
             SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, true);
         }

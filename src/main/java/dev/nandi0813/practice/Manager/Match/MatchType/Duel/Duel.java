@@ -78,7 +78,8 @@ public class Duel
                         {
                             List<String> spectators = new ArrayList<>();
                             for (Player spectator : match.getSpectators())
-                                spectators.add(spectator.getName());
+                                if (!spectator.hasPermission("zonepractice.spectate.silent"))
+                                    spectators.add(spectator.getName());
                             player.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', line.replaceAll("%size%", String.valueOf(spectators.size())).replaceAll("%spectators%", spectators.toString().replace("[", "").replace("]", ""))));
                         }
                     }

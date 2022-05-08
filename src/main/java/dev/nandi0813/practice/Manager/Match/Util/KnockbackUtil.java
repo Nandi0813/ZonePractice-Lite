@@ -8,6 +8,12 @@ import org.bukkit.util.Vector;
 public class KnockbackUtil
 {
 
+    /**
+     * It sets the knockback of a player based on the knockback type
+     *
+     * @param player The player to set the knockback for.
+     * @param knockbackType The type of knockback you want to use.
+     */
     public static void setPlayerKnockback(Entity player, KnockbackType knockbackType)
     {
         int airhorizontal = ConfigManager.getConfig().getInt("knockback." + knockbackType.toString().toLowerCase() + ".air-horizontal");

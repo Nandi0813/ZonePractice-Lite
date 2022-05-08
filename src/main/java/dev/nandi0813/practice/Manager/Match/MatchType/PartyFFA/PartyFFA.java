@@ -11,6 +11,7 @@ import java.util.*;
 public class PartyFFA
 {
 
+    // Starting a match.
     public static void startMatch(Match match)
     {
         ArrayList<String> playerNames = new ArrayList<>();
@@ -30,6 +31,12 @@ public class PartyFFA
         }
     }
 
+    /**
+     * It sends a message to the players in the match, telling them who won
+     *
+     * @param match The match that is ending.
+     * @param winner The winner of the match. If the match ended in a draw, this will be null.
+     */
     public static void endMatch(Match match, Player winner)
     {
         if (winner != null)
@@ -51,6 +58,14 @@ public class PartyFFA
         }
     }
 
+    /**
+     * It kills a player, removes them from the alive players list, hides them from other players, and ends the round if
+     * there's only one player left
+     *
+     * @param match The match that the player is in
+     * @param player The player who died
+     * @param message Whether or not to send a message to the players in the match.
+     */
     public static void killPlayer(Match match, Player player, boolean message)
     {
         if (message)

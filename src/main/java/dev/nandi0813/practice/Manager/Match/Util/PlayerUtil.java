@@ -2,7 +2,6 @@ package dev.nandi0813.practice.Manager.Match.Util;
 
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
 import dev.nandi0813.practice.Manager.Match.Match;
-import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import org.bukkit.Bukkit;
@@ -17,6 +16,12 @@ import org.bukkit.potion.PotionEffect;
 public class PlayerUtil
 {
 
+    /**
+     * It sets the player's health, food, fire ticks, max health, fall distance, walk speed, potion effects, game mode, and
+     * flying to default values
+     *
+     * @param player The player to set the match player for.
+     */
     public static void setMatchPlayer(Player player)
     {
         player.setHealth(20);
@@ -32,6 +37,12 @@ public class PlayerUtil
         player.setFlying(false);
     }
 
+    /**
+     * It drops all of the items in a player's inventory and hides them from non-match players
+     *
+     * @param player The player to drop the inventory of.
+     * @param match The match that the player is in.
+     */
     public static void dropPlayerInventory(Player player, Match match)
     {
         for (ItemStack item : player.getInventory().getContents())
@@ -71,6 +82,12 @@ public class PlayerUtil
         player.updateInventory();
     }
 
+    /**
+     * Teleports the player to the position of their team
+     *
+     * @param player The player to teleport
+     * @param match The match that the player is in
+     */
     public static void teleportPlayer(Player player, Match match)
     {
         if (match.getTeams().get(player).equals(TeamEnum.TEAM1))
@@ -79,6 +96,12 @@ public class PlayerUtil
             player.teleport(match.getGameArena().getPosition2());
     }
 
+    /**
+     * Hide a player from all other players in a match
+     *
+     * @param match The match that the player is in.
+     * @param player The player to hide
+     */
     public static void hidePlayerPartyGames(Match match, Player player)
     {
         setMatchPlayer(player);

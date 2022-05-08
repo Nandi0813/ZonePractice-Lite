@@ -52,6 +52,8 @@ public class SystemManager
         profileManager.loadProfiles();
         sidebarManager.enable();
 
+        matchManager.startRankedTimer();
+
         registerCommands();
         registerListeners(practice, Bukkit.getPluginManager());
         registerPacketListener();

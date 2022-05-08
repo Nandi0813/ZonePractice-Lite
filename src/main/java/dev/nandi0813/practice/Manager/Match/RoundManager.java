@@ -106,7 +106,8 @@ public class RoundManager
         }
 
         match.setStatus(MatchStatus.OLD);
-        match.getAfterCountdown().begin();
+        if (!match.getAfterCountdown().isRunning())
+            match.getAfterCountdown().begin();
     }
 
 }

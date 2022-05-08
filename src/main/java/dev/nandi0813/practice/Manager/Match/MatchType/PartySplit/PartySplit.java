@@ -14,6 +14,12 @@ import java.util.List;
 public class PartySplit
 {
 
+    /**
+     * It collects all players in the match, shuffles them, splits them into two teams, and then sends a message to the
+     * players
+     *
+     * @param match The match object.
+     */
     public static void startMatch(Match match)
     {
         // Collect and shuffle players
@@ -58,6 +64,12 @@ public class PartySplit
         }
     }
 
+    /**
+     * It sends a message to the players in the match, telling them who won and who lost
+     *
+     * @param match The match that is ending
+     * @param winner The player who won the match. If the match ended in a draw, this will be null.
+     */
     public static void endMatch(Match match, Player winner)
     {
         if (winner != null)
@@ -89,6 +101,14 @@ public class PartySplit
         }
     }
 
+    /**
+     * It removes a player from the alive players list, sends a message to the match, hides the player from the other
+     * players, and ends the round if the player's team is empty
+     *
+     * @param match The match object
+     * @param player The player that died
+     * @param message If true, the message will be sent to the players.
+     */
     public static void killPlayer(Match match, Player player, boolean message)
     {
         match.getAlivePlayers().remove(player);
@@ -105,6 +125,16 @@ public class PartySplit
     }
 
 
+    /**
+     * "Return a list of players on the given team."
+     *
+     * The first line of the function is the function signature. It tells us the name of the function, the type of the
+     * return value, and the types of the parameters
+     *
+     * @param match The match object
+     * @param team The team you want to get the players from.
+     * @return A list of players on a team.
+     */
     public static List<Player> getTeamPlayers(Match match, TeamEnum team)
     {
         List<Player> players = new ArrayList<>();
@@ -114,6 +144,13 @@ public class PartySplit
         return players;
     }
 
+    /**
+     * Returns a list of all the alive players on a team.
+     *
+     * @param match The match object
+     * @param team The team you want to get the players from.
+     * @return A list of players that are alive and on the team.
+     */
     public static List<Player> getTeamAlivePlayers(Match match, TeamEnum team)
     {
         List<Player> players = new ArrayList<>();

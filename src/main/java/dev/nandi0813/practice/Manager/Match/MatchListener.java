@@ -43,6 +43,10 @@ public class MatchListener implements Listener
         SystemManager.getMatchManager().getMatches().put(match.getMatchID(), match);
         SystemManager.getMatchManager().getLiveMatches().add(match);
 
+        if (match.isRanked())
+            for (Player player : match.getPlayers())
+                SystemManager.getMatchManager().getRankedPerDay().put(player, SystemManager.getMatchManager().getRankedPerDay().get(player) + 1);
+
         UnrankedGui.updateGui();
         RankedGui.updateGui();
     }

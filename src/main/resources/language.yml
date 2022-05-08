@@ -80,6 +80,7 @@ match:
   cant-build: "&cYou can't build here."
   cant-craft: "&cYou can't craft with this ladder."
   enderpearl-cooldown: "&cYou cannot use this for another %time% seconds."
+  ranked-limit: "&cYou have exceeded the daily ranked limit!"
   duel:
     match-start:
       - "&7&m----------------------------------------"
