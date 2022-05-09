@@ -43,6 +43,9 @@ public class PracticeCommand implements CommandExecutor
             else if (args[0].equalsIgnoreCase("endmatch"))
                 EndmatchArg.MatchForceendCommand(player, label, args);
 
+            else if (args[0].equalsIgnoreCase("reload"))
+                ReloadArg.ReloadCommand(player);
+
             else
                 HelpArg.HelpCommand(player, label);
         }

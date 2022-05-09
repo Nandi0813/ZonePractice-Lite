@@ -12,8 +12,19 @@ ranked:
   elo-range-increase: 20 # Range
   max-range: 300
   elo-change: 10
-  min-unranked-wins: 10
+  min-unranked-wins: 10 # Players have to win at least this many unrankeds before they can play ranked games.
   default-elo: 1000
+  ranked-per-day: # You can continue the list below. Don't remove the "default" section. It reset at midnight every day or when you restart the server.
+    default: 1
+    R20:
+      permission: "zonepractice.ranked.20"
+      allowed-rankeds: 20
+    R30:
+      permission: "zonepractice.ranked.30"
+      allowed-rankeds: 30
+    R50:
+      permission: "zonepractice.ranked.50"
+      allowed-rankeds: 50
 #
 # Match settings
 match-settings:
@@ -31,3 +42,6 @@ party-settings:
   max-party-members:
     default: 6 # Maximum party members, if the owner don't have permission to change it.
   party-invite-cooldown: 60 # After these seconds, the party invite will expire.
+#
+# Leaderboard settings
+show-player: 5 # The leaderboard will show the first this many player.

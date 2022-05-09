@@ -1,4 +1,4 @@
-package dev.nandi0813.practice.Command;
+package dev.nandi0813.practice.Command.Stats;
 
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Gui.StatsGui;

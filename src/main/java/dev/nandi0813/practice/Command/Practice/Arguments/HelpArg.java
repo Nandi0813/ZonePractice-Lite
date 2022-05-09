@@ -16,6 +16,7 @@ public class HelpArg
         player.sendMessage(StringUtil.CC(" &c » /" + label + " reset <player> - Resets the players stats."));
         player.sendMessage(StringUtil.CC(" &c » /" + label + " resetall - &4Resets all player stats!"));
         player.sendMessage(StringUtil.CC(" &c » /" + label + " endmatch <player> - &cForce end player's match."));
+        player.sendMessage(StringUtil.CC(" &c » /" + label + " reload - &cReload the config and lang files."));
         player.sendMessage(StringUtil.CC("&c&m------------------------------------------------"));
     }
 

@@ -201,6 +201,11 @@ public class MatchListener implements Listener
                 if (!match.getStatus().equals(MatchStatus.LIVE)) e.setCancelled(true);
                 if (!item.getType().equals(Material.BOW)) player.updateInventory();
             }
+            else if (item.getType().equals(Material.POTION) && match.getStatus().equals(MatchStatus.END))
+            {
+                e.setCancelled(true);
+                player.updateInventory();
+            }
 
             // Kit selector
             if (player.getInventory().getItem(8) != null && player.getInventory().getItem(8).equals(KitUtil.getDefaultKitItem()))

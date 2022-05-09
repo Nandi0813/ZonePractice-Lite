@@ -42,3 +42,6 @@ party-settings:
   max-party-members:
     default: 6 # Maximum party members, if the owner don't have permission to change it.
   party-invite-cooldown: 60 # After these seconds, the party invite will expire.
+#
+# Leaderboard settings
+show-player: 5 # The leaderboard will show the first this many player.

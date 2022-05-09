@@ -2,7 +2,6 @@
   <artifact type="jar" name="ZonePractice Lite">
     <output-path>$USER_HOME$/Desktop/MC/Plugins/ZonePractice/Lite/Server/plugins</output-path>
     <root id="archive" name="ZonePractice Lite.jar">
-      <element id="library" level="project" name="Maven: com.comphenix.protocol:ProtocolLib:4.7.0" />
       <element id="library" level="project" name="Maven: net.bytebuddy:byte-buddy:1.11.0" />
       <element id="module-output" name="practice" />
     </root>

@@ -2,12 +2,19 @@ package dev.nandi0813.practice.Manager;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import dev.nandi0813.practice.Command.Arena.ArenaCommand;
+import dev.nandi0813.practice.Command.Arena.ArenaTabCompleter;
 import dev.nandi0813.practice.Command.Ladder.LadderCommand;
+import dev.nandi0813.practice.Command.Ladder.LadderTabCompleter;
+import dev.nandi0813.practice.Command.Leaderboard.LeaderboardCommand;
+import dev.nandi0813.practice.Command.Leaderboard.LeaderboardTabCompleter;
 import dev.nandi0813.practice.Command.Matchinv.MatchinvCommand;
 import dev.nandi0813.practice.Command.Party.PartyCommand;
+import dev.nandi0813.practice.Command.Party.PartyTabCompleter;
 import dev.nandi0813.practice.Command.Practice.PracticeCommand;
-import dev.nandi0813.practice.Command.SpectateCommand;
-import dev.nandi0813.practice.Command.StatsCommand;
+import dev.nandi0813.practice.Command.Practice.PracticeTabCompleter;
+import dev.nandi0813.practice.Command.Spectate.SpectateTabCompleter;
+import dev.nandi0813.practice.Command.Spectate.SpectateCommand;
+import dev.nandi0813.practice.Command.Stats.StatsCommand;
 import dev.nandi0813.practice.Listener.*;
 import dev.nandi0813.practice.Manager.Arena.ArenaManager;
 import dev.nandi0813.practice.Manager.File.BackendManager;
@@ -70,10 +77,23 @@ public class SystemManager
     public static void registerCommands()
     {
         Bukkit.getServer().getPluginCommand("arena").setExecutor(new ArenaCommand());
+        Bukkit.getServer().getPluginCommand("arena").setTabCompleter(new ArenaTabCompleter());
+
         Bukkit.getServer().getPluginCommand("ladder").setExecutor(new LadderCommand());
+        Bukkit.getServer().getPluginCommand("ladder").setTabCompleter(new LadderTabCompleter());
+
         Bukkit.getServer().getPluginCommand("practice").setExecutor(new PracticeCommand());
+        Bukkit.getServer().getPluginCommand("practice").setTabCompleter(new PracticeTabCompleter());
+
         Bukkit.getServer().getPluginCommand("spectate").setExecutor(new SpectateCommand());
+        Bukkit.getServer().getPluginCommand("spectate").setTabCompleter(new SpectateTabCompleter());
+
         Bukkit.getServer().getPluginCommand("party").setExecutor(new PartyCommand());
+        Bukkit.getServer().getPluginCommand("party").setTabCompleter(new PartyTabCompleter());
+
+        Bukkit.getServer().getPluginCommand("leaderboard").setExecutor(new LeaderboardCommand());
+        Bukkit.getServer().getPluginCommand("leaderboard").setTabCompleter(new LeaderboardTabCompleter());
+
         Bukkit.getServer().getPluginCommand("matchinv").setExecutor(new MatchinvCommand());
         Bukkit.getServer().getPluginCommand("statistics").setExecutor(new StatsCommand());
     }

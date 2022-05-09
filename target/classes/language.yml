@@ -64,6 +64,16 @@ stats:
   cant-use: "&cYou can't use this right now."
   player-not-found: "&cPlayer cannot be found."
 
+leaderboard:
+  ladder-not-found: "&cLadder cannot be found."
+  ladder-disabled: "&cLadder is currently disabled."
+  elo:
+    title: "&6&l%ladder% &6elo leaderboard"
+    place-line: " &e%place%. &7%player% &6» &f%elo% elo"
+  win:
+    title: "&6&l%ladder% &6win leaderboard"
+    place-line: " &e%place%. &7%player% &6» &f%wins% wins"
+
 queue:
   queue-start: "&aYou are now queued for %weightClass% %ladderName%."
   queue-end: "&aYou are no longer queued for %weightClass% %ladderName%." # %weightClass% equals ranked or unranked
@@ -80,6 +90,7 @@ match:
   cant-build: "&cYou can't build here."
   cant-craft: "&cYou can't craft with this ladder."
   enderpearl-cooldown: "&cYou cannot use this for another %time% seconds."
+  ranked-limit: "&cYou have exceeded the daily ranked limit!"
   duel:
     match-start:
       - "&7&m----------------------------------------"
