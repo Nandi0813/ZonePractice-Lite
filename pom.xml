@@ -6,7 +6,7 @@
 
     <groupId>dev.nandi0813</groupId>
     <artifactId>practice</artifactId>
-    <version>1.0</version>
+    <version>2.2</version>
     <packaging>jar</packaging>
 
     <name>ZonePractice Lite</name>
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
-            <version>4.7.0</version>
+            <version>4.8.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

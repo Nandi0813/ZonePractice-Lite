@@ -117,7 +117,10 @@ public class LeaderboardCommand implements CommandExecutor
             for (Profile profile : SystemManager.getProfileManager().getProfiles().values())
             {
                 if (engine.equalsIgnoreCase("elo"))
-                    leaderboard.put(profile.getPlayer(), profile.getElo().get(ladder));
+                {
+                    int elo = profile.getElo().get(ladder);
+                    leaderboard.put(profile.getPlayer(), elo);
+                }
                 else
                 {
                     int unrankedWin = profile.getLadderUnRankedWins().get(ladder);

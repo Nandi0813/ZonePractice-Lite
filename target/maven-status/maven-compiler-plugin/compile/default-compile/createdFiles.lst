@@ -86,11 +86,9 @@ dev/nandi0813/practice/Manager/Ladder/Ladders/NoDebuff.class
 dev/nandi0813/practice/Manager/Match/MatchStats/MatchStatListener$1.class
 dev/nandi0813/practice/Manager/Queue/QueueRunnable.class
 dev/nandi0813/practice/Manager/Ladder/Ladders/Debuff.class
-dev/nandi0813/practice/Command/SpectateCommand.class
 dev/nandi0813/practice/Util/EntityHider/EntityHider$2.class
 dev/nandi0813/practice/Manager/Match/Match$1.class
 dev/nandi0813/practice/Command/Party/Arguments/PartyInfoArg.class
-dev/nandi0813/practice/Command/Setup/SetupCommand.class
 dev/nandi0813/practice/Manager/Queue/Queue$1.class
 dev/nandi0813/practice/Manager/Gui/Match/MatchStatsGui.class
 dev/nandi0813/practice/Util/EntityHider/EntityHiderListener.class
@@ -111,7 +109,6 @@ dev/nandi0813/practice/Manager/Sidebar/SidebarManager.class
 dev/nandi0813/practice/Manager/Ladder/Custom/Gui/KitSelectorGui.class
 dev/nandi0813/practice/Listener/InventoryClick.class
 dev/nandi0813/practice/Util/ClickableMessageUtil.class
-dev/nandi0813/practice/Command/Staff/StaffCommand.class
 dev/nandi0813/practice/Event/QueueEndEvent.class
 dev/nandi0813/practice/Manager/Arena/BlockChange/Rollback.class
 dev/nandi0813/practice/Manager/Match/Util/KitUtil.class
