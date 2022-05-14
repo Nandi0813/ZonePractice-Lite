@@ -1,5 +1,5 @@
 name: ZonePracticeLite
-version: '2.2'
+version: '2.22'
 main: dev.nandi0813.practice.Practice
 authors: [ Nandi0813 ]
 depend: [ ProtocolLib ]
@@ -22,15 +22,13 @@ permissions:
     children:
       zonepractice.setup: true
       zonepractice.practice: true
-      zonepractice.staff: true
+      zonepractice.reload: true
   zonepractice.setup:
     description: Setup everything, like arenas, ladders..
   zonepractice.practice:
     description: Practice permission.
   zonepractice.match.forceend:
     description: Ends any matches instantly.
-  zonepractice.staff:
-    description: Staff permission.
   zonepractice.stats.resetall:
     description: Resets all player stats.
   zonepractice.reload:

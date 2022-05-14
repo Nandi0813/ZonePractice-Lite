@@ -32,6 +32,7 @@ import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.Enderpearl.EnderpearlListener;
 import dev.nandi0813.practice.Util.EntityHider.EntityHider;
 import dev.nandi0813.practice.Util.EntityHider.EntityHiderListener;
+import dev.nandi0813.practice.Util.UpdateChecker;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -59,11 +60,12 @@ public class SystemManager
         profileManager.loadProfiles();
         sidebarManager.enable();
 
-        matchManager.startRankedTimer();
-
         registerCommands();
         registerListeners(practice, Bukkit.getPluginManager());
         registerPacketListener();
+
+        matchManager.startRankedTimer();
+        UpdateChecker.check(practice);
     }
 
     public static void Disable()

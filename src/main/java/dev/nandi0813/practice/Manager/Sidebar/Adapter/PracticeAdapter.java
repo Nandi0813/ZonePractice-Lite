@@ -59,8 +59,9 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("");
                 sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
-                sidebar.add("&fParty Leader: &6" + party.getLeader().getName());
-                sidebar.add("&fParty Members: &6" + party.getMaxPlayerLimit() + "&7/&e" + party.getMembers().size());
+                sidebar.add("&6Party");
+                sidebar.add("&fLeader: &6" + party.getLeader().getName());
+                sidebar.add("&fMembers: &6" + party.getMaxPlayerLimit() + "&7/&e" + party.getMembers().size());
                 sidebar.add("&7&m---------------------");
             }
         }

@@ -93,6 +93,9 @@ public class Duel
 
             MatchStatEditor.setDuelStats(winnerProfile, loserProfile, match.getLadder(), match.isRanked());
 
+            if (!match.isRanked() && (winnerProfile.getUnrankedWins() == ConfigManager.getInt("ranked.min-unranked-wins")))
+                winner.sendMessage(LanguageManager.getString("match.ranked-limit-reach"));
+
             if (match.isRanked())
             {
                 int elochange = ConfigManager.getInt("ranked.elo-change");
