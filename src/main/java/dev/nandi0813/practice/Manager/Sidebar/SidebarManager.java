@@ -21,6 +21,9 @@ public class SidebarManager
         Bukkit.getPluginManager().registerEvents(new SidebarListener(), practice);
     }
 
+    /**
+     * Enable the sidebar by loading it for all online players and starting the sidebar task.
+     */
     public void enable()
     {
         for (Player player : Bukkit.getOnlinePlayers())
@@ -28,17 +31,30 @@ public class SidebarManager
         sidebarTask.begin();
     }
 
+    /**
+     * Disable the plugin by unloading all the sidebars.
+     */
     public void disable()
     {
         for (Player player : Bukkit.getOnlinePlayers())
             unLoadSidebar(player);
     }
 
+    /**
+     * It creates a new Sidebar object for the player, and stores it in a HashMap
+     *
+     * @param player The player to load the sidebar for.
+     */
     public void loadSidebar(Player player)
     {
         playerSidebars.put(player, new Sidebar(player));
     }
 
+    /**
+     * It removes the sidebar from the player's scoreboard, clears the sidebar slot, and unregisters all teams
+     *
+     * @param player The player to unload the sidebar for.
+     */
     public void unLoadSidebar(Player player)
     {
         playerSidebars.remove(player);

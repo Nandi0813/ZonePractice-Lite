@@ -30,6 +30,12 @@ public class ArenaManager
         createArenaWorld();
     }
 
+    /**
+     * Return the arena with the given name, or null if no arena with that name exists.
+     *
+     * @param arenaName The name of the arena you want to get.
+     * @return The arena with the name that is passed in.
+     */
     public Arena getArena(String arenaName)
     {
         for (Arena arena : arenas)
@@ -42,18 +48,11 @@ public class ArenaManager
         return null;
     }
 
-    public Arena getArena(Arena arenaID)
-    {
-        for (Arena arena : arenas)
-        {
-            if (arena.equals(arenaID))
-            {
-                return arena;
-            }
-        }
-        return null;
-    }
-
+    /**
+     * This function returns an ArrayList of all the enabled arenas.
+     *
+     * @return An ArrayList of enabled arenas.
+     */
     public ArrayList<Arena> getEnabledArenas()
     {
         ArrayList<Arena> enabledArenas = new ArrayList<>();
@@ -62,6 +61,13 @@ public class ArenaManager
         return enabledArenas;
     }
 
+    /**
+     * Get all enabled arenas that are available and have the same build status as the parameter.
+     *
+     * @param build If true, only arenas that are built will be returned. If false, only arenas that are not built will be
+     * returned.
+     * @return An ArrayList of Arena objects.
+     */
     public ArrayList<Arena> getAvailableArenas(boolean build)
     {
         ArrayList<Arena> availableArenas = new ArrayList<>();
@@ -71,6 +77,15 @@ public class ArenaManager
         return availableArenas;
     }
 
+    /**
+     * "Get a random arena from the list of available arenas."
+     *
+     * The first line of the function is a comment. Comments are ignored by the compiler, but they are useful for
+     * explaining what the code does
+     *
+     * @param build If true, the arena will be built if it's not already built.
+     * @return A random arena from the list of available arenas.
+     */
     public Arena getRandomArena(boolean build)
     {
         Random random = new Random();
@@ -81,6 +96,11 @@ public class ArenaManager
             return null;
     }
 
+    /**
+     * If the folder exists, and there are files in the folder, then for each file in the folder, if the file is a file and
+     * ends with ".yml", then load the file as a YamlConfiguration, get the name of the arena from the file, and add a new
+     * Arena to the list of arenas
+     */
     public void loadArenas()
     {
         if (!folder.exists()) folder.mkdir();
@@ -99,6 +119,9 @@ public class ArenaManager
         }
     }
 
+    /**
+     * Create a new world called "arenas" with the world type "FLAT" and the generator settings "2;0;1;"
+     */
     public void createArenaWorld()
     {
         if (arenasWorld == null)

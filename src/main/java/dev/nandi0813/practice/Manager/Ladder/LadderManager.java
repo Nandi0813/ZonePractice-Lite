@@ -13,6 +13,12 @@ public class LadderManager
     @Getter private final List<Ladder> ladders = new ArrayList<>();
     @Getter private final List<String> disabledLadders = new ArrayList<>();
 
+    /**
+     * Return the ladder with the given name, or null if no ladder with that name exists.
+     *
+     * @param ladderName The name of the ladder you want to get.
+     * @return A ladder object
+     */
     public Ladder getLadder(String ladderName)
     {
         for (Ladder ladder : ladders)
@@ -25,18 +31,9 @@ public class LadderManager
         return null;
     }
 
-    public Ladder getLadder(Ladder ladderID)
-    {
-        for (Ladder ladder : ladders)
-        {
-            if (ladder.equals(ladderID))
-            {
-                return ladder;
-            }
-        }
-        return null;
-    }
-
+    /**
+     * It loads all the ladders into the ladders list
+     */
     public void loadLadders()
     {
         ladders.add(new Axe(("Axe")));

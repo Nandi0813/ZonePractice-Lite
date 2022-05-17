@@ -46,6 +46,9 @@ public class Queue
         this.range = ConfigManager.getConfig().getInt("ranked.elo-range-increase");
     }
 
+    /**
+     * It starts the queue
+     */
     public void startQueue()
     {
         QueueStartEvent queueStartEvent = new QueueStartEvent(this);
@@ -124,6 +127,11 @@ public class Queue
         }
     }
 
+    /**
+     * If there is an arena available, start a match with the player in the queue and the player who called the function
+     *
+     * @param queue The queue of the player you want to start a match with.
+     */
     public void startMatch(Queue queue)
     {
         Arena arena = SystemManager.getArenaManager().getRandomArena(ladder.isBuild());
@@ -148,6 +156,12 @@ public class Queue
 
     }
 
+    /**
+     * This function is called when the queue ends, and it cancels the queue runnable, and if the player is online, it
+     * sends them a message saying that the queue has ended
+     *
+     * @param foundMatch Whether or not the player was found a match.
+     */
     public void endQueue(boolean foundMatch)
     {
         QueueEndEvent queueEndEvent = new QueueEndEvent(this);

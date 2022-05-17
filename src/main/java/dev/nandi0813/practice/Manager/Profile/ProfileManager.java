@@ -16,6 +16,12 @@ public class ProfileManager
     @Getter private final HashMap<OfflinePlayer, Profile> profiles = new HashMap<>();
     private final File folder = new File(Practice.getInstance().getDataFolder() + "/profiles");
 
+    /**
+     * If the folder exists, and the folder is a directory, and the folder has files in it, then for each file in the
+     * folder, if the file is a file and the file ends with .yml, then load the file as a YamlConfiguration, get the UUID
+     * from the file, get the OfflinePlayer from the UUID, create a new Profile from the OfflinePlayer, and put the
+     * OfflinePlayer and Profile into the profiles HashMap
+     */
     public void loadProfiles()
     {
         if (!folder.exists()) folder.mkdir();
@@ -39,6 +45,9 @@ public class ProfileManager
         }
     }
 
+    /**
+     * It saves all the profiles
+     */
     public void saveProfiles()
     {
         for (Profile profile : profiles.values()) profile.saveData();

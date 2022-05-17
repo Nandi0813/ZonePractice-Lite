@@ -9,6 +9,11 @@ import org.bukkit.inventory.Inventory;
 public class PartyEventsGui
 {
 
+    /**
+     * It creates an inventory with two items, one for split fight and one for party ffa
+     *
+     * @return An Inventory object.
+     */
     public static Inventory getPartyEventGui()
     {
         Inventory gui = InventoryUtil.createInventory(LanguageManager.getString("party.game-gui.title"), 1);

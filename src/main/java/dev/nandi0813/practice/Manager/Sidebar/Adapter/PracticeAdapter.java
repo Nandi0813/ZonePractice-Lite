@@ -193,16 +193,6 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("&7&m---------------------");
             }
         }
-        /*
-        else if (profile.getStatus().equals(ProfileStatus.STAFFMODE))
-        {
-
-        }
-        else if (profile.getStatus().equals(ProfileStatus.EVENT))
-        {
-
-        }
-         */
 
         if (player.hasPermission("zonepractice.admin"))
         {

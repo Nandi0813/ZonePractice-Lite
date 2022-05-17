@@ -24,6 +24,9 @@ public class ProfileFile
         config = YamlConfiguration.loadConfiguration(file);
     }
 
+    /**
+     * It saves the player's profile data to the file
+     */
     public void setProfileData()
     {
         config.set("uuid", profile.getUuid().toString());
@@ -78,6 +81,9 @@ public class ProfileFile
         saveFile();
     }
 
+    /**
+     * It sets the default data for a player's stats
+     */
     public void setDefaultData()
     {
         for (Ladder ladder : SystemManager.getLadderManager().getLadders())
@@ -106,6 +112,9 @@ public class ProfileFile
         saveFile();
     }
 
+    /**
+     * It loads the player's profile data from the config file
+     */
     public void getProfileData()
     {
         for (String ladderName : config.getConfigurationSection("stats.elo").getKeys(false))
@@ -148,6 +157,11 @@ public class ProfileFile
         }
     }
 
+    /**
+     * It deletes a custom kit from the config
+     *
+     * @param ladder The ladder you want to delete the custom kit from.
+     */
     public void deleteCustomKit(Ladder ladder)
     {
         config.set("customkit." + ladder.getName().toLowerCase(), null);

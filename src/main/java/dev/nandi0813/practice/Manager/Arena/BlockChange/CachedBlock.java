@@ -36,6 +36,11 @@ public class CachedBlock
         saveChest(location);
     }
 
+    /**
+     * It saves the contents of a chest to an array
+     *
+     * @param loc The location of the chest
+     */
     private void saveChest(Location loc)
     {
         try
@@ -60,6 +65,10 @@ public class CachedBlock
         }
     }
 
+    /**
+     * If the location is not null and the old material is not null, set the block at the location to the old material and
+     * data, and update the block
+     */
     public void reset()
     {
         if (location != null && oldMaterial != null)

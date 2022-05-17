@@ -14,9 +14,14 @@ import java.util.List;
 public class Rollback
 {
 
+    /**
+     * It rolls back the arena by iterating through the list of blocks that were changed during the match, and then
+     * resetting them to their original state
+     *
+     * @param match The match that is being rolled back.
+     */
     public static void rollBackArena(Match match)
     {
-
         if (!Practice.getInstance().isEnabled())
         {
             quickRollbackArena(match);
@@ -116,9 +121,13 @@ public class Rollback
                 }.runTaskTimer(Practice.getInstance(), 0, 1);
             }
         }.runTaskTimer(Practice.getInstance(), 0, 1);
-
     }
 
+    /**
+     * It iterates through all the blocks that were changed during the match, and resets them to their original state
+     *
+     * @param match The match that you want to rollback.
+     */
     public static void quickRollbackArena(Match match)
     {
         Iterator<CachedBlock> iterator = new HashSet<>(match.getBlockChange()).iterator();

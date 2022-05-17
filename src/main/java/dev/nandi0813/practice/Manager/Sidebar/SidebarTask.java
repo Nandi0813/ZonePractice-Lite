@@ -13,6 +13,9 @@ public class SidebarTask extends BukkitRunnable implements Runnable
         this.runTaskTimerAsynchronously(Practice.getInstance(), 0, 5L);
     }
 
+    /**
+     * It updates all the sidebars
+     */
     @Override
     public void run()
     {

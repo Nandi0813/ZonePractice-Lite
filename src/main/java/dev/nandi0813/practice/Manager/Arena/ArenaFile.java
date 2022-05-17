@@ -26,6 +26,10 @@ public class ArenaFile
         config = YamlConfiguration.loadConfiguration(file);
     }
 
+    /**
+     * It saves the arena's name, build status, enabled status, ladder names, and corner and position locations to the
+     * config file
+     */
     public void setData()
     {
         config.set("name", arena.getName());
@@ -40,6 +44,9 @@ public class ArenaFile
         saveFile();
     }
 
+    /**
+     * It loads the data from the config file into the arena object
+     */
     public void getData()
     {
         arena.setBuild(config.getBoolean("build"));

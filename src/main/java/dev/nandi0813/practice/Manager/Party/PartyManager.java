@@ -23,6 +23,12 @@ public class PartyManager
         Bukkit.getPluginManager().registerEvents(new PartyListener(), Practice.getInstance());
     }
 
+    /**
+     * Get the party that the player is in.
+     *
+     * @param player The player you want to get the party of.
+     * @return The party that the player is in.
+     */
     public Party getParty(Player player)
     {
         for (Party party : parties)
@@ -31,6 +37,12 @@ public class PartyManager
         return null;
     }
 
+    /**
+     * Returns the party that is playing the given match.
+     *
+     * @param match The match you want to get the party from.
+     * @return The party that is associated with the match.
+     */
     public Party getParty(Match match)
     {
         for (Party party : parties)

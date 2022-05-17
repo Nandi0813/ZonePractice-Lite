@@ -29,6 +29,10 @@ public class Sidebar
         this.count = -1;
     }
 
+    /**
+     * If the title of the sidebar has changed, update it. If the lines of the sidebar have changed, update them. If the
+     * lines of the sidebar are empty, clear the sidebar
+     */
     public void update()
     {
         if (!objective.getDisplayName().equals(sidebarAdapter.getTitle(player)))
@@ -105,11 +109,21 @@ public class Sidebar
     }
 
 
+    /**
+     * If the player has a scoreboard, return it. If not, create one and return it
+     *
+     * @return A new scoreboard.
+     */
     public Scoreboard getOrCreateScoreboard()
     {
         return Bukkit.getServer().getScoreboardManager().getNewScoreboard();
     }
 
+    /**
+     * If the objective doesn't exist, create it. If it does exist, return it
+     *
+     * @return The Objective
+     */
     public Objective getOrCreateObjective()
     {
         Objective objective = scoreboard.getObjective("sidebar");
@@ -122,6 +136,14 @@ public class Sidebar
         return objective;
     }
 
+    /**
+     * "Get the team for the given line index, or create it if it doesn't exist."
+     *
+     * The first thing we do is get the team for the given line index. If it doesn't exist, we create it
+     *
+     * @param teamindex The index of the team.
+     * @return The team that is being returned is the team that is being created.
+     */
     public Team getOrCreateTeam(int teamindex)
     {
         Team team = scoreboard.getTeam("line-" + teamindex);
@@ -135,6 +157,11 @@ public class Sidebar
         return team;
     }
 
+    /**
+     * It removes a line from the scoreboard
+     *
+     * @param index The index of the team to remove.
+     */
     public void remove(int index)
     {
         scoreboard.resetScores(ChatColor.values()[index].toString() + ChatColor.RESET);
@@ -142,6 +169,12 @@ public class Sidebar
         team.unregister();
     }
 
+    /**
+     * It returns the name of the color at the given index
+     *
+     * @param index The index of the name in the list.
+     * @return The name of the color at the given index.
+     */
     public String getNameIndex(int index)
     {
         return ChatColor.values()[index].toString() + ChatColor.RESET;

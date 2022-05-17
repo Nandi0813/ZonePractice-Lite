@@ -43,6 +43,9 @@ public class Profile
         file = new ProfileFile(this);
     }
 
+    /**
+     * If the plugin is enabled, run the setProfileData function asynchronously, otherwise run it synchronously.
+     */
     public void saveData()
     {
         if (Practice.getInstance().isEnabled())
@@ -50,6 +53,10 @@ public class Profile
         else
             file.setProfileData();
     }
+
+    /**
+     * Get the data from the file, and run it asynchronously.
+     */
     public void getData()
     {
         Bukkit.getScheduler().runTaskAsynchronously(Practice.getInstance(), file::getProfileData);

@@ -44,12 +44,16 @@ public class Arena
     {
         file.setData();
     }
+
     public void deleteData()
     {
         SystemManager.getArenaManager().getArenaCuboids().remove(cuboid);
         file.getFile().delete();
     }
 
+    /**
+     * If the two corners are not null, create a new cuboid with the two corners and add it to the arena cuboids map.
+     */
     public void createCuboid()
     {
         if (corner1 != null && corner2 != null)
@@ -59,6 +63,13 @@ public class Arena
         }
     }
 
+    /**
+     * If position3 is not null, return position3. Otherwise, if position1 is not null, return position1. Otherwise, if
+     * position2 is not null, return position2. Otherwise, if corner1 is not null, return corner1. Otherwise, if corner2 is
+     * not null, return corner2. Otherwise, return null.
+     *
+     * @return A location
+     */
     public Location getAvailableLocation()
     {
         if (position3 != null) return position3;
@@ -69,6 +80,12 @@ public class Arena
         return null;
     }
 
+    /**
+     * If the arena has an available location, set the player's gamemode to creative, set the player's flying to true,
+     * teleport the player to the available location, and close the player's inventory
+     *
+     * @param player The player to teleport.
+     */
     public void teleport(Player player)
     {
         if (getAvailableLocation() != null)
@@ -81,6 +98,9 @@ public class Arena
         else player.sendMessage(StringUtil.CC("&cArena has no available location."));
     }
 
+    /**
+     * It sets the build boolean to the opposite of what it was, clears the ladders list, and saves the data
+     */
     public void changeBuildStatus()
     {
         setBuild(!build);

@@ -13,6 +13,13 @@ import java.util.Set;
 public class CornerUtil
 {
 
+    /**
+     * It sets the arena corners
+     *
+     * @param arenaName The name of the arena you want to set the corners for.
+     * @param player The player who is setting the arena corners.
+     * @param corner 1 or 2
+     */
     public static void setArenaCorners(String arenaName, Player player, int corner)
     {
         Arena arena = SystemManager.getArenaManager().getArena(arenaName);

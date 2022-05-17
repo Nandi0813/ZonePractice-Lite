@@ -13,6 +13,12 @@ import java.util.List;
 public class ArenaUtil
 {
 
+    /**
+     * This function returns a list of strings that are the names of the ladders in the given arena.
+     *
+     * @param arena The arena you want to get the ladders from.
+     * @return A list of strings containing the names of the ladders in the arena.
+     */
     public static List<String> getLadderNames(Arena arena)
     {
         List<String> ladderStrings = new ArrayList<>();
@@ -20,6 +26,13 @@ public class ArenaUtil
         return ladderStrings;
     }
 
+    /**
+     * If the arena is disabled, check if all the corners and positions are set, if they are, enable the arena. If the
+     * arena is enabled, check if there's a match in the arena, if there isn't, disable the arena
+     *
+     * @param player The player who is changing the arena's status.
+     * @param arena The arena you want to change the status of.
+     */
     public static void changeStatus(Player player, Arena arena)
     {
         if (!arena.isEnabled())
@@ -50,6 +63,12 @@ public class ArenaUtil
         }
     }
 
+    /**
+     * It sets the spawn location, disables the day/night cycle, disables mob spawning, disables death messages, and
+     * disables fire spread
+     *
+     * @param world The world you want to set the gamerules for.
+     */
     public static void setGamerules(World world)
     {
         world.setSpawnLocation(0, 60, 0);
