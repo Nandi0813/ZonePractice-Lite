@@ -49,4 +49,4 @@ show-player: 5 # The leaderboard will show the first this many player.
 # World settings
 world-settings:
   cancel-weather: true
-  remover-arrows: true
+  remove-arrows: true

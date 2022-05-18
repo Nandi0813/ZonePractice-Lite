@@ -12,7 +12,7 @@ public class ProjectileLaunch implements Listener
     @EventHandler
     public void onProjHit(ProjectileHitEvent e)
     {
-        if (ConfigManager.getBoolean("world-settings.remover-arrows"))
+        if (ConfigManager.getBoolean("world-settings.remove-arrows"))
         {
             if ((e.getEntity() instanceof Arrow))
                 e.getEntity().remove();
