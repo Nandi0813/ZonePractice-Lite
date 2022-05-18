@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Listener;
 
+import dev.nandi0813.practice.Manager.File.ConfigManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -10,19 +11,24 @@ public class WeatherChange implements Listener
 {
 
     @EventHandler(priority= EventPriority.HIGHEST)
-    public void onWeatherChange(WeatherChangeEvent event)
+    public void onWeatherChange(WeatherChangeEvent e)
     {
-
-        boolean rain = event.toWeatherState();
-        if(rain) event.setCancelled(true);
+        if (ConfigManager.getBoolean("world-settings.cancel-weather"))
+        {
+            boolean rain = e.toWeatherState();
+            if (rain) e.setCancelled(true);
+        }
     }
 
     @EventHandler(priority=EventPriority.HIGHEST)
-    public void onThunderChange(ThunderChangeEvent event)
+    public void onThunderChange(ThunderChangeEvent e)
     {
-        boolean storm = event.toThunderState();
-        if(storm)
-            event.setCancelled(true);
+        if (ConfigManager.getBoolean("world-settings.cancel-weather"))
+        {
+            boolean storm = e.toThunderState();
+            if (storm)
+                e.setCancelled(true);
+        }
     }
 
 }

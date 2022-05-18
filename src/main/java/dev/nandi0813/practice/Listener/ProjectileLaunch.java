@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Listener;
 
+import dev.nandi0813.practice.Manager.File.ConfigManager;
 import org.bukkit.entity.Arrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,8 +12,11 @@ public class ProjectileLaunch implements Listener
     @EventHandler
     public void onProjHit(ProjectileHitEvent e)
     {
-        if ((e.getEntity() instanceof Arrow))
-            e.getEntity().remove();
+        if (ConfigManager.getBoolean("world-settings.remover-arrows"))
+        {
+            if ((e.getEntity() instanceof Arrow))
+                e.getEntity().remove();
+        }
     }
 
 }

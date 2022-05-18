@@ -30,7 +30,9 @@ public class SpawnInventoryListener implements Listener
 
         if (item != null && profile.getStatus().equals(ProfileStatus.LOBBY) && party == null)
         {
-            e.setCancelled(true);
+            if (!player.hasPermission("zonepractice.admin"))
+                e.setCancelled(true);
+
             if (action.equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR))
             {
                 if (item.equals(SpawnInventory.getUnrankedItem()))
