@@ -1,3 +1,4 @@
+notify-updates: true
 # Knockback modifier - it depends on the hit delay very much. You should test what is the optimal for you.
 knockback:
   combo:
@@ -32,6 +33,7 @@ match-settings:
   start-countdown: 5 # Countdown when the match starts.
   after-countdown: 3 # After the match is over this countdown start, and when it's over the players teleport back to lobby.
   remove-empty-bottle: true # Removes empty potion bottles after the player use it.
+  hide-other-spectators: true
   enderpearl:
     cooldown: 13 # Sec
   party:
@@ -49,4 +51,4 @@ show-player: 5 # The leaderboard will show the first this many player.
 # World settings
 world-settings:
   cancel-weather: true
-  remover-arrows: true
+  remove-arrows: true

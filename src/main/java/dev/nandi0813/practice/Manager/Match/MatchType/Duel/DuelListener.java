@@ -59,7 +59,7 @@ public class DuelListener implements Listener
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.DUEL))
         {
-            match.removePlayer(player);
+            match.removePlayer(player, false);
 
             // Stop the match at the stating countdown
             if (match.getStartCountdown().isRunning())

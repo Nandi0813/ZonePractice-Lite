@@ -66,7 +66,7 @@ public class PartyFFAListener implements Listener
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA))
         {
-            match.removePlayer(player);
+            match.removePlayer(player, false);
             match.getPlayers().remove(player);
 
             PartyFFA.killPlayer(match, player, false);

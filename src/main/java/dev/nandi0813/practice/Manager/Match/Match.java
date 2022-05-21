@@ -5,6 +5,7 @@ import dev.nandi0813.practice.Event.MatchStartEvent;
 import dev.nandi0813.practice.Manager.Arena.Arena;
 import dev.nandi0813.practice.Manager.Arena.BlockChange.CachedBlock;
 import dev.nandi0813.practice.Manager.Arena.BlockChange.Rollback;
+import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
@@ -132,15 +133,16 @@ public class Match
     {
         // Remove match players
         for (Player player : players)
-            removePlayer(player);
+            removePlayer(player, false);
 
         resetMap();
 
         status = MatchStatus.OLD;
 
         // Remove spectators
-        for (int i = 0; i < spectators.size(); i++)
-            removePlayer(spectators.get(i));
+        for (Player spectator : spectators)
+            removePlayer(spectator, false);
+        spectators.clear();
 
         for (Chunk chunk : gameArena.getCuboid().getChunks())
             chunk.unload();
@@ -231,6 +233,20 @@ public class Match
         player.teleport(gameArena.getPosition3());
         SystemManager.getInventoryManager().getSpectatorInventory().setSpectatorInventory(player);
 
+        for (Player spectator : spectators)
+        {
+            if (ConfigManager.getBoolean("match-settings.hide-other-spectators"))
+            {
+                spectator.hidePlayer(player);
+                player.hidePlayer(spectator);
+            }
+            else
+            {
+                spectator.showPlayer(player);
+                player.showPlayer(spectator);
+            }
+        }
+
         if (!player.hasPermission("zonepractice.spectate.silent"))
             sendMessage(LanguageManager.getString("match.spectator-join").replaceAll("%player%", player.getName()), true);
     }
@@ -240,7 +256,7 @@ public class Match
      *
      * @param player The player to remove from the match.
      */
-    public void removePlayer(Player player)
+    public void removePlayer(Player player, boolean removeSpectator)
     {
         Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
 
@@ -250,7 +266,8 @@ public class Match
             if (!status.equals(MatchStatus.OLD) && profile.getStatus().equals(ProfileStatus.SPECTATE) && !player.hasPermission("zonepractice.spectate.silent"))
                 sendMessage(LanguageManager.getString("match.spectator-leave").replaceAll("%player%", player.getName()), true);
 
-            spectators.remove(player);
+            if (removeSpectator)
+                spectators.remove(player);
 
             for (Player onlinePlayer : Bukkit.getOnlinePlayers())
                 player.showPlayer(onlinePlayer);

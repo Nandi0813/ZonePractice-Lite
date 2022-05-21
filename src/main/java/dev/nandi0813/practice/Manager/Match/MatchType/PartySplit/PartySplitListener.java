@@ -100,7 +100,7 @@ public class PartySplitListener implements Listener
         {
             match.sendMessage(LanguageManager.getString("match.partysplit.player-left").replaceAll("%player%", player.getName()), true);
 
-            match.removePlayer(player);
+            match.removePlayer(player, false);
             match.getPlayers().remove(player);
             match.getAlivePlayers().remove(player);
 

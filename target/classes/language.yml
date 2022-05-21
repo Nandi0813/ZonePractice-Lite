@@ -224,7 +224,6 @@ gui:
           - "&ewhen the game starts."
           - ""
           - "%effects%"
-          - ""
   end-match-inventory:
     title: "&8Inventory of %player%"
     health-item-name: "&a20.0/%health% ♡"

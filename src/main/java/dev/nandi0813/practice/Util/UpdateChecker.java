@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Util;
 
+import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Practice;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -41,12 +42,15 @@ public class UpdateChecker
 
     public static void check(Practice practice)
     {
-        new UpdateChecker(practice, 101928).getVersion(version ->
+        if (ConfigManager.getBoolean("notify-updates"))
         {
-            if (!practice.getDescription().getVersion().equals(version))
-                Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&',
-                        "&aThere is a new update available for &6ZonePractice Lite&a.\n&aYou can download it from: https://www.spigotmc.org/resources/zonepractice-lite-the-free-practice-plugin-1v1-parties-build-fights-and-more.101928/"));
-        });
+            new UpdateChecker(practice, 101928).getVersion(version ->
+            {
+                if (!practice.getDescription().getVersion().equals(version))
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&',
+                            "&aThere is a new update available for &6ZonePractice Lite&a.\n&aYou can download it from: https://www.spigotmc.org/resources/zonepractice-lite-the-free-practice-plugin-1v1-parties-build-fights-and-more.101928/"));
+            });
+        }
     }
 
 }

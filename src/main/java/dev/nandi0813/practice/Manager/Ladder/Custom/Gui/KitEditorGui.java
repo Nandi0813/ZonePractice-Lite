@@ -10,6 +10,7 @@ import dev.nandi0813.practice.Util.InventoryUtil;
 import dev.nandi0813.practice.Util.ItemUtil;
 import dev.nandi0813.practice.Util.StringUtil;
 import lombok.Getter;
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -88,7 +89,7 @@ public class KitEditorGui
 
         if (ladder.getEffects().size() > 0)
             for (PotionEffect potionEffect : ladder.getEffects())
-                effectList.add("&d" + potionEffect.getType().getName() + " " + (potionEffect.getAmplifier()+1) + " &7for " + StringUtil.formatMillisecondsToMinutes((potionEffect.getDuration()/20)* 1000L));
+                effectList.add("&d" + getPotionEffectNormalName(potionEffect.getType().getName()) + " " + (potionEffect.getAmplifier()+1) + " &7for " + StringUtil.formatMillisecondsToMinutes((potionEffect.getDuration()/20)* 1000L));
         else effectList.add("&7This ladder has no effects.");
 
         for (String line : LanguageManager.getList("gui.kit-editor.editor.effect-item.lore"))
@@ -103,6 +104,11 @@ public class KitEditorGui
         }
 
         return ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.effect-item.name"), Material.POTION, Short.valueOf("8233"), lore);
+    }
+
+    public static String getPotionEffectNormalName(String base)
+    {
+        return WordUtils.capitalize(base.replaceAll("_", "").toLowerCase());
     }
 
 }

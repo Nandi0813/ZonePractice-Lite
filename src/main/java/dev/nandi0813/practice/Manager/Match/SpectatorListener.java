@@ -121,7 +121,7 @@ public class SpectatorListener implements Listener
 
             if (match != null && item.equals(SpectatorInventory.getLeaveItemSpectate()))
             {
-                match.removePlayer(player);
+                match.removePlayer(player, true);
             }
         }
     }
@@ -210,7 +210,7 @@ public class SpectatorListener implements Listener
         if (profile.getStatus().equals(ProfileStatus.SPECTATE))
         {
             Match match = SystemManager.getMatchManager().getLiveMatchBySpectator(player);
-            match.removePlayer(player);
+            match.removePlayer(player, true);
         }
     }
 

@@ -38,7 +38,7 @@ public class Sidebar
         if (!objective.getDisplayName().equals(sidebarAdapter.getTitle(player)))
             objective.setDisplayName(sidebarAdapter.getTitle(player));
 
-        if (!sidebarAdapter.getLines(player).isEmpty())
+        if (sidebarAdapter.getLines(player) != null && !sidebarAdapter.getLines(player).isEmpty())
         {
             player.setScoreboard(scoreboard);
 
@@ -102,7 +102,6 @@ public class Sidebar
         }
         else
         {
-            sidebarAdapter.getLines(player).clear();
             player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
