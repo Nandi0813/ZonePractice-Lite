@@ -7,6 +7,8 @@ import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class ArenaLadderArg
 {
 
@@ -24,10 +26,17 @@ public class ArenaLadderArg
 
                     if (arena != null)
                     {
+                        List<String> ladderNames = ArenaUtil.getLadderNames(arena);
+
                         player.sendMessage(StringUtil.CC("&7&m-----------------------------------"));
                         player.sendMessage(StringUtil.CC(" &7» &3" + arena.getName() + " &7arena ladders:"));
                         player.sendMessage("");
-                        player.sendMessage(StringUtil.CC(" &b" + ArenaUtil.getLadderNames(arena)));
+
+                        if (ladderNames.isEmpty())
+                            player.sendMessage(StringUtil.CC(" &cNULL"));
+                        else
+                            player.sendMessage(StringUtil.CC(" &b" + ladderNames.toString().replace("[", "").replace("]", "")));
+
                         player.sendMessage(StringUtil.CC("&7&m-----------------------------------"));
                     }
                     else

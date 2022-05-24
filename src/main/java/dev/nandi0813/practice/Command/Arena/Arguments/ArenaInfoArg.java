@@ -7,6 +7,8 @@ import dev.nandi0813.practice.Util.ClickableMessageUtil;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class ArenaInfoArg
 {
 
@@ -19,15 +21,22 @@ public class ArenaInfoArg
 
             if (arena != null)
             {
+                List<String> ladderNames = ArenaUtil.getLadderNames(arena);
+
                 player.sendMessage(StringUtil.CC("&7&m-----------------------------------"));
                 player.sendMessage(StringUtil.CC(" &7» &3Arena: &b" + arena.getName()));
                 player.sendMessage("");
-                player.sendMessage(StringUtil.CC(" &7» &3Build: &b" + StringUtil.getStatus(arena.isBuild())));
-                player.sendMessage(StringUtil.CC(" &7» &3Ladders: &b" + ArenaUtil.getLadderNames(arena)));
+                player.sendMessage(StringUtil.CC(" &7» &3Build: &b" + StringUtil.getStatus(arena.isBuild()) + "d"));
+
+                if (ladderNames.isEmpty())
+                    player.sendMessage(StringUtil.CC(" &7» &3Ladders: &cNULL"));
+                else
+                    player.sendMessage(StringUtil.CC(" &7» &3Ladders: &b" + ArenaUtil.getLadderNames(arena).toString().replace("[", "").replace("]", "")));
+
                 player.sendMessage("");
                 if (arena.getCorner1() != null)
                 {
-                    player.sendMessage(StringUtil.CC(" &7» &3Corner 1: &b" + arena.getCorner1().getWorld().getName() + ", " + arena.getCorner1().getX() + ", " + arena.getCorner1().getY() + ", " + arena.getCorner1().getZ()));
+                    player.sendMessage(StringUtil.CC(" &7» &3Corner 1: &b" + Math.round(arena.getCorner1().getX()) + ", " + Math.round(arena.getCorner1().getY()) + ", " + Math.round(arena.getCorner1().getZ())));
                 }
                 else
                 {
@@ -35,7 +44,7 @@ public class ArenaInfoArg
                 }
                 if (arena.getCorner2() != null)
                 {
-                    player.sendMessage(StringUtil.CC(" &7» &3Corner 2: &b" + arena.getCorner2().getWorld().getName() + ", " + arena.getCorner2().getX() + ", " + arena.getCorner2().getY() + ", " + arena.getCorner2().getZ()));
+                    player.sendMessage(StringUtil.CC(" &7» &3Corner 2: &b" + Math.round(arena.getCorner2().getX()) + ", " + Math.round(arena.getCorner2().getY()) + ", " + Math.round(arena.getCorner2().getZ())));
                 }
                 else
                 {
@@ -44,7 +53,7 @@ public class ArenaInfoArg
                 player.sendMessage("");
                 if (arena.getPosition1() != null)
                 {
-                    ClickableMessageUtil.sendClickableMessage(player, " &7» &3Player 1 Position: &b" + arena.getPosition1().getWorld().getName() + ", " + Math.ceil(arena.getPosition1().getX()) + ", " + Math.ceil(arena.getPosition1().getY()) + ", " + Math.ceil(arena.getPosition1().getZ()), "/arena teleport " + arenaName + " 1", "&aTeleport to location.");
+                    ClickableMessageUtil.sendClickableMessage(player, " &7» &3Player 1 Position: &b" + Math.round(arena.getPosition1().getX()) + ", " + Math.round(arena.getPosition1().getY()) + ", " + Math.round(arena.getPosition1().getZ()), "/arena teleport " + arenaName + " 1", "&aTeleport to location.");
                 }
                 else
                 {
@@ -52,7 +61,7 @@ public class ArenaInfoArg
                 }
                 if (arena.getPosition2() != null)
                 {
-                    ClickableMessageUtil.sendClickableMessage(player, " &7» &3Player 2 Position: &b" + arena.getPosition2().getWorld().getName() + ", " + Math.ceil(arena.getPosition2().getX()) + ", " + Math.ceil(arena.getPosition2().getY()) + ", " + Math.ceil(arena.getPosition2().getZ()), "/arena teleport " + arenaName + " 2", "&aTeleport to location.");
+                    ClickableMessageUtil.sendClickableMessage(player, " &7» &3Player 2 Position: &b" + Math.round(arena.getPosition2().getX()) + ", " + Math.round(arena.getPosition2().getY()) + ", " + Math.round(arena.getPosition2().getZ()), "/arena teleport " + arenaName + " 2", "&aTeleport to location.");
                 }
                 else
                 {
@@ -60,14 +69,14 @@ public class ArenaInfoArg
                 }
                 if (arena.getPosition3() != null)
                 {
-                    ClickableMessageUtil.sendClickableMessage(player, " &7» &3Spectator Position: &b" + arena.getPosition3().getWorld().getName() + ", " + Math.ceil(arena.getPosition3().getX()) + ", " + Math.ceil(arena.getPosition3().getY()) + ", " + Math.ceil(arena.getPosition3().getZ()), "/arena teleport " + arenaName + " 3", "&aTeleport to location.");
+                    ClickableMessageUtil.sendClickableMessage(player, " &7» &3Spectator Position: &b" + Math.round(arena.getPosition3().getX()) + ", " + Math.round(arena.getPosition3().getY()) + ", " + Math.round(arena.getPosition3().getZ()), "/arena teleport " + arenaName + " 3", "&aTeleport to location.");
                 }
                 else
                 {
                     player.sendMessage(StringUtil.CC(" &7» &3Spectator Position: &cnull"));
                 }
                 player.sendMessage("");
-                player.sendMessage(StringUtil.CC(" &7» &3Status: &b" + StringUtil.getStatus(arena.isEnabled())));
+                player.sendMessage(StringUtil.CC(" &7» &3Status: &b" + StringUtil.getStatus(arena.isEnabled()) + "d"));
                 player.sendMessage(StringUtil.CC("&7&m-----------------------------------"));
             }
             else

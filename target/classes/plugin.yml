@@ -1,5 +1,5 @@
 name: ZonePracticeLite
-version: '2.24'
+version: '2.31'
 main: dev.nandi0813.practice.Practice
 authors: [ Nandi0813 ]
 depend: [ ProtocolLib ]
