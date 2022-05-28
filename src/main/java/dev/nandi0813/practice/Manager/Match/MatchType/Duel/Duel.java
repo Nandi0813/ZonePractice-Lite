@@ -80,7 +80,9 @@ public class Duel
                             for (Player spectator : match.getSpectators())
                                 if (!spectator.hasPermission("zonepractice.spectate.silent"))
                                     spectators.add(spectator.getName());
-                            player.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', line.replaceAll("%size%", String.valueOf(spectators.size())).replaceAll("%spectators%", spectators.toString().replace("[", "").replace("]", ""))));
+
+                            if (!spectators.isEmpty())
+                                player.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', line.replaceAll("%size%", String.valueOf(spectators.size())).replaceAll("%spectators%", spectators.toString().replace("[", "").replace("]", ""))));
                         }
                     }
                     else

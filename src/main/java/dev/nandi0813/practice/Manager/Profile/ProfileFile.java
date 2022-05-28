@@ -121,7 +121,7 @@ public class ProfileFile
         for (String ladderName : config.getConfigurationSection("stats.elo").getKeys(false))
         {
             Ladder ladder = SystemManager.getLadderManager().getLadder(ladderName);
-            if (ladder != null)
+            if (ladder != null && ladder.isRanked() && config.isSet("stats.elo." + ladder.getName()))
                 profile.getElo().put(ladder, config.getInt("stats.elo." + ladder.getName()));
         }
 

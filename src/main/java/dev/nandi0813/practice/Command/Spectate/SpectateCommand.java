@@ -48,19 +48,24 @@ public class SpectateCommand implements CommandExecutor
 
                             if (targetProfile.getStatus().equals(ProfileStatus.MATCH))
                             {
-                                match.addSpectator(player);
+                                if (!match.getSpectators().contains(player))
+                                {
+                                    match.addSpectator(player);
+                                }
+                                else
+                                    player.sendMessage(LanguageManager.getString("spectate-command.already-spectating-match"));
                             }
                             else
-                                player.sendMessage(StringUtil.CC("&cPlayer isn't in match."));
+                                player.sendMessage(LanguageManager.getString("spectate-command.player-not-in-match"));
                         }
                         else
-                            player.sendMessage(StringUtil.CC("&cYou can't spectate yourself."));
+                            player.sendMessage(LanguageManager.getString("spectate-command.cant-spec-yourself"));
                     }
                     else
-                        player.sendMessage(StringUtil.CC("&cPlayer isn't online."));
+                        player.sendMessage(LanguageManager.getString("spectate-command.player-not-online"));
                 }
                 else
-                    player.sendMessage(StringUtil.CC("&cYou can't spectate anyone right now."));
+                    player.sendMessage(LanguageManager.getString("spectate-command.cant-spectate"));
             }
 
         }

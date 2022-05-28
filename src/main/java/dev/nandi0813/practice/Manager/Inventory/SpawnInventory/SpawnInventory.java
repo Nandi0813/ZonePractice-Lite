@@ -47,7 +47,6 @@ public class SpawnInventory
     public void setInventory(Player player, boolean teleport)
     {
         Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        profile.setStatus(ProfileStatus.LOBBY);
 
         PlayerUtil.setPlayerData(player, false, true);
 
@@ -67,6 +66,8 @@ public class SpawnInventory
 
         player.updateInventory();
         if (ServerManager.getLobby() != null && teleport) player.teleport(ServerManager.getLobby());
+
+        profile.setStatus(ProfileStatus.LOBBY);
     }
 
 }

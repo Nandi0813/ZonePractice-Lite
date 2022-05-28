@@ -59,7 +59,7 @@ public class Profile
      */
     public void getData()
     {
-        Bukkit.getScheduler().runTaskAsynchronously(Practice.getInstance(), file::getProfileData);
+        file.getProfileData();
     }
 
 }

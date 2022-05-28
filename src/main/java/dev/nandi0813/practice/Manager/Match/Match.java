@@ -104,14 +104,6 @@ public class Match
         for (Chunk chunk : gameArena.getCuboid().getChunks())
             chunk.load();
 
-        // Hide players
-        for (Player onlinePlayer : Bukkit.getOnlinePlayers())
-        {
-            for (Player matchPlayer : players)
-                if (!players.contains(onlinePlayer))
-                    matchPlayer.hidePlayer(onlinePlayer);
-        }
-
         for (Player player : players)
         {
             if (type.equals(MatchType.DUEL))
@@ -128,6 +120,7 @@ public class Match
 
         roundManager.startRound();
     }
+
 
     public void endMatch()
     {
@@ -222,30 +215,8 @@ public class Match
     {
         spectators.add(player);
 
-        // Hide spectator from match players
-        for (Player matchPlayer : players)
-            matchPlayer.hidePlayer(player);
-
-        for (Player onlinePlayer : Bukkit.getOnlinePlayers())
-            if (!players.contains(onlinePlayer))
-                player.hidePlayer(onlinePlayer);
-
-        player.teleport(gameArena.getPosition3());
         SystemManager.getInventoryManager().getSpectatorInventory().setSpectatorInventory(player);
-
-        for (Player spectator : spectators)
-        {
-            if (ConfigManager.getBoolean("match-settings.hide-other-spectators"))
-            {
-                spectator.hidePlayer(player);
-                player.hidePlayer(spectator);
-            }
-            else
-            {
-                spectator.showPlayer(player);
-                player.showPlayer(spectator);
-            }
-        }
+        player.teleport(gameArena.getPosition3());
 
         if (!player.hasPermission("zonepractice.spectate.silent"))
             sendMessage(LanguageManager.getString("match.spectator-join").replaceAll("%player%", player.getName()), true);
@@ -268,9 +239,6 @@ public class Match
 
             if (removeSpectator)
                 spectators.remove(player);
-
-            for (Player onlinePlayer : Bukkit.getOnlinePlayers())
-                player.showPlayer(onlinePlayer);
 
             SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, true);
         }

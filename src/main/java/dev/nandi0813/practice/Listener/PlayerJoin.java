@@ -32,17 +32,6 @@ public class PlayerJoin implements Listener
 
         SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, true);
 
-        for (Player onlinePlayer : Bukkit.getOnlinePlayers())
-        {
-            if (onlinePlayer != player)
-            {
-                Profile profile = SystemManager.getProfileManager().getProfiles().get(onlinePlayer);
-
-                if (profile.getStatus().equals(ProfileStatus.MATCH))
-                    onlinePlayer.hidePlayer(player);
-            }
-        }
-
         if (player.isOp())
             AdMessageUtil.sendAdMessagesToPlayer(player);
 

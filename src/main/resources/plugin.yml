@@ -42,6 +42,13 @@ permissions:
   zonepractice.stats:
     description: View other players statistics.
 
+  # Staff permissions
+  zonepractice.staff.vanish:
+    description: Player with the permission won't be visible for the players.
+    default: false
+  zonepractice.staff.vanish.bypass:
+    description: Bypass for the staff vanish permission.
+
   # Party permissions
   zonepractice.party.create:
     description: Create party.

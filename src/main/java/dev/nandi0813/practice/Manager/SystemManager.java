@@ -32,6 +32,7 @@ import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.Enderpearl.EnderpearlListener;
 import dev.nandi0813.practice.Util.EntityHider.EntityHider;
 import dev.nandi0813.practice.Util.EntityHider.EntityHiderListener;
+import dev.nandi0813.practice.Util.PlayerHider;
 import dev.nandi0813.practice.Util.UpdateChecker;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -113,6 +114,7 @@ public class SystemManager
         pm.registerEvents(new EntityHiderListener(), practice);
         pm.registerEvents(new PlayerCommandPreprocess(), practice);
         pm.registerEvents(new CustomLadderListener(), practice);
+        pm.registerEvents(new PlayerHider(), practice);
     }
 
     public static void registerPacketListener()

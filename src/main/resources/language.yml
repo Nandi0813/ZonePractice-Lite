@@ -56,6 +56,13 @@ party:
     - " &f/%label% disband &8- &7Disband party."
     - "&7&m------------------------------------------------"
 
+spectate-command:
+  cant-spectate: "&cYou can't spectate anyone right now."
+  player-not-online: "&cPlayer isn't online."
+  cant-spec-yourself: "&cYou can't spectate yourself."
+  player-not-in-match: "&cPlayer isn't in match."
+  already-spectating-match: "&cYou are already spectating this match."
+
 sidebar:
   title: "&6&lZONE PRACTICE"
   ip-line: "&6play.zonepractice.com"
