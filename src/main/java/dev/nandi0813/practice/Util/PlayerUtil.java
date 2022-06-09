@@ -14,7 +14,6 @@ public class PlayerUtil
 
     public static void setPlayerData(Player player, boolean fly, boolean entityCollide)
     {
-        player.closeInventory();
         player.setFallDistance(0);
         player.setHealth(20);
         player.setExp(0);
