@@ -115,6 +115,7 @@ public class SystemManager
         pm.registerEvents(new PlayerCommandPreprocess(), practice);
         pm.registerEvents(new CustomLadderListener(), practice);
         pm.registerEvents(new PlayerHider(), practice);
+        pm.registerEvents(new MultiGameListener(), practice);
     }
 
     public static void registerPacketListener()

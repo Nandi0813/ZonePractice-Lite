@@ -4,6 +4,7 @@ import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Profile.Profile;
+import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
@@ -25,84 +26,88 @@ public class LeaderboardCommand implements CommandExecutor
         if (sender instanceof Player)
         {
             Player player = (Player) sender;
+            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
 
-            if (args.length == 2 && (args[1].equalsIgnoreCase("elo") || args[1].equalsIgnoreCase("win")))
+            if (!profile.getStatus().equals(ProfileStatus.OFFLINE))
             {
-                Ladder ladder = SystemManager.getLadderManager().getLadder(args[0]);
-
-                if (ladder != null)
+                if (args.length == 2 && (args[1].equalsIgnoreCase("elo") || args[1].equalsIgnoreCase("win")))
                 {
-                    if (ladder.isEnabled())
-                    {
-                        if (args[1].equalsIgnoreCase("elo"))
-                        {
-                            createLeaderboard(ladder, "elo", result ->
-                            {
-                                ArrayList<OfflinePlayer> topPlayers = new ArrayList<>();
-                                for (OfflinePlayer p : result.keySet())
-                                {
-                                    if (topPlayers.size() <= ConfigManager.getInt("show-player"))
-                                        topPlayers.add(p);
-                                    else
-                                        break;
-                                }
+                    Ladder ladder = SystemManager.getLadderManager().getLadder(args[0]);
 
-                                player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
-                                player.sendMessage(LanguageManager.getString("leaderboard.elo.title").replaceAll("%ladder%", ladder.getName()));
-                                player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
-                                for (int i = 0; i < ConfigManager.getInt("show-player"); i++)
+                    if (ladder != null)
+                    {
+                        if (ladder.isEnabled())
+                        {
+                            if (args[1].equalsIgnoreCase("elo"))
+                            {
+                                createLeaderboard(ladder, "elo", result ->
                                 {
-                                    if (topPlayers.size() > i)
+                                    ArrayList<OfflinePlayer> topPlayers = new ArrayList<>();
+                                    for (OfflinePlayer p : result.keySet())
                                     {
-                                        OfflinePlayer target = topPlayers.get(i);
-                                        player.sendMessage(LanguageManager.getString("leaderboard.elo.place-line")
-                                                .replaceAll("%place%", String.valueOf((i+1)))
-                                                .replaceAll("%player%", target.getName())
-                                                .replaceAll("%elo%", String.valueOf(result.get(target))));
+                                        if (topPlayers.size() <= ConfigManager.getInt("show-player"))
+                                            topPlayers.add(p);
+                                        else
+                                            break;
                                     }
-                                }
-                                player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
-                            });
+
+                                    player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
+                                    player.sendMessage(LanguageManager.getString("leaderboard.elo.title").replaceAll("%ladder%", ladder.getName()));
+                                    player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
+                                    for (int i = 0; i < ConfigManager.getInt("show-player"); i++)
+                                    {
+                                        if (topPlayers.size() > i)
+                                        {
+                                            OfflinePlayer target = topPlayers.get(i);
+                                            player.sendMessage(LanguageManager.getString("leaderboard.elo.place-line")
+                                                    .replaceAll("%place%", String.valueOf((i+1)))
+                                                    .replaceAll("%player%", target.getName())
+                                                    .replaceAll("%elo%", String.valueOf(result.get(target))));
+                                        }
+                                    }
+                                    player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
+                                });
+                            }
+                            else
+                            {
+                                createLeaderboard(ladder, "win", result ->
+                                {
+                                    ArrayList<OfflinePlayer> topPlayers = new ArrayList<>();
+                                    for (OfflinePlayer p : result.keySet())
+                                    {
+                                        if (topPlayers.size() <= ConfigManager.getInt("show-player"))
+                                            topPlayers.add(p);
+                                        else
+                                            break;
+                                    }
+
+                                    player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
+                                    player.sendMessage(LanguageManager.getString("leaderboard.win.title").replaceAll("%ladder%", ladder.getName()));
+                                    player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
+                                    for (int i = 0; i < ConfigManager.getInt("show-player"); i++)
+                                    {
+                                        if (topPlayers.size() > i)
+                                        {
+                                            OfflinePlayer target = topPlayers.get(i);
+                                            player.sendMessage(LanguageManager.getString("leaderboard.win.place-line")
+                                                    .replaceAll("%place%", String.valueOf((i+1)))
+                                                    .replaceAll("%player%", target.getName())
+                                                    .replaceAll("%wins%", String.valueOf(result.get(target))));
+                                        }
+                                    }
+                                    player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
+                                });
+                            }
                         }
                         else
-                        {
-                            createLeaderboard(ladder, "win", result ->
-                            {
-                                ArrayList<OfflinePlayer> topPlayers = new ArrayList<>();
-                                for (OfflinePlayer p : result.keySet())
-                                {
-                                    if (topPlayers.size() <= ConfigManager.getInt("show-player"))
-                                        topPlayers.add(p);
-                                    else
-                                        break;
-                                }
-
-                                player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
-                                player.sendMessage(LanguageManager.getString("leaderboard.win.title").replaceAll("%ladder%", ladder.getName()));
-                                player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
-                                for (int i = 0; i < ConfigManager.getInt("show-player"); i++)
-                                {
-                                    if (topPlayers.size() > i)
-                                    {
-                                        OfflinePlayer target = topPlayers.get(i);
-                                        player.sendMessage(LanguageManager.getString("leaderboard.win.place-line")
-                                                .replaceAll("%place%", String.valueOf((i+1)))
-                                                .replaceAll("%player%", target.getName())
-                                                .replaceAll("%wins%", String.valueOf(result.get(target))));
-                                    }
-                                }
-                                player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
-                            });
-                        }
+                            player.sendMessage(LanguageManager.getString("leaderboard.ladder-disabled"));
                     }
                     else
-                        player.sendMessage(LanguageManager.getString("leaderboard.ladder-disabled"));
+                        player.sendMessage(LanguageManager.getString("leaderboard.ladder-not-found"));
                 }
                 else
-                    player.sendMessage(LanguageManager.getString("leaderboard.ladder-not-found"));
+                    player.sendMessage(StringUtil.CC("&c/" + label + " <ladder> <elo/win>"));
             }
-            else
-                player.sendMessage(StringUtil.CC("&c/" + label + " <ladder> <elo/win>"));
         }
         return true;
     }

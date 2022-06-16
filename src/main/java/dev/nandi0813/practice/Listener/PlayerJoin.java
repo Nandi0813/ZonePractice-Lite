@@ -1,6 +1,6 @@
 package dev.nandi0813.practice.Listener;
 
-import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
+import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
@@ -30,7 +30,8 @@ public class PlayerJoin implements Listener
             SystemManager.getProfileManager().getProfiles().put(player, profile);
         }
 
-        SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, true);
+        if (!ConfigManager.getBoolean("multi-game-support"))
+            SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, true);
 
         if (player.isOp())
             AdMessageUtil.sendAdMessagesToPlayer(player);

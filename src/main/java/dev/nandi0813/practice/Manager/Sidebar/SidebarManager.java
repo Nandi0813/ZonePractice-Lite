@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Sidebar;
 
+import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -47,7 +48,8 @@ public class SidebarManager
      */
     public void loadSidebar(Player player)
     {
-        playerSidebars.put(player, new Sidebar(player));
+        if (ConfigManager.getBoolean("sidebar"))
+            playerSidebars.put(player, new Sidebar(player));
     }
 
     /**

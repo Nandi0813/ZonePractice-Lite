@@ -22,52 +22,55 @@ public class SpectateCommand implements CommandExecutor
         if (sender instanceof Player)
         {
             Player player = (Player) sender;
-            if (!player.hasPermission("zonepractice.spectate"))
+            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+
+            if (!profile.getStatus().equals(ProfileStatus.OFFLINE))
             {
-                player.sendMessage(LanguageManager.getString("no-permission"));
-                return false;
-            }
-
-            if (args.length != 1)
-                player.sendMessage(StringUtil.CC("&c/" + label + " <player>"));
-
-            else
-            {
-                Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-                Player target = Bukkit.getPlayer(args[0]);
-                Party party = SystemManager.getPartyManager().getParty(player);
-
-                if ((profile.getStatus().equals(ProfileStatus.LOBBY) || profile.getStatus().equals(ProfileStatus.SPECTATE)) && party == null)
+                if (!player.hasPermission("zonepractice.spectate"))
                 {
-                    if (target != null)
-                    {
-                        if (target != player)
-                        {
-                            Profile targetProfile = SystemManager.getProfileManager().getProfiles().get(target);
-                            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(target);
+                    player.sendMessage(LanguageManager.getString("no-permission"));
+                    return false;
+                }
 
-                            if (targetProfile.getStatus().equals(ProfileStatus.MATCH))
+                if (args.length != 1)
+                    player.sendMessage(StringUtil.CC("&c/" + label + " <player>"));
+
+                else
+                {
+                    Player target = Bukkit.getPlayer(args[0]);
+                    Party party = SystemManager.getPartyManager().getParty(player);
+
+                    if ((profile.getStatus().equals(ProfileStatus.LOBBY) || profile.getStatus().equals(ProfileStatus.SPECTATE)) && party == null)
+                    {
+                        if (target != null)
+                        {
+                            if (target != player)
                             {
-                                if (!match.getSpectators().contains(player))
+                                Profile targetProfile = SystemManager.getProfileManager().getProfiles().get(target);
+                                Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(target);
+
+                                if (targetProfile.getStatus().equals(ProfileStatus.MATCH))
                                 {
-                                    match.addSpectator(player);
+                                    if (!match.getSpectators().contains(player))
+                                    {
+                                        match.addSpectator(player);
+                                    }
+                                    else
+                                        player.sendMessage(LanguageManager.getString("spectate-command.already-spectating-match"));
                                 }
                                 else
-                                    player.sendMessage(LanguageManager.getString("spectate-command.already-spectating-match"));
+                                    player.sendMessage(LanguageManager.getString("spectate-command.player-not-in-match"));
                             }
                             else
-                                player.sendMessage(LanguageManager.getString("spectate-command.player-not-in-match"));
+                                player.sendMessage(LanguageManager.getString("spectate-command.cant-spec-yourself"));
                         }
                         else
-                            player.sendMessage(LanguageManager.getString("spectate-command.cant-spec-yourself"));
+                            player.sendMessage(LanguageManager.getString("spectate-command.player-not-online"));
                     }
                     else
-                        player.sendMessage(LanguageManager.getString("spectate-command.player-not-online"));
+                        player.sendMessage(LanguageManager.getString("spectate-command.cant-spectate"));
                 }
-                else
-                    player.sendMessage(LanguageManager.getString("spectate-command.cant-spectate"));
             }
-
         }
         return true;
     }
