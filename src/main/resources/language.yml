@@ -205,24 +205,19 @@ gui:
     editor:
       title: "&8Editing %ladderName% Kit"
       name-item: "&6&lEditing &eKit %ladderName%"
+      auto-equip-item-name: "&aThis is automatically equipped."
       save-item:
         name: "&a&lSave"
         lore:
           - ""
           - "&e&lClick here &eto save"
-          - "&ethe custom kit."
+          - "&ethe kit and go back to the menu."
       load-item:
         name: "&e&lLoad Default Kit"
         lore:
           - ""
           - "&e&lClick here &eto load the default"
           - "&ekit to your inventory."
-      cancel-item:
-        name: "&c&lCancel"
-        lore:
-          - ""
-          - "&e&lClick here &eto abort editing the"
-          - "&ekit, and return to the kit menu."
       effect-item:
         name: "&5Effects"
         lore:

@@ -52,3 +52,5 @@ show-player: 5 # The leaderboard will show the first this many player.
 world-settings:
   cancel-weather: true
   remove-arrows: true
+# Sidebar
+admin-sidebar: true # Show TPS or not

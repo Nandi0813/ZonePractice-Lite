@@ -60,17 +60,18 @@ public class CustomLadderListener implements Listener
                 if (!CustomLadderManager.getOpenedKit().containsKey(player))
                 {
                     e.setCancelled(true);
+
                     if (inventory.getSize() > slot)
                     {
-                        if (slot == 4)
+                        if (slot == 0)
                         {
                             KitEditorGui.openGui(player, ladder);
                         }
-                        else if (slot == 22 && profile.getCustomKits().containsKey(ladder))
+                        else if (slot == 2 && profile.getCustomKits().containsKey(ladder))
                         {
                             KitEditorGui.openGui(player, ladder);
                         }
-                        else if (slot == 31)
+                        else if (slot == 3)
                         {
                             profile.getCustomKits().remove(ladder);
                             profile.getFile().deleteCustomKit(ladder);
@@ -78,10 +79,7 @@ public class CustomLadderListener implements Listener
                             CustomLadderManager.getBackToSum().add(player);
                             KitSumGui.openGui(player, ladder);
                         }
-                    }
-                    else if (inventory.getSize() < slot)
-                    {
-                        if (e.getCurrentItem() != null && e.getCurrentItem().getType().equals(Material.ARROW))
+                        else if (slot == 8)
                         {
                             player.openInventory(KitSelectorGui.getGui());
                             KitSelectorGui.updateGui();
@@ -92,18 +90,13 @@ public class CustomLadderListener implements Listener
                 {
                     if (inventory.getSize() > slot && !action.equals(InventoryAction.DROP_ONE_CURSOR) && !action.equals(InventoryAction.DROP_ALL_CURSOR)) e.setCancelled(true);
 
-                    if (slot == 6 || slot == 8)
+                    if (slot == 8)
                     {
                         CustomLadderManager.getBackToSum().add(player);
                         KitSumGui.openGui(player, ladder);
                     }
                     else if (slot == 7)
                         player.getInventory().setContents(ladder.getInventory());
-                    else if ((20 <= slot && slot <= 26) || (29 <= slot && slot <= 35) || (38 <= slot && slot <= 44) || (47 <= slot && slot <= 53))
-                    {
-                        if (item != null && !item.getType().equals(Material.AIR) && !item.equals(KitEditorGui.getFillerItem()))
-                            player.setItemOnCursor(item);
-                    }
                 }
             }
         }

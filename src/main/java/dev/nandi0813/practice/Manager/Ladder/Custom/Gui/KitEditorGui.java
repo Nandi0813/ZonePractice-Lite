@@ -15,10 +15,12 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class KitEditorGui
 {
@@ -40,24 +42,30 @@ public class KitEditorGui
 
     public static Inventory buildGui(Ladder ladder)
     {
-        Inventory gui = InventoryUtil.createInventory(LanguageManager.getString("gui.kit-editor.editor.title").replaceAll("%ladderName%", ladder.getName()), 6);
+        Inventory gui = InventoryUtil.createInventory(LanguageManager.getString("gui.kit-editor.editor.title").replaceAll("%ladderName%", ladder.getName()), 1);
 
-        gui.setItem(0, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.name-item").replaceAll("%ladderName%", ladder.getName()), Material.NAME_TAG));
-        gui.setItem(6, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.save-item.name"), Material.WOOL, Short.valueOf("5"), LanguageManager.getList("gui.kit-editor.editor.save-item.lore")));
         gui.setItem(7, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.load-item.name"), Material.WOOL, Short.valueOf("4"), LanguageManager.getList("gui.kit-editor.editor.load-item.lore")));
-        gui.setItem(8, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.cancel-item.name"), Material.WOOL, Short.valueOf("14"), LanguageManager.getList("gui.kit-editor.editor.cancel-item.lore")));
+        gui.setItem(8, ItemUtil.createItem(LanguageManager.getString("gui.kit-editor.editor.save-item.name"), Material.WOOL, Short.valueOf("5"), LanguageManager.getList("gui.kit-editor.editor.save-item.lore")));
 
         // Frame
-        for (int i : new int[]{1,2,3,5,9,10,11,12,13,14,15,16,17,19,28,37,46})
+        for (int i : new int[]{4,6})
             gui.setItem(i, CustomLadderManager.getFillerItem());
 
-        gui.setItem(4, getEffectItem(ladder));
+        gui.setItem(5, getEffectItem(ladder));
 
         ArrayList<ItemStack> armorContent = new ArrayList<>(Arrays.asList(ladder.getArmor()));
-        for (int i : new int[]{18,27,36,45})
+        Collections.reverse(armorContent);
+        for (int i : new int[]{0,1,2,3})
         {
-            if (armorContent.get(Math.abs(i / 9 - 5)) != null)
-                gui.setItem(i, armorContent.get(Math.abs(i / 9 - 5)));
+            ItemStack armor = armorContent.get(i);
+            if (armor != null)
+            {
+                ItemMeta armorMeta = armor.getItemMeta();
+                armorMeta.setDisplayName(LanguageManager.getString("gui.kit-editor.editor.auto-equip-item-name"));
+                armor.setItemMeta(armorMeta);
+
+                gui.setItem(i, armor);
+            }
             else
                 gui.setItem(i, dummyItem);
         }

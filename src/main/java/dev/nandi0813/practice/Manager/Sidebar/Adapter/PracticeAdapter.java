@@ -1,5 +1,6 @@
 package dev.nandi0813.practice.Manager.Sidebar.Adapter;
 
+import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
@@ -194,7 +195,7 @@ public class PracticeAdapter implements SidebarAdapter
             }
         }
 
-        if (player.hasPermission("zonepractice.admin"))
+        if (ConfigManager.getBoolean("admin-sidebar") && player.hasPermission("zonepractice.admin"))
         {
             sidebar.add("&fTPS: &6" + TPSUtil.get1MinTPSRounded());
             sidebar.add("&7&m---------------------");
