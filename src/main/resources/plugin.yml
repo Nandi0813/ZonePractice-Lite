@@ -3,6 +3,7 @@ version: '${project.version}'
 main: dev.nandi0813.practice.Practice
 authors: [ Nandi0813 ]
 depend: [ ProtocolLib ]
+softdepend:  [ PlaceholderAPI ]
 commands:
   arena:
   ladder:

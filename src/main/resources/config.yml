@@ -1,7 +1,7 @@
 notify-updates: true
 # Multi game support means, that you can run multiple things in your server including the practice.
 # The plugin only uses the lobby (which you can set) and the arenas worlds.
-multi-game-support: true
+multi-game-support: false
 # Knockback modifier - it depends on the hit delay very much. You should test what is the optimal for you.
 knockback:
   combo:

@@ -32,6 +32,7 @@ import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.Enderpearl.EnderpearlListener;
 import dev.nandi0813.practice.Util.EntityHider.EntityHider;
 import dev.nandi0813.practice.Util.EntityHider.EntityHiderListener;
+import dev.nandi0813.practice.Util.PAPIExpansion;
 import dev.nandi0813.practice.Util.PlayerHider;
 import dev.nandi0813.practice.Util.UpdateChecker;
 import lombok.Getter;
@@ -67,6 +68,9 @@ public class SystemManager
 
         matchManager.startRankedTimer();
         UpdateChecker.check(practice);
+
+        // Register PAPI expansion
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) new PAPIExpansion().register();
     }
 
     public static void Disable()
