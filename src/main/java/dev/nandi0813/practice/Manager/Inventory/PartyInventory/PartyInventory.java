@@ -32,11 +32,12 @@ public class PartyInventory
     public void getInventory()
     {
         hostEventItem = (ItemStack) config.get("host-event.item");
-        infoItem = (ItemStack) config.get("info.item");
-        leaveItem = (ItemStack) config.get("leave.item");
-
         ItemUtil.hideItemFlags(hostEventItem);
+
+        infoItem = (ItemStack) config.get("info.item");
         ItemUtil.hideItemFlags(infoItem);
+
+        leaveItem = (ItemStack) config.get("leave.item");
         ItemUtil.hideItemFlags(leaveItem);
     }
 

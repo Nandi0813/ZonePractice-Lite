@@ -6,6 +6,7 @@ import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Server.ServerManager;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
+import dev.nandi0813.practice.Util.ItemUtil;
 import dev.nandi0813.practice.Util.PlayerUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -38,10 +39,19 @@ public class SpawnInventory
     public void getInventory()
     {
         unrankedItem = (ItemStack) config.get("unranked.item");
+        ItemUtil.hideItemFlags(unrankedItem);
+
         rankedItem = (ItemStack) config.get("ranked.item");
+        ItemUtil.hideItemFlags(rankedItem);
+
         partyItem = (ItemStack) config.get("party.item");
+        ItemUtil.hideItemFlags(partyItem);
+
         statsItem = (ItemStack) config.get("stats.item");
+        ItemUtil.hideItemFlags(statsItem);
+
         kiteditorItem = (ItemStack) config.get("kiteditor.item");
+        ItemUtil.hideItemFlags(kiteditorItem);
     }
 
     public void setInventory(Player player, boolean teleport)

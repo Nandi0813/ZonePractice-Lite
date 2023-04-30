@@ -4,6 +4,7 @@ import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
+import dev.nandi0813.practice.Util.ItemUtil;
 import dev.nandi0813.practice.Util.PlayerUtil;
 import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -31,6 +32,7 @@ public class SpectatorInventory
     public void getInventory()
     {
         leaveItemSpectate = (ItemStack) config.get("spectate.leave.item");
+        ItemUtil.hideItemFlags(leaveItemSpectate);
     }
 
     public void setSpectatorInventory(Player player)

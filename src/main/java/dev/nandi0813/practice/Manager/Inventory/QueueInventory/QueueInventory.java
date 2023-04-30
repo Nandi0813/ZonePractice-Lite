@@ -1,6 +1,7 @@
 package dev.nandi0813.practice.Manager.Inventory.QueueInventory;
 
 import dev.nandi0813.practice.Practice;
+import dev.nandi0813.practice.Util.ItemUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -28,6 +29,7 @@ public class QueueInventory
     public void getInventory()
     {
         leaveItem = (ItemStack) config.get("leave.item");
+        ItemUtil.hideItemFlags(leaveItem);
     }
 
     public void setQueueInventory(Player player)
