@@ -19,13 +19,6 @@ public class QueueManager
         Bukkit.getPluginManager().registerEvents(new QueueListener(), practice);
     }
 
-    public Queue getQueue(Queue queueID)
-    {
-        for (Queue queue : queues)
-            if (queue.equals(queueID)) return queue;
-        return null;
-    }
-
     public Queue getQueue(Player queuePlayer)
     {
         for (Queue queue : queues)

@@ -101,17 +101,21 @@ public class ItemUtil
 
     public static void hideItemFlags(ItemMeta itemMeta)
     {
+        itemMeta.spigot().setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
     }
 
     public static ItemStack hideItemFlags(ItemStack item)
     {
         ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.spigot().setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         item.setItemMeta(itemMeta);
         return item;
     }
