@@ -46,6 +46,8 @@ public class ProfileFile
         // Ladder win/lose stats
         for (Ladder ladder : Practice.getLadderManager().getLadders())
         {
+            if (!ladder.isEnabled()) continue;
+
             if (profile.getLadderUnRankedWins().get(ladder) != null)
                 config.set("stats.ladder-stats." + ladder.getName() + ".unranked.wins", profile.getLadderUnRankedWins().get(ladder));
             else
@@ -73,6 +75,8 @@ public class ProfileFile
         // Custom kits
         for (Ladder ladder : Practice.getLadderManager().getLadders())
         {
+            if (!ladder.isEnabled()) continue;
+
             if (profile.getCustomKits().containsKey(ladder) && profile.getCustomKits().get(ladder) != null)
                 config.set("customkit.ladder" + ladder.getId() + ".inventory", ItemSerializationUtil.itemStackArrayToBase64(profile.getCustomKits().get(ladder)));
         }
@@ -87,6 +91,8 @@ public class ProfileFile
     {
         for (Ladder ladder : Practice.getLadderManager().getLadders())
         {
+            if (!ladder.isEnabled()) continue;
+
             if (ladder.isRanked())
                 config.set("stats.elo." + ladder.getName(), ConfigManager.getInt("ranked.default-elo"));
         }
@@ -98,6 +104,8 @@ public class ProfileFile
 
         for (Ladder ladder : Practice.getLadderManager().getLadders())
         {
+            if (!ladder.isEnabled()) continue;
+
             config.set("stats.ladder-stats." + ladder.getName() + ".unranked.wins", 0);
             config.set("stats.ladder-stats." + ladder.getName() + ".unranked.losses", 0);
 
