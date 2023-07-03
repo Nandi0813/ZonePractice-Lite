@@ -5,7 +5,7 @@ import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,8 +21,8 @@ public class DuelListener implements Listener
         if (e.getEntity() instanceof Player)
         {
             Player player = (Player) e.getEntity();
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.DUEL))
             {
@@ -54,8 +54,8 @@ public class DuelListener implements Listener
     public void onPlayerQuit(PlayerQuitEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.DUEL))
         {

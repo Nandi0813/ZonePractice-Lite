@@ -1,14 +1,12 @@
 package dev.nandi0813.practice.Manager.Inventory.SpawnInventory;
 
 import dev.nandi0813.practice.Manager.File.LanguageManager;
-import dev.nandi0813.practice.Manager.Gui.RankedGui;
-import dev.nandi0813.practice.Manager.Gui.StatsGui;
-import dev.nandi0813.practice.Manager.Gui.UnrankedGui;
-import dev.nandi0813.practice.Manager.Ladder.Custom.Gui.KitSelectorGui;
+import dev.nandi0813.practice.Manager.Gui.GUIType;
+import dev.nandi0813.practice.Manager.Gui.GUIs.StatsGui;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,8 +21,8 @@ public class SpawnInventoryListener implements Listener
     public void onPlayerInteract(PlayerInteractEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Party party = SystemManager.getPartyManager().getParty(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Party party = Practice.getPartyManager().getParty(player);
         ItemStack item = e.getItem();
         Action action = e.getAction();
 
@@ -37,18 +35,16 @@ public class SpawnInventoryListener implements Listener
             {
                 if (item.equals(SpawnInventory.getUnrankedItem()))
                 {
-                    player.openInventory(UnrankedGui.getGui());
-                    UnrankedGui.updateGui();
+                    Practice.getGuiManager().searchGUI(GUIType.QUEUE_UNRANKED).open(player);
                 }
                 else if (item.equals(SpawnInventory.getRankedItem()))
                 {
-                    int i1 = SystemManager.getMatchManager().getAllowedRankedPerDay().get(player);
-                    int i2 = SystemManager.getMatchManager().getRankedPerDay().get(player);
+                    int i1 = Practice.getMatchManager().getAllowedRankedPerDay().get(player);
+                    int i2 = Practice.getMatchManager().getRankedPerDay().get(player);
 
                     if (i1 > i2)
                     {
-                        player.openInventory(RankedGui.getGui());
-                        RankedGui.updateGui();
+                        Practice.getGuiManager().searchGUI(GUIType.QUEUE_RANKED).open(player);
                     }
                     else
                         player.sendMessage(LanguageManager.getString("match.ranked-limit"));
@@ -57,19 +53,18 @@ public class SpawnInventoryListener implements Listener
                 {
                     if (player.hasPermission("zonepractice.customkit"))
                     {
-                        player.openInventory(KitSelectorGui.getGui());
-                        KitSelectorGui.updateGui();
+                        Practice.getGuiManager().searchGUI(GUIType.CUSTOM_LADDER_SELECTOR).open(player);
                     }
                     else
                         player.sendMessage(LanguageManager.getString("no-permission"));
                 }
                 else if (item.equals(SpawnInventory.getPartyItem()))
                 {
-                    SystemManager.getPartyManager().createParty(player);
+                    Practice.getPartyManager().createParty(player);
                 }
                 else if (item.equals(SpawnInventory.getStatsItem()))
                 {
-                    player.openInventory(StatsGui.getStatsGui(profile));
+                    new StatsGui(profile).open(player);
                 }
             }
         }

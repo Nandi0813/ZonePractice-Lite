@@ -2,7 +2,7 @@ package dev.nandi0813.practice.Listener;
 
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ public class PlayerInteract implements Listener
     public void onPlayerInteract(PlayerInteractEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         Action action = e.getAction();
         ItemStack item = e.getItem();

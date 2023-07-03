@@ -2,7 +2,6 @@ package dev.nandi0813.practice.Manager.Arena;
 
 import dev.nandi0813.practice.Manager.Arena.Util.ArenaUtil;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import org.bukkit.Location;
@@ -53,7 +52,7 @@ public class ArenaFile
         arena.setEnabled(config.getBoolean("enabled"));
         for (String ladderName : config.getStringList("ladders"))
         {
-            Ladder ladder = SystemManager.getLadderManager().getLadder(ladderName);
+            Ladder ladder = Practice.getLadderManager().getLadder(ladderName);
             if (ladder != null) arena.getLadders().add(ladder);
         }
         if (config.get("corner.1") != null) arena.setCorner1((Location) config.get("corner.1"));

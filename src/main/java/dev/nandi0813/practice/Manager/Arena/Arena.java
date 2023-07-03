@@ -2,7 +2,7 @@ package dev.nandi0813.practice.Manager.Arena;
 
 import dev.nandi0813.practice.Manager.Arena.Util.Cuboid;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,7 +47,7 @@ public class Arena
 
     public void deleteData()
     {
-        SystemManager.getArenaManager().getArenaCuboids().remove(cuboid);
+        Practice.getArenaManager().getArenaCuboids().remove(cuboid);
         file.getFile().delete();
     }
 
@@ -59,7 +59,7 @@ public class Arena
         if (corner1 != null && corner2 != null)
         {
             cuboid = new Cuboid(corner1, corner2);
-            SystemManager.getArenaManager().getArenaCuboids().put(cuboid, this);
+            Practice.getArenaManager().getArenaCuboids().put(cuboid, this);
         }
     }
 

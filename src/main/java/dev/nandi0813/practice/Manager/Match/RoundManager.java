@@ -9,7 +9,6 @@ import dev.nandi0813.practice.Manager.Match.MatchType.PartySplit.PartySplit;
 import dev.nandi0813.practice.Manager.Match.Util.KitUtil;
 import dev.nandi0813.practice.Manager.Match.Util.PlayerUtil;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.ItemUtil;
 import lombok.Getter;
@@ -51,7 +50,7 @@ public class RoundManager
             PlayerUtil.teleportPlayer(player, match);
 
             // Custom kit
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
             player.getInventory().clear();
             player.getInventory().setArmorContents(null);

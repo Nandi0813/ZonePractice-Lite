@@ -2,7 +2,7 @@ package dev.nandi0813.practice.Command.Party.Arguments;
 
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Party.Party;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -18,7 +18,7 @@ public class PartyInfoArg
 
             if (args.length == 1)
             {
-                party = SystemManager.getPartyManager().getParty(player);
+                party = Practice.getPartyManager().getParty(player);
                 if (party == null)
                 {
                     player.sendMessage(LanguageManager.getString("party.not-member"));
@@ -34,7 +34,7 @@ public class PartyInfoArg
                     return;
                 }
 
-                party = SystemManager.getPartyManager().getParty(target);
+                party = Practice.getPartyManager().getParty(target);
                 if (party == null)
                 {
                     player.sendMessage(LanguageManager.getString("party.not-member"));

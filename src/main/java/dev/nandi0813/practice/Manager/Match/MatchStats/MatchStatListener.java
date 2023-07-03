@@ -5,7 +5,6 @@ import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -38,8 +37,8 @@ public class MatchStatListener implements Listener
     public void onClick(PlayerInteractEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (player.getItemInHand() != null && player.getItemInHand().getType() == Material.FISHING_ROD) return;
 
@@ -86,9 +85,9 @@ public class MatchStatListener implements Listener
 
             Bukkit.getScheduler().runTaskAsynchronously(practice, () ->
             {
-                if (SystemManager.getProfileManager().getProfiles().get(attacker).getStatus().equals(ProfileStatus.MATCH) && SystemManager.getProfileManager().getProfiles().get(defender).getStatus().equals(ProfileStatus.MATCH))
+                if (Practice.getProfileManager().getProfiles().get(attacker).getStatus().equals(ProfileStatus.MATCH) && Practice.getProfileManager().getProfiles().get(defender).getStatus().equals(ProfileStatus.MATCH))
                 {
-                    Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(attacker);
+                    Match match = Practice.getMatchManager().getLiveMatchByPlayer(attacker);
 
                     if (match.getStatus().equals(MatchStatus.LIVE) && match.getType().equals(MatchType.DUEL))
                     {

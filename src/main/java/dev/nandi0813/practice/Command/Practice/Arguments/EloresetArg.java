@@ -3,7 +3,7 @@ package dev.nandi0813.practice.Command.Practice.Arguments;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -19,11 +19,11 @@ public class EloresetArg
         if (args.length == 3)
         {
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
-            Profile targetProfile = SystemManager.getProfileManager().getProfiles().get(target);
+            Profile targetProfile = Practice.getProfileManager().getProfiles().get(target);
 
             if (targetProfile != null)
             {
-                Ladder ladder = SystemManager.getLadderManager().getLadder(args[2]);
+                Ladder ladder = Practice.getLadderManager().getLadder(args[2]);
 
                 if (ladder != null)
                 {
@@ -34,7 +34,7 @@ public class EloresetArg
                 else if (args[2].equalsIgnoreCase("all"))
                 {
                     targetProfile.setElo(new HashMap<>());
-                    for (Ladder ladder1 : SystemManager.getLadderManager().getLadders())
+                    for (Ladder ladder1 : Practice.getLadderManager().getLadders())
                         if (ladder1.isRanked())
                         {
                             targetProfile.getElo().put(ladder1, ConfigManager.getInt("ranked.default-elo"));

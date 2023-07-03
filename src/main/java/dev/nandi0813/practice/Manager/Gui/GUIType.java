@@ -1,0 +1,19 @@
+package dev.nandi0813.practice.Manager.Gui;
+
+public enum GUIType
+{
+
+    QUEUE_UNRANKED,
+    QUEUE_RANKED,
+
+    PROFILE_STATS,
+    MATCH_STATS,
+
+    PARTY_EVENT_SELECTOR,
+    LADDER_SELECTOR,
+
+    CUSTOM_LADDER_SELECTOR,
+    CUSTOM_LADDER_SUMMARY,
+    CUSTOM_LADDER_EDITOR,
+
+}

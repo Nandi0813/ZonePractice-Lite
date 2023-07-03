@@ -3,7 +3,6 @@ package dev.nandi0813.practice.Manager.Arena.BlockChange;
 import dev.nandi0813.practice.Manager.Arena.Util.Cuboid;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
 import dev.nandi0813.practice.Manager.Match.Match;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -83,7 +82,7 @@ public class RollbackListener implements Listener
     @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)
     public void onBucketEmpty(PlayerBucketEmptyEvent e)
     {
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(e.getPlayer());
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(e.getPlayer());
 
         if (match != null)
         {
@@ -120,7 +119,7 @@ public class RollbackListener implements Listener
         {
             if (e.getClickedBlock() != null && (e.getClickedBlock().getType() == Material.CHEST || e.getClickedBlock().getType() == Material.TRAPPED_CHEST))
             {
-                Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(e.getPlayer());
+                Match match = Practice.getMatchManager().getLiveMatchByPlayer(e.getPlayer());
 
                 if(match != null)
                     match.addBlockChange(new CachedBlock(e.getClickedBlock().getLocation(), e.getClickedBlock()));
@@ -131,7 +130,7 @@ public class RollbackListener implements Listener
     @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)
     public void onPlace(BlockPlaceEvent e)
     {
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(e.getPlayer());
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(e.getPlayer());
         if (match != null)
         {
             e.getBlockPlaced().setMetadata(PLACED_IN_FIGHT, new FixedMetadataValue(practice, match));
@@ -146,7 +145,7 @@ public class RollbackListener implements Listener
     @EventHandler(priority=EventPriority.MONITOR,ignoreCancelled=true)
     public void onBreak(BlockBreakEvent e)
     {
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(e.getPlayer());
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(e.getPlayer());
         if (match != null)
         {
             if (e.getBlock().hasMetadata(PLACED_IN_FIGHT))
@@ -172,7 +171,7 @@ public class RollbackListener implements Listener
     {
         Location location = e.getLocation();
 
-        for (Cuboid cuboid : SystemManager.getArenaManager().getArenaCuboids().keySet())
+        for (Cuboid cuboid : Practice.getArenaManager().getArenaCuboids().keySet())
         {
             if (cuboid.contains(location))
             {

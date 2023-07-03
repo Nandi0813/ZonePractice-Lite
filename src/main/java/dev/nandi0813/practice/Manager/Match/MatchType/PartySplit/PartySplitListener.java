@@ -10,7 +10,7 @@ import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Match.Util.TeamUtil;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,8 +34,8 @@ public class PartySplitListener implements Listener
         if (e.getEntity() instanceof Player)
         {
             Player player = (Player) e.getEntity();
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_SPLIT))
             {
@@ -71,14 +71,14 @@ public class PartySplitListener implements Listener
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player)
         {
             Player attacker = (Player) e.getDamager();
-            Profile attackerProfile = SystemManager.getProfileManager().getProfiles().get(attacker);
+            Profile attackerProfile = Practice.getProfileManager().getProfiles().get(attacker);
             Player target = (Player) e.getEntity();
-            Profile targetProfile = SystemManager.getProfileManager().getProfiles().get(target);
+            Profile targetProfile = Practice.getProfileManager().getProfiles().get(target);
 
             if (attackerProfile.getStatus().equals(ProfileStatus.MATCH) && targetProfile.getStatus().equals(ProfileStatus.MATCH))
             {
-                Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(attacker);
-                if (match.getType().equals(MatchType.PARTY_SPLIT) && match.equals(SystemManager.getMatchManager().getLiveMatchByPlayer(target)))
+                Match match = Practice.getMatchManager().getLiveMatchByPlayer(attacker);
+                if (match.getType().equals(MatchType.PARTY_SPLIT) && match.equals(Practice.getMatchManager().getLiveMatchByPlayer(target)))
                 {
                     if (match.getTeams().get(attacker).equals(match.getTeams().get(target)))
                     {
@@ -93,8 +93,8 @@ public class PartySplitListener implements Listener
     public void onPlayerQuit(PlayerQuitEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_SPLIT))
         {
@@ -145,8 +145,8 @@ public class PartySplitListener implements Listener
     public void onBlockBreak(BlockBreakEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_SPLIT) && !match.getAlivePlayers().contains(player))
             e.setCancelled(true);
@@ -156,8 +156,8 @@ public class PartySplitListener implements Listener
     public void onPlayerPickItem(PlayerPickupItemEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_SPLIT) && !match.getAlivePlayers().contains(player))
             e.setCancelled(true);
@@ -167,8 +167,8 @@ public class PartySplitListener implements Listener
     public void onHunger(FoodLevelChangeEvent e)
     {
         Player player = (Player) e.getEntity();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_SPLIT) && !match.getAlivePlayers().contains(player))
             e.setFoodLevel(20);
@@ -180,8 +180,8 @@ public class PartySplitListener implements Listener
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player)
         {
             Player player = (Player) e.getDamager();
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_SPLIT) && !match.getAlivePlayers().contains(player))
                 e.setCancelled(true);
@@ -192,8 +192,8 @@ public class PartySplitListener implements Listener
     public void onPlayerMove(PlayerMoveEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_SPLIT) && !match.getAlivePlayers().contains(player))
         {

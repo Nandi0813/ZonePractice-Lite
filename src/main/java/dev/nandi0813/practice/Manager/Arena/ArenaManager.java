@@ -119,6 +119,12 @@ public class ArenaManager
         }
     }
 
+    public void saveArenas()
+    {
+        for (Arena arena : arenas)
+            arena.saveData();
+    }
+
     /**
      * Create a new world called "arenas" with the world type "FLAT" and the generator settings "2;0;1;"
      */

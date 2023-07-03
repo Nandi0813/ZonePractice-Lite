@@ -2,7 +2,7 @@ package dev.nandi0813.practice.Command.Party.Arguments;
 
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Party.Party;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,7 +14,7 @@ public class PartyLeaderArg
     {
         if (args.length == 2)
         {
-            Party party = SystemManager.getPartyManager().getParty(player);
+            Party party = Practice.getPartyManager().getParty(player);
 
             if (party != null)
             {

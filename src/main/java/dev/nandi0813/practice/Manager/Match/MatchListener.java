@@ -5,8 +5,7 @@ import dev.nandi0813.practice.Event.MatchStartEvent;
 import dev.nandi0813.practice.Manager.Arena.Util.Cuboid;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
-import dev.nandi0813.practice.Manager.Gui.RankedGui;
-import dev.nandi0813.practice.Manager.Gui.UnrankedGui;
+import dev.nandi0813.practice.Manager.Gui.GUIType;
 import dev.nandi0813.practice.Manager.Ladder.KnockbackType;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
@@ -14,7 +13,7 @@ import dev.nandi0813.practice.Manager.Match.Util.KitUtil;
 import dev.nandi0813.practice.Manager.Match.Util.KnockbackUtil;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -40,15 +39,15 @@ public class MatchListener implements Listener
     {
         Match match = e.getMatch();
 
-        SystemManager.getMatchManager().getMatches().put(match.getMatchID(), match);
-        SystemManager.getMatchManager().getLiveMatches().add(match);
+        Practice.getMatchManager().getMatches().put(match.getMatchID(), match);
+        Practice.getMatchManager().getLiveMatches().add(match);
 
         if (match.isRanked())
             for (Player player : match.getPlayers())
-                SystemManager.getMatchManager().getRankedPerDay().put(player, SystemManager.getMatchManager().getRankedPerDay().get(player) + 1);
+                Practice.getMatchManager().getRankedPerDay().put(player, Practice.getMatchManager().getRankedPerDay().get(player) + 1);
 
-        UnrankedGui.updateGui();
-        RankedGui.updateGui();
+        Practice.getGuiManager().searchGUI(GUIType.QUEUE_UNRANKED).update();
+        Practice.getGuiManager().searchGUI(GUIType.QUEUE_RANKED).update();
     }
 
     @EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled=true)
@@ -56,13 +55,13 @@ public class MatchListener implements Listener
     {
         Match match = e.getMatch();
 
-        if (SystemManager.getPartyManager().getParty(match) != null)
-            SystemManager.getPartyManager().getParty(match).setMatch(null);
+        if (Practice.getPartyManager().getParty(match) != null)
+            Practice.getPartyManager().getParty(match).setMatch(null);
 
-        SystemManager.getMatchManager().getLiveMatches().remove(match);
+        Practice.getMatchManager().getLiveMatches().remove(match);
 
-        UnrankedGui.updateGui();
-        RankedGui.updateGui();
+        Practice.getGuiManager().searchGUI(GUIType.QUEUE_UNRANKED).update();
+        Practice.getGuiManager().searchGUI(GUIType.QUEUE_RANKED).update();
     }
 
 
@@ -72,15 +71,15 @@ public class MatchListener implements Listener
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player)
         {
             Player attacker = (Player) e.getDamager();
-            Profile attackerProfile = SystemManager.getProfileManager().getProfiles().get(attacker);
+            Profile attackerProfile = Practice.getProfileManager().getProfiles().get(attacker);
             Player target = (Player) e.getEntity();
-            Profile targetProfile = SystemManager.getProfileManager().getProfiles().get(target);
+            Profile targetProfile = Practice.getProfileManager().getProfiles().get(target);
 
             if (e.getEntity() != null && e.getDamager() != null && attackerProfile.getStatus().equals(ProfileStatus.MATCH) && targetProfile.getStatus().equals(ProfileStatus.MATCH))
             {
-                if (SystemManager.getMatchManager().getLiveMatchByPlayer(attacker).equals(SystemManager.getMatchManager().getLiveMatchByPlayer(target)))
+                if (Practice.getMatchManager().getLiveMatchByPlayer(attacker).equals(Practice.getMatchManager().getLiveMatchByPlayer(target)))
                 {
-                    Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(attacker);
+                    Match match = Practice.getMatchManager().getLiveMatchByPlayer(attacker);
 
                     if (match.getStatus().equals(MatchStatus.LIVE))
                     {
@@ -97,11 +96,11 @@ public class MatchListener implements Listener
     public void onPlayerMove(PlayerMoveEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
             Cuboid cuboid = match.getGameArena().getCuboid();
 
             Location to1 = e.getTo().clone();
@@ -117,11 +116,11 @@ public class MatchListener implements Listener
     public void onBlockBreak(BlockBreakEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!match.getLadder().isBuild() || !match.getStatus().equals(MatchStatus.LIVE))
                 e.setCancelled(true);
@@ -132,17 +131,17 @@ public class MatchListener implements Listener
     public void onBlockPlace(BlockPlaceEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!match.getLadder().isBuild() || !match.getStatus().equals(MatchStatus.LIVE))
             {
                 e.setCancelled(true);
             }
-            else if (match.getLadder().isBuild() && match.getStatus().equals(MatchStatus.LIVE))
+            else
             {
                 int buildLimit = match.getGameArena().getPosition1().getBlockY() + ConfigManager.getInt("match-settings.build-limit");
                 if (e.getBlock().getLocation().getY() >= buildLimit)
@@ -158,17 +157,17 @@ public class MatchListener implements Listener
     public void onBucketEmpty(PlayerBucketEmptyEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!match.getLadder().isBuild() || !match.getStatus().equals(MatchStatus.LIVE))
             {
                 e.setCancelled(true);
             }
-            else if (match.getLadder().isBuild() && match.getStatus().equals(MatchStatus.LIVE))
+            else
             {
                 int buildLimit = match.getGameArena().getPosition1().getBlockY() + ConfigManager.getInt("match-settings.build-limit");
                 if (e.getBlockClicked().getLocation().getY() >= buildLimit)
@@ -184,13 +183,13 @@ public class MatchListener implements Listener
     public void onPlayerInteract(PlayerInteractEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
         ItemStack item = player.getInventory().getItemInHand();
         Action action = e.getAction();
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!action.equals(Action.RIGHT_CLICK_AIR) && !action.equals(Action.RIGHT_CLICK_BLOCK))
                 return;
@@ -225,7 +224,7 @@ public class MatchListener implements Listener
     public void onInventoryClick(InventoryClickEvent e)
     {
         Player player = (Player) e.getWhoClicked();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
@@ -238,11 +237,11 @@ public class MatchListener implements Listener
     public void onItemDrop(PlayerDropItemEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (player.getInventory().getItem(8) != null && player.getInventory().getItem(8).equals(KitUtil.getDefaultKitItem()))
                 e.setCancelled(true);
@@ -254,7 +253,7 @@ public class MatchListener implements Listener
                 {
                     if (!match.getPlayers().contains(onlinePlayer) && !match.getSpectators().contains(onlinePlayer))
                     {
-                        SystemManager.getEntityHider().hideEntity(onlinePlayer, e.getItemDrop());
+                        Practice.getEntityHider().hideEntity(onlinePlayer, e.getItemDrop());
                     }
                 }
             }
@@ -267,11 +266,11 @@ public class MatchListener implements Listener
         if (e.getEntity().getShooter() instanceof Player)
         {
             Player player = (Player) e.getEntity().getShooter();
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
             if (profile.getStatus().equals(ProfileStatus.MATCH))
             {
-                Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+                Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
                 if (e.getEntityType() == EntityType.SPLASH_POTION || e.getEntityType() == EntityType.ARROW || e.getEntityType() == EntityType.ENDER_PEARL)
                 {
@@ -279,7 +278,7 @@ public class MatchListener implements Listener
                     {
                         if (!match.getPlayers().contains(onlinePlayer) && !match.getSpectators().contains(onlinePlayer))
                         {
-                            SystemManager.getEntityHider().hideEntity(onlinePlayer, e.getEntity());
+                            Practice.getEntityHider().hideEntity(onlinePlayer, e.getEntity());
                         }
                     }
                 }
@@ -291,11 +290,11 @@ public class MatchListener implements Listener
     public void onPlayerPickItem(PlayerPickupItemEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!match.getStatus().equals(MatchStatus.LIVE))
                 e.setCancelled(true);
@@ -306,11 +305,11 @@ public class MatchListener implements Listener
     public void onHunger(FoodLevelChangeEvent e)
     {
         Player player = (Player) e.getEntity();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!match.getLadder().isHunger())
                 e.setFoodLevel(20);
@@ -321,8 +320,8 @@ public class MatchListener implements Listener
     public void onRegen(EntityRegainHealthEvent e)
     {
         Player player = (Player) e.getEntity();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
@@ -335,11 +334,11 @@ public class MatchListener implements Listener
     public void onCraft(CraftItemEvent e)
     {
         Player player = (Player) e.getWhoClicked();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!match.getLadder().isBuild())
             {

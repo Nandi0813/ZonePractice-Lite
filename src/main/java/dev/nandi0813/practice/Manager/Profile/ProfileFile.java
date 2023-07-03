@@ -2,11 +2,9 @@ package dev.nandi0813.practice.Manager.Profile;
 
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
-import org.bukkit.Bukkit;
+import dev.nandi0813.practice.Util.ItemSerializationUtil;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +31,7 @@ public class ProfileFile
         config.set("uuid", profile.getUuid().toString());
 
         // Elo
-        for (Ladder ladder : SystemManager.getLadderManager().getLadders())
+        for (Ladder ladder : Practice.getLadderManager().getLadders())
         {
             if (ladder.isRanked())
                 config.set("stats.elo." + ladder.getName(), profile.getElo().get(ladder));
@@ -46,7 +44,7 @@ public class ProfileFile
         config.set("stats.ranked.losses", profile.getRankedLosses());
 
         // Ladder win/lose stats
-        for (Ladder ladder : SystemManager.getLadderManager().getLadders())
+        for (Ladder ladder : Practice.getLadderManager().getLadders())
         {
             if (profile.getLadderUnRankedWins().get(ladder) != null)
                 config.set("stats.ladder-stats." + ladder.getName() + ".unranked.wins", profile.getLadderUnRankedWins().get(ladder));
@@ -73,10 +71,10 @@ public class ProfileFile
         }
 
         // Custom kits
-        for (Ladder ladder : SystemManager.getLadderManager().getLadders())
+        for (Ladder ladder : Practice.getLadderManager().getLadders())
         {
-            if (profile.getCustomKits().get(ladder) != null)
-                config.set("customkit." + ladder.getName().toLowerCase() + ".inventory", profile.getCustomKits().get(ladder));
+            if (profile.getCustomKits().containsKey(ladder) && profile.getCustomKits().get(ladder) != null)
+                config.set("customkit.ladder" + ladder.getId() + ".inventory", ItemSerializationUtil.itemStackArrayToBase64(profile.getCustomKits().get(ladder)));
         }
 
         saveFile();
@@ -87,7 +85,7 @@ public class ProfileFile
      */
     public void setDefaultData()
     {
-        for (Ladder ladder : SystemManager.getLadderManager().getLadders())
+        for (Ladder ladder : Practice.getLadderManager().getLadders())
         {
             if (ladder.isRanked())
                 config.set("stats.elo." + ladder.getName(), ConfigManager.getInt("ranked.default-elo"));
@@ -98,7 +96,7 @@ public class ProfileFile
         config.set("stats.ranked.wins", 0);
         config.set("stats.ranked.losses", 0);
 
-        for (Ladder ladder : SystemManager.getLadderManager().getLadders())
+        for (Ladder ladder : Practice.getLadderManager().getLadders())
         {
             config.set("stats.ladder-stats." + ladder.getName() + ".unranked.wins", 0);
             config.set("stats.ladder-stats." + ladder.getName() + ".unranked.losses", 0);
@@ -120,7 +118,7 @@ public class ProfileFile
     {
         for (String ladderName : config.getConfigurationSection("stats.elo").getKeys(false))
         {
-            Ladder ladder = SystemManager.getLadderManager().getLadder(ladderName);
+            Ladder ladder = Practice.getLadderManager().getLadder(ladderName);
             if (ladder != null && ladder.isRanked() && config.isSet("stats.elo." + ladder.getName()))
                 profile.getElo().put(ladder, config.getInt("stats.elo." + ladder.getName()));
         }
@@ -132,7 +130,7 @@ public class ProfileFile
 
         for (String ladderName : config.getConfigurationSection("stats.ladder-stats").getKeys(false))
         {
-            Ladder ladder = SystemManager.getLadderManager().getLadder(ladderName);
+            Ladder ladder = Practice.getLadderManager().getLadder(ladderName);
             if (ladder != null)
             {
                 profile.getLadderUnRankedWins().put(ladder, config.getInt("stats.ladder-stats." + ladder.getName() + ".unranked.wins"));
@@ -148,12 +146,14 @@ public class ProfileFile
             }
         }
 
-        for (Ladder ladder : SystemManager.getLadderManager().getLadders())
+        for (Ladder ladder : Practice.getLadderManager().getLadders())
         {
-            if (config.isList("customkit." + ladder.getName().toLowerCase() + ".inventory"))
-            {
-                ItemStack[] inventory = config.getList("customkit." + ladder.getName().toLowerCase() + ".inventory").toArray(new ItemStack[0]);
-                profile.getCustomKits().put(ladder, inventory);
+            if (config.isString("customkit.ladder" + ladder.getId() + ".inventory")) {
+                try {
+                    profile.getCustomKits().put(ladder, ItemSerializationUtil.itemStackArrayFromBase64(config.getString("customkit.ladder" + ladder.getId() + ".inventory")));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

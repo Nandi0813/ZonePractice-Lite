@@ -3,7 +3,7 @@ package dev.nandi0813.practice.Command.Arena.Arguments;
 import dev.nandi0813.practice.Manager.Arena.Arena;
 import dev.nandi0813.practice.Manager.Arena.Util.ArenaUtil;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.entity.Player;
 
@@ -22,7 +22,7 @@ public class ArenaLadderArg
                 if (args.length == 3)
                 {
                     String arenaName = args[2];
-                    Arena arena = SystemManager.getArenaManager().getArena(arenaName);
+                    Arena arena = Practice.getArenaManager().getArena(arenaName);
 
                     if (arena != null)
                     {
@@ -54,7 +54,7 @@ public class ArenaLadderArg
                 if (args.length == 4)
                 {
                     String arenaName = args[2];
-                    Arena arena = SystemManager.getArenaManager().getArena(arenaName);
+                    Arena arena = Practice.getArenaManager().getArena(arenaName);
 
                     if (arena != null)
                     {
@@ -65,7 +65,7 @@ public class ArenaLadderArg
                         }
 
                         String ladderName = args[3];
-                        Ladder ladder = SystemManager.getLadderManager().getLadder(ladderName);
+                        Ladder ladder = Practice.getLadderManager().getLadder(ladderName);
 
                         if (ladder != null)
                         {
@@ -103,7 +103,7 @@ public class ArenaLadderArg
                 if (args.length == 4)
                 {
                     String arenaName = args[2];
-                    Arena arena = SystemManager.getArenaManager().getArena(arenaName);
+                    Arena arena = Practice.getArenaManager().getArena(arenaName);
 
                     if (arena != null)
                     {
@@ -114,7 +114,7 @@ public class ArenaLadderArg
                         }
 
                         String ladderName = args[3];
-                        Ladder ladder = SystemManager.getLadderManager().getLadder(ladderName);
+                        Ladder ladder = Practice.getLadderManager().getLadder(ladderName);
 
                         if (ladder != null)
                         {

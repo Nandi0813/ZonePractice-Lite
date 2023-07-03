@@ -9,6 +9,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class Profile
@@ -16,7 +17,7 @@ public class Profile
 
     @Getter private final UUID uuid;
     @Getter private final OfflinePlayer player;
-    @Getter private final HashMap<Ladder, ItemStack[]> customKits = new HashMap<>();
+    @Getter private final Map<Ladder, ItemStack[]> customKits = new HashMap<>();
     @Getter private final ProfileFile file;
 
     // Temporary Settings
@@ -28,11 +29,11 @@ public class Profile
     @Getter @Setter private int unrankedLosses;
     @Getter @Setter private int rankedWins;
     @Getter @Setter private int rankedLosses;
-    @Getter private final HashMap<Ladder, Integer> ladderUnRankedWins = new HashMap<>();
-    @Getter private final HashMap<Ladder, Integer> ladderUnRankedLosses = new HashMap<>();
-    @Getter private final HashMap<Ladder, Integer> ladderRankedWins = new HashMap<>();
-    @Getter private final HashMap<Ladder, Integer> ladderRankedLosses = new HashMap<>();
-    @Getter @Setter private HashMap<Ladder, Integer> elo = new HashMap<>();
+    @Getter private final Map<Ladder, Integer> ladderUnRankedWins = new HashMap<>();
+    @Getter private final Map<Ladder, Integer> ladderUnRankedLosses = new HashMap<>();
+    @Getter private final Map<Ladder, Integer> ladderRankedWins = new HashMap<>();
+    @Getter private final Map<Ladder, Integer> ladderRankedLosses = new HashMap<>();
+    @Getter @Setter private Map<Ladder, Integer> elo = new HashMap<>();
 
     public Profile(UUID uuid)
     {

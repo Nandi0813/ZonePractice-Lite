@@ -1,10 +1,10 @@
 package dev.nandi0813.practice.Command.Stats;
 
 import dev.nandi0813.practice.Manager.File.LanguageManager;
-import dev.nandi0813.practice.Manager.Gui.StatsGui;
+import dev.nandi0813.practice.Manager.Gui.GUIs.StatsGui;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -22,7 +22,7 @@ public class StatsCommand implements CommandExecutor
         if (sender instanceof Player)
         {
             Player player = (Player) sender;
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
             if (!profile.getStatus().equals(ProfileStatus.OFFLINE))
             {
@@ -36,16 +36,16 @@ public class StatsCommand implements CommandExecutor
                 {
                     if (args.length == 0)
                     {
-                        player.openInventory(StatsGui.getStatsGui(profile));
+                        new StatsGui(profile).open(player);
                     }
                     else if (args.length == 1)
                     {
                         OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
-                        Profile targetProfile = SystemManager.getProfileManager().getProfiles().get(target);
+                        Profile targetProfile = Practice.getProfileManager().getProfiles().get(target);
 
                         if (targetProfile != null)
                         {
-                            player.openInventory(StatsGui.getStatsGui(targetProfile));
+                            new StatsGui(targetProfile).open(player);
                         }
                         else
                             player.sendMessage(LanguageManager.getString("stats.player-not-found"));

@@ -2,7 +2,7 @@ package dev.nandi0813.practice.Manager.Arena.Util;
 
 import dev.nandi0813.practice.Manager.Arena.Arena;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -50,7 +50,7 @@ public class ArenaUtil
         }
         else
         {
-            if (SystemManager.getMatchManager().getLiveMatchByArena(arena) == null)
+            if (Practice.getMatchManager().getLiveMatchByArena(arena) == null)
             {
                 arena.setEnabled(false);
                 arena.saveData();

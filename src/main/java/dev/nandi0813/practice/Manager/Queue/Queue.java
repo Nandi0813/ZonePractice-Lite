@@ -5,14 +5,12 @@ import dev.nandi0813.practice.Event.QueueStartEvent;
 import dev.nandi0813.practice.Manager.Arena.Arena;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
-import dev.nandi0813.practice.Manager.Gui.RankedGui;
-import dev.nandi0813.practice.Manager.Gui.UnrankedGui;
+import dev.nandi0813.practice.Manager.Gui.GUIType;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +24,7 @@ import java.util.Arrays;
 public class Queue
 {
 
-    private final QueueManager queueManager = SystemManager.getQueueManager();
+    private final QueueManager queueManager = Practice.getQueueManager();
 
     @Getter @Setter private Player player;
     @Getter private final Profile profile;
@@ -40,7 +38,7 @@ public class Queue
     public Queue(Player player, Ladder ladder, boolean ranked)
     {
         this.player = player;
-        profile = SystemManager.getProfileManager().getProfiles().get(player);
+        profile = Practice.getProfileManager().getProfiles().get(player);
         this.ladder = ladder;
         this.ranked = ranked;
         this.range = ConfigManager.getConfig().getInt("ranked.elo-range-increase");
@@ -57,7 +55,7 @@ public class Queue
         if (!queueStartEvent.isCancelled())
         {
             profile.setStatus(ProfileStatus.QUEUE);
-            SystemManager.getInventoryManager().getQueueInventory().setQueueInventory(player);
+            Practice.getInventoryManager().getQueueInventory().setQueueInventory(player);
             queueManager.getQueues().add(this);
 
             queueRunnable.begin();
@@ -122,8 +120,8 @@ public class Queue
                 }
             }
 
-            UnrankedGui.updateGui();
-            RankedGui.updateGui();
+            Practice.getGuiManager().searchGUI(GUIType.QUEUE_UNRANKED).update();
+            Practice.getGuiManager().searchGUI(GUIType.QUEUE_RANKED).update();
         }
     }
 
@@ -134,7 +132,7 @@ public class Queue
      */
     public void startMatch(Queue queue)
     {
-        Arena arena = SystemManager.getArenaManager().getRandomArena(ladder.isBuild());
+        Arena arena = Practice.getArenaManager().getRandomArena(ladder.isBuild());
         if (arena != null)
         {
             queue.endQueue(true);
@@ -143,8 +141,8 @@ public class Queue
             Match match = new Match(MatchType.DUEL, Arrays.asList(player, queue.getPlayer()), ladder, ranked, arena);
             match.startMatch();
 
-            UnrankedGui.updateGui();
-            RankedGui.updateGui();
+            Practice.getGuiManager().searchGUI(GUIType.QUEUE_UNRANKED).update();
+            Practice.getGuiManager().searchGUI(GUIType.QUEUE_RANKED).update();
             return;
         }
 
@@ -174,12 +172,12 @@ public class Queue
 
         if (!foundMatch && player.isOnline())
         {
-            SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, false);
+            Practice.getInventoryManager().getSpawnInventory().setInventory(player, false);
             player.sendMessage(LanguageManager.getString("queue.queue-end").replaceAll("%weightClass%", (ranked ? "ranked" : "unranked")).replaceAll("%ladderName%", ladder.getName()));
         }
 
-        UnrankedGui.updateGui();
-        RankedGui.updateGui();
+        Practice.getGuiManager().searchGUI(GUIType.QUEUE_UNRANKED).update();
+        Practice.getGuiManager().searchGUI(GUIType.QUEUE_RANKED).update();
     }
 
 }

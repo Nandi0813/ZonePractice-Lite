@@ -2,14 +2,13 @@ package dev.nandi0813.practice.Manager.Match.MatchType.Duel;
 
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
-import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Match.MatchStats.MatchStatEditor;
 import dev.nandi0813.practice.Manager.Match.MatchStats.PlayerMatchStat;
 import dev.nandi0813.practice.Manager.Match.Util.PlayerUtil;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -90,8 +89,8 @@ public class Duel
                 }
             }
 
-            Profile winnerProfile = SystemManager.getProfileManager().getProfiles().get(winner);
-            Profile loserProfile = SystemManager.getProfileManager().getProfiles().get(loser);
+            Profile winnerProfile = Practice.getProfileManager().getProfiles().get(winner);
+            Profile loserProfile = Practice.getProfileManager().getProfiles().get(loser);
 
             MatchStatEditor.setDuelStats(winnerProfile, loserProfile, match.getLadder(), match.isRanked());
 

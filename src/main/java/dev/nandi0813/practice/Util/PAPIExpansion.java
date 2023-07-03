@@ -2,7 +2,7 @@ package dev.nandi0813.practice.Util;
 
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -37,11 +37,11 @@ public class PAPIExpansion extends PlaceholderExpansion
     @Override
     public String onPlaceholderRequest(Player player, @NotNull String identifier)
     {
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile != null)
         {
-            for (Ladder ladder : SystemManager.getLadderManager().getLadders())
+            for (Ladder ladder : Practice.getLadderManager().getLadders())
             {
                 String ladderName = ladder.getName().toLowerCase();
 

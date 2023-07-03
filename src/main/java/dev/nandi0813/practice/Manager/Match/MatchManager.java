@@ -20,11 +20,11 @@ import java.util.*;
 public class MatchManager
 {
 
-    @Getter private final HashMap<String, Match> matches = new HashMap<>();
+    @Getter private final Map<String, Match> matches = new HashMap<>();
     @Getter private final List<Match> liveMatches = new ArrayList<>();
 
-    @Getter @Setter private HashMap<Player, Integer> rankedPerDay = new HashMap<>();
-    @Getter private final HashMap<Player, Integer> allowedRankedPerDay = new HashMap<>();
+    @Getter @Setter private Map<Player, Integer> rankedPerDay = new HashMap<>();
+    @Getter private final Map<Player, Integer> allowedRankedPerDay = new HashMap<>();
 
     public MatchManager(Practice practice)
     {
@@ -56,6 +56,15 @@ public class MatchManager
         for (Match match : liveMatches)
             if (match.getArena().equals(arena)) return match;
         return null;
+    }
+
+    public List<Match> getLiveMatchByLadder(Ladder ladder)
+    {
+        List<Match> list = new ArrayList<>();
+        for (Match match : liveMatches)
+            if (match.getLadder().equals(ladder))
+                list.add(match);
+        return list;
     }
 
     public int getDuelMatchSize(Ladder ladder, boolean ranked)

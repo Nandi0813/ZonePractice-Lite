@@ -1,7 +1,7 @@
 package dev.nandi0813.practice.Command.Arena.Arguments;
 
 import dev.nandi0813.practice.Manager.Arena.Arena;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.entity.Player;
 
@@ -12,13 +12,13 @@ public class ArenaCreateArg
     {
         if (args.length == 2)
         {
-            if (SystemManager.getArenaManager().getArenas().size() < 243)
+            if (Practice.getArenaManager().getArenas().size() < 243)
             {
                 String arenaName = args[1];
-                if (SystemManager.getArenaManager().getArena(arenaName) == null)
+                if (Practice.getArenaManager().getArena(arenaName) == null)
                 {
                     Arena arena = new Arena(arenaName);
-                    SystemManager.getArenaManager().getArenas().add(arena);
+                    Practice.getArenaManager().getArenas().add(arena);
                     arena.saveData();
                     player.sendMessage(StringUtil.CC("&e" + arenaName + " &aarena has been created."));
                 }

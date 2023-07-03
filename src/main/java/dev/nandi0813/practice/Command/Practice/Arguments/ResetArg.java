@@ -1,7 +1,7 @@
 package dev.nandi0813.practice.Command.Practice.Arguments;
 
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -15,7 +15,7 @@ public class ResetArg
         if (args.length == 2)
         {
             OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
-            Profile targetProfile = SystemManager.getProfileManager().getProfiles().get(target);
+            Profile targetProfile = Practice.getProfileManager().getProfiles().get(target);
 
             if (targetProfile != null)
             {

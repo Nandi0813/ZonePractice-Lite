@@ -26,23 +26,26 @@ public class ProfileManager
     {
         if (!folder.exists()) folder.mkdir();
 
-        if (folder.isDirectory() && folder.listFiles().length > 0)
+        Bukkit.getScheduler().runTaskLaterAsynchronously(Practice.getInstance(), () ->
         {
-            for (File profileFile : folder.listFiles())
+            if (folder.isDirectory() && folder.listFiles().length > 0)
             {
-                if (profileFile.isFile() && profileFile.getName().endsWith(".yml"))
+                for (File profileFile : folder.listFiles())
                 {
-                    YamlConfiguration config = YamlConfiguration.loadConfiguration(profileFile);
-                    String uuidString = config.getString("uuid");
+                    if (profileFile.isFile() && profileFile.getName().endsWith(".yml"))
+                    {
+                        YamlConfiguration config = YamlConfiguration.loadConfiguration(profileFile);
+                        String uuidString = config.getString("uuid");
 
-                    UUID uuid = UUID.fromString(uuidString);
-                    OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-                    Profile profile = new Profile(uuid);
-                    profile.getData();
-                    profiles.put(offlinePlayer, profile);
+                        UUID uuid = UUID.fromString(uuidString);
+                        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+                        Profile profile = new Profile(uuid);
+                        profile.getData();
+                        profiles.put(offlinePlayer, profile);
+                    }
                 }
             }
-        }
+        }, 20L * 2);
     }
 
     /**

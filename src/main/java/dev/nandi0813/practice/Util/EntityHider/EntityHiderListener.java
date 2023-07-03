@@ -7,7 +7,6 @@ import java.util.List;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -95,8 +94,8 @@ public class EntityHiderListener extends PacketAdapter implements Listener
             if (projectile.getShooter() instanceof Player)
             {
                 Player player = (Player) projectile.getShooter();
-                Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-                Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+                Profile profile = Practice.getProfileManager().getProfiles().get(player);
+                Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
                 if (profile.getStatus().equals(ProfileStatus.MATCH) && match != null && !match.getLadder().isBuild())
                 {
@@ -132,8 +131,8 @@ public class EntityHiderListener extends PacketAdapter implements Listener
         if (e.getEntity().getShooter() instanceof Player)
         {
             Player player = (Player) e.getEntity().getShooter();
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (profile.getStatus().equals(ProfileStatus.MATCH) && match != null && !match.getLadder().isBuild())
             {

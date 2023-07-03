@@ -7,7 +7,7 @@ import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,8 +28,8 @@ public class PartyFFAListener implements Listener
         if (e.getEntity() instanceof Player)
         {
             Player player = (Player) e.getEntity();
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA))
             {
@@ -61,8 +61,8 @@ public class PartyFFAListener implements Listener
     public void onPlayerQuit(PlayerQuitEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA))
         {
@@ -87,8 +87,8 @@ public class PartyFFAListener implements Listener
     public void onBlockBreak(BlockBreakEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA) && !match.getAlivePlayers().contains(player))
                 e.setCancelled(true);
@@ -98,8 +98,8 @@ public class PartyFFAListener implements Listener
     public void onPlayerPickItem(PlayerPickupItemEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA) && !match.getAlivePlayers().contains(player))
             e.setCancelled(true);
@@ -109,8 +109,8 @@ public class PartyFFAListener implements Listener
     public void onHunger(FoodLevelChangeEvent e)
     {
         Player player = (Player) e.getEntity();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA) && !match.getAlivePlayers().contains(player))
             e.setFoodLevel(20);
@@ -122,8 +122,8 @@ public class PartyFFAListener implements Listener
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player)
         {
             Player player = (Player) e.getDamager();
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA) && !match.getAlivePlayers().contains(player))
                 e.setCancelled(true);
@@ -134,8 +134,8 @@ public class PartyFFAListener implements Listener
     public void onPlayerMove(PlayerMoveEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA) && !match.getAlivePlayers().contains(player))
         {

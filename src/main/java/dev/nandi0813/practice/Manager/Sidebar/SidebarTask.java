@@ -1,6 +1,5 @@
 package dev.nandi0813.practice.Manager.Sidebar;
 
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -19,9 +18,9 @@ public class SidebarTask extends BukkitRunnable implements Runnable
     @Override
     public void run()
     {
-        for (Player player : SystemManager.getSidebarManager().getPlayerSidebars().keySet())
+        for (Player player : Practice.getSidebarManager().getPlayerSidebars().keySet())
         {
-            Sidebar sidebar = SystemManager.getSidebarManager().getPlayerSidebars().get(player);
+            Sidebar sidebar = Practice.getSidebarManager().getPlayerSidebars().get(player);
             if (sidebar != null)
                 sidebar.update();
         }

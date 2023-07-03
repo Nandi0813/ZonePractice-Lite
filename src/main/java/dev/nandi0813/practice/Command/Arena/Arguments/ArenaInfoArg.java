@@ -2,7 +2,7 @@ package dev.nandi0813.practice.Command.Arena.Arguments;
 
 import dev.nandi0813.practice.Manager.Arena.Arena;
 import dev.nandi0813.practice.Manager.Arena.Util.ArenaUtil;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.ClickableMessageUtil;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.entity.Player;
@@ -17,7 +17,7 @@ public class ArenaInfoArg
         if (args.length == 2)
         {
             String arenaName = args[1];
-            Arena arena = SystemManager.getArenaManager().getArena(arenaName);
+            Arena arena = Practice.getArenaManager().getArena(arenaName);
 
             if (arena != null)
             {

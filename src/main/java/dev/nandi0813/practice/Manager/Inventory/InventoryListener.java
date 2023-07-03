@@ -3,7 +3,7 @@ package dev.nandi0813.practice.Manager.Inventory;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileManager;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,7 +20,7 @@ public class InventoryListener implements Listener
     public void onInventoryClick(InventoryClickEvent e)
     {
         Player player = (Player) e.getWhoClicked();
-        ProfileManager profileManager = SystemManager.getProfileManager();
+        ProfileManager profileManager = Practice.getProfileManager();
         Profile profile = profileManager.getProfiles().get(player);
 
         if (!player.hasPermission("zonepractice.admin") && profile.getStatus().equals(ProfileStatus.LOBBY))
@@ -33,7 +33,7 @@ public class InventoryListener implements Listener
     public void onPlayerDropItem(PlayerDropItemEvent e)
     {
         Player player = e.getPlayer();
-        ProfileManager profileManager = SystemManager.getProfileManager();
+        ProfileManager profileManager = Practice.getProfileManager();
         Profile profile = profileManager.getProfiles().get(player);
 
         if (!player.hasPermission("zonepractice.admin") && profile.getStatus().equals(ProfileStatus.LOBBY))
@@ -46,7 +46,7 @@ public class InventoryListener implements Listener
     public void onPlayerPickupItem(PlayerPickupItemEvent e)
     {
         Player player = e.getPlayer();
-        ProfileManager profileManager = SystemManager.getProfileManager();
+        ProfileManager profileManager = Practice.getProfileManager();
         Profile profile = profileManager.getProfiles().get(player);
 
         if (!player.hasPermission("zonepractice.admin") && profile.getStatus().equals(ProfileStatus.LOBBY))
@@ -61,7 +61,7 @@ public class InventoryListener implements Listener
         if (e.getEntity() instanceof Player)
         {
             Player player = (Player) e.getEntity();
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
             if (profile.getStatus().equals(ProfileStatus.LOBBY) || profile.getStatus().equals(ProfileStatus.QUEUE))
             {
@@ -77,7 +77,7 @@ public class InventoryListener implements Listener
         if (e.getEntity() instanceof Player)
         {
             Player player = (Player) e.getEntity();
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
             if (profile.getStatus().equals(ProfileStatus.LOBBY) || profile.getStatus().equals(ProfileStatus.QUEUE))
                 e.setCancelled(true);

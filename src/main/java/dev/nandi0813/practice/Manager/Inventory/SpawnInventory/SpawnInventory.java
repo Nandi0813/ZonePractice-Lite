@@ -4,7 +4,6 @@ import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Server.ServerManager;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.ItemUtil;
 import dev.nandi0813.practice.Util.PlayerUtil;
@@ -56,13 +55,13 @@ public class SpawnInventory
 
     public void setInventory(Player player, boolean teleport)
     {
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         PlayerUtil.setPlayerData(player, false, true);
 
         if (profile.isParty())
         {
-            SystemManager.getInventoryManager().getPartyInventory().setPartyInventory(player);
+            Practice.getInventoryManager().getPartyInventory().setPartyInventory(player);
         }
         else
         {

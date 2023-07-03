@@ -1,7 +1,6 @@
 package dev.nandi0813.practice.Manager.Sidebar;
 
 import dev.nandi0813.practice.Manager.File.ConfigManager;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,14 +19,14 @@ public class SidebarListener implements Listener
 
         if (!ConfigManager.getBoolean("multi-game-support"))
             Bukkit.getScheduler().runTaskLater(Practice.getInstance(), () ->
-                    SystemManager.getSidebarManager().loadSidebar(player), 5L);
+                    Practice.getSidebarManager().loadSidebar(player), 5L);
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e)
     {
         Player player = e.getPlayer();
-        SystemManager.getSidebarManager().unLoadSidebar(player);
+        Practice.getSidebarManager().unLoadSidebar(player);
     }
 
 }

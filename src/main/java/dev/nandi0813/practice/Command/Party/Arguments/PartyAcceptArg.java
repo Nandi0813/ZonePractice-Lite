@@ -5,7 +5,7 @@ import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -17,17 +17,17 @@ public class PartyAcceptArg
     {
         if (args.length == 2)
         {
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
             if (profile.getStatus().equals(ProfileStatus.LOBBY))
             {
-                if (SystemManager.getPartyManager().getParty(player) == null)
+                if (Practice.getPartyManager().getParty(player) == null)
                 {
                     Player target = Bukkit.getPlayer(args[1]);
 
                     if (target != null)
                     {
-                        Party party = SystemManager.getPartyManager().getParty(target);
+                        Party party = Practice.getPartyManager().getParty(target);
 
                         if (party != null)
                         {

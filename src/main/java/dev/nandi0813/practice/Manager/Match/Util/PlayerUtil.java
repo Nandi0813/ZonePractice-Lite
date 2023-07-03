@@ -2,7 +2,6 @@ package dev.nandi0813.practice.Manager.Match.Util;
 
 import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
 import dev.nandi0813.practice.Manager.Match.Match;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -56,7 +55,7 @@ public class PlayerUtil
                 {
                     if (!match.getPlayers().contains(onlinePlayer) && !match.getSpectators().contains(onlinePlayer))
                     {
-                        SystemManager.getEntityHider().hideEntity(onlinePlayer, droppedItem);
+                        Practice.getEntityHider().hideEntity(onlinePlayer, droppedItem);
                     }
                 }
             }
@@ -72,7 +71,7 @@ public class PlayerUtil
                 {
                     if (!match.getPlayers().contains(onlinePlayer) && !match.getSpectators().contains(onlinePlayer))
                     {
-                        SystemManager.getEntityHider().hideEntity(onlinePlayer, droppedItem);
+                        Practice.getEntityHider().hideEntity(onlinePlayer, droppedItem);
                     }
                 }
             }

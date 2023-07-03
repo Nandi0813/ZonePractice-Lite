@@ -2,7 +2,6 @@ package dev.nandi0813.practice.Command.Practice.Arguments;
 
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
@@ -19,7 +18,7 @@ public class ResetallArg
             {
                 Bukkit.getScheduler().runTaskAsynchronously(Practice.getInstance(), () ->
                 {
-                    for (Profile profile : SystemManager.getProfileManager().getProfiles().values())
+                    for (Profile profile : Practice.getProfileManager().getProfiles().values())
                     {
                         profile.getFile().setDefaultData();
                         profile.getData();

@@ -5,7 +5,7 @@ import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -22,7 +22,7 @@ public class SpectateCommand implements CommandExecutor
         if (sender instanceof Player)
         {
             Player player = (Player) sender;
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
             if (!profile.getStatus().equals(ProfileStatus.OFFLINE))
             {
@@ -38,7 +38,7 @@ public class SpectateCommand implements CommandExecutor
                 else
                 {
                     Player target = Bukkit.getPlayer(args[0]);
-                    Party party = SystemManager.getPartyManager().getParty(player);
+                    Party party = Practice.getPartyManager().getParty(player);
 
                     if ((profile.getStatus().equals(ProfileStatus.LOBBY) || profile.getStatus().equals(ProfileStatus.SPECTATE)) && party == null)
                     {
@@ -46,8 +46,8 @@ public class SpectateCommand implements CommandExecutor
                         {
                             if (target != player)
                             {
-                                Profile targetProfile = SystemManager.getProfileManager().getProfiles().get(target);
-                                Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(target);
+                                Profile targetProfile = Practice.getProfileManager().getProfiles().get(target);
+                                Match match = Practice.getMatchManager().getLiveMatchByPlayer(target);
 
                                 if (targetProfile.getStatus().equals(ProfileStatus.MATCH))
                                 {

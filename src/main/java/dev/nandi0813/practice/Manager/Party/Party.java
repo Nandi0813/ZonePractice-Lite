@@ -5,7 +5,7 @@ import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -50,11 +50,11 @@ public class Party
      */
     public void addMember(Player member)
     {
-        Profile memberProfile = SystemManager.getProfileManager().getProfiles().get(member);
+        Profile memberProfile = Practice.getProfileManager().getProfiles().get(member);
 
         members.add(member);
         memberProfile.setParty(true);
-        SystemManager.getInventoryManager().getSpawnInventory().setInventory(member, false);
+        Practice.getInventoryManager().getSpawnInventory().setInventory(member, false);
 
         sendMessage(LanguageManager.getString("party.player-join").replaceAll("%player%", member.getName()));
     }
@@ -67,7 +67,7 @@ public class Party
      */
     public void removeMember(Player member, boolean kick)
     {
-        Profile memberProfile = SystemManager.getProfileManager().getProfiles().get(member);
+        Profile memberProfile = Practice.getProfileManager().getProfiles().get(member);
 
         if (kick)
             sendMessage(LanguageManager.getString("party.player-kick").replaceAll("%player%", member.getName()));
@@ -80,8 +80,8 @@ public class Party
         members.remove(member);
         memberProfile.setParty(false);
 
-        if (SystemManager.getProfileManager().getProfiles().get(member).getStatus().equals(ProfileStatus.LOBBY))
-            SystemManager.getInventoryManager().getSpawnInventory().setInventory(member, false);
+        if (Practice.getProfileManager().getProfiles().get(member).getStatus().equals(ProfileStatus.LOBBY))
+            Practice.getInventoryManager().getSpawnInventory().setInventory(member, false);
     }
 
     /**
@@ -92,7 +92,7 @@ public class Party
         sendMessage(LanguageManager.getString("party.disband"));
 
         for (Player member : members)
-            SystemManager.getProfileManager().getProfiles().get(member).setParty(false);
+            Practice.getProfileManager().getProfiles().get(member).setParty(false);
 
         List<Player> members_copy = new ArrayList<>(members);
         members.clear();
@@ -105,10 +105,10 @@ public class Party
         else
         {
             for (Player member : members_copy)
-                SystemManager.getInventoryManager().getSpawnInventory().setInventory(member, false);
+                Practice.getInventoryManager().getSpawnInventory().setInventory(member, false);
         }
 
-        SystemManager.getPartyManager().getParties().remove(this);
+        Practice.getPartyManager().getParties().remove(this);
     }
 
     /**

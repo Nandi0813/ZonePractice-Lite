@@ -6,7 +6,7 @@ import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.Cooldown.CooldownObject;
 import dev.nandi0813.practice.Util.Cooldown.PlayerCooldown;
 import org.bukkit.Material;
@@ -29,8 +29,8 @@ public class EnderpearlListener implements Listener
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR))
         {
             Player player = e.getPlayer();
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getStatus().equals(MatchStatus.LIVE) && e.getItem().getType().equals(Material.ENDER_PEARL))
             {

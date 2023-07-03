@@ -5,7 +5,6 @@ import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Server.ServerManager;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
@@ -23,7 +22,7 @@ public class MultiGameListener implements Listener
     public void onPlayerTeleport(PlayerTeleportEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         World from = e.getFrom().getWorld();
         World to = e.getTo().getWorld();
@@ -31,7 +30,7 @@ public class MultiGameListener implements Listener
         if (ServerManager.getLobby() != null)
         {
             World lobby = ServerManager.getLobby().getWorld();
-            World arenas = SystemManager.getArenaManager().getArenasWorld();
+            World arenas = Practice.getArenaManager().getArenasWorld();
 
             if (ConfigManager.getBoolean("multi-game-support"))
             {
@@ -39,22 +38,22 @@ public class MultiGameListener implements Listener
                 {
                     Bukkit.getServer().getScheduler().runTaskLater(Practice.getInstance(), () ->
                     {
-                        SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, true);
-                        SystemManager.getSidebarManager().loadSidebar(player);
+                        Practice.getInventoryManager().getSpawnInventory().setInventory(player, true);
+                        Practice.getSidebarManager().loadSidebar(player);
                     }, 2L);
                 }
                 else if (from.equals(lobby) && (!to.equals(arenas) && !to.equals(lobby)))
                 {
                     player.getInventory().clear();
 
-                    Party party = SystemManager.getPartyManager().getParty(player);
+                    Party party = Practice.getPartyManager().getParty(player);
                     if (party != null)
                         party.removeMember(player, false);
 
                     profile.setStatus(ProfileStatus.OFFLINE);
                     profile.saveData();
 
-                    SystemManager.getSidebarManager().unLoadSidebar(player);
+                    Practice.getSidebarManager().unLoadSidebar(player);
                 }
             }
         }

@@ -1,7 +1,7 @@
 package dev.nandi0813.practice.Util;
 
 import dev.nandi0813.practice.Manager.File.ConfigManager;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -42,8 +42,8 @@ public class PlayerUtil
 
     public static void setupPlayerRankedPerDay(Player player)
     {
-        if (!SystemManager.getMatchManager().getRankedPerDay().containsKey(player))
-            SystemManager.getMatchManager().getRankedPerDay().put(player, 0);
+        if (!Practice.getMatchManager().getRankedPerDay().containsKey(player))
+            Practice.getMatchManager().getRankedPerDay().put(player, 0);
 
         for (String permissionName : ConfigManager.getConfigSectionKeys("ranked.ranked-per-day"))
         {
@@ -53,20 +53,20 @@ public class PlayerUtil
             {
                 if (player.isOp())
                 {
-                    SystemManager.getMatchManager().getAllowedRankedPerDay().put(player, 1000000000);
+                    Practice.getMatchManager().getAllowedRankedPerDay().put(player, 1000000000);
                     return;
                 }
                 else if (player.hasPermission(permission))
                 {
                     int allowed_rankeds = ConfigManager.getInt("ranked.ranked-per-day." + permissionName + ".allowed-rankeds");
-                    SystemManager.getMatchManager().getAllowedRankedPerDay().put(player, allowed_rankeds);
+                    Practice.getMatchManager().getAllowedRankedPerDay().put(player, allowed_rankeds);
 
                     return;
                 }
             }
         }
 
-        SystemManager.getMatchManager().getAllowedRankedPerDay().put(player, ConfigManager.getInt("ranked.ranked-per-day.default"));
+        Practice.getMatchManager().getAllowedRankedPerDay().put(player, ConfigManager.getInt("ranked.ranked-per-day.default"));
     }
 
 }

@@ -1,62 +1,187 @@
 package dev.nandi0813.practice.Manager.Ladder;
 
-import dev.nandi0813.practice.Util.ItemUtil;
+import dev.nandi0813.practice.Manager.File.LadderFile;
+import dev.nandi0813.practice.Util.ItemSerializationUtil;
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Ladder
 {
 
-    @Getter @Setter private String name;
-    @Getter @Setter private boolean enabled;
-    @Getter @Setter private ItemStack icon;
-    @Getter @Setter private ItemStack[] armor;
-    @Getter @Setter private ItemStack[] inventory;
-    @Getter @Setter private List<PotionEffect> effects;
-    @Getter @Setter private KnockbackType knockbackType;
+    @Getter private final int id;
+    @Getter @Setter private String name = null;
+    @Getter @Setter private boolean enabled = false;
+    @Getter @Setter private ItemStack icon = null;
 
-    @Getter @Setter private int hitDelay;
-    @Getter @Setter private boolean ranked;
-    @Getter @Setter private boolean editable;
-    @Getter @Setter private boolean regen;
-    @Getter @Setter private boolean hunger;
-    @Getter @Setter private boolean build;
+    @Getter @Setter private ItemStack[] armor = null;
+    @Getter @Setter private ItemStack[] inventory = null;
+    @Getter @Setter private List<PotionEffect> effects = new ArrayList<>();
 
-    public Ladder(String name, Boolean enabled, ItemStack icon, boolean ranked, ItemStack[] armor, ItemStack[] inventory, List<PotionEffect> effects, int hitdelay, boolean editable, boolean regen, boolean hunger, boolean build) {
-        this.name = name;
-        this.enabled = enabled;
-        this.icon = icon;
-        this.ranked = ranked;
-        this.armor = armor;
-        this.inventory = inventory;
-        this.effects = effects;
-        this.hitDelay = hitdelay;
-        this.editable = editable;
-        this.regen = regen;
-        this.hunger = hunger;
-        this.build = build;
+    @Getter @Setter private KnockbackType knockbackType = KnockbackType.DEFAULT;
+    @Getter @Setter private int hitDelay = 20;
+    @Getter @Setter private boolean ranked = false;
+    @Getter @Setter private boolean editable = true;
+    @Getter @Setter private boolean regen = true;
+    @Getter @Setter private boolean hunger = true;
+    @Getter @Setter private boolean build = false;
+
+    public Ladder(int id) {
+        this.id = id;
+        getData();
     }
 
-    public Ladder(String name)
+    public void getData()
     {
-        this.name = name;
-        this.enabled = true;
-        this.icon = ItemUtil.createItem("&6" + this.name, Material.ANVIL);
-        this.ranked = false;
-        this.armor = new ItemStack[4];
-        this.inventory = new ItemStack[36];
-        this.effects = new ArrayList<>();
-        this.hitDelay = 20;
-        this.editable = false;
-        this.regen = true;
-        this.hunger = true;
-        this.build = false;
+        FileConfiguration config = LadderFile.getConfig();
+        String path = "ladders.ladder" + id;
+
+        if (!config.isConfigurationSection(path))
+            return;
+
+        String namePath = path + ".name";
+        if (config.isSet(namePath) && config.isString(namePath))
+            name = config.getString(namePath);
+
+        String enabledPath = path + ".enabled";
+        if (config.isSet(enabledPath) && config.isBoolean(enabledPath))
+            enabled = config.getBoolean(enabledPath);
+
+        String iconPath = path + ".icon";
+        if (config.isSet(iconPath) && config.isItemStack(iconPath))
+            icon = config.getItemStack(iconPath);
+
+        String armorPath = path + ".armor";
+        if (config.isSet(armorPath) && config.isString(armorPath))
+        {
+            try {
+                armor = ItemSerializationUtil.itemStackArrayFromBase64(config.getString(armorPath));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        String inventoryPath = path + ".inventory";
+        if (config.isSet(inventoryPath) && config.isString(inventoryPath))
+        {
+            try {
+                inventory = ItemSerializationUtil.itemStackArrayFromBase64(config.getString(inventoryPath));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        String effectPath = path + ".effects";
+        if (config.isSet(effectPath) && config.isList(effectPath))
+            effects = (List<PotionEffect>) config.getList(effectPath);
+
+        String knockbackPath = path + ".knockback";
+        if (config.isSet(knockbackPath) && config.isString(knockbackPath))
+            knockbackType = KnockbackType.valueOf(config.getString(knockbackPath));
+
+        String hitdelayPath = path + ".hitdelay";
+        if (config.isSet(hitdelayPath) && config.isInt(hitdelayPath))
+            hitDelay = config.getInt(hitdelayPath);
+
+        String rankedPath = path + ".ranked";
+        if (config.isSet(rankedPath) && config.isBoolean(rankedPath))
+            ranked = config.getBoolean(rankedPath);
+
+        String editablePath = path + ".editable";
+        if (config.isSet(editablePath) && config.isBoolean(editablePath))
+            editable = config.getBoolean(editablePath);
+
+        String regenPath = path + ".regen";
+        if (config.isSet(regenPath) && config.isBoolean(regenPath))
+            regen = config.getBoolean(regenPath);
+
+        String hungerPath = path + ".hunger";
+        if (config.isSet(hungerPath) && config.isBoolean(hungerPath))
+            hunger = config.getBoolean(hungerPath);
+
+        String buildPath = path + ".build";
+        if (config.isSet(buildPath) && config.isBoolean(buildPath))
+            build = config.getBoolean(buildPath);
+
+        if (enabled && !isReadyToEnable())
+            enabled = false;
+    }
+
+    public boolean isReadyToEnable()
+    {
+        return name != null && icon != null && armor != null && inventory != null && knockbackType != null;
+    }
+
+    public void saveData(boolean saveFile)
+    {
+        FileConfiguration config = LadderFile.getConfig();
+        String path = "ladders.ladder" + id;
+
+        if (name != null)
+        {
+            String namePath = path + ".name";
+            config.set(namePath, name);
+        }
+
+        String enabledPath = path + ".enabled";
+        config.set(enabledPath, enabled);
+
+        if (icon != null)
+        {
+            String iconPath = path + ".icon";
+            config.set(iconPath, icon);
+        }
+
+        if (armor != null)
+        {
+            String armorPath = path + ".armor";
+            config.set(armorPath, ItemSerializationUtil.itemStackArrayToBase64(armor));
+        }
+
+        if (inventory != null)
+        {
+            String inventoryPath = path + ".inventory";
+            config.set(inventoryPath, ItemSerializationUtil.itemStackArrayToBase64(inventory));
+        }
+
+        if (effects != null && !effects.isEmpty())
+        {
+            String effectPath = path + ".effects";
+            config.set(effectPath, effects);
+        }
+
+        if (knockbackType != null)
+        {
+            String knockbackPath = path + ".knockback";
+            config.set(knockbackPath, knockbackType.name().toUpperCase());
+        }
+
+        String hitdelayPath = path + ".hitdelay";
+        config.set(hitdelayPath, hitDelay);
+
+        String rankedPath = path + ".ranked";
+        config.set(rankedPath, ranked);
+
+        String editablePath = path + ".editable";
+        config.set(editablePath, editable);
+
+        String regenPath = path + ".regen";
+        config.set(regenPath, regen);
+
+        String hungerPath = path + ".hunger";
+        config.set(hungerPath, hunger);
+
+        String buildPath = path + ".build";
+        config.set(buildPath, build);
+
+        if (saveFile)
+            LadderFile.save();
     }
 
 }

@@ -3,7 +3,7 @@ package dev.nandi0813.practice.Command.Practice.Arguments;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Server.ServerManager;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -17,7 +17,7 @@ public class LobbyArg
         {
             if (ServerManager.getLobby() != null)
             {
-                Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+                Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
                 if (profile.getStatus().equals(ProfileStatus.MATCH) || profile.getStatus().equals(ProfileStatus.SPECTATE))
                 {
@@ -37,7 +37,7 @@ public class LobbyArg
         {
             Location lobbyLocation = player.getLocation();
 
-            if (!lobbyLocation.getWorld().equals(SystemManager.getArenaManager().getArenasWorld()))
+            if (!lobbyLocation.getWorld().equals(Practice.getArenaManager().getArenasWorld()))
             {
                 ServerManager.setLobby(lobbyLocation);
                 player.sendMessage(StringUtil.CC("&aYou successfully set the &elobby spawn&a."));

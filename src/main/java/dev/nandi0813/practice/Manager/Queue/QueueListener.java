@@ -1,6 +1,6 @@
 package dev.nandi0813.practice.Manager.Queue;
 
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,7 +13,7 @@ public class QueueListener implements Listener
     public void onPlayerQuit(PlayerQuitEvent e)
     {
         Player player = e.getPlayer();
-        Queue queue = SystemManager.getQueueManager().getQueue(player);
+        Queue queue = Practice.getQueueManager().getQueue(player);
 
         if (queue != null)
             queue.endQueue(false);

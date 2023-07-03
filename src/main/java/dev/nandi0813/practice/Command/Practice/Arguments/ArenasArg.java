@@ -2,7 +2,7 @@ package dev.nandi0813.practice.Command.Practice.Arguments;
 
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -12,7 +12,7 @@ public class ArenasArg
 
     public static void ArenasCommand(Player player)
     {
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.MATCH) || profile.getStatus().equals(ProfileStatus.SPECTATE))
         {
@@ -20,7 +20,7 @@ public class ArenasArg
             return;
         }
 
-        player.teleport(SystemManager.getArenaManager().getArenasWorld().getSpawnLocation());
+        player.teleport(Practice.getArenaManager().getArenasWorld().getSpawnLocation());
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
         player.setGameMode(GameMode.CREATIVE);

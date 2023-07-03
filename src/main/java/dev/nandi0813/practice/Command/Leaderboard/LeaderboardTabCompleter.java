@@ -1,7 +1,7 @@
 package dev.nandi0813.practice.Command.Leaderboard;
 
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -19,7 +19,7 @@ public class LeaderboardTabCompleter implements TabCompleter
 
         if (args.length == 1)
         {
-            for (Ladder ladder : SystemManager.getLadderManager().getLadders())
+            for (Ladder ladder : Practice.getLadderManager().getLadders())
                 if (ladder.isEnabled())
                     arguments.add(ladder.getName());
         }

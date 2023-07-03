@@ -3,7 +3,7 @@ package dev.nandi0813.practice.Command.Practice.Arguments;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
 import dev.nandi0813.practice.Manager.Match.Match;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class EndmatchArg
 
                 if (target != null)
                 {
-                    Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(target);
+                    Match match = Practice.getMatchManager().getLiveMatchByPlayer(target);
 
                     if (match != null)
                     {

@@ -2,7 +2,7 @@ package dev.nandi0813.practice.Manager.Inventory.QueueInventory;
 
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +17,7 @@ public class QueueInventoryListener implements Listener
     public void onPlayerInteract(PlayerInteractEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
         ItemStack item = e.getItem();
         Action action = e.getAction();
 
@@ -29,7 +29,7 @@ public class QueueInventoryListener implements Listener
             if (action.equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR))
             {
                 if (item.equals(QueueInventory.getLeaveItem()))
-                    SystemManager.getQueueManager().getQueue(player).endQueue(false);
+                    Practice.getQueueManager().getQueue(player).endQueue(false);
             }
         }
     }

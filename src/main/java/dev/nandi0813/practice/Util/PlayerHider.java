@@ -5,7 +5,7 @@ import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Server.ServerManager;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,7 +26,7 @@ public class PlayerHider implements Listener
         {
             if (player != p)
             {
-                Profile pProfile = SystemManager.getProfileManager().getProfiles().get(p);
+                Profile pProfile = Practice.getProfileManager().getProfiles().get(p);
 
                 if (pProfile.getStatus().equals(ProfileStatus.MATCH))
                     p.hidePlayer(player);
@@ -44,15 +44,15 @@ public class PlayerHider implements Listener
     public void onPlayerTeleport(PlayerTeleportEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (ServerManager.getLobby() != null)
         {
-            if (e.getFrom().getWorld().equals(ServerManager.getLobby().getWorld()) && e.getTo().getWorld().equals(SystemManager.getArenaManager().getArenasWorld()))
+            if (e.getFrom().getWorld().equals(ServerManager.getLobby().getWorld()) && e.getTo().getWorld().equals(Practice.getArenaManager().getArenasWorld()))
             {
                 if (profile.getStatus().equals(ProfileStatus.MATCH))
                 {
-                    Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+                    Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
                     for (Player p : Bukkit.getOnlinePlayers())
                     {
@@ -65,7 +65,7 @@ public class PlayerHider implements Listener
                 }
                 else if (profile.getStatus().equals(ProfileStatus.SPECTATE))
                 {
-                    Match match = SystemManager.getMatchManager().getLiveMatchBySpectator(player);
+                    Match match = Practice.getMatchManager().getLiveMatchBySpectator(player);
 
                     for (Player p : Bukkit.getOnlinePlayers())
                     {
@@ -90,11 +90,11 @@ public class PlayerHider implements Listener
                     }
                 }
             }
-            else if (e.getFrom().getWorld().equals(SystemManager.getArenaManager().getArenasWorld()) && e.getTo().getWorld().equals(SystemManager.getArenaManager().getArenasWorld()))
+            else if (e.getFrom().getWorld().equals(Practice.getArenaManager().getArenasWorld()) && e.getTo().getWorld().equals(Practice.getArenaManager().getArenasWorld()))
             {
                 if (profile.getStatus().equals(ProfileStatus.SPECTATE))
                 {
-                    Match match = SystemManager.getMatchManager().getLiveMatchBySpectator(player);
+                    Match match = Practice.getMatchManager().getLiveMatchBySpectator(player);
 
                     for (Player p : Bukkit.getOnlinePlayers())
                     {
@@ -119,7 +119,7 @@ public class PlayerHider implements Listener
                     }
                 }
             }
-            else if (e.getFrom().getWorld().equals(SystemManager.getArenaManager().getArenasWorld()) && e.getTo().getWorld().equals(ServerManager.getLobby().getWorld()))
+            else if (e.getFrom().getWorld().equals(Practice.getArenaManager().getArenasWorld()) && e.getTo().getWorld().equals(ServerManager.getLobby().getWorld()))
             {
                 for (Player p : Bukkit.getOnlinePlayers())
                 {

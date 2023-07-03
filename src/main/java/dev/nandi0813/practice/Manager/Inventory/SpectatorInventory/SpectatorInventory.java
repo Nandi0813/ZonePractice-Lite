@@ -2,7 +2,6 @@ package dev.nandi0813.practice.Manager.Inventory.SpectatorInventory;
 
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.ItemUtil;
 import dev.nandi0813.practice.Util.PlayerUtil;
@@ -37,7 +36,7 @@ public class SpectatorInventory
 
     public void setSpectatorInventory(Player player)
     {
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
         profile.setStatus(ProfileStatus.SPECTATE);
 
         PlayerUtil.setPlayerData(player, true, false);

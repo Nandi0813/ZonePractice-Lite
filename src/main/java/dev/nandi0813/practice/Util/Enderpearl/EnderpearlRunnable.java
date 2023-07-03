@@ -3,7 +3,6 @@ package dev.nandi0813.practice.Util.Enderpearl;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.Cooldown.CooldownObject;
 import dev.nandi0813.practice.Util.Cooldown.PlayerCooldown;
@@ -23,7 +22,7 @@ public class EnderpearlRunnable extends BukkitRunnable
     public EnderpearlRunnable(Player player)
     {
         this.player = player;
-        profile = SystemManager.getProfileManager().getProfiles().get(player);
+        profile = Practice.getProfileManager().getProfiles().get(player);
         seconds = ConfigManager.getInt("match-settings.enderpearl.cooldown");
     }
 

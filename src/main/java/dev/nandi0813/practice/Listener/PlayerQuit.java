@@ -3,7 +3,7 @@ package dev.nandi0813.practice.Listener;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,8 +16,8 @@ public class PlayerQuit implements Listener
     public void onPlayerQuit(PlayerQuitEvent e)
     {
         Player player = e.getPlayer();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
-        Party party = SystemManager.getPartyManager().getParty(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Party party = Practice.getPartyManager().getParty(player);
 
         if (party != null)
         {

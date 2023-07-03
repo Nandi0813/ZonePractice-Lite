@@ -1,7 +1,7 @@
 package dev.nandi0813.practice.Manager.Arena.Util;
 
 import dev.nandi0813.practice.Manager.Arena.Arena;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,7 +22,7 @@ public class CornerUtil
      */
     public static void setArenaCorners(String arenaName, Player player, int corner)
     {
-        Arena arena = SystemManager.getArenaManager().getArena(arenaName);
+        Arena arena = Practice.getArenaManager().getArena(arenaName);
 
         if (arena != null)
         {
@@ -40,7 +40,7 @@ public class CornerUtil
                 player.sendMessage(StringUtil.CC("&cBlock location can not be found!"));
                 return;
             }
-            if (!cornerLocation.getWorld().equals(SystemManager.getArenaManager().getArenasWorld()))
+            if (!cornerLocation.getWorld().equals(Practice.getArenaManager().getArenasWorld()))
             {
                 player.sendMessage(StringUtil.CC("&cThe corner must be located in the arenas world."));
                 return;

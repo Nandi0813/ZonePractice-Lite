@@ -1,7 +1,7 @@
 package dev.nandi0813.practice.Command.Arena.Arguments;
 
 import dev.nandi0813.practice.Manager.Arena.Arena;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -16,7 +16,7 @@ public class ArenaSetpositionArg
             String arenaName = args[1];
             int positionNumber = Integer.parseInt(args[2]);
             Location position = player.getLocation();
-            Arena arena = SystemManager.getArenaManager().getArena(arenaName);
+            Arena arena = Practice.getArenaManager().getArena(arenaName);
 
             if (arena != null)
             {

@@ -5,7 +5,6 @@ import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import org.bukkit.Bukkit;
@@ -26,13 +25,13 @@ public class LeaderboardCommand implements CommandExecutor
         if (sender instanceof Player)
         {
             Player player = (Player) sender;
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
             if (!profile.getStatus().equals(ProfileStatus.OFFLINE))
             {
                 if (args.length == 2 && (args[1].equalsIgnoreCase("elo") || args[1].equalsIgnoreCase("win")))
                 {
-                    Ladder ladder = SystemManager.getLadderManager().getLadder(args[0]);
+                    Ladder ladder = Practice.getLadderManager().getLadder(args[0]);
 
                     if (ladder != null)
                     {
@@ -119,7 +118,7 @@ public class LeaderboardCommand implements CommandExecutor
         {
             HashMap<OfflinePlayer, Integer> leaderboard = new HashMap<>();
 
-            for (Profile profile : SystemManager.getProfileManager().getProfiles().values())
+            for (Profile profile : Practice.getProfileManager().getProfiles().values())
             {
                 if (engine.equalsIgnoreCase("elo"))
                 {

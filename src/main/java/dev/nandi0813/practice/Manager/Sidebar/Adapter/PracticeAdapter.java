@@ -12,7 +12,7 @@ import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Queue.Queue;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import dev.nandi0813.practice.Util.TPSUtil;
 import org.bukkit.Bukkit;
@@ -35,18 +35,18 @@ public class PracticeAdapter implements SidebarAdapter
     public List<String> getLines(Player player)
     {
         List<String> sidebar = new ArrayList<>();
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if (profile.getStatus().equals(ProfileStatus.LOBBY) || profile.getStatus().equals(ProfileStatus.EDITOR))
         {
-            Party party = SystemManager.getPartyManager().getParty(player);
+            Party party = Practice.getPartyManager().getParty(player);
 
             if (party == null)
             {
                 sidebar.add("&7&m---------------------");
                 sidebar.add("&fOnline: &6" + Bukkit.getOnlinePlayers().size());
-                sidebar.add("&fIn Fights: &6" + SystemManager.getMatchManager().getMatchSize());
-                sidebar.add("&fIn Queue: &6" + SystemManager.getQueueManager().getQueues().size());
+                sidebar.add("&fIn Fights: &6" + Practice.getMatchManager().getMatchSize());
+                sidebar.add("&fIn Queue: &6" + Practice.getQueueManager().getQueues().size());
                 sidebar.add("");
                 sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
@@ -55,8 +55,8 @@ public class PracticeAdapter implements SidebarAdapter
             {
                 sidebar.add("&7&m---------------------");
                 sidebar.add("&fOnline: &6" + Bukkit.getOnlinePlayers().size());
-                sidebar.add("&fIn Fights: &6" + SystemManager.getMatchManager().getMatchSize());
-                sidebar.add("&fIn Queue: &6" + SystemManager.getQueueManager().getQueues().size());
+                sidebar.add("&fIn Fights: &6" + Practice.getMatchManager().getMatchSize());
+                sidebar.add("&fIn Queue: &6" + Practice.getQueueManager().getQueues().size());
                 sidebar.add("");
                 sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
@@ -68,15 +68,15 @@ public class PracticeAdapter implements SidebarAdapter
         }
         else if (profile.getStatus().equals(ProfileStatus.QUEUE))
         {
-            Queue queue = SystemManager.getQueueManager().getQueue(player);
+            Queue queue = Practice.getQueueManager().getQueue(player);
             if (queue == null) return null;
 
             sidebar.add("&7&m---------------------");
             sidebar.add("&fOnline: &6" + Bukkit.getOnlinePlayers().size());
-            sidebar.add("&fIn Fights: &6" + SystemManager.getMatchManager().getMatchSize());
-            sidebar.add("&fIn Queue: &6" + SystemManager.getQueueManager().getQueues().size());
+            sidebar.add("&fIn Fights: &6" + Practice.getMatchManager().getMatchSize());
+            sidebar.add("&fIn Queue: &6" + Practice.getQueueManager().getQueues().size());
             sidebar.add("&7&m---------------------");
-            sidebar.add((queue.isRanked() ? "&cRanked" : "&aUnranked") + " " + queue.getLadder().getIcon().getItemMeta().getDisplayName());
+            sidebar.add((queue.isRanked() ? "&cRanked" : "&aUnranked") + " &e" + queue.getLadder().getName());
             sidebar.add("&fTime: &6" + StringUtil.formatMillisecondsToMinutes(queue.getQueueRunnable().getSeconds() * 1000L));
             sidebar.add("");
             sidebar.add(LanguageManager.getString("sidebar.ip-line"));
@@ -84,7 +84,7 @@ public class PracticeAdapter implements SidebarAdapter
         }
         else if (profile.getStatus().equals(ProfileStatus.MATCH))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchByPlayer(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
             if (match == null) return null;
 
             if (match.getType().equals(MatchType.DUEL))
@@ -137,7 +137,7 @@ public class PracticeAdapter implements SidebarAdapter
         }
         else if (profile.getStatus().equals(ProfileStatus.SPECTATE))
         {
-            Match match = SystemManager.getMatchManager().getLiveMatchBySpectator(player);
+            Match match = Practice.getMatchManager().getLiveMatchBySpectator(player);
             if (match == null) return null;
 
             if (match.getType().equals(MatchType.DUEL))
@@ -153,7 +153,7 @@ public class PracticeAdapter implements SidebarAdapter
                 else player2Ping = "N/A";
 
                 sidebar.add("&7&m---------------------");
-                sidebar.add("&aKit: " + match.getLadder().getIcon().getItemMeta().getDisplayName());
+                sidebar.add("&aKit: &e" + match.getLadder().getName());
                 sidebar.add("");
                 sidebar.add("&fDuration: &6" + StringUtil.formatMillisecondsToMinutes(match.getDurationCountdown().getSeconds() * 1000L));
                 sidebar.add("");
@@ -166,10 +166,10 @@ public class PracticeAdapter implements SidebarAdapter
             else if (match.getType().equals(MatchType.PARTY_FFA))
             {
                 sidebar.add("&7&m---------------------");
-                sidebar.add("&aKit: " + match.getLadder().getIcon().getItemMeta().getDisplayName());
+                sidebar.add("&aKit: &e" + match.getLadder().getName());
                 sidebar.add("");
                 sidebar.add("&6&lParty FFA");
-                sidebar.add("&fLeader: &e" + SystemManager.getPartyManager().getParty(match).getLeader().getName());
+                sidebar.add("&fLeader: &e" + Practice.getPartyManager().getParty(match).getLeader().getName());
                 sidebar.add("&fAlive: &6" + match.getPlayers().size() + "&7/&e" + match.getAlivePlayers().size());
                 sidebar.add("&fDuration: &6" + StringUtil.formatMillisecondsToMinutes(match.getDurationCountdown().getSeconds() * 1000L));
                 sidebar.add("");
@@ -182,7 +182,7 @@ public class PracticeAdapter implements SidebarAdapter
                 List<Player> team2 = PartySplit.getTeamPlayers(match, TeamEnum.TEAM2);
 
                 sidebar.add("&7&m---------------------");
-                sidebar.add("&aKit: " + match.getLadder().getIcon().getItemMeta().getDisplayName());
+                sidebar.add("&aKit: &e" + match.getLadder().getName());
                 sidebar.add("");
                 sidebar.add("&6&lParty Split");
                 sidebar.add(TeamEnum.TEAM1.getName() + "&7: &9" + team1.size() + "&7/&9" + PartySplit.getTeamAlivePlayers(match, TeamEnum.TEAM1).size());

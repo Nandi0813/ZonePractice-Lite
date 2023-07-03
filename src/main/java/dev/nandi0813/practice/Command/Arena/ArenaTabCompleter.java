@@ -2,7 +2,7 @@ package dev.nandi0813.practice.Command.Arena;
 
 import dev.nandi0813.practice.Manager.Arena.Arena;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -41,7 +41,7 @@ public class ArenaTabCompleter implements TabCompleter
         {
             if (args[0].equalsIgnoreCase("info") || args[0].equalsIgnoreCase("delete") || args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("setcorner") || args[0].equalsIgnoreCase("setposition") || args[0].equalsIgnoreCase("setbuild"))
             {
-                for (Arena arena : SystemManager.getArenaManager().getArenas())
+                for (Arena arena : Practice.getArenaManager().getArenas())
                     arguments.add(arena.getName());
             }
             else if (args[0].equalsIgnoreCase("ladder"))
@@ -73,12 +73,12 @@ public class ArenaTabCompleter implements TabCompleter
             {
                 if (args[1].equalsIgnoreCase("list"))
                 {
-                    for (Arena arena : SystemManager.getArenaManager().getArenas())
+                    for (Arena arena : Practice.getArenaManager().getArenas())
                         arguments.add(arena.getName());
                 }
                 else if (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove"))
                 {
-                    for (Arena arena : SystemManager.getArenaManager().getArenas())
+                    for (Arena arena : Practice.getArenaManager().getArenas())
                         arguments.add(arena.getName());
                 }
             }
@@ -87,7 +87,7 @@ public class ArenaTabCompleter implements TabCompleter
         {
             if (args[0].equalsIgnoreCase("ladder") && (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove")))
             {
-                for (Ladder ladder : SystemManager.getLadderManager().getLadders())
+                for (Ladder ladder : Practice.getLadderManager().getLadders())
                     arguments.add(ladder.getName());
             }
         }

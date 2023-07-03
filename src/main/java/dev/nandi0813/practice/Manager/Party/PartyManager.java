@@ -4,7 +4,6 @@ import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Match.Match;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Manager.Profile.Profile;
-import dev.nandi0813.practice.Manager.SystemManager;
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -58,9 +57,9 @@ public class PartyManager
      */
     public void createParty(Player player)
     {
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (SystemManager.getPartyManager().getParty(player) == null)
+        if (Practice.getPartyManager().getParty(player) == null)
         {
             if (profile.getStatus().equals(ProfileStatus.LOBBY))
             {
@@ -70,7 +69,7 @@ public class PartyManager
                     parties.add(party);
                     profile.setParty(true);
 
-                    SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, false);
+                    Practice.getInventoryManager().getSpawnInventory().setInventory(player, false);
 
                     player.sendMessage(LanguageManager.getString("party.create"));
                 }

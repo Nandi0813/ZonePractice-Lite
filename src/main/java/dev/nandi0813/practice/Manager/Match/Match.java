@@ -5,7 +5,6 @@ import dev.nandi0813.practice.Event.MatchStartEvent;
 import dev.nandi0813.practice.Manager.Arena.Arena;
 import dev.nandi0813.practice.Manager.Arena.BlockChange.CachedBlock;
 import dev.nandi0813.practice.Manager.Arena.BlockChange.Rollback;
-import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
@@ -20,7 +19,7 @@ import dev.nandi0813.practice.Manager.Match.Runnable.DurationCountdown;
 import dev.nandi0813.practice.Manager.Match.Runnable.StartCountdown;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
-import dev.nandi0813.practice.Manager.SystemManager;
+import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.StringUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -108,7 +107,7 @@ public class Match
         {
             if (type.equals(MatchType.DUEL))
                 matchStats.put(player, new PlayerMatchStat(player));
-            SystemManager.getProfileManager().getProfiles().get(player).setStatus(ProfileStatus.MATCH);
+            Practice.getProfileManager().getProfiles().get(player).setStatus(ProfileStatus.MATCH);
         }
 
         switch (type)
@@ -193,9 +192,9 @@ public class Match
     {
         for (Player player : players)
         {
-            Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-            if (profile.getStatus().equals(ProfileStatus.MATCH) && SystemManager.getMatchManager().getLiveMatchByPlayer(player).equals(this))
+            if (profile.getStatus().equals(ProfileStatus.MATCH) && Practice.getMatchManager().getLiveMatchByPlayer(player).equals(this))
                 player.sendMessage(StringUtil.CC(message));
         }
         if (spectator)
@@ -215,7 +214,7 @@ public class Match
     {
         spectators.add(player);
 
-        SystemManager.getInventoryManager().getSpectatorInventory().setSpectatorInventory(player);
+        Practice.getInventoryManager().getSpectatorInventory().setSpectatorInventory(player);
         player.teleport(gameArena.getPosition3());
 
         if (!player.hasPermission("zonepractice.spectate.silent"))
@@ -229,10 +228,10 @@ public class Match
      */
     public void removePlayer(Player player, boolean removeSpectator)
     {
-        Profile profile = SystemManager.getProfileManager().getProfiles().get(player);
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if ((profile.getStatus().equals(ProfileStatus.MATCH) && SystemManager.getMatchManager().getLiveMatchByPlayer(player).equals(this))
-                || (profile.getStatus().equals(ProfileStatus.SPECTATE) && SystemManager.getMatchManager().getLiveMatchBySpectator(player).equals(this)))
+        if ((profile.getStatus().equals(ProfileStatus.MATCH) && Practice.getMatchManager().getLiveMatchByPlayer(player).equals(this))
+                || (profile.getStatus().equals(ProfileStatus.SPECTATE) && Practice.getMatchManager().getLiveMatchBySpectator(player).equals(this)))
         {
             if (!status.equals(MatchStatus.OLD) && profile.getStatus().equals(ProfileStatus.SPECTATE) && !player.hasPermission("zonepractice.spectate.silent"))
                 sendMessage(LanguageManager.getString("match.spectator-leave").replaceAll("%player%", player.getName()), true);
@@ -240,7 +239,7 @@ public class Match
             if (removeSpectator)
                 spectators.remove(player);
 
-            SystemManager.getInventoryManager().getSpawnInventory().setInventory(player, true);
+            Practice.getInventoryManager().getSpawnInventory().setInventory(player, true);
         }
     }
 
