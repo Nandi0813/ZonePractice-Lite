@@ -73,6 +73,7 @@ stats:
 
 leaderboard:
   ladder-not-found: "&cLadder cannot be found."
+  ladder-not-ranked: "&cLadder is not ranked."
   ladder-disabled: "&cLadder is currently disabled."
   elo:
     title: "&6&l%ladder% &6elo leaderboard"

@@ -33,8 +33,13 @@ public class LeaderboardTabCompleter implements TabCompleter
         }
         else if (args.length == 2)
         {
-            arguments.add("win");
-            arguments.add("elo");
+            Ladder ladder = Practice.getLadderManager().getLadder(args[0]);
+            if (ladder != null)
+            {
+                arguments.add("win");
+                if (ladder.isRanked())
+                    arguments.add("elo");
+            }
 
             StringUtil.copyPartialMatches(args[1], arguments, completion);
         }

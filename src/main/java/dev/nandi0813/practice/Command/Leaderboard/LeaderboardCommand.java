@@ -39,33 +39,38 @@ public class LeaderboardCommand implements CommandExecutor
                         {
                             if (args[1].equalsIgnoreCase("elo"))
                             {
-                                createLeaderboard(ladder, "elo", result ->
+                                if (ladder.isRanked())
                                 {
-                                    ArrayList<OfflinePlayer> topPlayers = new ArrayList<>();
-                                    for (OfflinePlayer p : result.keySet())
+                                    createLeaderboard(ladder, "elo", result ->
                                     {
-                                        if (topPlayers.size() <= ConfigManager.getInt("show-player"))
-                                            topPlayers.add(p);
-                                        else
-                                            break;
-                                    }
-
-                                    player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
-                                    player.sendMessage(LanguageManager.getString("leaderboard.elo.title").replaceAll("%ladder%", ladder.getName()));
-                                    player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
-                                    for (int i = 0; i < ConfigManager.getInt("show-player"); i++)
-                                    {
-                                        if (topPlayers.size() > i)
+                                        List<OfflinePlayer> topPlayers = new ArrayList<>();
+                                        for (OfflinePlayer p : result.keySet())
                                         {
-                                            OfflinePlayer target = topPlayers.get(i);
-                                            player.sendMessage(LanguageManager.getString("leaderboard.elo.place-line")
-                                                    .replaceAll("%place%", String.valueOf((i+1)))
-                                                    .replaceAll("%player%", target.getName())
-                                                    .replaceAll("%elo%", String.valueOf(result.get(target))));
+                                            if (topPlayers.size() <= ConfigManager.getInt("show-player"))
+                                                topPlayers.add(p);
+                                            else
+                                                break;
                                         }
-                                    }
-                                    player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
-                                });
+
+                                        player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
+                                        player.sendMessage(LanguageManager.getString("leaderboard.elo.title").replaceAll("%ladder%", ladder.getName()));
+                                        player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
+                                        for (int i = 0; i < ConfigManager.getInt("show-player"); i++)
+                                        {
+                                            if (topPlayers.size() > i)
+                                            {
+                                                OfflinePlayer target = topPlayers.get(i);
+                                                player.sendMessage(LanguageManager.getString("leaderboard.elo.place-line")
+                                                        .replaceAll("%place%", String.valueOf((i+1)))
+                                                        .replaceAll("%player%", target.getName())
+                                                        .replaceAll("%elo%", String.valueOf(result.get(target))));
+                                            }
+                                        }
+                                        player.sendMessage(StringUtil.CC("&7&m------------------------------------"));
+                                    });
+                                }
+                                else
+                                    player.sendMessage(StringUtil.CC(LanguageManager.getString("leaderboard.ladder-not-ranked")));
                             }
                             else
                             {
@@ -128,7 +133,10 @@ public class LeaderboardCommand implements CommandExecutor
                 else
                 {
                     int unrankedWin = profile.getLadderUnRankedWins().get(ladder);
-                    int rankedWin = profile.getLadderRankedWins().get(ladder);
+                    int rankedWin = 0;
+
+                    if (ladder.isRanked())
+                        profile.getLadderRankedWins().get(ladder);
 
                     leaderboard.put(profile.getPlayer(), (unrankedWin + rankedWin));
                 }
