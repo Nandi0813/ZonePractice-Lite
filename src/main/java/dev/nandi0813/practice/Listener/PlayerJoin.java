@@ -3,7 +3,6 @@ package dev.nandi0813.practice.Listener;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Practice;
-import dev.nandi0813.practice.Util.AdMessageUtil;
 import dev.nandi0813.practice.Util.PlayerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -31,9 +30,6 @@ public class PlayerJoin implements Listener
 
         if (!ConfigManager.getBoolean("multi-game-support"))
             Practice.getInventoryManager().getSpawnInventory().setInventory(player, true);
-
-        if (player.isOp())
-            AdMessageUtil.sendAdMessagesToPlayer(player);
 
         PlayerUtil.setupPlayerRankedPerDay(player);
     }
