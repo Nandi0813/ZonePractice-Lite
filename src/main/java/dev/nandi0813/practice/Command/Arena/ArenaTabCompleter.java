@@ -7,8 +7,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ArenaTabCompleter implements TabCompleter
@@ -17,8 +19,11 @@ public class ArenaTabCompleter implements TabCompleter
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String label, String[] args)
     {
-        List<String> arguments = new ArrayList<>();
+        if (!(commandSender instanceof Player)) return null;
+
         Player player = (Player) commandSender;
+        List<String> arguments = new ArrayList<>();
+        List<String> completion = new ArrayList<>();
 
         if (!player.hasPermission("zonepractice.setup"))
             return null;
@@ -36,6 +41,8 @@ public class ArenaTabCompleter implements TabCompleter
             arguments.add("setposition");
             arguments.add("setbuild");
             arguments.add("ladder");
+
+            StringUtil.copyPartialMatches(args[0], arguments, completion);
         }
         else if (args.length == 2)
         {
@@ -50,6 +57,8 @@ public class ArenaTabCompleter implements TabCompleter
                 arguments.add("add");
                 arguments.add("remove");
             }
+
+            StringUtil.copyPartialMatches(args[1], arguments, completion);
         }
         else if (args.length == 3)
         {
@@ -82,6 +91,8 @@ public class ArenaTabCompleter implements TabCompleter
                         arguments.add(arena.getName());
                 }
             }
+
+            StringUtil.copyPartialMatches(args[2], arguments, completion);
         }
         else if (args.length == 4)
         {
@@ -90,9 +101,12 @@ public class ArenaTabCompleter implements TabCompleter
                 for (Ladder ladder : Practice.getLadderManager().getLadders())
                     arguments.add(ladder.getName());
             }
+
+            StringUtil.copyPartialMatches(args[3], arguments, completion);
         }
 
-        return arguments;
+        Collections.sort(completion);
+        return completion;
     }
 
 }

@@ -5,8 +5,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SpectateTabCompleter implements TabCompleter
@@ -15,8 +17,11 @@ public class SpectateTabCompleter implements TabCompleter
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String label, String[] args)
     {
-        List<String> arguments = new ArrayList<>();
+        if (!(commandSender instanceof Player)) return null;
+
         Player player = (Player) commandSender;
+        List<String> arguments = new ArrayList<>();
+        List<String> completion = new ArrayList<>();
 
         if (!player.hasPermission("zonepractice.spectate"))
             return null;
@@ -27,9 +32,12 @@ public class SpectateTabCompleter implements TabCompleter
             for (Player online : Bukkit.getOnlinePlayers())
                 if (online != player)
                     arguments.add(online.getName());
+
+            StringUtil.copyPartialMatches(args[0], arguments, completion);
         }
 
-        return arguments;
+        Collections.sort(completion);
+        return completion;
     }
 
 }

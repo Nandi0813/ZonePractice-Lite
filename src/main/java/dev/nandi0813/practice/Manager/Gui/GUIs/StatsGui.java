@@ -24,7 +24,8 @@ public class StatsGui extends GUI
 
     @Getter private final Profile profile;
 
-    public StatsGui(Profile profile) {
+    public StatsGui(Profile profile)
+    {
         super(GUIType.PROFILE_STATS);
         this.profile = profile;
 
@@ -61,7 +62,7 @@ public class StatsGui extends GUI
             {
                 if (ladder.isEnabled())
                 {
-                    ItemStack item = ladder.getIcon();
+                    ItemStack item = ladder.getIcon().clone();
                     ItemMeta itemMeta = item.getItemMeta();
 
                     List<String> lore = new ArrayList<>();

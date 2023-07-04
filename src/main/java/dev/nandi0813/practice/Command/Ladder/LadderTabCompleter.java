@@ -18,6 +18,8 @@ public class LadderTabCompleter implements TabCompleter
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String label, String[] args)
     {
+        if (!(commandSender instanceof Player)) return null;
+
         Player player = (Player) commandSender;
 
         if (!player.hasPermission("zonepractice.setup"))
@@ -41,10 +43,12 @@ public class LadderTabCompleter implements TabCompleter
             arguments.add("setenable");
             arguments.add("list");
             arguments.add("info");
+
+            StringUtil.copyPartialMatches(args[0], arguments, completion);
         }
         else if (args.length == 2)
         {
-            switch (args[1])
+            switch (args[0])
             {
                 case "info":
                 case "setname":
@@ -66,11 +70,11 @@ public class LadderTabCompleter implements TabCompleter
                     }
                     break;
             }
+
+            StringUtil.copyPartialMatches(args[1], arguments, completion);
         }
 
-        StringUtil.copyPartialMatches(args[0], arguments, completion);
         Collections.sort(completion);
-
         return completion;
     }
 
