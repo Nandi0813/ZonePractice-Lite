@@ -17,7 +17,7 @@ public class BackendManager
 
     public static void createFile(Practice practice)
     {
-        file = new File(practice.getDataFolder(), "do-not-touch.yml");
+        file = new File(practice.getDataFolder(), "backend.yml");
         config = YamlConfiguration.loadConfiguration(file);
         save();
         reload();

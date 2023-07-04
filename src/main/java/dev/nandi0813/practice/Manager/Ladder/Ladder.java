@@ -150,10 +150,14 @@ public class Ladder
             config.set(inventoryPath, ItemSerializationUtil.itemStackArrayToBase64(inventory));
         }
 
+        String effectPath = path + ".effects";
         if (effects != null && !effects.isEmpty())
         {
-            String effectPath = path + ".effects";
             config.set(effectPath, effects);
+        }
+        else
+        {
+            config.set(effectPath, null);
         }
 
         if (knockbackType != null)

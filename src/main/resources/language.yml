@@ -252,15 +252,24 @@ gui:
         - "&eW/L Ration: &f%w/l-ratio%"
         - "&7&m---------------------------------"
     ladder:
-      lore:
-        - "&7&m---------------------------------"
-        - "&eELO: &f%elo%"
-        - ""
-        - "&aUnranked &eWins: &f%unrankedWins%"
-        - "&aUnranked &eLosses: &f%unrankedLosses%"
-        - ""
-        - "&cRanked &eWins: &f%rankedWins%"
-        - "&cRanked &eLosses: &f%rankedLosses%"
-        - ""
-        - "&eW/L Ratio: &f%w/l-ratio%"
-        - "&7&m---------------------------------"
+      unranked:
+        lore:
+          - "&7&m---------------------------------"
+          - "&aUnranked &eWins: &f%unrankedWins%"
+          - "&aUnranked &eLosses: &f%unrankedLosses%"
+          - ""
+          - "&eW/L Ratio: &f%w/l-ratio%"
+          - "&7&m---------------------------------"
+      ranked:
+        lore:
+          - "&7&m---------------------------------"
+          - "&eELO: &f%elo%"
+          - ""
+          - "&aUnranked &eWins: &f%unrankedWins%"
+          - "&aUnranked &eLosses: &f%unrankedLosses%"
+          - ""
+          - "&cRanked &eWins: &f%rankedWins%"
+          - "&cRanked &eLosses: &f%rankedLosses%"
+          - ""
+          - "&eW/L Ratio: &f%w/l-ratio%"
+          - "&7&m---------------------------------"

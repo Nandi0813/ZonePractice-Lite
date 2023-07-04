@@ -65,15 +65,28 @@ public class StatsGui extends GUI
                     ItemMeta itemMeta = item.getItemMeta();
 
                     List<String> lore = new ArrayList<>();
-                    for (String line : LanguageManager.getList("gui.stats.ladder.lore"))
+                    if (ladder.isRanked())
                     {
-                        lore.add(line
-                                .replaceAll("%elo%", String.valueOf(profile.getElo().get(ladder)))
-                                .replaceAll("%unrankedWins%", String.valueOf(profile.getLadderUnRankedWins().get(ladder)))
-                                .replaceAll("%unrankedLosses%", String.valueOf(profile.getLadderUnRankedLosses().get(ladder)))
-                                .replaceAll("%rankedWins%", String.valueOf(profile.getLadderRankedWins().get(ladder)))
-                                .replaceAll("%rankedLosses%", String.valueOf(profile.getLadderRankedLosses().get(ladder)))
-                                .replaceAll("%w/l-ratio%", df.format(((profile.getLadderRankedWins().get(ladder) + profile.getLadderUnRankedWins().get(ladder)) * 1.0 / (profile.getLadderRankedLosses().get(ladder) + profile.getLadderUnRankedLosses().get(ladder))))));
+                        for (String line : LanguageManager.getList("gui.stats.ladder.ranked.lore"))
+                        {
+                            lore.add(line
+                                    .replaceAll("%elo%", String.valueOf(profile.getElo().get(ladder)))
+                                    .replaceAll("%unrankedWins%", String.valueOf(profile.getLadderUnRankedWins().get(ladder)))
+                                    .replaceAll("%unrankedLosses%", String.valueOf(profile.getLadderUnRankedLosses().get(ladder)))
+                                    .replaceAll("%rankedWins%", String.valueOf(profile.getLadderRankedWins().get(ladder)))
+                                    .replaceAll("%rankedLosses%", String.valueOf(profile.getLadderRankedLosses().get(ladder)))
+                                    .replaceAll("%w/l-ratio%", df.format(((profile.getLadderRankedWins().get(ladder) + profile.getLadderUnRankedWins().get(ladder)) * 1.0 / (profile.getLadderRankedLosses().get(ladder) + profile.getLadderUnRankedLosses().get(ladder))))));
+                        }
+                    }
+                    else
+                    {
+                        for (String line : LanguageManager.getList("gui.stats.ladder.unranked.lore"))
+                        {
+                            lore.add(line
+                                    .replaceAll("%unrankedWins%", String.valueOf(profile.getLadderUnRankedWins().get(ladder)))
+                                    .replaceAll("%unrankedLosses%", String.valueOf(profile.getLadderUnRankedLosses().get(ladder)))
+                                    .replaceAll("%w/l-ratio%", df.format(((profile.getLadderUnRankedWins().get(ladder)) * 1.0 / profile.getLadderUnRankedLosses().get(ladder)))));
+                        }
                     }
 
                     itemMeta.setLore(lore);
