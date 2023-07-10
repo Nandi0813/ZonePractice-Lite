@@ -111,15 +111,8 @@ public class EntityHiderListener extends PacketAdapter implements Listener
                     EntityHiderListener.blockPositions.add(bp);
                     EntityHiderListener.blockPositions.add(bp);
 
-                    try
-                    {
-                        for (Player matchPlayer : match.getPlayers())
-                            ProtocolLibrary.getProtocolManager().sendServerPacket(matchPlayer, packet);
-                    }
-                    catch (InvocationTargetException x)
-                    {
-                        x.printStackTrace();
-                    }
+                    for (Player matchPlayer : match.getPlayers())
+                        ProtocolLibrary.getProtocolManager().sendServerPacket(matchPlayer, packet);
                 }
             }
         }
