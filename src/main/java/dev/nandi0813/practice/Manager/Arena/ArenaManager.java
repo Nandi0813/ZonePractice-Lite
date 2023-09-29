@@ -3,6 +3,7 @@ package dev.nandi0813.practice.Manager.Arena;
 import dev.nandi0813.practice.Manager.Arena.BlockChange.RollbackListener;
 import dev.nandi0813.practice.Manager.Arena.Util.ArenaUtil;
 import dev.nandi0813.practice.Manager.Arena.Util.Cuboid;
+import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import org.bukkit.*;
@@ -132,7 +133,7 @@ public class ArenaManager
     {
         if (arenasWorld == null)
         {
-            WorldCreator wc = new WorldCreator("arenas");
+            WorldCreator wc = new WorldCreator(ConfigManager.getString("arena-world-name"));
             wc.type(WorldType.FLAT);
             wc.generatorSettings("2;0;1;");
             wc.createWorld();
