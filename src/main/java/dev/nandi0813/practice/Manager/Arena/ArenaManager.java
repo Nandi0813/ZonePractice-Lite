@@ -133,7 +133,7 @@ public class ArenaManager
     {
         if (arenasWorld == null)
         {
-            WorldCreator wc = new WorldCreator(ConfigManager.getString("arena-world-name"));
+            WorldCreator wc = new WorldCreator(ConfigManager.getConfig().getString("arena-world-name"));
             wc.type(WorldType.FLAT);
             wc.generatorSettings("2;0;1;");
             wc.createWorld();

@@ -61,12 +61,13 @@ public final class Practice extends JavaPlugin
     public void onEnable()
     {
         instance = this;
-        loadManagers();
 
         ConfigManager.createConfig(this);
         LanguageManager.createFile(this);
         BackendManager.createFile(this);
         LadderFile.createFile(this);
+
+        loadManagers();
 
         ladderManager.loadLadders();
         arenaManager.loadArenas();

@@ -3,7 +3,7 @@ notify-updates: true
 # The plugin only uses the lobby (which you can set) and the arenas worlds.
 multi-game-support: false
 # You can set the arenas world name which contains all the arenas.
-arena-world-name: "arenas";
+arena-world-name: arenas
 # Knockback modifier - it depends on the hit delay very much. You should test what is the optimal for you.
 knockback:
   combo:

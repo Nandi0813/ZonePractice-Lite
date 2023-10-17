@@ -34,7 +34,7 @@ public class ConfigManager
 
     public static String getString(String loc)
     {
-        return getConfig().getString(StringUtil.CC(loc));
+        return config.getString(StringUtil.CC(loc));
     }
     public static boolean getBoolean(String loc) { return getConfig().getBoolean(loc); }
     public static int getInt(String loc) { return getConfig().getInt(loc); }
