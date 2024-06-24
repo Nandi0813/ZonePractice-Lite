@@ -12,25 +12,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter @Setter
 public class Ladder
 {
 
-    @Getter private final int id;
-    @Getter @Setter private String name = null;
-    @Getter @Setter private boolean enabled = false;
-    @Getter @Setter private ItemStack icon = null;
+    private final int id;
+    private String name = null;
+    private boolean enabled = false;
+    private ItemStack icon = null;
 
-    @Getter @Setter private ItemStack[] armor = null;
-    @Getter @Setter private ItemStack[] inventory = null;
-    @Getter @Setter private List<PotionEffect> effects = new ArrayList<>();
+    private ItemStack[] armor = null;
+    private ItemStack[] inventory = null;
+    private List<PotionEffect> effects = new ArrayList<>();
 
-    @Getter @Setter private KnockbackType knockbackType = KnockbackType.DEFAULT;
-    @Getter @Setter private int hitDelay = 20;
-    @Getter @Setter private boolean ranked = false;
-    @Getter @Setter private boolean editable = true;
-    @Getter @Setter private boolean regen = true;
-    @Getter @Setter private boolean hunger = true;
-    @Getter @Setter private boolean build = false;
+    private KnockbackType knockbackType = KnockbackType.DEFAULT;
+    private int hitDelay = 20;
+    private boolean ranked = false;
+    private boolean editable = true;
+    private boolean regen = true;
+    private boolean hunger = true;
+    private boolean build = false;
 
     public Ladder(int id) {
         this.id = id;

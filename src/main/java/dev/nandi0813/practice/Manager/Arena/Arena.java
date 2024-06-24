@@ -13,21 +13,22 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter @Setter
 public class Arena
 {
 
-    @Getter private final String name;
-    @Getter @Setter private boolean available;
-    @Getter @Setter private Location corner1;
-    @Getter @Setter private Location corner2;
-    @Getter @Setter private Cuboid cuboid;
-    @Getter @Setter private Location position1;
-    @Getter @Setter private Location position2;
-    @Getter @Setter private Location position3;
-    @Getter @Setter private List<Ladder> ladders = new ArrayList<>();
-    @Getter @Setter private boolean build;
-    @Getter @Setter private boolean enabled;
-    @Getter private final ArenaFile file;
+    private final String name;
+    private boolean available;
+    private Location corner1;
+    private Location corner2;
+    private Cuboid cuboid;
+    private Location position1;
+    private Location position2;
+    private Location position3;
+    private List<Ladder> ladders = new ArrayList<>();
+    private boolean build;
+    private boolean enabled;
+    private final ArenaFile file;
 
     public Arena(String name)
     {
