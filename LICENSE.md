@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2022 Nandi0813
+Copyright (c) 2024 Nandi0813
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
