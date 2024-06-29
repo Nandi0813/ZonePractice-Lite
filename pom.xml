@@ -26,7 +26,7 @@
                 <filtering>true</filtering>
                 <directory>${basedir}/src/main/resources/</directory>
                 <includes>
-                    <include>*.*</include>
+                    <include>**/*</include> <!-- This will include all files and subdirectories -->
                 </includes>
             </resource>
         </resources>
