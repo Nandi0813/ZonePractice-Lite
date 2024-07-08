@@ -317,16 +317,18 @@ public class MatchListener implements Listener
     }
 
     @EventHandler
-    public void onRegen(EntityRegainHealthEvent e)
-    {
-        Player player = (Player) e.getEntity();
-        Profile profile = Practice.getProfileManager().getProfiles().get(player);
-        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
+    public void onRegen(EntityRegainHealthEvent e) {
+        if (e.getEntity() instanceof Player) {
+            Player player = (Player) e.getEntity();
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
-            if (!match.getLadder().isRegen() && e.getRegainReason() == EntityRegainHealthEvent.RegainReason.SATIATED)
-                e.setCancelled(true);
+            if (profile != null && match != null && profile.getStatus().equals(ProfileStatus.MATCH)) {
+                {
+                    if (!match.getLadder().isRegen() && e.getRegainReason() == EntityRegainHealthEvent.RegainReason.SATIATED)
+                        e.setCancelled(true);
+                }
+            }
         }
     }
 
