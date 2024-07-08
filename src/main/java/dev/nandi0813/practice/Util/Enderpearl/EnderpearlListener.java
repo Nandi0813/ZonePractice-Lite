@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -24,34 +25,32 @@ public class EnderpearlListener implements Listener
 {
 
     @EventHandler
-    public void enderPearlCooldown(PlayerInteractEvent e)
-    {
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR))
-        {
+    public void enderPearlCooldown(PlayerInteractEvent e) {
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             Player player = e.getPlayer();
             Profile profile = Practice.getProfileManager().getProfiles().get(player);
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
-            if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getStatus().equals(MatchStatus.LIVE) && e.getItem().getType().equals(Material.ENDER_PEARL))
-            {
-                int duration = ConfigManager.getInt("match-settings.enderpearl.cooldown");
+            if (profile != null && profile.getStatus() == ProfileStatus.MATCH &&
+                    match != null && match.getStatus() == MatchStatus.LIVE) {
 
-                if (duration > 0)
-                {
-                    if (!PlayerCooldown.isActive(player, CooldownObject.ENDER_PEARL))
-                    {
-                        EnderpearlRunnable enderPearlCountdown = new EnderpearlRunnable(player);
-                        enderPearlCountdown.begin();
-                    }
-                    else
-                    {
-                        e.setCancelled(true);
+                ItemStack item = e.getItem();
+                if (item != null && item.getType() == Material.ENDER_PEARL) {
+                    int duration = ConfigManager.getInt("match-settings.enderpearl.cooldown");
 
-                        BigDecimal bd = BigDecimal.valueOf(PlayerCooldown.getLeft(player, CooldownObject.ENDER_PEARL) / (float) 1000);
-                        bd = bd.setScale(1, RoundingMode.HALF_UP);
+                    if (duration > 0) {
+                        if (!PlayerCooldown.isActive(player, CooldownObject.ENDER_PEARL)) {
+                            EnderpearlRunnable enderPearlCountdown = new EnderpearlRunnable(player);
+                            enderPearlCountdown.begin();
+                        } else {
+                            e.setCancelled(true);
 
-                        player.sendMessage(LanguageManager.getString("match.enderpearl-cooldown").replaceAll("%time%", String.valueOf(bd.doubleValue())));
-                        player.updateInventory();
+                            BigDecimal bd = BigDecimal.valueOf(PlayerCooldown.getLeft(player, CooldownObject.ENDER_PEARL) / (float) 1000);
+                            bd = bd.setScale(1, RoundingMode.HALF_UP);
+
+                            player.sendMessage(LanguageManager.getString("match.enderpearl-cooldown").replaceAll("%time%", String.valueOf(bd.doubleValue())));
+                            player.updateInventory();
+                        }
                     }
                 }
             }
