@@ -95,7 +95,7 @@ public class CornerUtil
             }
             else
             {
-                player.sendMessage("&cInvalid number!");
+                player.sendMessage(StringUtil.CC("&cInvalid number!"));
             }
         }
         else
