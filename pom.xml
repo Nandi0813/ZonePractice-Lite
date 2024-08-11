@@ -38,6 +38,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <finalName>ZonePractice Lite</finalName>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <relocations>
                                 <relocation>
@@ -46,6 +47,19 @@
                                 </relocation>
                             </relocations>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -60,10 +74,10 @@
 
     <repositories>
         <!-- Panda repository -->
-            <repository>
-                <id>hpfxd-repo</id>
-                <url>https://repo.hpfxd.com/releases/</url>
-            </repository>
+        <repository>
+            <id>hpfxd-repo</id>
+            <url>https://repo.hpfxd.com/releases/</url>
+        </repository>
 
         <!-- ProtocolLib repository -->
         <repository>
