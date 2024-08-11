@@ -19,62 +19,49 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class PartyFFAListener implements Listener
-{
+public class PartyFFAListener implements Listener {
 
-    @EventHandler (ignoreCancelled = true)
-    public void onPlayerDamage(EntityDamageEvent e)
-    {
-        if (e.getEntity() instanceof Player)
-        {
+    @EventHandler(ignoreCancelled = true)
+    public void onPlayerDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();
             Profile profile = Practice.getProfileManager().getProfiles().get(player);
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
-            if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA))
-            {
-                if (match.getStatus().equals(MatchStatus.LIVE) && match.getAlivePlayers().contains(player))
-                {
-                    if (e.getCause().equals(EntityDamageEvent.DamageCause.VOID))
-                    {
+            if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA)) {
+                if (match.getStatus().equals(MatchStatus.LIVE) && match.getAlivePlayers().contains(player)) {
+                    if (e.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
                         e.setCancelled(true);
                         PartyFFA.killPlayer(match, player, true);
                     }
 
-                    if (player.getHealth() - e.getFinalDamage() <= 0)
-                    {
+                    if (player.getHealth() - e.getFinalDamage() <= 0) {
                         if (e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) || e.getCause().equals(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION))
                             e.setCancelled(true);
 
                         PartyFFA.killPlayer(match, player, true);
                     }
-                }
-                else
-                {
+                } else {
                     e.setCancelled(true);
                 }
             }
         }
     }
 
-    @EventHandler (ignoreCancelled = true)
-    public void onPlayerQuit(PlayerQuitEvent e)
-    {
+    @EventHandler(ignoreCancelled = true)
+    public void onPlayerQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
         Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA)) {
             match.removePlayer(player, false);
             match.getPlayers().remove(player);
 
             PartyFFA.killPlayer(match, player, false);
-            match.sendMessage(LanguageManager.getString("match.partyffa.player-left"), true);
-            if (match.getPlayers().size() < 2)
-            {
-                for (Player winner : match.getPlayers())
-                {
+            match.sendMessage(LanguageManager.getString("match.partyffa.player-left").replaceAll("%player%", player.getName()), true);
+            if (match.getPlayers().size() < 2) {
+                for (Player winner : match.getPlayers()) {
                     match.getRoundManager().endMatch(winner);
                     return;
                 }
@@ -84,19 +71,7 @@ public class PartyFFAListener implements Listener
 
 
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent e)
-    {
-        Player player = e.getPlayer();
-        Profile profile = Practice.getProfileManager().getProfiles().get(player);
-        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
-
-        if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA) && !match.getAlivePlayers().contains(player))
-                e.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onPlayerPickItem(PlayerPickupItemEvent e)
-    {
+    public void onBlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
         Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
@@ -106,8 +81,17 @@ public class PartyFFAListener implements Listener
     }
 
     @EventHandler
-    public void onHunger(FoodLevelChangeEvent e)
-    {
+    public void onPlayerPickItem(PlayerPickupItemEvent e) {
+        Player player = e.getPlayer();
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
+
+        if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA) && !match.getAlivePlayers().contains(player))
+            e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onHunger(FoodLevelChangeEvent e) {
         Player player = (Player) e.getEntity();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
         Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
@@ -117,10 +101,8 @@ public class PartyFFAListener implements Listener
     }
 
     @EventHandler
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent e)
-    {
-        if (e.getEntity() instanceof Player && e.getDamager() instanceof Player)
-        {
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
+        if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
             Player player = (Player) e.getDamager();
             Profile profile = Practice.getProfileManager().getProfiles().get(player);
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
@@ -131,19 +113,16 @@ public class PartyFFAListener implements Listener
     }
 
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent e)
-    {
+    public void onPlayerMove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
         Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA) && !match.getAlivePlayers().contains(player))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH) && match.getType().equals(MatchType.PARTY_FFA) && !match.getAlivePlayers().contains(player)) {
             Cuboid cuboid = match.getGameArena().getCuboid();
 
             if (!cuboid.contains(e.getTo()))
                 player.teleport(match.getGameArena().getPosition3());
         }
     }
-
 }
