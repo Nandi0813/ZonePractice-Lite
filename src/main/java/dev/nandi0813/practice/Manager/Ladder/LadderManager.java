@@ -4,6 +4,7 @@ import dev.nandi0813.practice.Manager.File.LadderFile;
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +43,11 @@ public class LadderManager
     {
         Bukkit.getScheduler().runTaskAsynchronously(Practice.getInstance(), () ->
         {
-            for (int id = 1; id < 10; id++)
-                ladders.add(new Ladder(id));
+            FileConfiguration config = LadderFile.getConfig();
+
+            for (String ladder : config.getConfigurationSection("ladders").getKeys(false)) {
+                ladders.add(new Ladder(Integer.parseInt(ladder.replace("ladder", ""))));
+            }
         });
     }
 
