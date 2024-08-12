@@ -113,6 +113,12 @@ public class MatchListener implements Listener {
             if (!cuboid.contains(to1)) {
                 e.setTo(e.getFrom());
             }
+
+            if (match.getLadder().isDeadInWater()) {
+                if (player.getLocation().getBlock().getType().name().toLowerCase().contains("water")) {
+                    player.setHealth(0);
+                }
+            }
         }
     }
 

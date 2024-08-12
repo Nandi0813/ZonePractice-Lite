@@ -539,3 +539,22 @@ ladders:
         ==: ItemMeta
         meta-type: UNSPECIFIC
         display-name: §6Soup
+  ladder8:
+    enabled: true
+    knockback: DEFAULT
+    hitdelay: 20
+    ranked: true
+    editable: false
+    regen: false
+    hunger: false
+    build: false
+    name: Sumo
+    invulnerability: true
+    dead-in-water: true
+    icon:
+      ==: org.bukkit.inventory.ItemStack
+      type: LEASH
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: §aSumo
