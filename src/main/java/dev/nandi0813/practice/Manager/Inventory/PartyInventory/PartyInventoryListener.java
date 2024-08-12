@@ -40,7 +40,7 @@ public class PartyInventoryListener implements Listener
         }
         else if (item.equals(PartyInventory.getLeaveItem()))
         {
-            party.removeMember(player, false);
+            party.removeMember(party, player, false);
         }
         else if (item.equals(PartyInventory.getHostEventItem()))
         {

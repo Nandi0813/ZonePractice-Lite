@@ -28,7 +28,7 @@ public class PartyKickArg
                         {
                             if (party.getMembers().contains(target))
                             {
-                                party.removeMember(target, true);
+                                party.removeMember(party, player, true);
                             }
                             else
                                 player.sendMessage(LanguageManager.getString("party.player-not-member"));
