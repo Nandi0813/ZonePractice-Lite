@@ -10,6 +10,7 @@ import dev.nandi0813.practice.Manager.Gui.GUIType;
 import dev.nandi0813.practice.Manager.Ladder.KnockbackType;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
+import dev.nandi0813.practice.Manager.Match.MatchType.Duel.Duel;
 import dev.nandi0813.practice.Manager.Match.Util.KitUtil;
 import dev.nandi0813.practice.Manager.Match.Util.KnockbackUtil;
 import dev.nandi0813.practice.Manager.Profile.Profile;
@@ -62,7 +63,7 @@ public class MatchListener implements Listener {
         Practice.getGuiManager().searchGUI(GUIType.QUEUE_RANKED).update();
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
@@ -72,7 +73,7 @@ public class MatchListener implements Listener {
                 Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
                 if (match.getLadder().isInvulnerability()) {
-                    event.setCancelled(true);
+                    event.setDamage(0);
                 }
             }
         }
@@ -116,7 +117,7 @@ public class MatchListener implements Listener {
 
             if (match.getLadder().isDeadInWater()) {
                 if (player.getLocation().getBlock().getType().name().toLowerCase().contains("water")) {
-                    player.setHealth(0);
+                    Duel.killPlayer(match, player, true);
                 }
             }
         }

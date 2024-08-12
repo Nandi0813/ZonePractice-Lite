@@ -56,6 +56,14 @@ public class Ladder
         if (config.isSet(enabledPath) && config.isBoolean(enabledPath))
             enabled = config.getBoolean(enabledPath);
 
+        String invulnerabilityPath = path + ".invulnerability";
+        if (config.isSet(invulnerabilityPath) && config.isBoolean(invulnerabilityPath))
+            invulnerability = config.getBoolean(invulnerabilityPath);
+
+        String deadInWaterPath = path + ".dead-in-water";
+        if (config.isSet(deadInWaterPath) && config.isBoolean(deadInWaterPath))
+            deadInWater = config.getBoolean(deadInWaterPath);
+
         String iconPath = path + ".icon";
         if (config.isSet(iconPath) && config.isItemStack(iconPath))
             icon = config.getItemStack(iconPath);
