@@ -30,6 +30,7 @@ public class Ladder
     private boolean ranked = false;
     private boolean editable = true;
     private boolean regen = true;
+    private boolean invulnerability = false;
     private boolean hunger = true;
     private boolean build = false;
 
@@ -178,6 +179,9 @@ public class Ladder
 
         String regenPath = path + ".regen";
         config.set(regenPath, regen);
+
+        String invulnerabilityPath = path + ".invulnerability";
+        config.set(invulnerabilityPath, invulnerability);
 
         String hungerPath = path + ".hunger";
         config.set(hungerPath, hunger);

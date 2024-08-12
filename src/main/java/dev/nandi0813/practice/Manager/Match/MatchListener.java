@@ -62,6 +62,21 @@ public class MatchListener implements Listener {
         Practice.getGuiManager().searchGUI(GUIType.QUEUE_RANKED).update();
     }
 
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onDamage(EntityDamageEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+
+            if (profile.getStatus().equals(ProfileStatus.MATCH)) {
+                Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
+
+                if (match.getLadder().isInvulnerability()) {
+                    event.setCancelled(true);
+                }
+            }
+        }
+    }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent e) {
