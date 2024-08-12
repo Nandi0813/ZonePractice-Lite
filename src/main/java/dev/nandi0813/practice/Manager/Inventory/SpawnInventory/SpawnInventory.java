@@ -15,28 +15,31 @@ import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 
-public class SpawnInventory
-{
+public class SpawnInventory {
 
-    @Getter private final File file = new File(Practice.getInstance().getDataFolder() + "/inventories", "spawnitems.yml");
+    @Getter
+    private final File file = new File(Practice.getInstance().getDataFolder() + "/inventories", "spawnitems.yml");
     private final YamlConfiguration config;
 
-    @Getter private static ItemStack unrankedItem;
-    @Getter private static ItemStack rankedItem;
-    @Getter private static ItemStack partyItem;
-    @Getter private static ItemStack statsItem;
-    @Getter private static ItemStack kiteditorItem;
+    @Getter
+    private static ItemStack unrankedItem;
+    @Getter
+    private static ItemStack rankedItem;
+    @Getter
+    private static ItemStack partyItem;
+    @Getter
+    private static ItemStack statsItem;
+    @Getter
+    private static ItemStack kiteditorItem;
 
-    public SpawnInventory()
-    {
+    public SpawnInventory() {
         Bukkit.getPluginManager().registerEvents(new SpawnInventoryListener(), Practice.getInstance());
         if (!file.exists()) Practice.getInstance().saveResource("inventories/spawnitems.yml", false);
         config = YamlConfiguration.loadConfiguration(file);
         getInventory();
     }
 
-    public void getInventory()
-    {
+    public void getInventory() {
         unrankedItem = (ItemStack) config.get("unranked.item");
         ItemUtil.hideItemFlags(unrankedItem);
 
@@ -53,18 +56,14 @@ public class SpawnInventory
         ItemUtil.hideItemFlags(kiteditorItem);
     }
 
-    public void setInventory(Player player, boolean teleport)
-    {
+    public void setInventory(Player player, boolean teleport) {
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         PlayerUtil.setPlayerData(player, false, true);
 
-        if (profile.isParty())
-        {
+        if (profile.isParty()) {
             Practice.getInventoryManager().getPartyInventory().setPartyInventory(player);
-        }
-        else
-        {
+        } else {
             player.getInventory().setItem(config.getInt("unranked.slot"), unrankedItem);
             if ((profile.getUnrankedWins() >= ConfigManager.getInt("ranked.min-unranked-wins")) || player.hasPermission("zonepractice.bypass.ranked.requirements"))
                 player.getInventory().setItem(config.getInt("ranked.slot"), rankedItem);
@@ -74,9 +73,12 @@ public class SpawnInventory
         }
 
         player.updateInventory();
-        if (ServerManager.getLobby() != null && teleport) player.teleport(ServerManager.getLobby());
+
+        if (teleport) {
+            if (ServerManager.getLobby() != null) player.teleport(ServerManager.getLobby());
+            else if (profile.getPreviousLocation() != null) player.teleport(profile.getPreviousLocation());
+        }
 
         profile.setStatus(ProfileStatus.LOBBY);
     }
-
 }

@@ -32,35 +32,57 @@ import org.bukkit.entity.Player;
 
 import java.util.*;
 
-public class Match
-{
+public class Match {
 
-    @Getter private final String matchID;
-    @Getter private final RoundManager roundManager;
-    @Getter private final MatchType type;
-    @Getter @Setter private MatchStatus status;
-    @Getter private final Ladder ladder;
-    @Getter private final boolean ranked;
+    @Getter
+    private final String matchID;
+    @Getter
+    private final RoundManager roundManager;
+    @Getter
+    private final MatchType type;
+    @Getter
+    @Setter
+    private MatchStatus status;
+    @Getter
+    private final Ladder ladder;
+    @Getter
+    private final boolean ranked;
 
-    @Getter private final Arena arena;
-    @Getter @Setter private Arena gameArena;
+    @Getter
+    private final Arena arena;
+    @Getter
+    @Setter
+    private Arena gameArena;
 
-    @Getter private final List<Player> players;
-    @Getter private final List<Player> spectators = new ArrayList<>();
-    @Getter private final HashMap<Player, TeamEnum> teams = new HashMap<>();
+    @Getter
+    private final List<Player> players;
+    @Getter
+    private final List<Player> spectators = new ArrayList<>();
+    @Getter
+    private final HashMap<Player, TeamEnum> teams = new HashMap<>();
     // For team matches
-    @Getter private final List<Player> alivePlayers = new ArrayList<>();
+    @Getter
+    private final List<Player> alivePlayers = new ArrayList<>();
 
-    @Getter private final HashSet<CachedBlock> blockChange;
-    @Getter @Setter private HashSet<Item> droppedItems = new HashSet<>();
-    @Getter private final HashMap<OfflinePlayer, PlayerMatchStat> matchStats = new HashMap<>();
+    @Getter
+    private final HashSet<CachedBlock> blockChange;
+    @Getter
+    @Setter
+    private HashSet<Item> droppedItems = new HashSet<>();
+    @Getter
+    private final HashMap<OfflinePlayer, PlayerMatchStat> matchStats = new HashMap<>();
 
-    @Getter @Setter private StartCountdown startCountdown;
-    @Getter @Setter private DurationCountdown durationCountdown;
-    @Getter @Setter private AfterCountdown afterCountdown;
+    @Getter
+    @Setter
+    private StartCountdown startCountdown;
+    @Getter
+    @Setter
+    private DurationCountdown durationCountdown;
+    @Getter
+    @Setter
+    private AfterCountdown afterCountdown;
 
-    public Match(MatchType matchType, List<Player> players, Ladder ladder, boolean ranked, Arena arena)
-    {
+    public Match(MatchType matchType, List<Player> players, Ladder ladder, boolean ranked, Arena arena) {
         matchID = "match" + System.currentTimeMillis();
         this.type = matchType;
         this.players = players;
@@ -74,24 +96,19 @@ public class Match
         afterCountdown = new AfterCountdown(this);
     }
 
-    public void startMatch()
-    {
+    public void startMatch() {
         MatchStartEvent matchStartEvent = new MatchStartEvent(this);
         Bukkit.getPluginManager().callEvent(matchStartEvent);
 
-        if (matchStartEvent.isCancelled())
-        {
+        if (matchStartEvent.isCancelled()) {
             sendMessage("&cThe match got cancelled!", false);
             return;
         }
 
-        if (!type.equals(MatchType.PARTY_FFA))
-        {
+        if (!type.equals(MatchType.PARTY_FFA)) {
             roundManager.getWonRoundsTeam().put(TeamEnum.TEAM1, 0);
             roundManager.getWonRoundsTeam().put(TeamEnum.TEAM2, 0);
-        }
-        else
-        {
+        } else {
             for (Player player : players)
                 roundManager.getWonRoundsPlayer().put(player, 0);
         }
@@ -103,26 +120,31 @@ public class Match
         for (Chunk chunk : gameArena.getCuboid().getChunks())
             chunk.load();
 
-        for (Player player : players)
-        {
+        for (Player player : players) {
             if (type.equals(MatchType.DUEL))
                 matchStats.put(player, new PlayerMatchStat(player));
-            Practice.getProfileManager().getProfiles().get(player).setStatus(ProfileStatus.MATCH);
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+            profile.setStatus(ProfileStatus.MATCH);
+            profile.setPreviousLocation(player.getLocation());
         }
 
-        switch (type)
-        {
-            case DUEL: Duel.startMatch(this); break;
-            case PARTY_FFA: PartyFFA.startMatch(this); break;
-            case PARTY_SPLIT: PartySplit.startMatch(this); break;
+        switch (type) {
+            case DUEL:
+                Duel.startMatch(this);
+                break;
+            case PARTY_FFA:
+                PartyFFA.startMatch(this);
+                break;
+            case PARTY_SPLIT:
+                PartySplit.startMatch(this);
+                break;
         }
 
         roundManager.startRound();
     }
 
 
-    public void endMatch()
-    {
+    public void endMatch() {
         // Remove match players
         for (Player player : players)
             removePlayer(player, false);
@@ -148,10 +170,8 @@ public class Match
      *
      * @param change The block that was changed.
      */
-    public void addBlockChange(CachedBlock change)
-    {
-        for (CachedBlock c : blockChange)
-        {
+    public void addBlockChange(CachedBlock change) {
+        for (CachedBlock c : blockChange) {
             if (c.getLocation().getX() == change.getLocation().getX() && c.getLocation().getY() == change.getLocation().getY() && c.getLocation().getZ() == change.getLocation().getZ())
                 return;
         }
@@ -161,19 +181,15 @@ public class Match
     /**
      * It removes all dropped items, rolls back the arena, and removes all items in the arena
      */
-    public void resetMap()
-    {
+    public void resetMap() {
         for (Item is : droppedItems)
             is.remove();
 
-        if (ladder.isBuild())
-        {
+        if (ladder.isBuild()) {
             Rollback.rollBackArena(this);
 
-            for (Chunk chunk : gameArena.getCuboid().getChunks())
-            {
-                for (Entity entity : chunk.getEntities())
-                {
+            for (Chunk chunk : gameArena.getCuboid().getChunks()) {
+                for (Entity entity : chunk.getEntities()) {
                     if (entity instanceof Item) entity.remove();
                 }
             }
@@ -185,20 +201,17 @@ public class Match
      * It sends a message to all players in the match, and if the spectator boolean is true, it sends the message to all
      * spectators
      *
-     * @param message The message you want to send to the players.
+     * @param message   The message you want to send to the players.
      * @param spectator If true, the message will be sent to the spectators.
      */
-    public void sendMessage(String message, boolean spectator)
-    {
-        for (Player player : players)
-        {
+    public void sendMessage(String message, boolean spectator) {
+        for (Player player : players) {
             Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
             if (profile.getStatus().equals(ProfileStatus.MATCH) && Practice.getMatchManager().getLiveMatchByPlayer(player).equals(this))
                 player.sendMessage(StringUtil.CC(message));
         }
-        if (spectator)
-        {
+        if (spectator) {
             for (Player specPlayer : spectators)
                 specPlayer.sendMessage(StringUtil.CC(message));
         }
@@ -210,8 +223,7 @@ public class Match
      *
      * @param player The player to add to the spectators list
      */
-    public void addSpectator(Player player)
-    {
+    public void addSpectator(Player player) {
         spectators.add(player);
 
         Practice.getInventoryManager().getSpectatorInventory().setSpectatorInventory(player);
@@ -226,13 +238,11 @@ public class Match
      *
      * @param player The player to remove from the match.
      */
-    public void removePlayer(Player player, boolean removeSpectator)
-    {
+    public void removePlayer(Player player, boolean removeSpectator) {
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
         if ((profile.getStatus().equals(ProfileStatus.MATCH) && Practice.getMatchManager().getLiveMatchByPlayer(player).equals(this))
-                || (profile.getStatus().equals(ProfileStatus.SPECTATE) && Practice.getMatchManager().getLiveMatchBySpectator(player).equals(this)))
-        {
+                || (profile.getStatus().equals(ProfileStatus.SPECTATE) && Practice.getMatchManager().getLiveMatchBySpectator(player).equals(this))) {
             if (!status.equals(MatchStatus.OLD) && profile.getStatus().equals(ProfileStatus.SPECTATE) && !player.hasPermission("zonepractice.spectate.silent"))
                 sendMessage(LanguageManager.getString("match.spectator-leave").replaceAll("%player%", player.getName()), true);
 
@@ -242,5 +252,4 @@ public class Match
             Practice.getInventoryManager().getSpawnInventory().setInventory(player, true);
         }
     }
-
 }
