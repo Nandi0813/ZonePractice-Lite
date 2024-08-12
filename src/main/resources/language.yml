@@ -98,6 +98,7 @@ match:
   cant-build: "&cYou can't build here."
   cant-craft: "&cYou can't craft with this ladder."
   enderpearl-cooldown: "&cYou cannot use this for another %time% seconds."
+  enderpearl-cancel-by-corner: "&cYou cannot teleport from arena."
   ranked-limit: "&cYou have exceeded the daily ranked limit!"
   ranked-limit-reach: "&aCongratulations, you have successfully achieved the requirements for ranked matches!"
   duel:

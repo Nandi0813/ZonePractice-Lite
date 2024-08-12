@@ -2,6 +2,7 @@ package dev.nandi0813.practice.Manager.Match;
 
 import dev.nandi0813.practice.Event.MatchEndEvent;
 import dev.nandi0813.practice.Event.MatchStartEvent;
+import dev.nandi0813.practice.Manager.Arena.Arena;
 import dev.nandi0813.practice.Manager.Arena.Util.Cuboid;
 import dev.nandi0813.practice.Manager.File.ConfigManager;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
@@ -294,6 +295,31 @@ public class MatchListener implements Listener {
             if (!match.getLadder().isBuild()) {
                 e.setCancelled(true);
                 player.sendMessage(LanguageManager.getString("match.cant-craft"));
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    public void onTeleport(PlayerTeleportEvent event) {
+        Player player = event.getPlayer();
+
+        if (event.getCause() == PlayerTeleportEvent.TeleportCause.ENDER_PEARL) {
+
+            Profile profile = Practice.getProfileManager().getProfiles().get(player);
+
+            if (profile.getStatus().equals(ProfileStatus.MATCH)) {
+                Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
+                Arena arena = match.getArena();
+
+                Cuboid cuboid = arena.getCuboid();
+
+                if (!cuboid.contains(event.getTo())) {
+                    event.setCancelled(true);
+
+                    player.getInventory().addItem(new ItemStack(Material.ENDER_PEARL));
+
+                    player.sendMessage(LanguageManager.getString("match.enderpearl-cancel-by-corner"));
+                }
             }
         }
     }
