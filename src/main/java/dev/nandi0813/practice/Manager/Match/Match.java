@@ -158,12 +158,32 @@ public class Match {
             removePlayer(spectator, false);
         spectators.clear();
 
-        for (Chunk chunk : gameArena.getCuboid().getChunks())
-            chunk.unload();
+        boolean shouldUnload = true;
+        for (Player player : Bukkit.getWorld("arenas").getPlayers()) {
+            Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
+
+            if (match != null && match.getArena().getName().equals(gameArena.getName())) {
+                shouldUnload = false;
+            }
+        }
+
+        if (shouldUnload) {
+            for (Chunk chunk : gameArena.getCuboid().getChunks()) {
+                for (Entity entity : chunk.getEntities()) {
+                    if (entity instanceof Player) {
+                        Player player = (Player) entity;
+                        player.kickPlayer("You are not in an active arena. Please join a valid game area.");
+                    }
+                }
+
+                if (shouldUnload) {
+                    chunk.unload();
+                }
+            }
+        }
 
         Bukkit.getPluginManager().callEvent(new MatchEndEvent(this));
     }
-
 
     /**
      * If the block change is not already in the list, add it
