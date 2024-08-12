@@ -31,12 +31,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 
-public class MatchListener implements Listener
-{
+public class MatchListener implements Listener {
 
     @EventHandler
-    public void onMatchStart(MatchStartEvent e)
-    {
+    public void onMatchStart(MatchStartEvent e) {
         Match match = e.getMatch();
 
         Practice.getMatchManager().getMatches().put(match.getMatchID(), match);
@@ -50,9 +48,8 @@ public class MatchListener implements Listener
         Practice.getGuiManager().searchGUI(GUIType.QUEUE_RANKED).update();
     }
 
-    @EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled=true)
-    public void onMatchEnd(MatchEndEvent e)
-    {
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onMatchEnd(MatchEndEvent e) {
         Match match = e.getMatch();
 
         if (Practice.getPartyManager().getParty(match) != null)
@@ -65,61 +62,50 @@ public class MatchListener implements Listener
     }
 
 
-    @EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled=true)
-    public void onDamage(EntityDamageByEntityEvent e)
-    {
-        if (e.getEntity() instanceof Player && e.getDamager() instanceof Player)
-        {
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onDamage(EntityDamageByEntityEvent e) {
+        if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
             Player attacker = (Player) e.getDamager();
             Profile attackerProfile = Practice.getProfileManager().getProfiles().get(attacker);
             Player target = (Player) e.getEntity();
             Profile targetProfile = Practice.getProfileManager().getProfiles().get(target);
 
-            if (e.getEntity() != null && e.getDamager() != null && attackerProfile.getStatus().equals(ProfileStatus.MATCH) && targetProfile.getStatus().equals(ProfileStatus.MATCH))
-            {
-                if (Practice.getMatchManager().getLiveMatchByPlayer(attacker).equals(Practice.getMatchManager().getLiveMatchByPlayer(target)))
-                {
+            if (e.getEntity() != null && e.getDamager() != null && attackerProfile.getStatus().equals(ProfileStatus.MATCH) && targetProfile.getStatus().equals(ProfileStatus.MATCH)) {
+                if (Practice.getMatchManager().getLiveMatchByPlayer(attacker).equals(Practice.getMatchManager().getLiveMatchByPlayer(target))) {
                     Match match = Practice.getMatchManager().getLiveMatchByPlayer(attacker);
 
-                    if (match.getStatus().equals(MatchStatus.LIVE))
-                    {
+                    if (match.getStatus().equals(MatchStatus.LIVE)) {
                         if (!match.getLadder().getKnockbackType().equals(KnockbackType.DEFAULT))
                             KnockbackUtil.setPlayerKnockback(e.getEntity(), match.getLadder().getKnockbackType());
-                    }
-                    else e.setCancelled(true);
+                    } else e.setCancelled(true);
                 }
             }
         }
     }
 
-    @EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onPlayerMove(PlayerMoveEvent e)
-    {
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onPlayerMove(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH)) {
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
             Cuboid cuboid = match.getGameArena().getCuboid();
 
             Location to1 = e.getTo().clone();
             to1.setY(match.getGameArena().getPosition3().getY());
-            if (!cuboid.contains(to1))
-            {
-                e.setCancelled(true);
+            if (!cuboid.contains(to1)) {
+                e.setTo(e.getFrom());
             }
         }
     }
 
-    @EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled=true)
-    public void onBlockBreak(BlockBreakEvent e)
-    {
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onBlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH)) {
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!match.getLadder().isBuild() || !match.getStatus().equals(MatchStatus.LIVE))
@@ -127,25 +113,19 @@ public class MatchListener implements Listener
         }
     }
 
-    @EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled=true)
-    public void onBlockPlace(BlockPlaceEvent e)
-    {
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onBlockPlace(BlockPlaceEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH)) {
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
-            if (!match.getLadder().isBuild() || !match.getStatus().equals(MatchStatus.LIVE))
-            {
+            if (!match.getLadder().isBuild() || !match.getStatus().equals(MatchStatus.LIVE)) {
                 e.setCancelled(true);
-            }
-            else
-            {
+            } else {
                 int buildLimit = match.getGameArena().getPosition1().getBlockY() + ConfigManager.getInt("match-settings.build-limit");
-                if (e.getBlock().getLocation().getY() >= buildLimit)
-                {
+                if (e.getBlock().getLocation().getY() >= buildLimit) {
                     player.sendMessage(LanguageManager.getString("match.cant-build"));
                     e.setCancelled(true);
                 }
@@ -153,25 +133,19 @@ public class MatchListener implements Listener
         }
     }
 
-    @EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled=true)
-    public void onBucketEmpty(PlayerBucketEmptyEvent e)
-    {
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onBucketEmpty(PlayerBucketEmptyEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH)) {
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
-            if (!match.getLadder().isBuild() || !match.getStatus().equals(MatchStatus.LIVE))
-            {
+            if (!match.getLadder().isBuild() || !match.getStatus().equals(MatchStatus.LIVE)) {
                 e.setCancelled(true);
-            }
-            else
-            {
+            } else {
                 int buildLimit = match.getGameArena().getPosition1().getBlockY() + ConfigManager.getInt("match-settings.build-limit");
-                if (e.getBlockClicked().getLocation().getY() >= buildLimit)
-                {
+                if (e.getBlockClicked().getLocation().getY() >= buildLimit) {
                     player.sendMessage(LanguageManager.getString("match.cant-build"));
                     e.setCancelled(true);
                 }
@@ -180,35 +154,29 @@ public class MatchListener implements Listener
     }
 
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent e)
-    {
+    public void onPlayerInteract(PlayerInteractEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
         ItemStack item = player.getInventory().getItemInHand();
         Action action = e.getAction();
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH)) {
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!action.equals(Action.RIGHT_CLICK_AIR) && !action.equals(Action.RIGHT_CLICK_BLOCK))
                 return;
             Ladder ladder = match.getLadder();
 
-            if (item.getType().equals(Material.BOW) || item.getType().equals(Material.ENDER_PEARL))
-            {
+            if (item.getType().equals(Material.BOW) || item.getType().equals(Material.ENDER_PEARL)) {
                 if (!match.getStatus().equals(MatchStatus.LIVE)) e.setCancelled(true);
                 if (!item.getType().equals(Material.BOW)) player.updateInventory();
-            }
-            else if (item.getType().equals(Material.POTION) && match.getStatus().equals(MatchStatus.END))
-            {
+            } else if (item.getType().equals(Material.POTION) && match.getStatus().equals(MatchStatus.END)) {
                 e.setCancelled(true);
                 player.updateInventory();
             }
 
             // Kit selector
-            if (player.getInventory().getItem(8) != null && player.getInventory().getItem(8).equals(KitUtil.getDefaultKitItem()))
-            {
+            if (player.getInventory().getItem(8) != null && player.getInventory().getItem(8).equals(KitUtil.getDefaultKitItem())) {
                 e.setCancelled(true);
 
                 if (item.equals(KitUtil.getDefaultKitItem()))
@@ -220,39 +188,32 @@ public class MatchListener implements Listener
         }
     }
 
-    @EventHandler (ignoreCancelled=true)
-    public void onInventoryClick(InventoryClickEvent e)
-    {
+    @EventHandler(ignoreCancelled = true)
+    public void onInventoryClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH)) {
             if (player.getInventory().getItem(8) != null && player.getInventory().getItem(8).equals(KitUtil.getDefaultKitItem()))
                 e.setCancelled(true);
         }
     }
 
-    @EventHandler (ignoreCancelled = true)
-    public void onItemDrop(PlayerDropItemEvent e)
-    {
+    @EventHandler(ignoreCancelled = true)
+    public void onItemDrop(PlayerDropItemEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH)) {
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (player.getInventory().getItem(8) != null && player.getInventory().getItem(8).equals(KitUtil.getDefaultKitItem()))
                 e.setCancelled(true);
-            else
-            {
+            else {
                 match.getDroppedItems().add(e.getItemDrop());
 
-                for (Player onlinePlayer : Bukkit.getOnlinePlayers())
-                {
-                    if (!match.getPlayers().contains(onlinePlayer) && !match.getSpectators().contains(onlinePlayer))
-                    {
+                for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                    if (!match.getPlayers().contains(onlinePlayer) && !match.getSpectators().contains(onlinePlayer)) {
                         Practice.getEntityHider().hideEntity(onlinePlayer, e.getItemDrop());
                     }
                 }
@@ -260,24 +221,18 @@ public class MatchListener implements Listener
         }
     }
 
-    @EventHandler (ignoreCancelled = true)
-    public void onProjectileLaunch(ProjectileLaunchEvent e)
-    {
-        if (e.getEntity().getShooter() instanceof Player)
-        {
+    @EventHandler(ignoreCancelled = true)
+    public void onProjectileLaunch(ProjectileLaunchEvent e) {
+        if (e.getEntity().getShooter() instanceof Player) {
             Player player = (Player) e.getEntity().getShooter();
             Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-            if (profile.getStatus().equals(ProfileStatus.MATCH))
-            {
+            if (profile.getStatus().equals(ProfileStatus.MATCH)) {
                 Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
-                if (e.getEntityType() == EntityType.SPLASH_POTION || e.getEntityType() == EntityType.ARROW || e.getEntityType() == EntityType.ENDER_PEARL)
-                {
-                    for (Player onlinePlayer : Bukkit.getOnlinePlayers())
-                    {
-                        if (!match.getPlayers().contains(onlinePlayer) && !match.getSpectators().contains(onlinePlayer))
-                        {
+                if (e.getEntityType() == EntityType.SPLASH_POTION || e.getEntityType() == EntityType.ARROW || e.getEntityType() == EntityType.ENDER_PEARL) {
+                    for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                        if (!match.getPlayers().contains(onlinePlayer) && !match.getSpectators().contains(onlinePlayer)) {
                             Practice.getEntityHider().hideEntity(onlinePlayer, e.getEntity());
                         }
                     }
@@ -286,14 +241,12 @@ public class MatchListener implements Listener
         }
     }
 
-    @EventHandler (ignoreCancelled = true)
-    public void onPlayerPickItem(PlayerPickupItemEvent e)
-    {
+    @EventHandler(ignoreCancelled = true)
+    public void onPlayerPickItem(PlayerPickupItemEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH)) {
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!match.getStatus().equals(MatchStatus.LIVE))
@@ -302,13 +255,11 @@ public class MatchListener implements Listener
     }
 
     @EventHandler
-    public void onHunger(FoodLevelChangeEvent e)
-    {
+    public void onHunger(FoodLevelChangeEvent e) {
         Player player = (Player) e.getEntity();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH)) {
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
             if (!match.getLadder().isHunger())
@@ -333,21 +284,17 @@ public class MatchListener implements Listener
     }
 
     @EventHandler
-    public void onCraft(CraftItemEvent e)
-    {
+    public void onCraft(CraftItemEvent e) {
         Player player = (Player) e.getWhoClicked();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (profile.getStatus().equals(ProfileStatus.MATCH))
-        {
+        if (profile.getStatus().equals(ProfileStatus.MATCH)) {
             Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
-            if (!match.getLadder().isBuild())
-            {
+            if (!match.getLadder().isBuild()) {
                 e.setCancelled(true);
                 player.sendMessage(LanguageManager.getString("match.cant-craft"));
             }
         }
     }
-
 }
