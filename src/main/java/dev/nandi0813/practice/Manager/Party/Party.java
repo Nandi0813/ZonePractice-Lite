@@ -65,7 +65,7 @@ public class Party
      * @param member The player that is being removed from the party.
      * @param kick If the player is kicked or not.
      */
-    public void removeMember(Player member, boolean kick)
+    public void removeMember(Party party, Player member, boolean kick)
     {
         Profile memberProfile = Practice.getProfileManager().getProfiles().get(member);
 
@@ -82,6 +82,10 @@ public class Party
 
         if (Practice.getProfileManager().getProfiles().get(member).getStatus().equals(ProfileStatus.LOBBY))
             Practice.getInventoryManager().getSpawnInventory().setInventory(member, false);
+
+        if (party.getMembers().size() == 1) {
+            party.disband();
+        }
     }
 
     /**

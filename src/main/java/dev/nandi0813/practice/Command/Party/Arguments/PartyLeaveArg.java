@@ -19,7 +19,7 @@ public class PartyLeaveArg
             {
                 if (party.getMatch() == null)
                 {
-                    party.removeMember(player, false);
+                    party.removeMember(party, player, false);
                 }
                 else
                     player.sendMessage(LanguageManager.getString("party.cant-leave-inmatch"));

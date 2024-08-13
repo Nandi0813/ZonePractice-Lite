@@ -32,7 +32,7 @@ public class ArenaTeleportArg
                 }
                 else
                 {
-                    player.sendMessage("&cInvalid number!");
+                    player.sendMessage(StringUtil.CC("&cInvalid number!"));
                 }
             }
             else
