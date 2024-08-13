@@ -27,6 +27,7 @@ public class Ladder
 
     private KnockbackType knockbackType = KnockbackType.DEFAULT;
     private int hitDelay = 20;
+    private int needHits = -1;
     private boolean ranked = false;
     private boolean editable = true;
     private boolean regen = true;
@@ -60,6 +61,10 @@ public class Ladder
         String invulnerabilityPath = path + ".invulnerability";
         if (config.isSet(invulnerabilityPath) && config.isBoolean(invulnerabilityPath))
             invulnerability = config.getBoolean(invulnerabilityPath);
+
+        String needHitsPath = path + ".need-hits";
+        if (config.isSet(needHitsPath) && config.isInt(needHitsPath))
+            needHits = config.getInt(needHitsPath);
 
         String deadInWaterPath = path + ".dead-in-water";
         if (config.isSet(deadInWaterPath) && config.isBoolean(deadInWaterPath))
@@ -184,6 +189,9 @@ public class Ladder
 
         String hitdelayPath = path + ".hitdelay";
         config.set(hitdelayPath, hitDelay);
+
+        String needHitsPath = path + ".need-hits";
+        config.set(needHitsPath, needHits);
 
         String rankedPath = path + ".ranked";
         config.set(rankedPath, ranked);

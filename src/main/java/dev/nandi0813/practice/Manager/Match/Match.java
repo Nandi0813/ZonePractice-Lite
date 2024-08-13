@@ -261,6 +261,9 @@ public class Match {
     public void removePlayer(Player player, boolean removeSpectator) {
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
+        profile.giveHits = 0;
+        profile.receivedHits = 0;
+
         if ((profile.getStatus().equals(ProfileStatus.MATCH) && Practice.getMatchManager().getLiveMatchByPlayer(player).equals(this))
                 || (profile.getStatus().equals(ProfileStatus.SPECTATE) && Practice.getMatchManager().getLiveMatchBySpectator(player).equals(this))) {
             if (!status.equals(MatchStatus.OLD) && profile.getStatus().equals(ProfileStatus.SPECTATE) && !player.hasPermission("zonepractice.spectate.silent"))
