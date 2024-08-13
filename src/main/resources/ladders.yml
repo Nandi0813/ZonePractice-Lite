@@ -8,6 +8,7 @@ ladders:
     regen: true
     hunger: true
     build: false
+    sumo: false
     name: Axe
     icon:
       ==: org.bukkit.inventory.ItemStack
@@ -56,6 +57,7 @@ ladders:
     regen: false
     hunger: true
     build: true
+    sumo: false
     name: BuildUHC
     icon:
       ==: org.bukkit.inventory.ItemStack
@@ -124,6 +126,7 @@ ladders:
     regen: true
     hunger: true
     build: false
+    sumo: false
     name: Combo
     icon:
       ==: org.bukkit.inventory.ItemStack
@@ -203,6 +206,7 @@ ladders:
     regen: true
     hunger: true
     build: false
+    sumo: false
     name: Debuff
     armor: |
       rO0ABXcEAAAABHNyABpvcmcuYnVra2l0LnV0aWwuaW8uV3JhcHBlcvJQR+zxEm8FAgABTAADbWFw
@@ -294,6 +298,7 @@ ladders:
     regen: true
     hunger: true
     build: false
+    sumo: false
     name: NoDebuff
     armor: |
       rO0ABXcEAAAABHNyABpvcmcuYnVra2l0LnV0aWwuaW8uV3JhcHBlcvJQR+zxEm8FAgABTAADbWFw
@@ -385,6 +390,7 @@ ladders:
     regen: true
     hunger: true
     build: false
+    sumo: false
     name: Gapple
     armor: |
       rO0ABXcEAAAABHNyABpvcmcuYnVra2l0LnV0aWwuaW8uV3JhcHBlcvJQR+zxEm8FAgABTAADbWFw
@@ -464,6 +470,7 @@ ladders:
     regen: false
     hunger: false
     build: false
+    sumo: false
     name: Soup
     armor: |
       rO0ABXcEAAAABHNyABpvcmcuYnVra2l0LnV0aWwuaW8uV3JhcHBlcvJQR+zxEm8FAgABTAADbWFw
@@ -548,6 +555,7 @@ ladders:
     regen: false
     hunger: false
     build: false
+    sumo: true
     name: Sumo
     invulnerability: true
     dead-in-water: true

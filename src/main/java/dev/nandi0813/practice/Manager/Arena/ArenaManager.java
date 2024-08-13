@@ -69,11 +69,14 @@ public class ArenaManager
      * returned.
      * @return An ArrayList of Arena objects.
      */
-    public ArrayList<Arena> getAvailableArenas(boolean build)
+    public ArrayList<Arena> getAvailableArenas(boolean build, boolean sumo)
     {
         ArrayList<Arena> availableArenas = new ArrayList<>();
         for (Arena arena : getEnabledArenas())
-            if (arena.isAvailable() && arena.isBuild() == build)
+            if (arena.isAvailable() && (
+                    arena.isBuild() == build &&
+                    arena.isSumo() == sumo
+            ))
                 availableArenas.add(arena);
         return availableArenas;
     }
@@ -87,10 +90,10 @@ public class ArenaManager
      * @param build If true, the arena will be built if it's not already built.
      * @return A random arena from the list of available arenas.
      */
-    public Arena getRandomArena(boolean build)
+    public Arena getRandomArena(boolean build, boolean sumo)
     {
         Random random = new Random();
-        ArrayList<Arena> availableArenas = getAvailableArenas(build);
+        ArrayList<Arena> availableArenas = getAvailableArenas(build, sumo);
         if (availableArenas.size() > 0)
             return availableArenas.get(random.nextInt(availableArenas.size()));
         else

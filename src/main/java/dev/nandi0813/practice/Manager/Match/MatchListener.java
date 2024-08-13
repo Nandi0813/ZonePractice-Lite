@@ -115,7 +115,7 @@ public class MatchListener implements Listener {
                 e.setTo(e.getFrom());
             }
 
-            if (match.getLadder().isDeadInWater()) {
+            if (match.getStatus() == MatchStatus.LIVE && match.getLadder().isDeadInWater()) {
                 if (player.getLocation().getBlock().getType().name().toLowerCase().contains("water")) {
                     Duel.killPlayer(match, player, true);
                 }

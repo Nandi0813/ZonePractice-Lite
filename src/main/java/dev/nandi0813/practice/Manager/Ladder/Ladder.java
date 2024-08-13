@@ -34,6 +34,7 @@ public class Ladder
     private boolean deadInWater = false;
     private boolean hunger = true;
     private boolean build = false;
+    private boolean sumo = false;
 
     public Ladder(int id) {
         this.id = id;
@@ -120,6 +121,10 @@ public class Ladder
         if (config.isSet(buildPath) && config.isBoolean(buildPath))
             build = config.getBoolean(buildPath);
 
+        String sumoPath = path + ".sumo";
+        if (config.isSet(sumoPath) && config.isBoolean(sumoPath))
+            sumo = config.getBoolean(sumoPath);
+
         if (enabled && !isReadyToEnable())
             enabled = false;
     }
@@ -200,6 +205,9 @@ public class Ladder
 
         String buildPath = path + ".build";
         config.set(buildPath, build);
+
+        String sumoPath = path + ".sumo";
+        config.set(sumoPath, sumo);
 
         if (saveFile)
             LadderFile.save();
