@@ -252,6 +252,10 @@ public class MatchListener implements Listener {
 
             if (!match.getStatus().equals(MatchStatus.LIVE))
                 e.setCancelled(true);
+            if (!Practice.getEntityHider().canSee(player, e.getItem())) {
+                e.setCancelled(true);
+            }
+
         }
     }
 
