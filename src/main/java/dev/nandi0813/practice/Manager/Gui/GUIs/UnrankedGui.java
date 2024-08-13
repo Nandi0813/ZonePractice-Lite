@@ -28,7 +28,9 @@ public class UnrankedGui extends GUI
     public UnrankedGui()
     {
         super(GUIType.QUEUE_UNRANKED);
-        this.gui.put(1, InventoryUtil.createInventory(LanguageManager.getString("gui.unranked.title"), 1));
+
+        this.gui.put(1, InventoryUtil.createInventory(LanguageManager.getString("gui.unranked.title"),
+                (int) Math.ceil(Practice.getLadderManager().getUnrankedLadders().size() / 9.)));
 
         build();
     }
@@ -45,31 +47,28 @@ public class UnrankedGui extends GUI
         gui.get(1).clear();
         ladderSlots.clear();
 
-        for (Ladder ladder : Practice.getLadderManager().getLadders())
+        for (Ladder ladder : Practice.getLadderManager().getUnrankedLadders())
         {
-            if (ladder.isEnabled() && ladder.getIcon() != null)
-            {
-                ItemStack icon = ladder.getIcon().clone();
-                ItemMeta iconMeta = icon.getItemMeta();
-                ItemUtil.hideItemFlags(iconMeta);
+            ItemStack icon = ladder.getIcon().clone();
+            ItemMeta iconMeta = icon.getItemMeta();
+            ItemUtil.hideItemFlags(iconMeta);
 
-                int duelMatchSize = Practice.getMatchManager().getDuelMatchSize(ladder, false);
-                if (duelMatchSize > 0 && duelMatchSize <= 64) icon.setAmount(duelMatchSize);
+            int duelMatchSize = Practice.getMatchManager().getDuelMatchSize(ladder, false);
+            if (duelMatchSize > 0 && duelMatchSize <= 64) icon.setAmount(duelMatchSize);
 
-                List<String> lore = new ArrayList<>();
-                for (String line : LanguageManager.getList("gui.unranked.item-lore"))
-                    lore.add(line
-                            .replaceAll("%inQueue%", String.valueOf(Practice.getQueueManager().getQueueSize(ladder, false)))
-                            .replaceAll("%inMatch%", String.valueOf(duelMatchSize))
-                            .replaceAll("%ladderName%", ladder.getName()));
-                iconMeta.setLore(lore);
+            List<String> lore = new ArrayList<>();
+            for (String line : LanguageManager.getList("gui.unranked.item-lore"))
+                lore.add(line
+                        .replaceAll("%inQueue%", String.valueOf(Practice.getQueueManager().getQueueSize(ladder, false)))
+                        .replaceAll("%inMatch%", String.valueOf(duelMatchSize))
+                        .replaceAll("%ladderName%", ladder.getName()));
+            iconMeta.setLore(lore);
 
-                icon.setItemMeta(iconMeta);
+            icon.setItemMeta(iconMeta);
 
-                int slot = gui.get(1).firstEmpty();
-                ladderSlots.put(slot, ladder);
-                gui.get(1).setItem(slot, icon);
-            }
+            int slot = gui.get(1).firstEmpty();
+            ladderSlots.put(slot, ladder);
+            gui.get(1).setItem(slot, icon);
         }
 
         updatePlayers();
