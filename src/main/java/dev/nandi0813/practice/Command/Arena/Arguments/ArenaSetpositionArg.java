@@ -51,7 +51,7 @@ public class ArenaSetpositionArg
                     }
                     else
                     {
-                        player.sendMessage("&cInvalid number!");
+                        player.sendMessage(StringUtil.CC("&cInvalid number!"));
                         return;
                     }
                     arena.saveData();
