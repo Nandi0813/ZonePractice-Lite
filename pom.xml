@@ -101,10 +101,10 @@
     </build>
 
     <repositories>
-        <!-- Spigot repository -->
+        <!-- Panda Spigot repository -->
         <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+            <id>hpfxd-repo</id>
+            <url>https://repo.hpfxd.com/releases/</url>
         </repository>
 
         <!-- ProtocolLib repository -->
@@ -121,10 +121,10 @@
     </repositories>
 
     <dependencies>
-        <!-- Spigot depend -->
+        <!-- Panda Spigot depend -->
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
+            <groupId>com.hpfxd.pandaspigot</groupId>
+            <artifactId>pandaspigot-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
