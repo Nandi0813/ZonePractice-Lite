@@ -11,6 +11,7 @@ commands:
     aliases: [prac, zonepractice, zoneprac, zonep]
   spectate:
     aliases: spec
+  duel:
   party:
     aliases: p
   matchinv:

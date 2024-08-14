@@ -15,6 +15,8 @@ import dev.nandi0813.practice.Command.Practice.PracticeTabCompleter;
 import dev.nandi0813.practice.Command.Spectate.SpectateCommand;
 import dev.nandi0813.practice.Command.Spectate.SpectateTabCompleter;
 import dev.nandi0813.practice.Command.Stats.StatsCommand;
+import dev.nandi0813.practice.Command.duel.DuelCommand;
+import dev.nandi0813.practice.Command.duel.DuelTabCompleter;
 import dev.nandi0813.practice.Listener.*;
 import dev.nandi0813.practice.Manager.Arena.ArenaManager;
 import dev.nandi0813.practice.Manager.File.BackendManager;
@@ -116,6 +118,9 @@ public final class Practice extends JavaPlugin
 
         Bukkit.getServer().getPluginCommand("spectate").setExecutor(new SpectateCommand());
         Bukkit.getServer().getPluginCommand("spectate").setTabCompleter(new SpectateTabCompleter());
+
+        Bukkit.getServer().getPluginCommand("duel").setExecutor(new DuelCommand());
+        Bukkit.getServer().getPluginCommand("duel").setTabCompleter(new DuelTabCompleter());
 
         Bukkit.getServer().getPluginCommand("party").setExecutor(new PartyCommand());
         Bukkit.getServer().getPluginCommand("party").setTabCompleter(new PartyTabCompleter());

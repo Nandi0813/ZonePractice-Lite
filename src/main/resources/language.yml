@@ -63,6 +63,15 @@ spectate-command:
   player-not-in-match: "&cPlayer isn't in match."
   already-spectating-match: "&cYou are already spectating this match."
 
+duel-command:
+  syntax: "Use /duel player or click your sword to player."
+  player-not-found: "&cThis player is offline."
+  player-is-in-match: "&cThis player is in match, you cant send duel request players, who already fighting."
+  request-yourself: "&cDo you want to fight with yourself?"
+  request-already: "&cYou already send request to this player."
+  in-match: "&cYou cant do it in match, leave from party and try again."
+  party: "&cYou cant do it in party, leave from party and try again."
+
 sidebar:
   title: "&6&lZONE PRACTICE"
   ip-line: "&6play.zonepractice.com"

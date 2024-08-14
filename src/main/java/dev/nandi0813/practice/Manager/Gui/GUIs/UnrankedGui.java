@@ -4,6 +4,8 @@ import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Gui.GUI;
 import dev.nandi0813.practice.Manager.Gui.GUIType;
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
+import dev.nandi0813.practice.Manager.Party.Party;
+import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Queue.Queue;
 import dev.nandi0813.practice.Practice;
 import dev.nandi0813.practice.Util.InventoryUtil;

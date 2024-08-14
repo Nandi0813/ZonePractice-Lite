@@ -7,10 +7,13 @@ import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Manager.Profile.ProfileStatus;
 import dev.nandi0813.practice.Practice;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -70,4 +73,19 @@ public class SpawnInventoryListener implements Listener
         }
     }
 
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerInteract(EntityDamageByEntityEvent e)
+    {
+        if (!(e.getDamager() instanceof Player && e.getEntity() instanceof Player)) return;
+
+        Player player = (Player) e.getDamager();
+        Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        ItemStack item = player.getItemInHand();
+
+        if (item != null && profile.getStatus().equals(ProfileStatus.LOBBY)) {
+            if (item.equals(SpawnInventory.getUnrankedItem())) {
+                player.chat("/duel " + e.getEntity().getName());
+            }
+        }
+    }
 }

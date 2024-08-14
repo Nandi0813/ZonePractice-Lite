@@ -11,6 +11,9 @@ knockback:
     air-vertical: 2.8
     horizontal: 2.5
     vertical: 2.5
+# How long player can accept request to duel in seconds
+request-time: 120
+
 #
 # Ranked settings
 ranked:

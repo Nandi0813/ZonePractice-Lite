@@ -23,13 +23,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LadderSelector extends GUI
+public class LadderSelectorParty extends GUI
 {
-
     @Getter private final MatchType matchType;
     private final Map<Integer, Ladder> ladderSlots = new HashMap<>();
 
-    public LadderSelector(MatchType matchType)
+    public LadderSelectorParty(MatchType matchType)
     {
         super(GUIType.LADDER_SELECTOR);
         this.matchType = matchType;

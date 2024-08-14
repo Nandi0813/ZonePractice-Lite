@@ -7,11 +7,10 @@ import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Profile {
 
@@ -27,6 +26,9 @@ public class Profile {
     @Getter
     @Setter
     private Location previousLocation;
+
+    @Getter
+    private final HashMap<Player, Ladder> sendRequests = new HashMap<>();
 
     // Temporary Settings
     @Getter

@@ -3,7 +3,7 @@ package dev.nandi0813.practice.Manager.Gui.GUIs;
 import dev.nandi0813.practice.Manager.File.LanguageManager;
 import dev.nandi0813.practice.Manager.Gui.GUI;
 import dev.nandi0813.practice.Manager.Gui.GUIType;
-import dev.nandi0813.practice.Manager.Gui.GUIs.Match.LadderSelector;
+import dev.nandi0813.practice.Manager.Gui.GUIs.Match.LadderSelectorParty;
 import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
 import dev.nandi0813.practice.Manager.Party.Party;
 import dev.nandi0813.practice.Practice;
@@ -60,8 +60,8 @@ public class PartyEventSelectorGui extends GUI
         }
 
         if (slot == 2)
-            new LadderSelector(MatchType.PARTY_SPLIT).open(player);
+            new LadderSelectorParty(MatchType.PARTY_SPLIT).open(player);
         else if (slot == 6)
-            new LadderSelector(MatchType.PARTY_FFA).open(player);
+            new LadderSelectorParty(MatchType.PARTY_FFA).open(player);
     }
 }
