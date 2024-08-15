@@ -43,7 +43,7 @@ public class LadderSelectorRequest extends GUI
 
         target = player;
 
-        this.gui.put(1, InventoryUtil.createInventory(LanguageManager.getString("gui.ladder-selector.title").replaceAll("%matchTypeName%", player.getName()), 1));
+        this.gui.put(1, InventoryUtil.createInventory(LanguageManager.getString("gui.ladder-selector.title").replaceAll("%matchTypeName%", player.getName()), (int) Math.ceil(Practice.getLadderManager().getUnrankedLadders().size() / 9.)));
 
         build();
     }
