@@ -132,7 +132,7 @@ public class Queue
      */
     public void startMatch(Queue queue)
     {
-        Arena arena = Practice.getArenaManager().getRandomArena(ladder.isBuild());
+        Arena arena = Practice.getArenaManager().getRandomArena(ladder.isBuild(), ladder.isSumo());
         if (arena != null)
         {
             queue.endQueue(true);

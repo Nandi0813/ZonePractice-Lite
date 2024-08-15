@@ -1,6 +1,8 @@
 package dev.nandi0813.practice.Util;
 
 import dev.nandi0813.practice.Manager.Ladder.Ladder;
+import dev.nandi0813.practice.Manager.Match.Match;
+import dev.nandi0813.practice.Manager.Match.MatchType.Duel.Duel;
 import dev.nandi0813.practice.Manager.Profile.Profile;
 import dev.nandi0813.practice.Practice;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
@@ -41,6 +43,12 @@ public class PAPIExpansion extends PlaceholderExpansion
 
         if (profile != null)
         {
+            if (identifier.contains("boxing_hits_received")) {
+                return String.valueOf(profile.receivedHits);
+            } else if (identifier.contains("boxing_hits_give")) {
+                return String.valueOf(profile.giveHits);
+            }
+
             for (Ladder ladder : Practice.getLadderManager().getLadders())
             {
                 String ladderName = ladder.getName().toLowerCase();

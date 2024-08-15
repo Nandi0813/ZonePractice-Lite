@@ -107,7 +107,7 @@ public class LadderSelectorParty extends GUI
             return;
         }
 
-        Arena arena = Practice.getArenaManager().getRandomArena(ladder.isBuild());
+        Arena arena = Practice.getArenaManager().getRandomArena(ladder.isBuild(), ladder.isSumo());
         if (arena != null)
         {
             List<Player> matchPlayers = new ArrayList<>(party.getMembers());

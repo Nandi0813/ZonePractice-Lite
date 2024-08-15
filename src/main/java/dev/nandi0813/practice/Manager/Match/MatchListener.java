@@ -92,6 +92,16 @@ public class MatchListener implements Listener {
                     Match match = Practice.getMatchManager().getLiveMatchByPlayer(attacker);
 
                     if (match.getStatus().equals(MatchStatus.LIVE)) {
+                        attackerProfile.giveHits++;
+
+                        targetProfile.receivedHits++;
+
+                        if (match.getLadder().getNeedHits() > 0) {
+                            if (targetProfile.receivedHits == match.getLadder().getNeedHits()) {
+                                Duel.killPlayer(match, target, false);
+                            }
+                        }
+
                         if (!match.getLadder().getKnockbackType().equals(KnockbackType.DEFAULT))
                             KnockbackUtil.setPlayerKnockback(e.getEntity(), match.getLadder().getKnockbackType());
                     } else e.setCancelled(true);
@@ -115,7 +125,7 @@ public class MatchListener implements Listener {
                 e.setTo(e.getFrom());
             }
 
-            if (match.getLadder().isDeadInWater()) {
+            if (match.getStatus() == MatchStatus.LIVE && match.getLadder().isDeadInWater()) {
                 if (player.getLocation().getBlock().getType().name().toLowerCase().contains("water")) {
                     Duel.killPlayer(match, player, true);
                 }

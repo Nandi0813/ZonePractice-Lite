@@ -42,6 +42,8 @@ public class Profile {
     @Getter
     @Setter
     private int unrankedWins;
+    public int receivedHits;
+    public int giveHits;
     @Getter
     @Setter
     private int unrankedLosses;

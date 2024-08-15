@@ -18,6 +18,7 @@ public class ArenaHelpArg
         player.sendMessage(StringUtil.CC(" &c » /" + label + " setcorner <name> <1/2>"));
         player.sendMessage(StringUtil.CC(" &c » /" + label + " setposition <name> <1/2/3>"));
         player.sendMessage(StringUtil.CC(" &c » /" + label + " setbuild <name> <true/false>"));
+        player.sendMessage(StringUtil.CC(" &c » /" + label + " setsumo <name> <true/false>"));
         player.sendMessage(StringUtil.CC(" &c » /" + label + " ladder list <name>"));
         player.sendMessage(StringUtil.CC(" &c » /" + label + " ladder <add/remove> <name> <ladder>"));
         player.sendMessage(StringUtil.CC("&c&m------------------------------------------------"));

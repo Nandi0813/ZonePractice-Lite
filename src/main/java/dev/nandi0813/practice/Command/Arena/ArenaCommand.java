@@ -47,6 +47,9 @@ public class ArenaCommand implements CommandExecutor
             else if (args[0].equalsIgnoreCase("setbuild"))
                 ArenaSetbuildArg.SetbuildCommand(player, label, args);
 
+            else if (args[0].equalsIgnoreCase("setsumo"))
+                ArenaSetsumoArg.SetsumoCommand(player, label, args);
+
             else if (args[0].equalsIgnoreCase("ladder"))
                 ArenaLadderArg.LadderCommand(player, label, args);
 

@@ -36,6 +36,10 @@ public class PracticeAdapter implements SidebarAdapter
     {
         List<String> sidebar = new ArrayList<>();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
+        int hitDelta = profile.giveHits - profile.receivedHits;
+        String giveHits = profile.giveHits + " &7(" + (hitDelta > 0? "&a+" :
+                                (hitDelta == 0? "&7" : "&c")) + hitDelta + "&7)",
+                receivedHits = String.valueOf(profile.receivedHits);
 
         if (profile.getStatus().equals(ProfileStatus.LOBBY) || profile.getStatus().equals(ProfileStatus.EDITOR))
         {
@@ -91,6 +95,7 @@ public class PracticeAdapter implements SidebarAdapter
             {
                 OfflinePlayer enemy = Duel.getOppositePlayer(match, player);
                 String enemyPing;
+
                 if (enemy.isOnline())
                     enemyPing = PlayerUtil.getPing(enemy.getPlayer()) + "ms";
                 else
@@ -101,6 +106,9 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("");
                 sidebar.add("&aYour Ping: &f" + PlayerUtil.getPing(player) + "ms");
                 sidebar.add("&cTheir Ping: &f" + enemyPing);
+                sidebar.add("");
+                sidebar.add("&fGive hits: &e" + giveHits);
+                sidebar.add("&fReceived hits: &e" + receivedHits);
                 sidebar.add("");
                 sidebar.add("&fDuration: &6" + StringUtil.formatMillisecondsToMinutes(match.getDurationCountdown().getSeconds() * 1000L));
                 sidebar.add("");
@@ -114,6 +122,9 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add("");
                 sidebar.add("&fPlayers: &6" + match.getPlayers().size() + "&7/&e" + match.getAlivePlayers().size());
                 sidebar.add("&fDuration: &6" + StringUtil.formatMillisecondsToMinutes(match.getDurationCountdown().getSeconds() * 1000L));
+                sidebar.add("");
+                sidebar.add("&fGive hits: &e" + giveHits);
+                sidebar.add("&fReceived hits: &e" + receivedHits);
                 sidebar.add("");
                 sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");
@@ -130,6 +141,9 @@ public class PracticeAdapter implements SidebarAdapter
                 sidebar.add(TeamEnum.TEAM2.getName() + "&7: &c" + team2.size() + "&7/&c" + PartySplit.getTeamAlivePlayers(match, TeamEnum.TEAM2).size());
                 sidebar.add("");
                 sidebar.add("&fDuration: &6" + StringUtil.formatMillisecondsToMinutes(match.getDurationCountdown().getSeconds() * 1000L));
+                sidebar.add("");
+                sidebar.add("&fGive hits: &e" + giveHits);
+                sidebar.add("&fReceived hits: &e" + receivedHits);
                 sidebar.add("");
                 sidebar.add(LanguageManager.getString("sidebar.ip-line"));
                 sidebar.add("&7&m---------------------");

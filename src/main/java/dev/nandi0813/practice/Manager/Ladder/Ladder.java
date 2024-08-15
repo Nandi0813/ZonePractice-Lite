@@ -27,6 +27,7 @@ public class Ladder
 
     private KnockbackType knockbackType = KnockbackType.DEFAULT;
     private int hitDelay = 20;
+    private int needHits = -1;
     private boolean ranked = false;
     private boolean editable = true;
     private boolean regen = true;
@@ -34,6 +35,7 @@ public class Ladder
     private boolean deadInWater = false;
     private boolean hunger = true;
     private boolean build = false;
+    private boolean sumo = false;
 
     public Ladder(int id) {
         this.id = id;
@@ -59,6 +61,10 @@ public class Ladder
         String invulnerabilityPath = path + ".invulnerability";
         if (config.isSet(invulnerabilityPath) && config.isBoolean(invulnerabilityPath))
             invulnerability = config.getBoolean(invulnerabilityPath);
+
+        String needHitsPath = path + ".need-hits";
+        if (config.isSet(needHitsPath) && config.isInt(needHitsPath))
+            needHits = config.getInt(needHitsPath);
 
         String deadInWaterPath = path + ".dead-in-water";
         if (config.isSet(deadInWaterPath) && config.isBoolean(deadInWaterPath))
@@ -120,6 +126,10 @@ public class Ladder
         if (config.isSet(buildPath) && config.isBoolean(buildPath))
             build = config.getBoolean(buildPath);
 
+        String sumoPath = path + ".sumo";
+        if (config.isSet(sumoPath) && config.isBoolean(sumoPath))
+            sumo = config.getBoolean(sumoPath);
+
         if (enabled && !isReadyToEnable())
             enabled = false;
     }
@@ -180,6 +190,9 @@ public class Ladder
         String hitdelayPath = path + ".hitdelay";
         config.set(hitdelayPath, hitDelay);
 
+        String needHitsPath = path + ".need-hits";
+        config.set(needHitsPath, needHits);
+
         String rankedPath = path + ".ranked";
         config.set(rankedPath, ranked);
 
@@ -200,6 +213,9 @@ public class Ladder
 
         String buildPath = path + ".build";
         config.set(buildPath, build);
+
+        String sumoPath = path + ".sumo";
+        config.set(sumoPath, sumo);
 
         if (saveFile)
             LadderFile.save();

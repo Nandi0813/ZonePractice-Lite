@@ -33,6 +33,7 @@ public class ArenaFile
     {
         config.set("name", arena.getName());
         config.set("build", arena.isBuild());
+        config.set("sumo", arena.isSumo());
         config.set("enabled", arena.isEnabled());
         config.set("ladders", ArenaUtil.getLadderNames(arena));
         if (arena.getCorner1() != null) config.set("corner.1", arena.getCorner1());
@@ -49,6 +50,7 @@ public class ArenaFile
     public void getData()
     {
         arena.setBuild(config.getBoolean("build"));
+        arena.setSumo(config.getBoolean("sumo"));
         arena.setEnabled(config.getBoolean("enabled"));
         for (String ladderName : config.getStringList("ladders"))
         {

@@ -27,6 +27,7 @@ public class Arena
     private Location position3;
     private List<Ladder> ladders = new ArrayList<>();
     private boolean build;
+    private boolean sumo;
     private boolean enabled;
     private final ArenaFile file;
 
@@ -105,6 +106,16 @@ public class Arena
     public void changeBuildStatus()
     {
         setBuild(!build);
+        ladders.clear();
+        saveData();
+    }
+
+    /**
+     * It sets the sumo boolean to the opposite of what it was, clears the ladders list, and saves the data
+     */
+    public void changeSumoStatus()
+    {
+        setSumo(!sumo);
         ladders.clear();
         saveData();
     }
