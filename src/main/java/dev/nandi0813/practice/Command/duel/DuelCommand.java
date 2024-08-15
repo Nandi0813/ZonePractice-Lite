@@ -53,7 +53,7 @@ public class DuelCommand implements CommandExecutor
                     Ladder ladder = targetProfile.getSendRequests().get(player);
                     targetProfile.getSendRequests().remove(player);
 
-                    Arena arena = Practice.getArenaManager().getRandomArena(ladder.isBuild());
+                    Arena arena = Practice.getArenaManager().getRandomArena(ladder.isBuild(), ladder.isSumo());
                     if (arena != null)
                     {
                         Match match = new Match(MatchType.DUEL, Arrays.asList(player, target), ladder, false, arena);
