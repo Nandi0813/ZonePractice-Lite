@@ -37,7 +37,7 @@ public class CornerUtil
 
             if (targetBlock.getType().equals(Material.AIR))
             {
-                player.sendMessage(StringUtil.CC("&cBlock location can not be found!"));
+                player.sendMessage(StringUtil.CC("&cBlock not found! Look at it to set the corner."));
                 return;
             }
             if (!cornerLocation.getWorld().equals(Practice.getArenaManager().getArenasWorld()))
