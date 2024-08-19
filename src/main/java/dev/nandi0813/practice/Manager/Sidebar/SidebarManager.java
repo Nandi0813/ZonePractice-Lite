@@ -8,25 +8,24 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Team;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class SidebarManager
-{
+public class SidebarManager {
 
-    @Getter private final Map<Player, Sidebar> playerSidebars = new HashMap<>();
-    @Getter private final SidebarTask sidebarTask = new SidebarTask();
+    @Getter
+    private final Map<Player, Sidebar> playerSidebars = new ConcurrentHashMap<>();
+    @Getter
+    private final SidebarTask sidebarTask = new SidebarTask();
 
-    public SidebarManager(Practice practice)
-    {
+    public SidebarManager(Practice practice) {
         Bukkit.getPluginManager().registerEvents(new SidebarListener(), practice);
     }
 
     /**
      * Enable the sidebar by loading it for all online players and starting the sidebar task.
      */
-    public void enable()
-    {
+    public void enable() {
         for (Player player : Bukkit.getOnlinePlayers())
             loadSidebar(player);
         sidebarTask.begin();
@@ -35,8 +34,7 @@ public class SidebarManager
     /**
      * Disable the plugin by unloading all the sidebars.
      */
-    public void disable()
-    {
+    public void disable() {
         for (Player player : Bukkit.getOnlinePlayers())
             unLoadSidebar(player);
     }
@@ -46,8 +44,7 @@ public class SidebarManager
      *
      * @param player The player to load the sidebar for.
      */
-    public void loadSidebar(Player player)
-    {
+    public void loadSidebar(Player player) {
         if (ConfigManager.getBoolean("sidebar"))
             playerSidebars.put(player, new Sidebar(player));
     }
@@ -57,14 +54,10 @@ public class SidebarManager
      *
      * @param player The player to unload the sidebar for.
      */
-    public void unLoadSidebar(Player player)
-    {
+    public void unLoadSidebar(Player player) {
         playerSidebars.remove(player);
         player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
         for (Team team : player.getScoreboard().getTeams())
             team.unregister();
     }
-
-
-
 }
