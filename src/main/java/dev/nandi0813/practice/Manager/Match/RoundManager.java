@@ -1,112 +1,115 @@
 package dev.nandi0813.practice.Manager.Match;
 
-import dev.nandi0813.practice.Manager.Match.Enum.MatchStatus;
-import dev.nandi0813.practice.Manager.Match.Enum.MatchType;
-import dev.nandi0813.practice.Manager.Match.Enum.TeamEnum;
-import dev.nandi0813.practice.Manager.Match.MatchType.Duel.Duel;
-import dev.nandi0813.practice.Manager.Match.MatchType.PartyFFA.PartyFFA;
-import dev.nandi0813.practice.Manager.Match.MatchType.PartySplit.PartySplit;
-import dev.nandi0813.practice.Manager.Match.Util.KitUtil;
-import dev.nandi0813.practice.Manager.Match.Util.PlayerUtil;
-import dev.nandi0813.practice.Manager.Profile.Profile;
+import dev.nandi0813.practice.Manager.Arena.Arena;
+import dev.nandi0813.practice.Manager.Ladder.Ladder;
+import dev.nandi0813.practice.Manager.Match.MatchStats.MatchStatListener;
+import dev.nandi0813.practice.Manager.Match.MatchType.Duel.DuelListener;
+import dev.nandi0813.practice.Manager.Match.MatchType.PartyFFA.PartyFFAListener;
+import dev.nandi0813.practice.Manager.Match.MatchType.PartySplit.PartySplitListener;
 import dev.nandi0813.practice.Practice;
-import dev.nandi0813.practice.Util.ItemUtil;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.util.*;
 
-public class RoundManager
+public class MatchManager
 {
 
-    private final Match match;
-    @Getter private final HashMap<TeamEnum, Integer> wonRoundsTeam = new HashMap<>();
-    @Getter private final HashMap<Player, Integer> wonRoundsPlayer = new HashMap<>();
+    @Getter private final Map<String, Match> matches = new HashMap<>();
+    @Getter private final List<Match> liveMatches = new ArrayList<>();
 
-    public RoundManager(Match match)
+    @Getter @Setter private Map<Player, Integer> rankedPerDay = new HashMap<>();
+    @Getter private final Map<Player, Integer> allowedRankedPerDay = new HashMap<>();
+
+    public MatchManager(Practice practice)
     {
-        this.match = match;
+        Bukkit.getPluginManager().registerEvents(new MatchListener(), practice);
+        Bukkit.getPluginManager().registerEvents(new SpectatorListener(), practice);
+        Bukkit.getPluginManager().registerEvents(new MatchStatListener(practice), practice);
+
+        Bukkit.getPluginManager().registerEvents(new DuelListener(), practice);
+        Bukkit.getPluginManager().registerEvents(new PartyFFAListener(), practice);
+        Bukkit.getPluginManager().registerEvents(new PartySplitListener(), practice);
     }
 
-    /**
-     * It sets the match status to START, starts the start countdown, sets the dropped items, sets the match player,
-     * teleports the player, loads the kit, sets the hit delay, and adds the player to the alive players list
-     */
-    public void startRound()
+    public Match getLiveMatchByPlayer(Player player)
     {
-        match.setStatus(MatchStatus.START);
-        match.getStartCountdown().begin();
-        match.setDroppedItems(new HashSet<>());
+        for (Match match : liveMatches)
+            if (match.getPlayers().contains(player)) return match;
+        return null;
+    }
 
-        for (Player player : match.getPlayers())
+    public Match getLiveMatchBySpectator(Player spectator)
+    {
+        for (Match match : liveMatches)
+            if (match.getSpectators().contains(spectator)) return match;
+        return null;
+    }
+
+    public Match getLiveMatchByArena(Arena arena)
+    {
+        for (Match match : liveMatches)
+            if (match.getArena().equals(arena)) return match;
+        return null;
+    }
+
+    public List<Match> getLiveMatchByLadder(Ladder ladder)
+    {
+        List<Match> list = new ArrayList<>();
+        for (Match match : liveMatches)
+            if (match.getLadder().equals(ladder))
+                list.add(match);
+        return list;
+    }
+
+    public int getDuelMatchSize(Ladder ladder, boolean ranked)
+    {
+        int size = 0;
+        for (Match match : liveMatches)
         {
-            // Set players match attributions
-            Bukkit.getScheduler().runTaskLater(Practice.getInstance(), () -> PlayerUtil.setMatchPlayer(player), 5L);
-
-            // Teleport player
-            PlayerUtil.teleportPlayer(player, match);
-
-            // Custom kit
-            Profile profile = Practice.getProfileManager().getProfiles().get(player);
-
-            player.getInventory().clear();
-            player.getInventory().setArmorContents(null);
-
-            for (Player matchPlayer : match.getPlayers())
-                if (!matchPlayer.equals(player))
-                    player.showPlayer(matchPlayer);
-
-            if (profile.getCustomKits().get(match.getLadder()) == null || !player.hasPermission("zonepractice.customkit"))
-                KitUtil.loadKit(player, match.getLadder());
-            else
+            if (match.getLadder().equals(ladder))
             {
-                player.getInventory().setItem(player.getInventory().firstEmpty(), ItemUtil.createItem("&a&lCustom Kit ", Material.ENCHANTED_BOOK));
-                player.getInventory().setItem(8, KitUtil.getDefaultKitItem());
+                if (match.isRanked() == ranked) size++;
             }
-
-            player.updateInventory();
-
-            // Hit delay
-            player.setMaximumNoDamageTicks(match.getLadder().getHitDelay());
-
-            if (!match.getType().equals(MatchType.DUEL))
-                match.getAlivePlayers().add(player);
         }
+        return size * 2;
     }
 
-    /**
-     * It ends the round and starts the next one
-     *
-     * @param winner The player who won the round.
-     */
-    public void endRound(Player winner)
+    public int getMatchSize()
     {
-        match.getDurationCountdown().cancel();
-        match.getAlivePlayers().clear();
-
-        endMatch(winner);
-    }
-
-    /**
-     * It ends the match
-     *
-     * @param winner The player who won the match.
-     */
-    public void endMatch(Player winner)
-    {
-        switch (match.getType())
+        int size = 0;
+        for (Match match : liveMatches)
         {
-            case DUEL: Duel.endMatch(match, winner, Duel.getOppositePlayer(match, winner)); break;
-            case PARTY_FFA: PartyFFA.endMatch(match, winner); break;
-            case PARTY_SPLIT: PartySplit.endMatch(match, winner); break;
+            size = size + match.getPlayers().size();
         }
+        return size;
+    }
 
-        match.setStatus(MatchStatus.OLD);
-        if (!match.getAfterCountdown().isRunning())
-            match.getAfterCountdown().begin();
+    public void disableLiveMatches()
+    {
+        for (Match match : liveMatches)
+            match.endMatch();
+    }
+
+
+    public void startRankedTimer()
+    {
+        ZonedDateTime zdt = LocalDate.now(TimeZone.getDefault().toZoneId()).atTime(LocalTime.of(23, 59, 59)).atZone(TimeZone.getDefault().toZoneId());
+
+        long i2 = zdt.toInstant().toEpochMilli()-System.currentTimeMillis();
+        long i3 = (i2/1000)*20;
+
+        Bukkit.getScheduler().runTaskTimerAsynchronously(Practice.getInstance(), () ->
+        {
+            rankedPerDay = new HashMap<>();
+            for (Player player : Bukkit.getOnlinePlayers())
+                rankedPerDay.put(player, 0);
+        }, i3, 86400000L);
     }
 
 }
