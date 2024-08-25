@@ -36,6 +36,7 @@ import dev.nandi0813.practice.Util.PAPIExpansion;
 import dev.nandi0813.practice.Util.PlayerHider;
 import dev.nandi0813.practice.Util.UpdateChecker;
 import lombok.Getter;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -83,6 +84,9 @@ public final class Practice extends JavaPlugin
 
         // Register PAPI expansion
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) new PAPIExpansion().register();
+
+        // BStats
+        new Metrics(this, 16054);
     }
 
     public void loadManagers()
@@ -159,3 +163,4 @@ public final class Practice extends JavaPlugin
     }
 
 }
+

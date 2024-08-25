@@ -48,7 +48,7 @@ public class MultiGameListener implements Listener
 
                     Party party = Practice.getPartyManager().getParty(player);
                     if (party != null)
-                        party.removeMember(player, false);
+                        party.removeMember(party, player, false);
 
                     profile.setStatus(ProfileStatus.OFFLINE);
                     profile.saveData();

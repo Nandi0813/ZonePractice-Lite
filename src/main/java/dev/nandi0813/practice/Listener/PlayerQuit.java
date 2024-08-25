@@ -21,7 +21,7 @@ public class PlayerQuit implements Listener
 
         if (party != null)
         {
-            party.removeMember(player, false);
+            party.removeMember(party, player, false);
         }
 
         if (profile != null)

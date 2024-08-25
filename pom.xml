@@ -17,41 +17,20 @@
     </properties>
 
     <build>
-        <defaultGoal>clean install</defaultGoal>
-        <finalName>ZonePractice Lite</finalName>
-        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-        <resources>
-            <resource>
-                <targetPath>.</targetPath>
-                <filtering>true</filtering>
-                <directory>${basedir}/src/main/resources/</directory>
-                <includes>
-                    <include>**/*</include> <!-- This will include all files and subdirectories -->
-                </includes>
-            </resource>
-        </resources>
         <plugins>
-            <!-- Filter values in resources -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.shared</groupId>
-                        <artifactId>maven-filtering</artifactId>
-                        <version>1.3</version>
-                    </dependency>
-                </dependencies>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.12.1</version>
                 <configuration>
-                    <encoding>UTF-8</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
-            <!-- Shade all Libs -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -60,35 +39,41 @@
                         </goals>
                         <configuration>
                             <finalName>ZonePractice Lite</finalName>
-                            <outputFile>${project.basedir}/target/Server/plugins/${project.build.finalName}.jar</outputFile>
-                            <minimizeJar>true</minimizeJar>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.bstats</pattern>
+                                    <shadedPattern>dev.nandi0813.practice.dependencies</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <!-- Make a Jar -->
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <compilerArgs>
-                        <arg>-parameters</arg>
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <repositories>
-        <!-- Panda Spigot repository -->
+        <!-- Panda repository -->
         <repository>
             <id>hpfxd-repo</id>
             <url>https://repo.hpfxd.com/releases/</url>
@@ -108,7 +93,7 @@
     </repositories>
 
     <dependencies>
-        <!-- Panda Spigot depend -->
+        <!-- Panda depend -->
         <dependency>
             <groupId>com.hpfxd.pandaspigot</groupId>
             <artifactId>pandaspigot-api</artifactId>
@@ -139,5 +124,14 @@
             <version>2.11.6</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- BStats depend -->
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.0.2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
+

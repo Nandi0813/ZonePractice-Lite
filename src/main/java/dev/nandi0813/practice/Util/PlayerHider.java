@@ -14,18 +14,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
-public class PlayerHider implements Listener
-{
+public class PlayerHider implements Listener {
 
-    @EventHandler (priority = EventPriority.MONITOR)
-    public void onPlayerJoin(PlayerJoinEvent e)
-    {
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
 
-        for (Player p : Bukkit.getOnlinePlayers())
-        {
-            if (player != p)
-            {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (player != p) {
                 Profile pProfile = Practice.getProfileManager().getProfiles().get(p);
 
                 if (pProfile.getStatus().equals(ProfileStatus.MATCH))
@@ -40,48 +36,37 @@ public class PlayerHider implements Listener
         }
     }
 
-    @EventHandler (priority = EventPriority.MONITOR)
-    public void onPlayerTeleport(PlayerTeleportEvent e)
-    {
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerTeleport(PlayerTeleportEvent e) {
         Player player = e.getPlayer();
         Profile profile = Practice.getProfileManager().getProfiles().get(player);
 
-        if (ServerManager.getLobby() != null)
-        {
-            if (e.getFrom().getWorld().equals(ServerManager.getLobby().getWorld()) && e.getTo().getWorld().equals(Practice.getArenaManager().getArenasWorld()))
-            {
-                if (profile.getStatus().equals(ProfileStatus.MATCH))
-                {
+        if (ServerManager.getLobby() != null) {
+            if (e.getFrom().getWorld().equals(ServerManager.getLobby().getWorld()) && e.getTo().getWorld().equals(Practice.getArenaManager().getArenasWorld())) {
+                if (profile.getStatus().equals(ProfileStatus.MATCH)) {
                     Match match = Practice.getMatchManager().getLiveMatchByPlayer(player);
 
-                    for (Player p : Bukkit.getOnlinePlayers())
-                    {
-                        if (player != p)
-                        {
-                            if (!match.getPlayers().contains(p))
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        if (player != p) {
+                            if (!match.getPlayers().contains(p)) {
                                 player.hidePlayer(p);
+                                p.hidePlayer(player);
+                            }
+
                         }
                     }
-                }
-                else if (profile.getStatus().equals(ProfileStatus.SPECTATE))
-                {
+                } else if (profile.getStatus().equals(ProfileStatus.SPECTATE)) {
                     Match match = Practice.getMatchManager().getLiveMatchBySpectator(player);
 
-                    for (Player p : Bukkit.getOnlinePlayers())
-                    {
-                        if (player != p)
-                        {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        if (player != p) {
                             if (match.getPlayers().contains(p))
                                 player.showPlayer(p);
-                            else if (match.getSpectators().contains(p))
-                            {
-                                if (ConfigManager.getBoolean("match-settings.hide-other-spectators"))
-                                {
+                            else if (match.getSpectators().contains(p)) {
+                                if (ConfigManager.getBoolean("match-settings.hide-other-spectators")) {
                                     player.hidePlayer(p);
                                     p.hidePlayer(player);
-                                }
-                                else
-                                {
+                                } else {
                                     player.showPlayer(p);
                                     p.showPlayer(player);
                                 }
@@ -89,28 +74,19 @@ public class PlayerHider implements Listener
                         }
                     }
                 }
-            }
-            else if (e.getFrom().getWorld().equals(Practice.getArenaManager().getArenasWorld()) && e.getTo().getWorld().equals(Practice.getArenaManager().getArenasWorld()))
-            {
-                if (profile.getStatus().equals(ProfileStatus.SPECTATE))
-                {
+            } else if (e.getFrom().getWorld().equals(Practice.getArenaManager().getArenasWorld()) && e.getTo().getWorld().equals(Practice.getArenaManager().getArenasWorld())) {
+                if (profile.getStatus().equals(ProfileStatus.SPECTATE)) {
                     Match match = Practice.getMatchManager().getLiveMatchBySpectator(player);
 
-                    for (Player p : Bukkit.getOnlinePlayers())
-                    {
-                        if (player != p)
-                        {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        if (player != p) {
                             if (match.getPlayers().contains(p))
                                 player.showPlayer(p);
-                            else if (match.getSpectators().contains(p))
-                            {
-                                if (ConfigManager.getBoolean("match-settings.hide-other-spectators"))
-                                {
+                            else if (match.getSpectators().contains(p)) {
+                                if (ConfigManager.getBoolean("match-settings.hide-other-spectators")) {
                                     player.hidePlayer(p);
                                     p.hidePlayer(player);
-                                }
-                                else
-                                {
+                                } else {
                                     player.showPlayer(p);
                                     p.showPlayer(player);
                                 }
@@ -118,13 +94,9 @@ public class PlayerHider implements Listener
                         }
                     }
                 }
-            }
-            else if (e.getFrom().getWorld().equals(Practice.getArenaManager().getArenasWorld()) && e.getTo().getWorld().equals(ServerManager.getLobby().getWorld()))
-            {
-                for (Player p : Bukkit.getOnlinePlayers())
-                {
-                    if (player != p)
-                    {
+            } else if (e.getFrom().getWorld().equals(Practice.getArenaManager().getArenasWorld()) && e.getTo().getWorld().equals(ServerManager.getLobby().getWorld())) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    if (player != p) {
                         if (player.hasPermission("zonepractice.staff.vanish") && !p.hasPermission("zonepractice.staff.vanish.bypass"))
                             p.hidePlayer(player);
                         else
@@ -139,5 +111,4 @@ public class PlayerHider implements Listener
             }
         }
     }
-
 }
