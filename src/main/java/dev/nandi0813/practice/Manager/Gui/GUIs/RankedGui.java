@@ -45,7 +45,9 @@ public class RankedGui extends GUI
         gui.get(1).clear();
         ladderSlots.clear();
 
-        for (Ladder ladder : Practice.getLadderManager().getLadders())
+        List<Ladder> ladders = new ArrayList<>(Practice.getLadderManager().getLadders());
+
+        for (Ladder ladder : ladders)
         {
             if (ladder.isRanked() && ladder.isEnabled() && ladder.getIcon() != null)
             {
