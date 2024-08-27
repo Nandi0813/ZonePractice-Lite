@@ -55,8 +55,9 @@ public class RankedGui extends GUI
                 ItemMeta iconMeta = icon.getItemMeta();
                 ItemUtil.hideItemFlags(iconMeta);
 
-                int duelMatchSize = Practice.getMatchManager().getDuelMatchSize(ladder, true);
-                if (duelMatchSize > 0 && duelMatchSize <= 64) icon.setAmount(duelMatchSize);
+                Integer duelMatchSize = Practice.getMatchManager().getDuelMatchSize(ladder, true);
+                int duelMatchSizeValue = (duelMatchSize != null) ? duelMatchSize.intValue() : 0;
+                if (duelMatchSizeValue > 0 && duelMatchSizeValue <= 64) icon.setAmount(duelMatchSizeValue);
 
                 List<String> lore = new ArrayList<>();
                 for (String line : LanguageManager.getList("gui.ranked.item-lore"))
