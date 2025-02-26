@@ -77,7 +77,11 @@ public class Sidebar
 
                     if (suffix.length() > 16)
                     {
-                        suffix.substring(0, 16);
+                        suffix = suffix.substring(0, 16);
+                    }
+                    if ((prefix + suffix).length() > 32)
+                    {
+                        suffix = "";
                     }
 
                 }
