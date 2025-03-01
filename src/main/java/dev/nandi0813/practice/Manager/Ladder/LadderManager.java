@@ -4,14 +4,18 @@ import dev.nandi0813.practice.Manager.File.LadderFile;
 import dev.nandi0813.practice.Practice;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class LadderManager
 {
 
-    @Getter private final List<Ladder> ladders = new ArrayList<>();
+    private final List<Ladder> ladders = new ArrayList<>();
+    private final List<Ladder> unrankedLadders = new ArrayList<>();
+    private final List<Ladder> rankedLadders = new ArrayList<>();
 
     /**
      * Return the ladder with the given name, or null if no ladder with that name exists.
@@ -38,12 +42,27 @@ public class LadderManager
     /**
      * Loads all the ladders into the ladders list
      */
-    public void loadLadders()
-    {
+    public void loadLadders() {
         Bukkit.getScheduler().runTaskAsynchronously(Practice.getInstance(), () ->
         {
-            for (int id = 1; id < 10; id++)
-                ladders.add(new Ladder(id));
+            ladders.clear();
+            rankedLadders.clear();
+            unrankedLadders.clear();
+
+            FileConfiguration config = LadderFile.getConfig();
+
+            for (String ladderName : config.getConfigurationSection("ladders").getKeys(false)) {
+                Ladder ladder = new Ladder(Integer.parseInt(ladderName.replace("ladder", "")));
+                ladders.add(ladder);
+
+                if (ladder.isEnabled() && ladder.getIcon() != null) {
+                    unrankedLadders.add(ladder);
+
+                    if (ladder.isRegen()) {
+                        rankedLadders.add(ladder);
+                    }
+                }
+            }
         });
     }
 

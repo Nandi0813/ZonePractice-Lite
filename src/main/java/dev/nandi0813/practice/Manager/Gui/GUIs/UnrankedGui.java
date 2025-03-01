@@ -28,7 +28,8 @@ public class UnrankedGui extends GUI
     public UnrankedGui()
     {
         super(GUIType.QUEUE_UNRANKED);
-        this.gui.put(1, InventoryUtil.createInventory(LanguageManager.getString("gui.unranked.title"), 1));
+        this.gui.put(1, InventoryUtil.createInventory(LanguageManager.getString("gui.unranked.title"),
+                (int) Math.ceil(Practice.getLadderManager().getUnrankedLadders().size() / 9.)));
 
         build();
     }
@@ -45,9 +46,8 @@ public class UnrankedGui extends GUI
         gui.get(1).clear();
         ladderSlots.clear();
 
-        for (Ladder ladder : Practice.getLadderManager().getLadders())
+        for (Ladder ladder : Practice.getLadderManager().getUnrankedLadders())
         {
-            if (ladder.isEnabled() && ladder.getIcon() != null)
             {
                 ItemStack icon = ladder.getIcon().clone();
                 ItemMeta iconMeta = icon.getItemMeta();

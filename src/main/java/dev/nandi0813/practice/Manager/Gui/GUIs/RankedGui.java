@@ -28,7 +28,8 @@ public class RankedGui extends GUI
     public RankedGui()
     {
         super(GUIType.QUEUE_RANKED);
-        this.gui.put(1, InventoryUtil.createInventory(LanguageManager.getString("gui.ranked.title"), 1));
+        this.gui.put(1, InventoryUtil.createInventory(LanguageManager.getString("gui.ranked.title"),
+                (int) Math.ceil(Practice.getLadderManager().getRankedLadders().size() / 9.)));
 
         build();
     }
@@ -45,9 +46,8 @@ public class RankedGui extends GUI
         gui.get(1).clear();
         ladderSlots.clear();
 
-        for (Ladder ladder : Practice.getLadderManager().getLadders())
+        for (Ladder ladder : Practice.getLadderManager().getRankedLadders())
         {
-            if (ladder.isRanked() && ladder.isEnabled() && ladder.getIcon() != null)
             {
                 ItemStack icon = ladder.getIcon().clone();
                 ItemMeta iconMeta = icon.getItemMeta();

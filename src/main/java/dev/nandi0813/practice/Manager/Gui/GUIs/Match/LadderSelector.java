@@ -34,7 +34,7 @@ public class LadderSelector extends GUI
         super(GUIType.LADDER_SELECTOR);
         this.matchType = matchType;
 
-        this.gui.put(1, InventoryUtil.createInventory(LanguageManager.getString("gui.ladder-selector.title").replaceAll("%matchTypeName%", matchType.getName()), 1));
+        this.gui.put(1, InventoryUtil.createInventory(LanguageManager.getString("gui.ladder-selector.title").replaceAll("%matchTypeName%", matchType.getName()), (int) Math.ceil(Practice.getLadderManager().getUnrankedLadders().size() / 9.)));
 
         build();
     }
