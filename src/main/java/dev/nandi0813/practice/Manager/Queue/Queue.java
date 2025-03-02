@@ -68,7 +68,7 @@ public class Queue
                     @Override
                     public void run()
                     {
-                        int elo = profile.getElo().get(ladder);
+                        int elo = profile.getElo().getOrDefault(ladder, ConfigManager.getConfig().getInt("ranked.default-elo"));
                         if (queueManager.getQueue(getPlayer()) == null || elo - getRange() <= 0)
                         {
                             queueRunnable.cancel();
